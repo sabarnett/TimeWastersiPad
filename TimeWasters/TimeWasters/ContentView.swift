@@ -13,16 +13,30 @@ import SwiftUI
 import SharedComponents
 
 struct ContentView: View {
+    @State private var selectedGame: GameDefinition?
+    @State private var columnVisibility = NavigationSplitViewVisibility.automatic
+    
     var body: some View {
-        VStack {
-            List {
-                ForEach(Game.allCases, id: \.self) { game in
-                    
-                    Text(game.gameDefinition.title)
-                }
+        NavigationSplitView(columnVisibility: $columnVisibility,
+        sidebar: {
+            GameMenuView(selectedGame: $selectedGame)
+                .navigationTitle("Time Wasters")
+        }, detail: {
+            if selectedGame == nil {
+                ContentUnavailableView("Select Game",
+                                       image: "",
+                                       description: Text("Select a game from the list in the side bar"))
+            } else {
+                Text("selected Game")
+//                GameView(game: $selectedGame)
+//                    .navigationTitle(selectedGame!.title)
             }
+        })
+        .onChange(of: selectedGame) {
+            columnVisibility = selectedGame == nil
+            ? .automatic
+            : .detailOnly
         }
-        .padding()
     }
 }
 
