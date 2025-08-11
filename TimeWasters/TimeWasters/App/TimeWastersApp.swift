@@ -13,9 +13,12 @@ import SwiftUI
 
 @main
 struct TimeWastersApp: App {
+    @AppStorage(Constants.displayMode) var displayMode: DisplayMode = .auto
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(displayMode.colorScheme)
         }
     }
 }
