@@ -38,7 +38,7 @@ struct GameMenuView: View {
             GameInfoView(gameData: game)
         }
         .sheet(isPresented: $showSettings) {
-            //SettingsView()
+            SettingsView()
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {
