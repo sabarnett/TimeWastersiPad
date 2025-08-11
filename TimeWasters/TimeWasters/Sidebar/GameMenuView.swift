@@ -50,24 +50,24 @@ struct GameMenuView: View {
             }
             
             ToolbarItem(placement: .bottomBar) {
-                //aboutBoxPopup()
+                aboutBoxPopup()
             }
         }
     }
 
-//    fileprivate func aboutBoxPopup() -> HStack<TupleView<(Spacer, some View)>> {
-//        return HStack {
-//            Spacer()
-//            Button(action: { showAbout.toggle() },
-//                   label: {
-//                Image(systemName: "info.circle")
-//                    .popover(isPresented: $showAbout,
-//                             arrowEdge: .bottom) {
-//                        AboutView()
-//                    }
-//            })
-//        }
-//    }
+    fileprivate func aboutBoxPopup() -> some View {
+        return HStack {
+            Spacer()
+            Button(action: { showAbout.toggle() },
+                   label: {
+                Image(systemName: "info.circle")
+                    .popover(isPresented: $showAbout,
+                             arrowEdge: .bottom) {
+                        AboutView()
+                    }
+            })
+        }
+    }
 }
 
 #Preview {

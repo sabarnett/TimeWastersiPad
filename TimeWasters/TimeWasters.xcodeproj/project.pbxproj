@@ -41,7 +41,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E8DB6CBD2E49F69900A351A8 /* TimeWasters */ = {
+		E8298B8D2E49FE5A00803FE0 /* TimeWasters */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = TimeWasters;
 			sourceTree = "<group>";
@@ -78,8 +78,8 @@
 		E8DB6CB22E49F69900A351A8 = {
 			isa = PBXGroup;
 			children = (
+				E8298B8D2E49FE5A00803FE0 /* TimeWasters */,
 				E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */,
-				E8DB6CBD2E49F69900A351A8 /* TimeWasters */,
 				E82346DD2E49F76B00BF34CB /* Frameworks */,
 				E8DB6CBC2E49F69900A351A8 /* Products */,
 			);
@@ -110,7 +110,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E8DB6CBD2E49F69900A351A8 /* TimeWasters */,
+				E8298B8D2E49FE5A00803FE0 /* TimeWasters */,
 			);
 			name = TimeWasters;
 			packageProductDependencies = (
@@ -321,6 +321,7 @@
 				DEVELOPMENT_TEAM = MH62Y8D74P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) Steven Barnett 2025-";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -350,6 +351,7 @@
 				DEVELOPMENT_TEAM = MH62Y8D74P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) Steven Barnett 2025-";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

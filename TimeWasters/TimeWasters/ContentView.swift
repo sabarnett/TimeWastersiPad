@@ -23,8 +23,8 @@ struct ContentView: View {
                 .navigationTitle("Time Wasters")
         }, detail: {
             if selectedGame == nil {
-                ContentUnavailableView("Select Game",
-                                       image: "",
+                ContentUnavailableView("Select a Game",
+                                       systemImage: "gamecontroller",
                                        description: Text("Select a game from the list in the side bar"))
             } else {
                 Text("selected Game")
