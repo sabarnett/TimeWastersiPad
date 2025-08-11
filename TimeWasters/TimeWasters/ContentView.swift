@@ -27,9 +27,8 @@ struct ContentView: View {
                                        systemImage: "gamecontroller",
                                        description: Text("Select a game from the list in the side bar"))
             } else {
-                Text("selected Game")
-//                GameView(game: $selectedGame)
-//                    .navigationTitle(selectedGame!.title)
+                GameView(game: $selectedGame)
+                    .navigationTitle(selectedGame!.title)
             }
         })
         .onChange(of: selectedGame) {
