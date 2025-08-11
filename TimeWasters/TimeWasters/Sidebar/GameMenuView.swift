@@ -13,6 +13,8 @@ import SharedComponents
 import SwiftUI
 
 struct GameMenuView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    
     @Binding var selectedGame: GameDefinition?
     
     @State private var showInfoFor: GameDefinition?
@@ -53,6 +55,7 @@ struct GameMenuView: View {
                 aboutBoxPopup()
             }
         }
+        .foregroundStyle(.primary)
     }
 
     fileprivate func aboutBoxPopup() -> some View {

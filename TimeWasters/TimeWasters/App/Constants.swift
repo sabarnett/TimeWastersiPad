@@ -18,5 +18,5 @@ struct Constants {
     static let homeAddress: String = "sabarnett.co.uk"
     
     // Application level settings keys
-    static let displayMode = "displayMode"
+    static let darkMode = "darkMode"
 }

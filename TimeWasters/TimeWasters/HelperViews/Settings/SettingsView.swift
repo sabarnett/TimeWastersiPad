@@ -14,7 +14,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @AppStorage(Constants.displayMode) var displayMode: DisplayMode = .auto
+    @AppStorage(Constants.darkMode) var isDarkMode = false
     
     var body: some View {
         NavigationStack {
@@ -47,7 +47,7 @@ struct SettingsView: View {
                        action: { dismiss() },
                        label: { Image(systemName: "xmark.app").scaleEffect(1.3) })
             }
-            .preferredColorScheme(displayMode.colorScheme)
+            .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }

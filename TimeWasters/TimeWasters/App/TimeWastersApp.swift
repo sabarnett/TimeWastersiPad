@@ -13,12 +13,12 @@ import SwiftUI
 
 @main
 struct TimeWastersApp: App {
-    @AppStorage(Constants.displayMode) var displayMode: DisplayMode = .auto
+    @AppStorage(Constants.darkMode) var isDarkMode = false
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .preferredColorScheme(displayMode.colorScheme)
+                .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }
