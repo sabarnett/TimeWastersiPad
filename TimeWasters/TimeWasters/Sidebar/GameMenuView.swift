@@ -42,6 +42,9 @@ struct GameMenuView: View {
         .sheet(isPresented: $showSettings) {
             SettingsView()
         }
+        .sheet(isPresented: $showAbout) {
+            AboutView()
+        }
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button(action: {
@@ -64,10 +67,6 @@ struct GameMenuView: View {
             Button(action: { showAbout.toggle() },
                    label: {
                 Image(systemName: "info.circle")
-                    .popover(isPresented: $showAbout,
-                             arrowEdge: .bottom) {
-                        AboutView()
-                    }
             })
         }
     }
