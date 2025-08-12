@@ -58,7 +58,6 @@ struct GameMenuView: View {
                 aboutBoxPopup()
             }
         }
-        .foregroundStyle(.primary)
     }
 
     fileprivate func aboutBoxPopup() -> some View {

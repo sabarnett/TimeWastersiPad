@@ -12,13 +12,15 @@
 import SwiftUI
 
 struct GeneralSettingsView: View {
-    @AppStorage(Constants.darkMode) private var isDarkMode = false
-
+    @AppStorage(Constants.displayMode) private var displayMode = DisplayMode.system
+    
     var body: some View {
         Form {
-            Toggle(isOn: $isDarkMode, label: {
-                Text("Dark mode")
-            })
+            Picker("Display mode", selection: $displayMode) {
+                ForEach(DisplayMode.allCases) { mode in
+                    Text(mode.description).tag(mode)
+                }
+            }
         }
     }
 }
