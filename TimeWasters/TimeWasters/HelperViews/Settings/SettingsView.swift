@@ -23,8 +23,8 @@ struct SettingsView: View {
                     GeneralSettingsView()
                 }, label: {
                     Label("General", systemImage: "gearshape")
-                        .font(.title3)
                         .padding(.vertical, 4)
+                        .foregroundStyle(.primary)
                 })
                 ForEach(Game.allCases, id: \.self) { game in
                     if game.gameDefinition.settingsIcon != nil {
@@ -34,8 +34,8 @@ struct SettingsView: View {
                         }, label: {
                             Label(game.gameDefinition.title,
                                   systemImage: game.gameDefinition.settingsIcon!)
+                            .foregroundStyle(.primary)
                         })
-                        .font(.title3)
                         .padding(.vertical, 4)
                     }
                 }

@@ -44,6 +44,7 @@ struct GameMenuView: View {
         }
         .sheet(isPresented: $showAbout) {
             AboutView()
+                .presentationDetents([.height(350)])
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {
