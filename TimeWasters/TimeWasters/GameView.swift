@@ -14,7 +14,7 @@ import SwiftUI
 
 struct GameView: View {
     @Binding var game: Game?
-    
+
     var body: some View {
         if let game {
             GameViewFactory().gameView(for: game)

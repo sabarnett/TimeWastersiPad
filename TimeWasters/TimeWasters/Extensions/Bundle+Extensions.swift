@@ -15,14 +15,14 @@ extension Bundle {
     public var appName: String { getInfo("CFBundleName")  }
     public var copyright: String {getInfo("NSHumanReadableCopyright")
         .replacing("\\\\n", with: "\n") }
-    
+
     public var appBuild: String { getInfo("CFBundleVersion") }
     public var appVersionLong: String { getInfo("CFBundleShortVersionString") }
-    
+
     fileprivate func getInfo(_ str: String) -> String {
         infoDictionary?[str] as? String ?? "⚠️"
     }
-    
+
     public var icon: UIImage? {
         if let icons = infoDictionary?["CFBundleIcons"] as? [String: Any],
             let primaryIcon = icons["CFBundlePrimaryIcon"] as? [String: Any],

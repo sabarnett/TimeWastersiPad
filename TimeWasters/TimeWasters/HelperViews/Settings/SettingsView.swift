@@ -15,7 +15,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(Constants.displayMode) var displayMode: DisplayMode = .system
-    
+
     var body: some View {
         NavigationStack {
             List {

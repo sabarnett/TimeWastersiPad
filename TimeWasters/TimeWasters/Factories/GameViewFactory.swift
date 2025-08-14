@@ -15,7 +15,7 @@ import SwiftUI
 /// Single place to generate the game view or the game
 /// settings view
 struct GameViewFactory {
-    
+
     func gameView(for game: Game) -> some View {
         switch game {
         case .minesweeper:
@@ -40,7 +40,7 @@ struct GameViewFactory {
             fatalError("Unable to determine game view")
         }
     }
-    
+
     func settingsView(for game: Game) -> some View {
         switch game {
         case .minesweeper:
@@ -65,5 +65,5 @@ struct GameViewFactory {
             fatalError("Unable to determine game settings view")
         }
     }
-    
+
 }

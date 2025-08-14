@@ -15,7 +15,7 @@ import SharedComponents
 struct ContentView: View {
     @State private var selectedGame: Game?
     @State private var columnVisibility = NavigationSplitViewVisibility.automatic
-    
+
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility,
         sidebar: {
@@ -26,7 +26,7 @@ struct ContentView: View {
                 ContentUnavailableView("Select a Game",
                                        systemImage: "gamecontroller",
                                        description: Text("Select a game from the list in the side bar"))
-            } else {                
+            } else {
                 GameView(game: $selectedGame)
                     .navigationTitle(selectedGame!.gameDefinition.title)
             }

@@ -36,7 +36,7 @@ enum DisplayMode: String, Identifiable, CaseIterable, Equatable, CustomStringCon
             return "System"
         }
     }
-    
+
     var colorScheme: ColorScheme? {
         switch self {
         case .light:

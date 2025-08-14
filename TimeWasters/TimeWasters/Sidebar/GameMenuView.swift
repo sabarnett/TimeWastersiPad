@@ -14,13 +14,13 @@ import SwiftUI
 
 struct GameMenuView: View {
     @Environment(\.colorScheme) private var colorScheme
-    
+
     @Binding var selectedGame: Game?
-    
+
     @State private var showInfoFor: Game?
     @State private var showAbout = false
     @State private var showSettings = false
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             ScrollView {
@@ -54,7 +54,7 @@ struct GameMenuView: View {
                     Image(systemName: "gearshape")
                 })
             }
-            
+
             ToolbarItem(placement: .bottomBar) {
                 aboutBoxPopup()
             }

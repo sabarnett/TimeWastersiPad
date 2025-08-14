@@ -14,9 +14,9 @@ import SwiftUI
 public enum Game: String, CaseIterable, Identifiable {
     case minesweeper, wordcraft, snake, adventure
     case numberCombinations, ticTacToe, othello, matchedPairs, wordSearch
-    
+
     public var id: Game { self }
-    
+
     public var gameDefinition: GameDefinition {
         switch self {
         case .minesweeper:
@@ -42,6 +42,7 @@ public enum Game: String, CaseIterable, Identifiable {
 }
 
 extension Game {
+    // swiftlint:disable line_length
     // MARK: - Minesweeper
     private func minesweeperGame() -> GameDefinition {
         GameDefinition(id: Game.minesweeper,
@@ -63,7 +64,7 @@ extension Game {
                        settingsIcon: "square.and.arrow.up"
         )
     }
-    
+
     // MARK: - Word Craft
     private func wordcraftGame() -> GameDefinition {
         GameDefinition(id: Game.wordcraft,
@@ -84,7 +85,7 @@ extension Game {
                        settingsIcon: "textformat.abc"
         )
     }
-    
+
     // MARK: - Snake
     private func snakeGame() -> GameDefinition {
         GameDefinition(id: Game.snake,
@@ -103,7 +104,7 @@ extension Game {
                        settingsIcon: "scribble.variable"
         )
     }
-    
+
     // MARK: - Pyramid of Doom
     private func pyramidOfDoom() -> GameDefinition {
         GameDefinition(id: Game.adventure,
@@ -111,31 +112,22 @@ extension Game {
                        tagLine: "Can you survive the pyramid of doom?",
                        description: textBlock(
                         "This is an Adventure that will transport you to a dangerous land of crumbling ruins and trackless desert wastes into the PYRAMID OF DOOM! Jewels, gold -- it's all here for the plundering -- IF you can find the way.",
-                        
                         "(Difficulty Level: Moderate)",
-                        
                         "Your mission is simple, find al the treasures before the pyramid kills you.",
-                        
                         "You are going to navigate from location to location using text commands like 'north', 'south', 'east', 'west', 'take item', 'drop item', 'read', 'inventory' and 'help'. There are many more commands, just try them out!"
                        ),
                        gamePlay: textBlock(
-                        
                         "Draw a map as you go, there are a lot more places than you think and without a map you will end up going round in circles or missing areas which you haven't tried. It doesn't need to be perfect as long as you have some record of where you have been and what you've found (as well as where you found it). Examine things you find and try to remember that most problems have solutions that require no more than some careful thought and a little common sense. If you get stuck try typing HELP -- you may or may not get assistance but you won't know until you ask. And be careful about assuming things, it can be fatal.",
-                        
                         "To speed things up you may use the following abbreviations N, S, E, W, U, D, for Go North, South, East, West, Up or Down. I is short for Inventory and will list what you're carrying.",
-                        
                         "Some (but not all) of the words available that you may find useful are: --",
-                        
                         "Get, Take, Drop, Go, Climb, Jump, Enter, Examine, Go, Leave, Move, Quit, Say, Wear, Read, Save, Light, Pull, Push and Look ... There are others!!!",
-                        
                         "Instructions are entered by you in the form of two word commands with the first word being a verb. If the computer doesn't understand, it will tell you so and you must try rewording what you wish to do (e.g. instead of GO FLYING try FLY). You will find that objects which can be picked up usually require only the last part of their name as in the Blue Ox where typing GET OX is all that is needed.",
-                        
                         "Good luck, happy adventuring and try not to die too often."
                        ),
                        credits: "Steve Barnett",
                        link: "http://www.sabarnett.co.uk")
     }
-    
+
     // MARK: - Number Combinations
     private func numberCombinationsGame() -> GameDefinition {
         GameDefinition(id: Game.numberCombinations,
@@ -156,7 +148,7 @@ extension Game {
                        settingsIcon: "squareshape.split.2x2.dotted"
         )
     }
-    
+
     // MARK: - Tic Tac Toe
     private func ticTacToeGame() -> GameDefinition {
         GameDefinition(id: Game.ticTacToe,
@@ -176,7 +168,7 @@ extension Game {
                        link: "http://www.sabarnett.co.uk"
         )
     }
-    
+
     // MARK: - Othello
     private func othelloGame() -> GameDefinition {
         GameDefinition(id: Game.othello,
@@ -198,7 +190,7 @@ extension Game {
                        link: "http://www.sabarnett.co.uk"
         )
     }
-    
+
     // MARK: - Matched Pairs
     private func matchedPairsGame() -> GameDefinition {
         GameDefinition(id: Game.matchedPairs,
@@ -219,7 +211,7 @@ extension Game {
                        settingsIcon: "square.and.line.vertical.and.square"
         )
     }
-    
+
     // MARK: - Word Search
     private func wordSearchGame() -> GameDefinition {
         GameDefinition(id: Game.wordSearch,
@@ -240,7 +232,9 @@ extension Game {
                        settingsIcon: "wonsign.square.fill"
         )
     }
- 
+
+    // swiftlint:enable line_length
+
     /// textBlock - takes a variadic parameter list of strings and returns a
     /// single string with each parameter separated by two newline characters.
     ///

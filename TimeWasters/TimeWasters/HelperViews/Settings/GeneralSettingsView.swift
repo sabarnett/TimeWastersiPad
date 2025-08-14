@@ -13,7 +13,7 @@ import SwiftUI
 
 struct GeneralSettingsView: View {
     @AppStorage(Constants.displayMode) private var displayMode = DisplayMode.system
-    
+
     var body: some View {
         Form {
             Picker("Display mode", selection: $displayMode) {

@@ -13,13 +13,13 @@ import SwiftUI
 
 public struct GamePlayView: View {
     @Environment(\.dismiss) private var dismiss
-    
+
     private var game: GameDefinition
-    
+
     public init(game: GameDefinition) {
         self.game = game
     }
-    
+
     public var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -30,7 +30,7 @@ public struct GamePlayView: View {
                        action: { dismiss() },
                        label: { Image(systemName: "xmark.app").scaleEffect(1.8) })
             }
-            
+
             Text(game.tagLine).font(.subheadline)
             ScrollView {
                 Text(game.gamePlay)

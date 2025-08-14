@@ -14,10 +14,10 @@ import SwiftUI
 
 struct GameItemButtonView: View {
     @Environment(\.colorScheme) private var colorScheme
-    
+
     var game: GameDefinition
     var infoPressed: () -> Void
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading) {

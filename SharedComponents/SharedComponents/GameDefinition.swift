@@ -19,8 +19,8 @@ public struct GameDefinition: Identifiable, CustomStringConvertible, Hashable {
     public var gamePlay: String = ""
     public var credits: String = ""
     public var link: String = ""
-    public var settingsIcon: String? = nil
-    
+    public var settingsIcon: String?
+
     public static var example: GameDefinition {
         GameDefinition(id: Game.minesweeper, title: "Game Title", tagLine: "Tag line",
             description: "Description", gamePlay: "Game play",

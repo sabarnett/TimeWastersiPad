@@ -12,19 +12,19 @@
 import SwiftUI
 
 public struct GameInfoView: View {
-    
+
     @Environment(\.dismiss) private var dismiss
     private var gameData: GameDefinition
-    
+
     public init(gameData: GameDefinition) {
         self.gameData = gameData
     }
-    
+
     private var webSiteLink: URL? {
         guard let targetUrl = URL(string: gameData.link) else { return nil }
         return targetUrl
     }
-    
+
     public var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -40,7 +40,7 @@ public struct GameInfoView: View {
                 Text(gameData.description)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            
+
             Text(gameData.credits)
             if let link = webSiteLink {
                 Link(destination: link) {
@@ -54,5 +54,14 @@ public struct GameInfoView: View {
 }
 
 #Preview {
-    GameInfoView(gameData: GameDefinition(id: Game.minesweeper, title: "Sample", tagLine: "This is a sample game", description: "This is the description of the game", credits: "Credit the author", link: "Link to web site"))
+    GameInfoView(
+        gameData: GameDefinition(
+            id: Game.minesweeper,
+            title: "Sample",
+            tagLine: "This is a sample game",
+            description: "This is the description of the game",
+            credits: "Credit the author",
+            link: "Link to web site"
+        )
+    )
 }
