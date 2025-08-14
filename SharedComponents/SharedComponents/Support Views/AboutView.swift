@@ -1,8 +1,8 @@
 //
 // -----------------------------------------
-// Original project: TimeWasters
-// Original package: TimeWasters
-// Created on: 11/08/2025 by: Steven Barnett
+// Original project: SharedComponents
+// Original package: SharedComponents
+// Created on: 14/08/2025 by: Steven Barnett
 // Web: http://www.sabarnett.co.uk
 // GitHub: https://www.github.com/sabarnett
 // -----------------------------------------
@@ -11,8 +11,10 @@
 
 import SwiftUI
 
-struct AboutView: View {
-    var body: some View {
+public struct AboutView: View {
+    public init() {}
+
+    public var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Image(uiImage: Bundle.main.icon ?? UIImage())

@@ -55,13 +55,6 @@ public struct GameInfoView: View {
 
 #Preview {
     GameInfoView(
-        gameData: GameDefinition(
-            id: Game.minesweeper,
-            title: "Sample",
-            tagLine: "This is a sample game",
-            description: "This is the description of the game",
-            credits: "Credit the author",
-            link: "Link to web site"
-        )
+        gameData: GameDefinition.example
     )
 }
