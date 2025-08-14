@@ -11,9 +11,11 @@
 
 import SwiftUI
 
-public enum Game: String, CaseIterable {
+public enum Game: String, CaseIterable, Identifiable {
     case minesweeper, wordcraft, snake, adventure
     case numberCombinations, ticTacToe, othello, matchedPairs, wordSearch
+    
+    public var id: Game { self }
     
     public var gameDefinition: GameDefinition {
         switch self {

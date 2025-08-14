@@ -15,9 +15,9 @@ import SwiftUI
 struct GameMenuView: View {
     @Environment(\.colorScheme) private var colorScheme
     
-    @Binding var selectedGame: GameDefinition?
+    @Binding var selectedGame: Game?
     
-    @State private var showInfoFor: GameDefinition?
+    @State private var showInfoFor: Game?
     @State private var showAbout = false
     @State private var showSettings = false
     
@@ -26,18 +26,18 @@ struct GameMenuView: View {
             ScrollView {
                 ForEach(Game.allCases, id: \.self) { game in
                     GameItemButtonView(game: game.gameDefinition, infoPressed: {
-                        showInfoFor = game.gameDefinition
+                        showInfoFor = game
                     })
                     .padding(.bottom, 4)
                     .padding(.horizontal, 8)
                     .onTapGesture {
-                        selectedGame = game.gameDefinition
+                        selectedGame = game
                     }
                 }
             }
         }
         .sheet(item: $showInfoFor) { game in
-            GameInfoView(gameData: game)
+            GameInfoView(gameData: game.gameDefinition)
         }
         .sheet(isPresented: $showSettings) {
             SettingsView()

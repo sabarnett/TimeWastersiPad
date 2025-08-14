@@ -13,7 +13,7 @@ import SwiftUI
 import SharedComponents
 
 struct ContentView: View {
-    @State private var selectedGame: GameDefinition?
+    @State private var selectedGame: Game?
     @State private var columnVisibility = NavigationSplitViewVisibility.automatic
     
     var body: some View {
@@ -26,9 +26,9 @@ struct ContentView: View {
                 ContentUnavailableView("Select a Game",
                                        systemImage: "gamecontroller",
                                        description: Text("Select a game from the list in the side bar"))
-            } else {
+            } else {                
                 GameView(game: $selectedGame)
-                    .navigationTitle(selectedGame!.title)
+                    .navigationTitle(selectedGame!.gameDefinition.title)
             }
         })
         .onChange(of: selectedGame) {

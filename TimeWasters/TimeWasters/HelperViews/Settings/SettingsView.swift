@@ -29,8 +29,7 @@ struct SettingsView: View {
                 ForEach(Game.allCases, id: \.self) { game in
                     if game.gameDefinition.settingsIcon != nil {
                         NavigationLink(destination: {
-                            Text(game.gameDefinition.description)
-//                            game.settingsView
+                            GameViewFactory().settingsView(for: game)
                         }, label: {
                             Label(game.gameDefinition.title,
                                   systemImage: game.gameDefinition.settingsIcon!)

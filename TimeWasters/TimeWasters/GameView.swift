@@ -13,10 +13,14 @@ import SharedComponents
 import SwiftUI
 
 struct GameView: View {
-    @Binding var game: GameDefinition?
+    @Binding var game: Game?
     
     var body: some View {
-        Text(game?.description ?? "No Game")
+        if let game {
+            GameViewFactory().gameView(for: game)
+        } else {
+            Text("No game selected")
+        }
     }
 }
 
