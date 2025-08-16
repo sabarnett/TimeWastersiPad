@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E805C1502E508611005B69A4 /* MineSweeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E805C14F2E508611005B69A4 /* MineSweeper.framework */; };
+		E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E805C14F2E508611005B69A4 /* MineSweeper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; };
 		E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -29,6 +31,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */,
+				E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,6 +39,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MineSweeper.xcodeproj; path = ../MineSweeper/MineSweeper.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E805C14F2E508611005B69A4 /* MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SharedComponents.xcodeproj; path = ../SharedComponents/SharedComponents.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E8DB6CBB2E49F69900A351A8 /* TimeWasters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeWasters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -54,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */,
+				E805C1502E508611005B69A4 /* MineSweeper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +69,7 @@
 		E82346DD2E49F76B00BF34CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E805C14F2E508611005B69A4 /* MineSweeper.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -80,6 +87,7 @@
 			children = (
 				E8298B8D2E49FE5A00803FE0 /* TimeWasters */,
 				E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */,
+				E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */,
 				E82346DD2E49F76B00BF34CB /* Frameworks */,
 				E8DB6CBC2E49F69900A351A8 /* Products */,
 			);

@@ -9,6 +9,7 @@
 // Copyright © 2025 Steven Barnett. All rights reserved.
 //
 
+import MineSweeper
 import SharedComponents
 import SwiftUI
 
@@ -16,51 +17,51 @@ import SwiftUI
 /// settings view
 struct GameViewFactory {
 
-    func gameView(for game: Game) -> some View {
+    @MainActor func gameView(for game: Game) -> some View {
         switch game {
         case .minesweeper:
-            Text(game.gameDefinition.description)
+            AnyView(MinesweeperView(gameData: game))
         case .wordcraft:
-            Text(game.gameDefinition.description)
+            AnyView(Text(game.gameDefinition.description))
         case .snake:
-            Text(game.gameDefinition.description)
+            AnyView(Text(game.gameDefinition.description))
         case .adventure:
-            Text(game.gameDefinition.description)
+            AnyView(Text(game.gameDefinition.description))
         case .numberCombinations:
-            Text(game.gameDefinition.description)
+            AnyView(Text(game.gameDefinition.description))
         case .ticTacToe:
-            Text(game.gameDefinition.description)
+            AnyView(Text(game.gameDefinition.description))
         case .othello:
-            Text(game.gameDefinition.description)
+            AnyView(Text(game.gameDefinition.description))
         case .matchedPairs:
-            Text(game.gameDefinition.description)
+            AnyView(Text(game.gameDefinition.description))
         case .wordSearch:
-            Text(game.gameDefinition.description)
+            AnyView(Text(game.gameDefinition.description))
         @unknown default:
             fatalError("Unable to determine game view")
         }
     }
 
-    func settingsView(for game: Game) -> some View {
+    @MainActor func settingsView(for game: Game) -> some View {
         switch game {
         case .minesweeper:
-            Text("Minesweeper settings")
+            AnyView(MinesweeperSettings())
         case .wordcraft:
-            Text("Wordcraft settings")
+            AnyView(Text("Wordcraft settings"))
         case .snake:
-            Text("Snake settings")
+            AnyView(Text("Snake settings"))
         case .adventure:
-            Text("Adventure settings")
+            AnyView(Text("Adventure settings"))
         case .numberCombinations:
-            Text("Number Combinations settings")
+            AnyView(Text("Number Combinations settings"))
         case .ticTacToe:
-            Text("Tic Tac Toe settings")
+            AnyView(Text("Tic Tac Toe settings"))
         case .othello:
-            Text("Othello settings")
+            AnyView(Text("Othello settings"))
         case .matchedPairs:
-            Text("Matched Pairs settings")
+            AnyView(Text("Matched Pairs settings"))
         case .wordSearch:
-            Text("Word Search settings")
+            AnyView(Text("Word Search settings"))
         @unknown default:
             fatalError("Unable to determine game settings view")
         }
