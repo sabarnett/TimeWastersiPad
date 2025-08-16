@@ -99,6 +99,10 @@ public struct MinesweeperView: View {
         .onAppear {
             playSound(tickingURL, repeating: true)
         }
+        .onDisappear {
+            resetGame()
+            ticking.stop()
+        }
 
         .sheet(isPresented: $showGamePlay, onDismiss: {
             if minePlaySounds {
