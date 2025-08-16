@@ -36,30 +36,30 @@ public struct MinesweeperSettings: View {
 
     public var body: some View {
         Form {
-            Picker("Game difficulty", selection: $mineGameDifficulty) {
-                ForEach(GameDifficulty.allCases, id: \.self) { difficulty in
-                    Text(difficulty.description)
-                        .tag(difficulty)
-                }
-            }
-            LabeledContent("") {
-                    switch mineGameDifficulty {
-                    case .beginner:
-                        Text("9x9 Grid with 10 mines")
-                            .font(.caption2)
-                    case .intermediate:
-                        Text("16x16 Grid with 25 mines")
-                            .font(.caption2)
-                    case .expert:
-                        Text("22x22 Grid with 60 mines")
-                            .font(.caption2)
+            Section("Game Difficulty") {
+                Picker("Game difficulty", selection: $mineGameDifficulty) {
+                    ForEach(GameDifficulty.allCases, id: \.self) { difficulty in
+                        Text(difficulty.description)
+                            .tag(difficulty)
                     }
                 }
 
-            Toggle("Play Sounds", isOn: $minePlaySounds)
+                LabeledContent("") {
+                    switch mineGameDifficulty {
+                    case .beginner:
+                        Text("9x9 Grid with 10 mines")
+                    case .intermediate:
+                        Text("16x16 Grid with 25 mines")
+                    case .expert:
+                        Text("22x22 Grid with 60 mines")
+                    }
+                }
+            }
+
+            Section("Sounds") {
+                Toggle("Play Sounds", isOn: $minePlaySounds)
+            }
         }
-        .frame(maxWidth: 400)
-        .padding()
     }
 }
 

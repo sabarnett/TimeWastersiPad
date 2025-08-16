@@ -3,6 +3,7 @@
 //  Minesweeper
 //
 //  Created by Paul Hudson on 03/08/2024.
+//  Modified/extended by Steve Barnett - 2025
 //
 
 import SwiftUI
@@ -64,6 +65,8 @@ public struct MinesweeperView: View {
                 .clipShape(.rect(cornerRadius: 6))
                 .padding([.horizontal, .bottom])
                 .opacity(game.isWaiting || game.isPlaying ? 1 : 0.5)
+
+                Spacer()
             }
             .disabled(game.isWon || game.isLost)
 
@@ -113,7 +116,6 @@ public struct MinesweeperView: View {
             LeaderBoardView(leaderBoard: game.leaderBoard,
                                  initialTab: game.mineGameDifficulty)
         })
-        .frame(maxWidth: game.playingAreaWidth)
     }
 
     /// Handles any toggle buttons to display in the scores area. We do these separately to
