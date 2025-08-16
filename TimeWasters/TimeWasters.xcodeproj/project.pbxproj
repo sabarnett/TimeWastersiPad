@@ -11,6 +11,8 @@
 		E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E805C14F2E508611005B69A4 /* MineSweeper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; };
 		E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E8FF0DEC2E50C0FA00D24375 /* WordCraft.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8FF0DEB2E50C0FA00D24375 /* WordCraft.framework */; };
+		E8FF0DED2E50C0FA00D24375 /* WordCraft.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8FF0DEB2E50C0FA00D24375 /* WordCraft.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +34,7 @@
 			files = (
 				E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */,
 				E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */,
+				E8FF0DED2E50C0FA00D24375 /* WordCraft.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,6 +46,8 @@
 		E805C14F2E508611005B69A4 /* MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SharedComponents.xcodeproj; path = ../SharedComponents/SharedComponents.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E8DB6CBB2E49F69900A351A8 /* TimeWasters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeWasters.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WordCraft.xcodeproj; path = ../WordCraft/WordCraft.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E8FF0DEB2E50C0FA00D24375 /* WordCraft.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WordCraft.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -60,6 +65,7 @@
 			files = (
 				E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */,
 				E805C1502E508611005B69A4 /* MineSweeper.framework in Frameworks */,
+				E8FF0DEC2E50C0FA00D24375 /* WordCraft.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +75,7 @@
 		E82346DD2E49F76B00BF34CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E8FF0DEB2E50C0FA00D24375 /* WordCraft.framework */,
 				E805C14F2E508611005B69A4 /* MineSweeper.framework */,
 			);
 			name = Frameworks;
@@ -88,6 +95,7 @@
 				E8298B8D2E49FE5A00803FE0 /* TimeWasters */,
 				E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */,
 				E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */,
+				E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */,
 				E82346DD2E49F76B00BF34CB /* Frameworks */,
 				E8DB6CBC2E49F69900A351A8 /* Products */,
 			);
@@ -97,6 +105,13 @@
 			isa = PBXGroup;
 			children = (
 				E8DB6CBB2E49F69900A351A8 /* TimeWasters.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E8FF0DD72E50C06600D24375 /* Products */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,6 +171,10 @@
 			productRefGroup = E8DB6CBC2E49F69900A351A8 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = E8FF0DD72E50C06600D24375 /* Products */;
+					ProjectRef = E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */;
+				},
 				{
 					ProductGroup = E8D25AE82E49F71900F29757 /* Products */;
 					ProjectRef = E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */;
@@ -367,9 +386,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.sabarnett.TimeWasters;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -398,9 +420,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.sabarnett.TimeWasters;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

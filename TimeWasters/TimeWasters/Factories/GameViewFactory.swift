@@ -12,6 +12,7 @@
 import MineSweeper
 import SharedComponents
 import SwiftUI
+import WordCraft
 
 /// Single place to generate the game view or the game
 /// settings view
@@ -22,7 +23,7 @@ struct GameViewFactory {
         case .minesweeper:
             AnyView(MinesweeperView(gameData: game))
         case .wordcraft:
-            AnyView(Text(game.gameDefinition.description))
+            AnyView(WordCraftView(gameData: game))
         case .snake:
             AnyView(Text(game.gameDefinition.description))
         case .adventure:
@@ -47,7 +48,7 @@ struct GameViewFactory {
         case .minesweeper:
             AnyView(MinesweeperSettings())
         case .wordcraft:
-            AnyView(Text("Wordcraft settings"))
+            AnyView(WordCraftSettingsView())
         case .snake:
             AnyView(Text("Snake settings"))
         case .adventure:
