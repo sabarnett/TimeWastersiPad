@@ -134,10 +134,8 @@ class WordCraftViewModel {
     // still in play.
     func tileIsValid(_ tile: Tile) -> Bool {
         // Make sure the tile is still in play
-        for row in columns {
-            if row.contains(tile) {
-                return true
-            }
+        for row in columns where row.contains(tile) {
+            return true
         }
 
         return false
@@ -195,6 +193,29 @@ class WordCraftViewModel {
         score += word.count * word.count
     }
 
+    func count(for letter: String) -> Int {
+        var count = 0
+
+        for column in columns {
+            for tile in column where tile.letter == letter {
+                count += 1
+            }
+        }
+
+        return count
+    }
+
+    // MARK: - Souond variables
+
+    private var sounds: AVAudioPlayer!
+    private var tileDrop: AVAudioPlayer!
+    private var backgroundURL: URL { soundFile(named: "background") }
+    private var splatURL: URL { soundFile(named: "splat") }
+
+}
+
+// MARK: - Rule processing
+extension WordCraftViewModel {
     func changeRule() {
         withAnimation {
             selectRule()
@@ -261,20 +282,6 @@ class WordCraftViewModel {
         !hasEvenNumberOfLetters(word)
     }
 
-    func count(for letter: String) -> Int {
-        var count = 0
-
-        for column in columns {
-            for tile in column {
-                if tile.letter == letter {
-                    count += 1
-                }
-            }
-        }
-
-        return count
-    }
-
     func selectRule() {
         let safeLetters = "ABCDEFGHILMNOPRSTUW".map(String.init)
         targetLetter = safeLetters.filter { count(for: $0) >= 2 }.randomElement() ?? "A"
@@ -302,13 +309,10 @@ class WordCraftViewModel {
             currentRule = newRule
         }
     }
+}
 
-    // MARK: - Souond functions
-
-    private var sounds: AVAudioPlayer!
-    private var tileDrop: AVAudioPlayer!
-    private var backgroundURL: URL { soundFile(named: "background") }
-    private var splatURL: URL { soundFile(named: "splat") }
+// MARK: - Sound related functions
+extension WordCraftViewModel {
 
     /// Play the background music
     func playBackgroundSound() {
@@ -367,5 +371,4 @@ class WordCraftViewModel {
             self.sounds.play()
         }
     }
-
 }
