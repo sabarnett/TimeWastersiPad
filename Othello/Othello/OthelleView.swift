@@ -1,0 +1,130 @@
+//
+// -----------------------------------------
+// Original project: Othello
+// Original package: Othello
+// Created on: 18/12/2024 by: Steven Barnett
+// Web: http://www.sabarnett.co.uk
+// GitHub: https://www.github.com/sabarnett
+// -----------------------------------------
+// Copyright © 2024 Steven Barnett. All rights reserved.
+//
+
+import SwiftUI
+import SharedComponents
+
+public struct OthelloView: View {
+
+    @State public var gameData: Game
+    @StateObject private var model: OthelloViewModel = OthelloViewModel()
+
+    @State private var isGameOver: Bool = false
+    @State private var showLeaderBoard: Bool = false
+
+    var gameOverMessage: String {
+        model.gameState == .playerWin ? "😀 You win!" : "🤖 I win this time."
+    }
+
+    public init(gameData: Game) {
+        self.gameData = gameData
+    }
+
+    public var body: some View {
+        ZStack {
+            VStack(alignment: .leading) {
+                topBarAndButtons
+                    .padding()
+                Spacer()
+
+                HStack(spacing: 2) {
+                    Spacer()
+                    VStack {
+                        GameBoardView(model: model)
+                        Text(model.statusMessage)
+                            .font(.title)
+                            .padding()
+                    }
+                    Spacer()
+                    ScoresView(model: model)
+                }
+
+            }
+            .disabled(isGameOver)
+            .sheet(isPresented: $model.showGamePlay) {
+                GamePlayView(game: gameData.gameDefinition)
+            }
+            .toast(toastMessage: $model.notifyMessage)
+
+            if isGameOver {
+                GameOverView(message: gameOverMessage,
+                             buttonCaption: "New Game") {
+                                 isGameOver = false
+                                 model.newGame()
+                             }
+            }
+        }
+        .onChange(of: model.gameState) { _, new in
+            if new == .playerWin || new == .computerWin {
+                isGameOver = true
+            }
+        }
+        .padding()
+        .sheet(isPresented: $showLeaderBoard) {
+            LeaderBoardView(leaderBoard: model.leaderBoard,
+                            initialTab: .player)
+        }
+    }
+
+    var topBarAndButtons: some View {
+        HStack {
+            Button(action: {
+                model.showGamePlay.toggle()
+            }, label: {
+                Image(systemName: "questionmark.circle.fill")
+            })
+            .buttonStyle(.plain)
+            .help("Show game rules")
+
+            Button(action: {
+                showLeaderBoard = true
+            }, label: {
+                Image(systemName: "trophy.circle.fill")
+            })
+            .buttonStyle(.plain)
+            .help("Show the leader board")
+
+            Spacer()
+
+            Button(action: {
+                model.showHint()
+            }, label: {
+                Image(systemName: "signpost.right.fill")
+            })
+            .buttonStyle(.plain)
+            .help("Show player moves")
+            .disabled(model.gameState != .playerMove)
+
+            Button(action: {
+                model.newGame()
+            }, label: {
+                Image(systemName: "arrow.uturn.left.circle.fill")
+            })
+            .buttonStyle(.plain)
+            .help("Start a new game")
+
+            Button(action: {
+                model.toggleSounds()
+            }, label: {
+                Image(systemName: model.speakerIcon)
+            })
+            .buttonStyle(.plain)
+            .help("Toggle sound effects")
+        }
+        .monospacedDigit()
+        .font(.largeTitle)
+        .clipShape(.rect(cornerRadius: 10))
+    }
+}
+
+#Preview {
+    OthelloView(gameData: Game.othello)
+}

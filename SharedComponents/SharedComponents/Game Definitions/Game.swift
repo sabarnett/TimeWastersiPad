@@ -13,8 +13,8 @@ import SwiftUI
 
 public enum Game: String, CaseIterable, Identifiable {
     case minesweeper, wordcraft, numberCombinations, ticTacToe,
-        snake, adventure,
-        othello, matchedPairs, wordSearch
+         othello,
+         snake, adventure, matchedPairs, wordSearch
 
     public var id: Game { self }
 
