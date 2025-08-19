@@ -11,6 +11,8 @@
 		E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E805C14F2E508611005B69A4 /* MineSweeper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; };
 		E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E88D54142E54A26C001ECD5E /* NumberCombinations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E88D54132E54A26C001ECD5E /* NumberCombinations.framework */; };
+		E88D54152E54A26C001ECD5E /* NumberCombinations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E88D54132E54A26C001ECD5E /* NumberCombinations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E8FF0DEC2E50C0FA00D24375 /* WordCraft.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8FF0DEB2E50C0FA00D24375 /* WordCraft.framework */; };
 		E8FF0DED2E50C0FA00D24375 /* WordCraft.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8FF0DEB2E50C0FA00D24375 /* WordCraft.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -35,6 +37,7 @@
 				E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */,
 				E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */,
 				E8FF0DED2E50C0FA00D24375 /* WordCraft.framework in Embed Frameworks */,
+				E88D54152E54A26C001ECD5E /* NumberCombinations.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,6 +47,8 @@
 /* Begin PBXFileReference section */
 		E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MineSweeper.xcodeproj; path = ../MineSweeper/MineSweeper.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E805C14F2E508611005B69A4 /* MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E88D53F02E54A20F001ECD5E /* NumberCombinations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NumberCombinations.xcodeproj; path = ../NumberCombinations/NumberCombinations.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E88D54132E54A26C001ECD5E /* NumberCombinations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NumberCombinations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SharedComponents.xcodeproj; path = ../SharedComponents/SharedComponents.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E8DB6CBB2E49F69900A351A8 /* TimeWasters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeWasters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WordCraft.xcodeproj; path = ../WordCraft/WordCraft.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -66,6 +71,7 @@
 				E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */,
 				E805C1502E508611005B69A4 /* MineSweeper.framework in Frameworks */,
 				E8FF0DEC2E50C0FA00D24375 /* WordCraft.framework in Frameworks */,
+				E88D54142E54A26C001ECD5E /* NumberCombinations.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +81,7 @@
 		E82346DD2E49F76B00BF34CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E88D54132E54A26C001ECD5E /* NumberCombinations.framework */,
 				E8FF0DEB2E50C0FA00D24375 /* WordCraft.framework */,
 				E805C14F2E508611005B69A4 /* MineSweeper.framework */,
 			);
@@ -102,6 +109,7 @@
 				E8298B8D2E49FE5A00803FE0 /* TimeWasters */,
 				E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */,
 				E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */,
+				E88D53F02E54A20F001ECD5E /* NumberCombinations.xcodeproj */,
 				E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */,
 				E82346DD2E49F76B00BF34CB /* Frameworks */,
 				E8DB6CBC2E49F69900A351A8 /* Products */,

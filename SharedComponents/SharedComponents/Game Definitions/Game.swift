@@ -12,8 +12,8 @@
 import SwiftUI
 
 public enum Game: String, CaseIterable, Identifiable {
-    case minesweeper, wordcraft, snake, adventure
-    case numberCombinations, ticTacToe, othello, matchedPairs, wordSearch
+    case minesweeper, wordcraft, numberCombinations, snake, adventure
+    case ticTacToe, othello, matchedPairs, wordSearch
 
     public var id: Game { self }
 
@@ -23,12 +23,12 @@ public enum Game: String, CaseIterable, Identifiable {
             return minesweeperGame()
         case .wordcraft:
             return wordcraftGame()
+        case .numberCombinations:
+            return numberCombinationsGame()
         case .snake:
             return snakeGame()
         case .adventure:
             return pyramidOfDoom()
-        case .numberCombinations:
-            return numberCombinationsGame()
         case .ticTacToe:
             return ticTacToeGame()
         case .othello:

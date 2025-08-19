@@ -10,6 +10,7 @@
 //
 
 import MineSweeper
+import NumberCombinations
 import SharedComponents
 import SwiftUI
 import WordCraft
@@ -24,11 +25,11 @@ struct GameViewFactory {
             AnyView(MinesweeperView(gameData: game))
         case .wordcraft:
             AnyView(WordCraftView(gameData: game))
+        case .numberCombinations:
+            AnyView(CombinationsView(gameData: game))
         case .snake:
             AnyView(Text(game.gameDefinition.description))
         case .adventure:
-            AnyView(Text(game.gameDefinition.description))
-        case .numberCombinations:
             AnyView(Text(game.gameDefinition.description))
         case .ticTacToe:
             AnyView(Text(game.gameDefinition.description))
@@ -49,12 +50,12 @@ struct GameViewFactory {
             AnyView(MinesweeperSettings())
         case .wordcraft:
             AnyView(WordCraftSettingsView())
+        case .numberCombinations:
+            AnyView(CombinationsSettingsView())
         case .snake:
             AnyView(Text("Snake settings"))
         case .adventure:
             AnyView(Text("Adventure settings"))
-        case .numberCombinations:
-            AnyView(Text("Number Combinations settings"))
         case .ticTacToe:
             AnyView(Text("Tic Tac Toe settings"))
         case .othello:
