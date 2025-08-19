@@ -102,6 +102,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E850C31F2E54C1280046C253 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E850C3602E54C1280046C253 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E850C3652E54C1280046C253 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E88D53782E549B78001ECD5E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,8 +228,20 @@
 					ProjectRef = E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */;
 				},
 				{
+					ProductGroup = E850C3602E54C1280046C253 /* Products */;
+					ProjectRef = E88D53F02E54A20F001ECD5E /* NumberCombinations.xcodeproj */;
+				},
+				{
+					ProductGroup = E850C31F2E54C1280046C253 /* Products */;
+					ProjectRef = E88D54452E54B343001ECD5E /* Othello.xcodeproj */;
+				},
+				{
 					ProductGroup = E8D25AE82E49F71900F29757 /* Products */;
 					ProjectRef = E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */;
+				},
+				{
+					ProductGroup = E850C3652E54C1280046C253 /* Products */;
+					ProjectRef = E88D541A2E54AE66001ECD5E /* TicTacToe.xcodeproj */;
 				},
 				{
 					ProductGroup = E88D53782E549B78001ECD5E /* Products */;
