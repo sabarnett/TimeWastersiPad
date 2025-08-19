@@ -81,6 +81,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E88D53782E549B78001ECD5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E8D25AE82E49F71900F29757 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +185,10 @@
 				{
 					ProductGroup = E8D25AE82E49F71900F29757 /* Products */;
 					ProjectRef = E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */;
+				},
+				{
+					ProductGroup = E88D53782E549B78001ECD5E /* Products */;
+					ProjectRef = E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */;
 				},
 			);
 			projectRoot = "";

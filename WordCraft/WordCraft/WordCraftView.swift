@@ -20,20 +20,46 @@ public struct WordCraftView: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading) {
+        VStack {
             WordCraftToolBar(viewModel: viewModel)
+                .confirmationDialog(
+                    String("Reset the game?"),
+                    isPresented: $viewModel.showResetConfirmation,
+                    titleVisibility: .visible
+                ) {
+                    Button("Yes") { viewModel.reset() }
+                    Button("No", role: .cancel) { }
+                   } message: {
+                       Text("This action cannot be undone. Would you like to proceed?")
+                   }
 
-            WordCraftRuleView(viewModel: viewModel)
+               .confirmationDialog(
+                   String("Reload saved game?"),
+                   isPresented: $viewModel.showReloadConfirmation,
+                   titleVisibility: .visible
+               ) {
+                   Button("Yes") { viewModel.restoreGame() }
+                   Button("No", role: .cancel) { }
+               } message: {
+                   Text("You will lose any current progress if you do this.")
+               }
 
-            HStack(spacing: 5) {
-                GameBoardView(viewModel: viewModel)
-                if wordcraftShowUsedWords {
-                    RecentWordsView(viewModel: viewModel)
+            Spacer()
+            VStack(alignment: .leading) {
+                WordCraftRuleView(viewModel: viewModel)
+
+                HStack(spacing: 5) {
+                    GameBoardView(viewModel: viewModel)
+                    if wordcraftShowUsedWords {
+                        RecentWordsView(viewModel: viewModel)
+                    }
                 }
+                .frame(height: 460)
             }
+
+            Spacer()
         }
         .padding()
-        .fixedSize()
         .onKeyPress(action: { keyPress in
             viewModel.selectLetter(keyPress)
             return .handled
@@ -48,27 +74,6 @@ public struct WordCraftView: View {
             viewModel.stopSounds()
         }
         .toast(toastMessage: $viewModel.notifyMessage)
-        .confirmationDialog(
-            String("Reset the game?"),
-            isPresented: $viewModel.showResetConfirmation,
-            titleVisibility: .visible
-        ) {
-            Button("Yes") { viewModel.reset() }
-            Button("No", role: .cancel) { }
-           } message: {
-               Text("This action cannot be undone. Would you like to proceed?")
-           }
-
-           .confirmationDialog(
-               String("Reload saved game?"),
-               isPresented: $viewModel.showReloadConfirmation,
-               titleVisibility: .visible
-           ) {
-               Button("Yes") { viewModel.restoreGame() }
-               Button("No", role: .cancel) { }
-           } message: {
-               Text("You will lose any current progress if you do this.")
-           }
     }
 }
 

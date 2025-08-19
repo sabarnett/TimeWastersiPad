@@ -27,6 +27,6 @@ struct WordCraftRuleView: View {
 
             Text(viewModel.currentRule.name)
                 .contentTransition(.numericText())
-        }.font(.system(size: 18))
+        }.font(.system(size: 22))
     }
 }
