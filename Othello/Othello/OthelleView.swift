@@ -31,10 +31,6 @@ public struct OthelloView: View {
     public var body: some View {
         ZStack {
             VStack(alignment: .leading) {
-                topBarAndButtons
-                    .padding()
-                Spacer()
-
                 HStack(spacing: 2) {
                     Spacer()
                     VStack {
@@ -47,6 +43,47 @@ public struct OthelloView: View {
                     ScoresView(model: model)
                 }
 
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button(action: {
+                        model.showGamePlay.toggle()
+                    }, label: {
+                        Image(systemName: "questionmark.circle")
+                    })
+                    .help("Show game rules")
+
+                    Button(action: {
+                        showLeaderBoard = true
+                    }, label: {
+                        Image(systemName: "trophy.circle")
+                    })
+                    .help("Show the leader board")
+                }
+                
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(action: {
+                        model.showHint()
+                    }, label: {
+                        Image(systemName: "signpost.right")
+                    })
+                    .help("Show player moves")
+                    .disabled(model.gameState != .playerMove)
+
+                    Button(action: {
+                        model.newGame()
+                    }, label: {
+                        Image(systemName: "arrow.uturn.left.circle")
+                    })
+                    .help("Start a new game")
+
+                    Button(action: {
+                        model.toggleSounds()
+                    }, label: {
+                        Image(systemName: model.speakerIcon)
+                    })
+                    .help("Toggle sound effects")
+                }
             }
             .disabled(isGameOver)
             .sheet(isPresented: $model.showGamePlay) {
@@ -72,56 +109,6 @@ public struct OthelloView: View {
             LeaderBoardView(leaderBoard: model.leaderBoard,
                             initialTab: .player)
         }
-    }
-
-    var topBarAndButtons: some View {
-        HStack {
-            Button(action: {
-                model.showGamePlay.toggle()
-            }, label: {
-                Image(systemName: "questionmark.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Show game rules")
-
-            Button(action: {
-                showLeaderBoard = true
-            }, label: {
-                Image(systemName: "trophy.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Show the leader board")
-
-            Spacer()
-
-            Button(action: {
-                model.showHint()
-            }, label: {
-                Image(systemName: "signpost.right.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Show player moves")
-            .disabled(model.gameState != .playerMove)
-
-            Button(action: {
-                model.newGame()
-            }, label: {
-                Image(systemName: "arrow.uturn.left.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Start a new game")
-
-            Button(action: {
-                model.toggleSounds()
-            }, label: {
-                Image(systemName: model.speakerIcon)
-            })
-            .buttonStyle(.plain)
-            .help("Toggle sound effects")
-        }
-        .monospacedDigit()
-        .font(.largeTitle)
-        .clipShape(.rect(cornerRadius: 10))
     }
 }
 
