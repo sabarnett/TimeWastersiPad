@@ -26,10 +26,7 @@ public struct CombinationsView: View {
     public var body: some View {
         ZStack {
             VStack {
-                topBarAndButtons
-                    .padding(.horizontal, 8)
                 Spacer()
-
                 HStack {
                     VStack {
                         HStack {
@@ -63,7 +60,48 @@ public struct CombinationsView: View {
                         .foregroundStyle(.red)
                 }
                 Spacer()
-            }.disabled(model.success)
+            }
+            .disabled(model.success)
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button(action: {
+                        model.showGamePlay.toggle()
+                    }, label: {
+                        Image(systemName: "questionmark.circle")
+                    })
+                    .help("Show game rules")
+
+                    Button(action: {
+                        model.showLeaderBoard.toggle()
+                    }, label: {
+                        Image(systemName: "trophy.circle")
+                    })
+                    .help("Show the leader board")
+                }
+                
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(action: {
+                        model.generatePuzzle()
+                    }, label: {
+                        Image(systemName: "arrow.uturn.left.circle")
+                    })
+                    .help("Restart the game")
+
+                    Button(action: {
+                        model.showSolution()
+                    }, label: {
+                        Image(systemName: "squareshape.split.2x2")
+                    })
+                    .help("Show/Hide the solution")
+
+                    Button(action: {
+                        model.toggleSounds()
+                    }, label: {
+                        Image(systemName: model.speakerIcon)
+                    })
+                    .help("Toggle sound effects")
+                }
+            }
 
             if model.success {
                 GameOverView(message: "You got it!!") {
@@ -85,55 +123,6 @@ public struct CombinationsView: View {
             LeaderBoardView(leaderBoard: model.leaderBoard)
         }
         .toast(toastMessage: $model.notifyMessage)
-    }
-
-    var topBarAndButtons: some View {
-        HStack {
-            Button(action: {
-                model.showGamePlay.toggle()
-            }, label: {
-                Image(systemName: "questionmark.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Show game rules")
-
-            Button(action: {
-                model.showLeaderBoard.toggle()
-            }, label: {
-                Image(systemName: "trophy.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Show the leader board")
-
-            Spacer()
-
-            Button(action: {
-                model.generatePuzzle()
-            }, label: {
-                Image(systemName: "arrow.uturn.left.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Restart the game")
-
-            Button(action: {
-                model.showSolution()
-            }, label: {
-                Image(systemName: "squareshape.split.2x2")
-            })
-            .buttonStyle(.plain)
-            .help("Show/Hide the solution")
-
-            Button(action: {
-                model.toggleSounds()
-            }, label: {
-                Image(systemName: model.speakerIcon)
-            })
-            .buttonStyle(.plain)
-            .help("Toggle sound effects")
-        }
-        .monospacedDigit()
-        .font(.largeTitle)
-        .clipShape(.rect(cornerRadius: 10))
     }
 }
 
