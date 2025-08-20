@@ -37,22 +37,47 @@ public struct TicTacToeView: View {
     public var body: some View {
         ZStack {
             VStack {
-                topBarAndButtons.padding(8)
-                Spacer()
-
                 HStack {
                     Spacer()
-                    GameGrid(model: model).frame(width: 380)
+                    VStack {
+                        GameGrid(model: model).frame(width: 380)
+                        Text(model.messages)
+                            .font(.title)
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
                     Spacer()
                     ScoreView(model: model).frame(maxWidth: 200)
                 }
 
-                Text(model.messages)
-                    .font(.title)
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .center)
             }
             .disabled(model.gameState != .active)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading, content: {
+                    Button(action: {
+                        model.showGamePlay.toggle()
+                    }, label: {
+                        Image(systemName: "questionmark.circle")
+                    })
+                    .help("Show game rules")
+                })
+
+                ToolbarItemGroup(placement: .topBarTrailing, content: {
+                    Button(action: {
+                        model.resetGame()
+                    }, label: {
+                        Image(systemName: "arrow.uturn.left.circle")
+                    })
+                    .help("Reset the game")
+
+                    Button(action: {
+                        model.toggleSounds()
+                    }, label: {
+                        Image(systemName: model.speakerIcon)
+                    })
+                    .help("Toggle sound effects")
+                })
+            }
 
             if model.gameState != .active {
                 GameOverView(message: gameOverMessage) {
@@ -66,40 +91,6 @@ public struct TicTacToeView: View {
         .sheet(isPresented: $model.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)
         }
-//        .frame(width: 580)
-    }
-
-    var topBarAndButtons: some View {
-        HStack {
-            Button(action: {
-                model.showGamePlay.toggle()
-            }, label: {
-                Image(systemName: "questionmark.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Show game rules")
-
-            Spacer()
-
-            Button(action: {
-                model.resetGame()
-            }, label: {
-                Image(systemName: "arrow.uturn.left.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Reset the game")
-
-            Button(action: {
-                model.toggleSounds()
-            }, label: {
-                Image(systemName: model.speakerIcon)
-            })
-            .buttonStyle(.plain)
-            .help("Toggle sound effects")
-        }
-        .monospacedDigit()
-        .font(.largeTitle)
-        .clipShape(.rect(cornerRadius: 10))
     }
 }
 
