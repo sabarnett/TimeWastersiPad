@@ -40,10 +40,7 @@ public struct MinesweeperView: View {
     public var body: some View {
         ZStack {
             VStack {
-                ZStack {
-                    toggleButtons
-                    gameStatusDisplay
-                }
+                gameStatusDisplay
 
                 Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                     ForEach(0..<game.rows.count, id: \.self) { row in
@@ -69,6 +66,34 @@ public struct MinesweeperView: View {
                 Spacer()
             }
             .disabled(game.isWon || game.isLost)
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button(action: {
+                        ticking?.stop()
+                        showGamePlay.toggle()
+                    }, label: {
+                        Image(systemName: "questionmark.circle")
+                    })
+                    .help("Show the game play")
+
+                    Button(action: {
+                        ticking?.stop()
+                        showLeaderBoard.toggle()
+                    }, label: {
+                        Image(systemName: "trophy.circle")
+                    })
+                    .help("Show the leader board")
+                }
+
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(action: {
+                        toggleSounds()
+                    }, label: {
+                        Image(systemName: minePlaySounds ? "speaker.slash.fill" : "speaker.fill")
+                    })
+                    .help("Toggle sounds")
+                }
+            }
 
             if game.isWon || game.isLost {
                 GameOverView(message: gameOverMessage) {
@@ -120,48 +145,6 @@ public struct MinesweeperView: View {
             LeaderBoardView(leaderBoard: game.leaderBoard,
                                  initialTab: game.mineGameDifficulty)
         })
-    }
-
-    /// Handles any toggle buttons to display in the scores area. We do these separately to
-    /// the score display because we want the scores to be centered regardless of how many
-    /// buttons we have in the buttons area.
-    private var toggleButtons: some View {
-        HStack {
-            Button(action: {
-                ticking.stop()
-                showGamePlay.toggle()
-            }, label: {
-                Image(systemName: "questionmark.circle.fill")
-                    .scaleEffect(2)
-                    .padding(5)
-            })
-            .buttonStyle(.plain)
-            .help("Show the game play")
-
-            Button(action: {
-                ticking.stop()
-                showLeaderBoard.toggle()
-            }, label: {
-                Image(systemName: "trophy.circle.fill")
-                    .scaleEffect(2)
-                    .padding(5)
-            })
-            .buttonStyle(.plain)
-            .help("Show the leader board")
-
-            Spacer()
-
-            Button(action: {
-                toggleSounds()
-            }, label: {
-                Image(systemName: minePlaySounds ? "speaker.slash.fill" : "speaker.fill")
-                    .scaleEffect(2)
-                    .padding(5)
-            })
-            .buttonStyle(.plain)
-            .help("Toggle sounds")
-
-        }.padding([.horizontal, .top])
     }
 
     /// Displays the current selected bomb count and the number of seconds elapsed. It also
