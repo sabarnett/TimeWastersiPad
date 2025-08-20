@@ -59,6 +59,46 @@ public struct WordCraftView: View {
 
             Spacer()
         }
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarLeading) {
+                Button(action: {
+                    viewModel.showGamePlay.toggle()
+                }, label: {
+                    Image(systemName: "questionmark.circle")
+                })
+                .help("Show game rules")
+            }
+
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Button(action: {
+                    viewModel.showResetConfirmation = true
+                }, label: {
+                    Image(systemName: "arrow.uturn.left.circle")
+                })
+                .help("Restart the game")
+
+                Button(action: {
+                    viewModel.saveGame()
+                }, label: {
+                    Image(systemName: "tray.and.arrow.down")
+                })
+                .help("Save the current game state.")
+
+                Button(action: {
+                    viewModel.showReloadConfirmation = true
+                }, label: {
+                    Image(systemName: "tray.and.arrow.up")
+                })
+                .help("Reload the last saved game.")
+
+                Button(action: {
+                    viewModel.toggleSounds()
+                }, label: {
+                    Image(systemName: viewModel.speakerIcon)
+                })
+                .help("Toggle sound effects")
+            }
+        }
         .padding()
         .onKeyPress(action: { keyPress in
             viewModel.selectLetter(keyPress)
