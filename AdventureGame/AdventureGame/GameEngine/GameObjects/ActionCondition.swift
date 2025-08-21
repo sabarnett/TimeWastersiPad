@@ -18,7 +18,7 @@ public class ActionCondition {
         case carried = 1                // Param = item
         case here = 2                   // Param = item
         case present = 3                // Param = item
-        case at = 4                     // Param = room
+        case atRoom = 4                 // Param = room
         case notHere = 5                // Param = item
         case notCarried = 6             // Param = item
         case notAt = 7                  // Param = room
@@ -59,11 +59,11 @@ extension ActionCondition {
     convenience init(forGame: Adventure, withCondition: String, usingValue: String) {
 
         guard let cond = Int(withCondition) else {
-            fatalError("Invalid condition - condition with value \(withCondition) is not supported.")
+            fatalError("Invalid condition: condition with value \(withCondition) is not supported.")
         }
 
         guard let val = Int(usingValue) else {
-            fatalError("Invalid condition - The conditioin with value \(withCondition) has an invalid value: \(usingValue)")
+            fatalError("Invalid condition: condition with value \(withCondition) has an invalid value: \(usingValue)")
         }
 
         self.init(forGame: forGame, withCondition: cond, usingValue: val)
@@ -78,6 +78,7 @@ extension ActionCondition: CustomStringConvertible {
 
 extension ActionCondition {
 
+    // swiftlint:disable:next cyclomatic_complexity
     public func evaluate() -> Bool {
         var item: GameItem?
 
@@ -96,7 +97,7 @@ extension ActionCondition {
             return item!.location == location
         case .present:
             return item!.location == game.ROOMCARRIED || item!.location == location
-        case .at:
+        case .atRoom:
             return location == value
         case .notHere:
             return item!.location != location

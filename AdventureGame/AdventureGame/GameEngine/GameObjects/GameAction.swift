@@ -92,7 +92,8 @@ extension GameAction {
 
         if testChance && verb == 0 && noun < 100 {
             // It's an occurrance and may be random ? whatever that means!
-            let dice = arc4random_uniform(100)
+            let dice = Int.random(in: 0..<100)
+            // let dice = arc4random_uniform(100)
             if dice >= noun {
                 return .actSuccess
             }
@@ -111,10 +112,8 @@ extension GameAction {
     }
 
     private func allConditionsAreTrue() -> Bool {
-        for cond in conditions {
-            if !cond.evaluate() {
-                return false
-            }
+        for cond in conditions where !cond.evaluate() {
+            return false
         }
 
         return true

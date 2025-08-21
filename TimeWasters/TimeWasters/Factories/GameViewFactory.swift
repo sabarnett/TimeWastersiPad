@@ -9,6 +9,7 @@
 // Copyright © 2025 Steven Barnett. All rights reserved.
 //
 
+import AdventureGame
 import MineSweeper
 import NumberCombinations
 import Othello
@@ -34,7 +35,7 @@ struct GameViewFactory {
         case .othello:
             AnyView(OthelloView(gameData: game))
         case .adventure:
-            AnyView(AdventureGameView(gameData: game, game: "ADV08.DAT"))
+            AnyView(AdventureGameView(gameData: game, game: "adv08"))
 
         case .snake:
             AnyView(Text(game.gameDefinition.description))

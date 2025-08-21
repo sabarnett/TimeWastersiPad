@@ -541,7 +541,8 @@ extension Adventure {
         }
 
         let item = items[index]
-        display(message: "Item \(index): '\(item.itemDescription)' at room \(item.location) '\(rooms[item.location].description)'")
+        let message = "Item \(index): '\(item.itemDescription)' at room \(item.location) '\(rooms[item.location].description)'"
+        display(message: message)
     }
 
     public func wizardSet(option: String) {

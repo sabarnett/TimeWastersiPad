@@ -91,6 +91,8 @@ extension ActionInstruction: CustomStringConvertible {
 
 extension ActionInstruction {
 
+    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable function_body_length
     public func execute(_ args: inout [Int]) -> Bool {
 
         // Should never happen, but who knows.
@@ -275,4 +277,6 @@ extension ActionInstruction {
 
         return false
     }
+    // swiftlint:enable function_body_length
+    // swiftlint:enable cyclomatic_complexity
 }

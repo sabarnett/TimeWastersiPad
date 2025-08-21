@@ -47,7 +47,10 @@ public class GameDataReader: GameDataReaderProtocol {
             return number
         }
 
-        throw GameDataReaderErrors.integerExpected(errorMessage: "Integer was requested, but non-integer value found: '\(nextValue)' in row \(lineNumber)")
+        let errorMessage = "Integer was requested, but non-integer value found: '\(nextValue)' in row \(lineNumber)"
+        throw GameDataReaderErrors.integerExpected(
+            errorMessage: errorMessage
+        )
     }
 
     public func nextLine() -> String {
