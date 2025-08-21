@@ -18,6 +18,7 @@ public struct AdventureGameView: View {
 
     @State public var gameData: Game
     @State var gameModel: GamePlayViewModel
+    @State var columnsVisible: NavigationSplitViewVisibility = .all
 
     @FocusState private var inputFocus: Bool
 
@@ -29,7 +30,7 @@ public struct AdventureGameView: View {
     public var body: some View {
         ZStack {
             VStack {
-                NavigationSplitView {
+                NavigationSplitView(columnVisibility: $columnsVisible) {
                     List {
                         carriedItemsView
                         Spacer().frame(height: 32)
@@ -38,7 +39,7 @@ public struct AdventureGameView: View {
                         treasureItemsView
                             .listRowSeparator(.hidden)
                             .listSectionSeparator(.hidden)
-                    }
+                    }.navigationBarHidden(true)
                 } detail: {
                     VStack {
                         gamePlayView
