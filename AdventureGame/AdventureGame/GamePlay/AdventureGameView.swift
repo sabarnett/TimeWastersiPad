@@ -41,9 +41,6 @@ public struct AdventureGameView: View {
                     }
                 } detail: {
                     VStack {
-                        topBarAndButtons
-                            .padding(.horizontal, 8)
-
                         gamePlayView
                     }
                 }
@@ -51,6 +48,42 @@ public struct AdventureGameView: View {
             .background(colorScheme == .dark ? Color.black : Color.white)
             .sheet(isPresented: $gameModel.showGamePlay) {
                 GamePlayView(game: gameData.gameDefinition)
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button(action: {
+                        gameModel.showGamePlay.toggle()
+                    }, label: {
+                        Image(systemName: "questionmark.circle.fill")
+                            .padding(.vertical, 5)
+                    })
+                    .help("Show game rules")
+                }
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(action: {
+                        gameModel.showResetConfirmation = true
+                    }, label: {
+                        Image(systemName: "arrow.uturn.left.circle.fill")
+                            .padding(.vertical, 5)
+                    })
+                    .help("Restart the game.")
+
+                    Button(action: {
+                        gameModel.saveGame()
+                    }, label: {
+                        Image(systemName: "tray.and.arrow.down.fill")
+                            .padding(.vertical, 5)
+                    })
+                    .help("Save the current game state.")
+
+                    Button(action: {
+                        gameModel.showReloadConfirmation = true
+                    }, label: {
+                        Image(systemName: "tray.and.arrow.up.fill")
+                            .padding(.vertical, 5)
+                    })
+                    .help("Reload the last saved game.")
+                }
             }
             .onAppear {
                 inputFocus = true
@@ -93,51 +126,6 @@ public struct AdventureGameView: View {
                 }
             }
         }
-    }
-
-    private var topBarAndButtons: some View {
-        HStack {
-            Button(action: {
-                gameModel.showGamePlay.toggle()
-            }, label: {
-                Image(systemName: "questionmark.circle.fill")
-                    .padding(.vertical, 5)
-            })
-            .buttonStyle(.plain)
-            .help("Show game rules")
-
-            Spacer()
-
-            Button(action: {
-                gameModel.showResetConfirmation = true
-            }, label: {
-                Image(systemName: "arrow.uturn.left.circle.fill")
-                    .padding(.vertical, 5)
-            })
-            .buttonStyle(.plain)
-            .help("Restart the game.")
-
-            Button(action: {
-                gameModel.saveGame()
-            }, label: {
-                Image(systemName: "tray.and.arrow.down.fill")
-                    .padding(.vertical, 5)
-            })
-            .buttonStyle(.plain)
-            .help("Save the current game state.")
-
-            Button(action: {
-                gameModel.showReloadConfirmation = true
-            }, label: {
-                Image(systemName: "tray.and.arrow.up.fill")
-                    .padding(.vertical, 5)
-            })
-            .buttonStyle(.plain)
-            .help("Reload the last saved game.")
-        }
-        .monospacedDigit()
-        .font(.largeTitle)
-        .clipShape(.rect(cornerRadius: 10))
     }
 
     private var gamePlayView: some View {

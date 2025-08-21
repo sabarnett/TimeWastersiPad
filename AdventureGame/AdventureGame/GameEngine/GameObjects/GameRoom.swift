@@ -32,6 +32,7 @@ public class GameRoom {
 
 extension GameRoom: CustomStringConvertible {
     public var description: String {
+        let exits = Translators.exitList(exits: self.exits)
         return "Room \(roomDescription) - Exits \(exits)"
     }
 }
