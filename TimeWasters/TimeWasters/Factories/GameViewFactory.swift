@@ -33,10 +33,10 @@ struct GameViewFactory {
             AnyView(TicTacToeView(gameData: game))
         case .othello:
             AnyView(OthelloView(gameData: game))
+        case .adventure:
+            AnyView(AdventureGameView(gameData: game, game: "ADV08.DAT"))
 
         case .snake:
-            AnyView(Text(game.gameDefinition.description))
-        case .adventure:
             AnyView(Text(game.gameDefinition.description))
         case .matchedPairs:
             AnyView(Text(game.gameDefinition.description))
@@ -59,11 +59,11 @@ struct GameViewFactory {
             AnyView(Text("There are no settings for Tic Tac Toe"))
         case .othello:
             AnyView(Text("There are no settigs for Othello"))
+        case .adventure:
+            AnyView(Text("There are no settings for Pyramid of Doom"))
 
         case .snake:
             AnyView(Text("Snake settings"))
-        case .adventure:
-            AnyView(Text("Adventure settings"))
         case .matchedPairs:
             AnyView(Text("Matched Pairs settings"))
         case .wordSearch:

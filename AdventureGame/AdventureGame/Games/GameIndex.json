@@ -1,0 +1,74 @@
+{
+  "games": [
+    {
+        "title": "AdventureLand",
+        "file": "adv01",
+        "version": "v4.16"
+    },
+    {
+        "title": "Pirate Adventure",
+        "file": "adv02",
+        "version": "v4.08"
+    },
+    {
+        "title": "Mission Impossible",
+        "file": "adv03",
+        "version": "v3.06"
+    },
+    {
+        "title": "VooDoo Castle",
+        "file": "adv04",
+        "version": "v1.19"
+    },
+    {
+        "title": "The Count",
+        "file": "adv05",
+        "version": "v1.15"
+    },
+    {
+        "title": "Strange Odyssey",
+        "file": "adv06",
+        "version": "v1.19"
+    },
+    {
+        "title": "Mystery Fun House",
+        "file": "adv07",
+        "version": "v1.45"
+    },
+    {
+        "title": "Pyramid Of Doom",
+        "file": "adv08",
+        "version": "v1.25"
+    },
+    {
+        "title": "Ghost Town",
+        "file": "adv09",
+        "version": "v2.23"
+    },
+    {
+        "title": "Savage Island, Part I",
+        "file": "adv10",
+        "version": "v1.23"
+    },
+    {
+        "title": "Savage Island, Part II",
+        "file": "adv11",
+        "version": "v1.23"
+    },
+    {
+        "title": "The Golden Voyage",
+        "file": "adv12",
+        "version": ""
+    },
+    {
+        "title": "Never Never Land",
+        "file": "adv14a",
+        "version": ""
+    },
+    {
+        "title": "Buckaroo Banzai",
+        "file": "adv14b",
+        "version": ""
+    }
+  ]
+}

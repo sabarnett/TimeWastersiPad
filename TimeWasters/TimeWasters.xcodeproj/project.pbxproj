@@ -11,6 +11,8 @@
 		E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E805C14F2E508611005B69A4 /* MineSweeper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; };
 		E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E85413EA2E57543300CFC667 /* AdventureGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E92E57543300CFC667 /* AdventureGame.framework */; };
+		E85413EB2E57543300CFC667 /* AdventureGame.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E92E57543300CFC667 /* AdventureGame.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E88D54142E54A26C001ECD5E /* NumberCombinations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E88D54132E54A26C001ECD5E /* NumberCombinations.framework */; };
 		E88D54152E54A26C001ECD5E /* NumberCombinations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E88D54132E54A26C001ECD5E /* NumberCombinations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E88D54432E54AEC5001ECD5E /* TicTacToe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E88D54422E54AEC5001ECD5E /* TicTacToe.framework */; };
@@ -43,6 +45,7 @@
 				E8FF0DED2E50C0FA00D24375 /* WordCraft.framework in Embed Frameworks */,
 				E88D54152E54A26C001ECD5E /* NumberCombinations.framework in Embed Frameworks */,
 				E88D54742E54B3C1001ECD5E /* Othello.framework in Embed Frameworks */,
+				E85413EB2E57543300CFC667 /* AdventureGame.framework in Embed Frameworks */,
 				E88D54442E54AEC5001ECD5E /* TicTacToe.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -53,6 +56,8 @@
 /* Begin PBXFileReference section */
 		E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MineSweeper.xcodeproj; path = ../MineSweeper/MineSweeper.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E805C14F2E508611005B69A4 /* MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E85413DC2E5753E000CFC667 /* AdventureGame.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdventureGame.xcodeproj; path = ../AdventureGame/AdventureGame.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E85413E92E57543300CFC667 /* AdventureGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdventureGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88D53F02E54A20F001ECD5E /* NumberCombinations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NumberCombinations.xcodeproj; path = ../NumberCombinations/NumberCombinations.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E88D54132E54A26C001ECD5E /* NumberCombinations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NumberCombinations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88D541A2E54AE66001ECD5E /* TicTacToe.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TicTacToe.xcodeproj; path = ../TicTacToe/TicTacToe.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -83,6 +88,7 @@
 				E8FF0DEC2E50C0FA00D24375 /* WordCraft.framework in Frameworks */,
 				E88D54142E54A26C001ECD5E /* NumberCombinations.framework in Frameworks */,
 				E88D54732E54B3C1001ECD5E /* Othello.framework in Frameworks */,
+				E85413EA2E57543300CFC667 /* AdventureGame.framework in Frameworks */,
 				E88D54432E54AEC5001ECD5E /* TicTacToe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +99,7 @@
 		E82346DD2E49F76B00BF34CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E85413E92E57543300CFC667 /* AdventureGame.framework */,
 				E88D54722E54B3C1001ECD5E /* Othello.framework */,
 				E88D54422E54AEC5001ECD5E /* TicTacToe.framework */,
 				E88D54132E54A26C001ECD5E /* NumberCombinations.framework */,
@@ -142,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				E8298B8D2E49FE5A00803FE0 /* TimeWasters */,
+				E85413DC2E5753E000CFC667 /* AdventureGame.xcodeproj */,
 				E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */,
 				E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */,
 				E88D53F02E54A20F001ECD5E /* NumberCombinations.xcodeproj */,
