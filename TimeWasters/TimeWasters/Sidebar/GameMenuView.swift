@@ -23,19 +23,33 @@ struct GameMenuView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            ScrollView {
-                ForEach(Game.allCases, id: \.self) { game in
-                    GameItemButtonView(game: game.gameDefinition, infoPressed: {
-                        showInfoFor = game
-                    })
-                    .padding(.bottom, 4)
-                    .padding(.horizontal, 8)
-                    .onTapGesture {
-                        selectedGame = game
+            Text("Time Wasters")
+                .font(.largeTitle)
+                .bold()
+                .foregroundStyle(.white)
+
+            VStack(alignment: .leading) {
+                ScrollView {
+                    ForEach(Game.allCases, id: \.self) { game in
+                        GameItemButtonView(game: game.gameDefinition, infoPressed: {
+                            showInfoFor = game
+                        })
+                        .padding(.bottom, 4)
+                        .padding(.horizontal, 8)
+                        .onTapGesture {
+                            selectedGame = game
+                        }
                     }
                 }
+                .padding(.top, 16)
+            }
+            .padding(4)
+            .background {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color(uiColor: UIColor(_colorLiteralRed: 0.26, green: 0.26, blue: 0.29, alpha: 1)))
             }
         }
+
         .sheet(item: $showInfoFor) { game in
             GameInfoView(gameData: game.gameDefinition)
         }

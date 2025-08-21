@@ -27,12 +27,12 @@ struct SettingsView: View {
                         .foregroundStyle(.primary)
                 })
                 ForEach(Game.allCases, id: \.self) { game in
-                    if game.gameDefinition.settingsIcon != nil {
+                    if game.gameDefinition.hasSettings {
                         NavigationLink(destination: {
                             GameViewFactory().settingsView(for: game)
                         }, label: {
                             Label(game.gameDefinition.title,
-                                  systemImage: game.gameDefinition.settingsIcon!)
+                                  systemImage: game.gameDefinition.gameIcon)
                             .foregroundStyle(.primary)
                         })
                         .padding(.vertical, 4)

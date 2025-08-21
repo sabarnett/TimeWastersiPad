@@ -60,7 +60,7 @@ public struct OthelloView: View {
                     })
                     .help("Show the leader board")
                 }
-                
+
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button(action: {
                         model.showHint()

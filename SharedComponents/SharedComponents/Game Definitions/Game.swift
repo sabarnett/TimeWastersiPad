@@ -62,7 +62,8 @@ extension Game {
                        ),
                        credits: "Paul Hudson - Hacking With Swift+, with modifications by Steven Barnett",
                        link: "https://www.hackingwithswift.com/plus",
-                       settingsIcon: "square.and.arrow.up"
+                       gameIcon: "square.and.arrow.up",
+                       hasSettings: true
         )
     }
 
@@ -83,7 +84,8 @@ extension Game {
                         "As an alternative, you can use the  keyboard to select letters. If you do this, the game will randomly select a tile for you. Pressing return will submit your word for testing and backspace will remove letters from the word."),
                        credits: "Paul Hudson - Hacking With Swift+",
                        link: "https://www.hackingwithswift.com/plus",
-                       settingsIcon: "textformat.abc"
+                       gameIcon: "textformat.abc",
+                       hasSettings: true
         )
     }
 
@@ -102,7 +104,8 @@ extension Game {
                        ),
                        credits: "Steve Barnett",
                        link: "http://www.sabarnett.co.uk",
-                       settingsIcon: "scribble.variable"
+                       gameIcon: "scribble.variable",
+                       hasSettings: true
         )
     }
 
@@ -126,7 +129,10 @@ extension Game {
                         "Good luck, happy adventuring and try not to die too often."
                        ),
                        credits: "Steve Barnett",
-                       link: "http://www.sabarnett.co.uk")
+                       link: "http://www.sabarnett.co.uk",
+                       gameIcon: "signpost.right.and.left.fill",
+                       hasSettings: false
+        )
     }
 
     // MARK: - Number Combinations
@@ -146,7 +152,8 @@ extension Game {
                        ),
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
-                       settingsIcon: "squareshape.split.2x2.dotted"
+                       gameIcon: "squareshape.split.2x2.dotted",
+                       hasSettings: true
         )
     }
 
@@ -166,7 +173,9 @@ extension Game {
                         "You can stop a player winning by selecting a square that stops the other player from getting a row of three. It's not as easy as it sounds!"
                        ),
                        credits: "Steven Barnett",
-                       link: "http://www.sabarnett.co.uk"
+                       link: "http://www.sabarnett.co.uk",
+                       gameIcon: "circle.grid.3x3.fill",
+                       hasSettings: false
         )
     }
 
@@ -188,7 +197,9 @@ extension Game {
                         "The game is over when neither player has a legal move (i.e. a move that captures at least one opposing piece) or when the board is full. At this time, the winner is determined by who has the most face up discs."
                        ),
                        credits: "Steven Barnett",
-                       link: "http://www.sabarnett.co.uk"
+                       link: "http://www.sabarnett.co.uk",
+                       gameIcon: "circle.hexagongrid.circle",
+                       hasSettings: false
         )
     }
 
@@ -209,7 +220,8 @@ extension Game {
                        ),
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
-                       settingsIcon: "square.and.line.vertical.and.square"
+                       gameIcon: "square.and.line.vertical.and.square",
+                       hasSettings: true
         )
     }
 
@@ -230,7 +242,8 @@ extension Game {
                        ),
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
-                       settingsIcon: "wonsign.square.fill"
+                       gameIcon: "wonsign.square.fill",
+                       hasSettings: true
         )
     }
 

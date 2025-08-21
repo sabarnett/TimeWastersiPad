@@ -78,7 +78,7 @@ public struct CombinationsView: View {
                     })
                     .help("Show the leader board")
                 }
-                
+
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button(action: {
                         model.generatePuzzle()

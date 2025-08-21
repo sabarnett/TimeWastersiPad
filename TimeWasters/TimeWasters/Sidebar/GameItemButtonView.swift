@@ -21,22 +21,20 @@ struct GameItemButtonView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(game.title).font(.title3).bold()
-                Text(game.description).font(.caption).lineLimit(2)
+                HStack {
+                    Image(systemName: game.gameIcon)
+                    Text(game.title)
+                        .bold()
+                }
             }
             Spacer()
             Image(systemName: "info.square")
-                .font(.title3)
                 .onTapGesture {
                     infoPressed()
                 }
         }
         .padding(8)
-        .background {
-            RoundedRectangle(cornerRadius: 15)
-                .foregroundStyle(Color.accentColor.opacity(colorScheme == .dark ? 0.4 : 0.3))
-                .shadow(color: .secondary, radius: 3, x: 3, y: 3)
-        }
+        .foregroundStyle(.white)
     }
 }
 
