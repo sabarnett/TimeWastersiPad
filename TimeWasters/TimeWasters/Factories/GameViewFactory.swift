@@ -18,6 +18,7 @@ import SharedComponents
 import SwiftUI
 import TicTacToe
 import WordCraft
+import WordSearch
 
 /// Single place to generate the game view or the game
 /// settings view
@@ -39,10 +40,10 @@ struct GameViewFactory {
             AnyView(AdventureGameView(gameData: game, game: "adv08"))
         case .matchedPairs:
             AnyView(MatchedPairsView(gameData: game))
+        case .wordSearch:
+            AnyView(WordSearchView(gameData: game))
 
         case .snake:
-            AnyView(Text(game.gameDefinition.description))
-        case .wordSearch:
             AnyView(Text(game.gameDefinition.description))
         @unknown default:
             fatalError("Unable to determine game view")
@@ -65,11 +66,11 @@ struct GameViewFactory {
             AnyView(Text("There are no settings for Pyramid of Doom"))
         case .matchedPairs:
             AnyView(MatchedPairsSettingsView())
+        case .wordSearch:
+            AnyView(WordSearchSettingsView())
 
         case .snake:
             AnyView(Text("Snake settings"))
-        case .wordSearch:
-            AnyView(Text("Word Search settings"))
         @unknown default:
             fatalError("Unable to determine game settings view")
         }
