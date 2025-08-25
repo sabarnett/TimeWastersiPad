@@ -62,8 +62,6 @@ public struct MatchedPairsSettingsView: View {
             ScrollViewCarouselView(scrollID: $bgID)
                 .padding(.bottom, 8)
         }
-        .frame(width: 350)
-        .padding()
         .onAppear {
             bgID = cardBackground.id
         }
