@@ -13,6 +13,8 @@
 		E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E85413EA2E57543300CFC667 /* AdventureGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E92E57543300CFC667 /* AdventureGame.framework */; };
 		E85413EB2E57543300CFC667 /* AdventureGame.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E92E57543300CFC667 /* AdventureGame.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E87CA3B62E5CE8BD001459A0 /* MatchedPairs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E87CA3B52E5CE8BD001459A0 /* MatchedPairs.framework */; };
+		E87CA3B72E5CE8BD001459A0 /* MatchedPairs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E87CA3B52E5CE8BD001459A0 /* MatchedPairs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E88D54142E54A26C001ECD5E /* NumberCombinations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E88D54132E54A26C001ECD5E /* NumberCombinations.framework */; };
 		E88D54152E54A26C001ECD5E /* NumberCombinations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E88D54132E54A26C001ECD5E /* NumberCombinations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E88D54432E54AEC5001ECD5E /* TicTacToe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E88D54422E54AEC5001ECD5E /* TicTacToe.framework */; };
@@ -47,6 +49,7 @@
 				E88D54742E54B3C1001ECD5E /* Othello.framework in Embed Frameworks */,
 				E85413EB2E57543300CFC667 /* AdventureGame.framework in Embed Frameworks */,
 				E88D54442E54AEC5001ECD5E /* TicTacToe.framework in Embed Frameworks */,
+				E87CA3B72E5CE8BD001459A0 /* MatchedPairs.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,6 +61,8 @@
 		E805C14F2E508611005B69A4 /* MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E85413DC2E5753E000CFC667 /* AdventureGame.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdventureGame.xcodeproj; path = ../AdventureGame/AdventureGame.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E85413E92E57543300CFC667 /* AdventureGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdventureGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E87CA3812E5CE85B001459A0 /* MatchedPairs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MatchedPairs.xcodeproj; path = ../MatchedPairs/MatchedPairs.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E87CA3B52E5CE8BD001459A0 /* MatchedPairs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MatchedPairs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88D53F02E54A20F001ECD5E /* NumberCombinations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NumberCombinations.xcodeproj; path = ../NumberCombinations/NumberCombinations.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E88D54132E54A26C001ECD5E /* NumberCombinations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NumberCombinations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88D541A2E54AE66001ECD5E /* TicTacToe.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TicTacToe.xcodeproj; path = ../TicTacToe/TicTacToe.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -90,6 +95,7 @@
 				E88D54732E54B3C1001ECD5E /* Othello.framework in Frameworks */,
 				E85413EA2E57543300CFC667 /* AdventureGame.framework in Frameworks */,
 				E88D54432E54AEC5001ECD5E /* TicTacToe.framework in Frameworks */,
+				E87CA3B62E5CE8BD001459A0 /* MatchedPairs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +105,7 @@
 		E82346DD2E49F76B00BF34CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E87CA3B52E5CE8BD001459A0 /* MatchedPairs.framework */,
 				E85413E92E57543300CFC667 /* AdventureGame.framework */,
 				E88D54722E54B3C1001ECD5E /* Othello.framework */,
 				E88D54422E54AEC5001ECD5E /* TicTacToe.framework */,
@@ -162,6 +169,7 @@
 				E88D53F02E54A20F001ECD5E /* NumberCombinations.xcodeproj */,
 				E88D54452E54B343001ECD5E /* Othello.xcodeproj */,
 				E88D541A2E54AE66001ECD5E /* TicTacToe.xcodeproj */,
+				E87CA3812E5CE85B001459A0 /* MatchedPairs.xcodeproj */,
 				E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */,
 				E82346DD2E49F76B00BF34CB /* Frameworks */,
 				E8DB6CBC2E49F69900A351A8 /* Products */,
