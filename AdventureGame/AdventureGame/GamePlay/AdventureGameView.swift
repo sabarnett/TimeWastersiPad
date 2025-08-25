@@ -57,7 +57,6 @@ public struct AdventureGameView: View {
                         gameModel.showGamePlay.toggle()
                     }, label: {
                         Image(systemName: "questionmark.circle.fill")
-                            .padding(.vertical, 5)
                     })
                     .help("Show game rules")
                 }
@@ -66,7 +65,6 @@ public struct AdventureGameView: View {
                         gameModel.showResetConfirmation = true
                     }, label: {
                         Image(systemName: "arrow.uturn.left.circle.fill")
-                            .padding(.vertical, 5)
                     })
                     .help("Restart the game.")
 
@@ -74,7 +72,6 @@ public struct AdventureGameView: View {
                         gameModel.saveGame()
                     }, label: {
                         Image(systemName: "tray.and.arrow.down.fill")
-                            .padding(.vertical, 5)
                     })
                     .help("Save the current game state.")
 
@@ -82,7 +79,6 @@ public struct AdventureGameView: View {
                         gameModel.showReloadConfirmation = true
                     }, label: {
                         Image(systemName: "tray.and.arrow.up.fill")
-                            .padding(.vertical, 5)
                     })
                     .help("Reload the last saved game.")
                 }
