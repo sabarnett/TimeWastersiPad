@@ -32,13 +32,12 @@ public struct MatchedPairsView: View {
     public var body: some View {
         ZStack {
             VStack {
-                ZStack {
-//                    toggleButtons
-                    gameStatusDisplay
-                }
+                gameStatusDisplay
+                Spacer()
                 GameGridView(model: model)
                     .padding()
                     .disabled(model.gameState != .playing)
+                Spacer()
             }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
@@ -58,7 +57,7 @@ public struct MatchedPairsView: View {
                     })
                     .help("Show the leader board")
                 }
-                
+
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button(action: {
                         model.newGame()
@@ -113,8 +112,6 @@ public struct MatchedPairsView: View {
                 model.stopSounds()
             }
         }
-
-        .frame(width: windowWidth)
     }
 
     /// Displays the current selected bomb count and the number of seconds elapsed. It also
