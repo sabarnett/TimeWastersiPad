@@ -107,6 +107,14 @@
 		E8FC3FC92CD66C4800991B12 /* GameSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSave.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		E84376FE2E5C88B1009900CF /* Keyboard */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		E8DE7E3B2CD3BDD600847B82 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -139,6 +147,7 @@
 		E8DE7E582CD3BDE200847B82 /* AdventureGame */ = {
 			isa = PBXGroup;
 			children = (
+				E84376FE2E5C88B1009900CF /* Keyboard */,
 				E8DE7E572CD3BDE200847B82 /* AdventureGame.h */,
 				E8DE7E5F2CD3C25E00847B82 /* GameDefinitions.swift */,
 				E8DE7E722CD3C25E00847B82 /* GameEngine */,
@@ -258,6 +267,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E84376FE2E5C88B1009900CF /* Keyboard */,
 			);
 			name = AdventureGame;
 			packageProductDependencies = (

@@ -109,6 +109,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E84376F92E5C86A8009900CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E850C31F2E54C1280046C253 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +238,10 @@
 			productRefGroup = E8DB6CBC2E49F69900A351A8 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = E84376F92E5C86A8009900CF /* Products */;
+					ProjectRef = E85413DC2E5753E000CFC667 /* AdventureGame.xcodeproj */;
+				},
 				{
 					ProductGroup = E8FF0DD72E50C06600D24375 /* Products */;
 					ProjectRef = E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */;

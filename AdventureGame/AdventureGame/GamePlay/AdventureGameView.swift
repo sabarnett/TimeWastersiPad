@@ -43,6 +43,7 @@ public struct AdventureGameView: View {
                 } detail: {
                     VStack {
                         gamePlayView
+                            .padding(.bottom, 20)
                     }
                 }
             }
@@ -140,16 +141,23 @@ public struct AdventureGameView: View {
             .padding()
             .background(colorScheme == .dark ? Color.black : Color.white)
 
-            TextField("What do you want to do?",
-                      text: $gameModel.commandLine)
-            .font(.title)
-            .padding()
-            .background(colorScheme == .dark ? Color.black : Color.white)
-            .onSubmit {
+//            TextField("What do you want to do?",
+//                      text: $gameModel.commandLine)
+//            .font(.title)
+//            .padding()
+//            .background(colorScheme == .dark ? Color.black : Color.white)
+//            .onSubmit {
+//                gameModel.consoleEnter()
+//            }
+//            .disabled(gameModel.gameOver)
+//            .focused($inputFocus)
+
+            Keyboard(onEnter: { commandLine in
+                print(commandLine)
+                gameModel.commandLine = commandLine
                 gameModel.consoleEnter()
-            }
+            })
             .disabled(gameModel.gameOver)
-            .focused($inputFocus)
         }
     }
 
