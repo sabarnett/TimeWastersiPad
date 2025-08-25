@@ -85,6 +85,7 @@ struct Keyboard: View {
                     )
                 }
                 Button {
+                    if currentCommand.isEmpty { return }
                     currentCommand.removeLast()
                 } label: {
                     Image(systemName: "delete.backward.fill")
