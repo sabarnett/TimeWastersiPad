@@ -33,12 +33,47 @@ public struct MatchedPairsView: View {
         ZStack {
             VStack {
                 ZStack {
-                    toggleButtons
+//                    toggleButtons
                     gameStatusDisplay
                 }
                 GameGridView(model: model)
                     .padding()
                     .disabled(model.gameState != .playing)
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button(action: {
+                        model.stopSounds()
+                        showGamePlay.toggle()
+                    }, label: {
+                        Image(systemName: "questionmark.circle.fill")
+                    })
+                    .help("Show the game play")
+
+                    Button(action: {
+                        model.stopSounds()
+                        showLeaderBoard.toggle()
+                    }, label: {
+                        Image(systemName: "trophy.circle.fill")
+                    })
+                    .help("Show the leader board")
+                }
+                
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(action: {
+                        model.newGame()
+                    }, label: {
+                        Image(systemName: "arrow.uturn.left.circle.fill")
+                    })
+                    .help("Start a new game")
+
+                    Button(action: {
+                        model.toggleSounds()
+                    }, label: {
+                        Image(systemName: model.speakerIcon)
+                    })
+                    .help("Toggle sounds")
+                }
             }
 
             if model.gameState == .gameOver {
@@ -80,59 +115,6 @@ public struct MatchedPairsView: View {
         }
 
         .frame(width: windowWidth)
-    }
-
-    /// Handles any toggle buttons to display in the scores area. We do these separately to
-    /// the score display because we want the scores to be centered regardless of how many
-    /// buttons we have in the buttons area.
-    private var toggleButtons: some View {
-        HStack {
-            Button(action: {
-                model.stopSounds()
-                showGamePlay.toggle()
-            }, label: {
-                Image(systemName: "questionmark.circle.fill")
-                    .scaleEffect(2)
-                    .padding(5)
-            })
-            .buttonStyle(.plain)
-            .help("Show the game play")
-
-            Button(action: {
-                model.stopSounds()
-                showLeaderBoard.toggle()
-            }, label: {
-                Image(systemName: "trophy.circle.fill")
-                    .scaleEffect(2)
-                    .padding(5)
-            })
-            .buttonStyle(.plain)
-            .help("Show the leader board")
-
-            Spacer()
-
-            Button(action: {
-                model.newGame()
-            }, label: {
-                Image(systemName: "arrow.uturn.left.circle.fill")
-                    .scaleEffect(2)
-                    .padding(5)
-            })
-            .buttonStyle(.plain)
-            .help("Start a new game")
-
-            Button(action: {
-                model.toggleSounds()
-            }, label: {
-                Image(systemName: model.speakerIcon)
-                    .scaleEffect(2)
-                    .padding(5)
-            })
-            .buttonStyle(.plain)
-            .help("Toggle sounds")
-
-        }
-        .padding([.horizontal, .top])
     }
 
     /// Displays the current selected bomb count and the number of seconds elapsed. It also
