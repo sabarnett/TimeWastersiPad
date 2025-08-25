@@ -12,11 +12,11 @@
 import SwiftUI
 
 struct GameGridView: View {
-    
+
     @State private var showDelay: CGFloat = 0
-    
+
     var model: MatchedPairsGameModel
-    
+
     var gamePlayColumns: [GridItem] {
         Array(repeating: GridItem(.fixed(85.00), spacing: 3), count: model.columns)
     }

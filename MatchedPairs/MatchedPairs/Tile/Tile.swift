@@ -13,11 +13,11 @@ import Foundation
 
 struct Tile: Identifiable {
     let id = UUID()
-    
+
     let face: String
     var isFaceUp: Bool = false
     var isMatched: Bool = false
-    
+
     mutating func match() {
         isFaceUp = false
         isMatched = true

@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct TileView: View {
-    
+
     @Environment(MatchedPairsGameModel.self) private var model
 
     @AppStorage(Constants.autoFlip) private var autoFlip: Bool = false
@@ -21,7 +21,7 @@ struct TileView: View {
     @State private var beginCountdown: Bool = false
     @State private var countdownRed: Color = Color.clear
     @State private var countdownBlack: Color = Color.clear
-    
+
     let myBundle = Bundle(for: MatchedPairsGameModel.self)
     var tile: Tile
     var onTap: (() -> Void)
@@ -35,7 +35,7 @@ struct TileView: View {
     }
 
     @State private var fadeIn: Bool = false
-    
+
     var body: some View {
         ZStack {
             cardFaceDownButton
@@ -62,7 +62,7 @@ struct TileView: View {
             }
         }
     }
-    
+
     var cardFaceDownButton: some View {
         Button(action: {
             if !tile.isMatched {
@@ -81,7 +81,7 @@ struct TileView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 80)
-                
+
                     .rotation3DEffect(.degrees(tile.isFaceUp ? 180 : 0), axis: (x: 0, y: 1, z: 0))
                     .opacity(tile.isFaceUp ? 0 : 1)
                     .accessibility(hidden: tile.isFaceUp)
@@ -91,7 +91,7 @@ struct TileView: View {
         })
         .buttonStyle(PlainButtonStyle())
     }
-    
+
     var cardFaceUpButton: some View {
         Button(action: {
             onTap()
@@ -114,26 +114,26 @@ struct TileView: View {
         })
         .buttonStyle(PlainButtonStyle())
     }
-    
+
     var countdownBar: some View {
         HStack {
             ZStack(alignment: .bottomLeading) {
                 Rectangle()
                     .fill(countdownRed)
-                    .frame(width: 60 , height: 8, alignment: .leading)
+                    .frame(width: 60, height: 8, alignment: .leading)
                 Rectangle()
                     .fill(countdownBlack)
-                    .frame(width: beginCountdown ? 0 : 60 , height: 8, alignment: .leading)
+                    .frame(width: beginCountdown ? 0 : 60, height: 8, alignment: .leading)
             }.offset(y: 45)
         }
     }
-    
+
     func startCountdown() {
         countdownRed = .red
         countdownBlack = .black
         beginCountdown = true
     }
-    
+
     func stopCountdown() {
         countdownRed = .clear
         countdownBlack = .clear

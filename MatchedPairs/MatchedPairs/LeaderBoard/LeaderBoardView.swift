@@ -16,9 +16,9 @@ struct LeaderBoardView: View {
 
     let leaderBoard: LeaderBoard
     let initialTab: GameDifficulty
-    
+
     @State var gameLevel: GameDifficulty = .easy
-    
+
     var leaderItems: [LeaderBoardItem] {
         switch gameLevel {
         case .easy:
@@ -29,25 +29,25 @@ struct LeaderBoardView: View {
             return leaderBoard.leaderBoard.hardLeaderBoard
         }
     }
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             headerView()
-            
+
             Picker("", selection: $gameLevel) {
                 pickerItem(.easy)
                 pickerItem(.medium)
                 pickerItem(.hard)
             }
             .pickerStyle(SegmentedPickerStyle())
-            
+
             List {
                 LeaderBoardItemHeader()
                 ForEach(leaderItems) { leaderItem in
                     LeaderBoardItemView(leaderItem: leaderItem)
                 }
             }.frame(minHeight: 200)
-            
+
             footerView()
         }
         .padding()
@@ -55,11 +55,11 @@ struct LeaderBoardView: View {
             gameLevel = initialTab
         }
     }
-    
+
     func pickerItem(_ difficulty: GameDifficulty) -> some View {
         Text(difficulty.shortDescription).tag(difficulty)
     }
-    
+
     func headerView() -> some View {
         HStack {
             Text("Leader Board")
@@ -74,7 +74,7 @@ struct LeaderBoardView: View {
             .help("Clear the leader board scores")
         }
     }
-    
+
     func footerView() -> some View {
         HStack {
             Spacer()

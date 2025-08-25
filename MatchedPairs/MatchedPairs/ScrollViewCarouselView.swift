@@ -13,17 +13,17 @@ import SwiftUI
 
 struct ScrollViewCarouselView: View {
     @Binding var scrollID: Int?
-    
+
     let myBundle = Bundle(for: MatchedPairsGameModel.self)
-    
+
     var cardImages: [CardBackgrounds] {
         CardBackgrounds.allCases
     }
-    
+
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 0) {
-                ForEach(cardImages, id:\.id) { card in
+                ForEach(cardImages, id: \.id) { card in
                     VStack {
                         Image(card.cardImage, bundle: myBundle)
                             .resizable()
@@ -48,7 +48,6 @@ struct ScrollViewCarouselView: View {
         }
         .scrollPosition(id: $scrollID)
         .scrollTargetBehavior(.paging)
-        
     }
 }
 

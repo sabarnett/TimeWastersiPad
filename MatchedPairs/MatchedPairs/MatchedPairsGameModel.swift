@@ -25,10 +25,10 @@ class MatchedPairsGameModel {
             updateSounds()
         }
     }
-    
+
     @ObservationIgnored
     @AppStorage(Constants.gameDifficulty) var gameDifficulty: GameDifficulty = .easy
-    
+
     @ObservationIgnored
     @AppStorage(Constants.cardBackground) private var cardBg: CardBackgrounds = .one
 
@@ -47,25 +47,25 @@ class MatchedPairsGameModel {
     init() {
         newGame()
     }
-    
+
     /// Starts a new game, generating a new card deck and a new card background. It
     /// resets the score and the timer.
     func newGame() {
         columns = gameDifficulty.columns
         rows = gameDifficulty.rows
-        
+
         tiles.removeAll(keepingCapacity: true)
         tiles = gameTiles()
-        
+
         moves = 0
         time = 0
-        
+
         gameState = .playing
 
         speakerIcon = playSounds ? Constants.soundsOff : Constants.soundsOn
         playBackgroundSound()
     }
-    
+
     /// Creates the tiles for a new game. Each tile will be generated with a card face
     /// name and will be initialised face fown. The number of tiles depends on the
     /// game board size. There will always be two tiles generated per card.
@@ -76,16 +76,16 @@ class MatchedPairsGameModel {
 
         // 10x6 grid of tiles
         var tileSetup: [Tile] = []
-        for i in 0..<(columns*rows)/2 {
-            let tileOne = Tile(face: cardNames[i])
+        for index in 0..<(columns*rows)/2 {
+            let tileOne = Tile(face: cardNames[index])
             tileSetup.append(tileOne)
-            let tileTwo = Tile(face: cardNames[i])
+            let tileTwo = Tile(face: cardNames[index])
             tileSetup.append(tileTwo)
         }
-        
+
         return tileSetup.shuffled()
     }
-    
+
     /// Generate a list of the names of all of the potential cards we could have in
     /// this game. Cards will have a suit name (heart, club, diamond, spade) an
     /// underscore and a two digit card value between 01 and 13 (ace thru
@@ -95,16 +95,16 @@ class MatchedPairsGameModel {
     /// shuffled into a random order.
     private func allPotentialCards() -> [String] {
         var cardNames: [String] = []
-        
+
         for suit in ["heart", "club", "diamond", "spade"] {
             for value in 1..<13 {
                 cardNames.append("\(suit)_\(String(format: "%02d", value))")
             }
         }
-        
+
         return cardNames.shuffled()
     }
-    
+
     /// We have face down card images numbered _01 thru _05. Generate the name of
     /// one of these card images for the new game.
     ///
@@ -113,7 +113,7 @@ class MatchedPairsGameModel {
         let background = Int.random(in: 1...5)
         return "back_\(String(format: "%02d", background))"
     }
-    
+
     /// Player selected a tile on the game board. Make sure the game is still playing and that
     /// the file exists (should never not exist) before toggling it to face up. If we currently have
     /// two cards face up, turn them doen - we cannot ever have more than two face up cards.
@@ -124,15 +124,15 @@ class MatchedPairsGameModel {
                 tile.isMatched == false,
                 tile.isFaceUp == false,
                 let tileIndex = tiles.firstIndex(where: {$0.id == tile.id}) else { return }
-        
+
         moves += 1
         turnCardsDownIfRequired()
-        
+
         tiles[tileIndex].isFaceUp = true
         checkForMatch()
         checkForEndOfGame()
     }
-    
+
     /// Locates the selected card and turns it face down.
     ///
     /// - Parameter tile: The tile to change
@@ -144,32 +144,32 @@ class MatchedPairsGameModel {
 
         tiles[tileIndex].isFaceUp = false
     }
-    
+
     /// If the user has two cards face up and taps a third card, the previous
     /// two cards must be turned face down.
     private func turnCardsDownIfRequired() {
         let indexes = tiles.enumerated().compactMap { $1.isFaceUp ? $0 : nil }
-        
+
         if indexes.count == 2 {
             for index in indexes {
                 tiles[index].isFaceUp = false
             }
         }
     }
-    
+
     /// Do we have two cards face up and, if we do, are they the same card?
     private func checkForMatch() {
         let indexes = tiles.enumerated().compactMap { $1.isFaceUp ? $0 : nil }
         if indexes.count != 2 { return }
-        
+
         if tiles[indexes[0]].face != tiles[indexes[1]].face { return }
-        
+
         // We have a match - update both cards
         playChime()
         tiles[indexes[0]].match()
         tiles[indexes[1]].match()
     }
-    
+
     /// Check for the end of the game. That's when all cards are marked as matched
     private func checkForEndOfGame() {
         if tiles.allSatisfy({$0.isMatched}) {
@@ -180,7 +180,7 @@ class MatchedPairsGameModel {
     }
 
     // MARK: - Souond functions
-    
+
     private var sounds: AVAudioPlayer!
     private var tileDrop: AVAudioPlayer!
     private var backgroundURL: URL { soundFile(named: "background") }
@@ -190,7 +190,7 @@ class MatchedPairsGameModel {
     func playBackgroundSound() {
         playSound(backgroundURL, repeating: true)
     }
-    
+
     /// If the background music is playing, stop it.
     func stopSounds() {
         if sounds != nil {
@@ -205,14 +205,14 @@ class MatchedPairsGameModel {
         tileDrop = try? AVAudioPlayer(contentsOf: successURL)
         tileDrop.play()
     }
-    
+
     /// Toggle the playing of sounds. If toggled off, the current sound is stopped. If
     /// toggled on, then we start playing the ticking sound. It is unlikely that we were playing
     /// any other sound, so this is a safe bet.
     func toggleSounds() {
         playSounds.toggle()
     }
-    
+
     private func updateSounds() {
         speakerIcon = playSounds ? "speaker.slash.fill" : "speaker.fill"
 
@@ -222,7 +222,7 @@ class MatchedPairsGameModel {
             sounds.stop()
         }
     }
-    
+
     /// Creates the URL of a sound file. The file must exist within the minesweeper project
     /// bundle.
     private func soundFile(named file: String) -> URL {
@@ -236,9 +236,11 @@ class MatchedPairsGameModel {
     private func playSound(_ url: URL, repeating: Bool = false) {
         guard playSounds else { return }
         if sounds != nil { sounds.stop() }
-        
-        sounds = try! AVAudioPlayer(contentsOf: url)
-        sounds.numberOfLoops = repeating ? -1 : 0
-        self.sounds.play()
+
+        sounds = try? AVAudioPlayer(contentsOf: url)
+        if sounds != nil {
+            sounds.numberOfLoops = repeating ? -1 : 0
+            self.sounds.play()
+        }
     }
 }

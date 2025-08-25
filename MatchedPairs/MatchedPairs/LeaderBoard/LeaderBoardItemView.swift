@@ -14,14 +14,14 @@ import SwiftUI
 struct LeaderBoardItemView: View {
     var leaderItem: LeaderBoardItem
     let dateFormatter: DateFormatter
-    
+
     init(leaderItem: LeaderBoardItem) {
         self.leaderItem = leaderItem
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
     }
-    
+
     var body: some View {
         HStack {
             Text(dateFormatter.string(from: leaderItem.gameDate))

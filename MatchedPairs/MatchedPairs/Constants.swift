@@ -18,10 +18,10 @@ struct Constants {
     static let cardBackground = "MatchedPairCardBackground"
     static let autoFlip = "MatchedPairsAutoFlip"
     static let autoFlipDelay = "MatchedPairsAutoFlipDelay"
-    
+
     // Leader board
     static let leaderBoardFileName = "MatchedPairsLeaderBoard"
-    
+
     // Sounds
     static let soundsOn = "speaker.fill"
     static let soundsOff = "speaker.slash.fill"

@@ -12,25 +12,25 @@
 import SwiftUI
 
 public struct MatchedPairsSettingsView: View {
-    
+
     // Images need to be loaded from the current bundle, not the global one
     let myBundle = Bundle(for: MatchedPairsGameModel.self)
 
     @AppStorage(Constants.playSound) private var playSounds = true
     @AppStorage(Constants.gameDifficulty) private var gameDifficulty: GameDifficulty = .easy
     @AppStorage(Constants.cardBackground) private var cardBackground: CardBackgrounds = .one
-    
+
     @AppStorage(Constants.autoFlip) private var autoFlip: Bool = false
     @AppStorage(Constants.autoFlipDelay) private var autoFlipDelay: Double = 5
-    
+
     @State private var bgID: Int? = 0
-    
+
     var formattedDelay: String {
         autoFlipDelay.formatted(.number.precision(.integerLength(2)))
     }
-    
+
     public init() { }
-    
+
     public var body: some View {
         Form {
             Toggle("Play sounds", isOn: $playSounds)

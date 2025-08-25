@@ -13,9 +13,9 @@ import SwiftUI
 
 enum CardBackgrounds: Int, Identifiable, CaseIterable {
     case one, two, three, four, five
-    
+
     var id: Int { self.rawValue}
-    
+
     var cardImage: String {
         switch self {
         case .one:
@@ -30,7 +30,7 @@ enum CardBackgrounds: Int, Identifiable, CaseIterable {
             return "back_05"
         }
     }
-    
+
     var cardTitle: String {
         switch self {
         case .one:

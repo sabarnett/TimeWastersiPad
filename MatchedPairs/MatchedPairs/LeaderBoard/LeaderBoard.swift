@@ -13,14 +13,14 @@ import Foundation
 
 @Observable
 class LeaderBoard {
-    
+
     // Leader board by game level
     var leaderBoard: LeaderBoardData = LeaderBoardData()
-    
+
     init () {
         loadLeaderBoard()
     }
-    
+
     /// Adds a score to the leader board at the game difficulty level if it is better than
     /// one of the existing high scores. The best five scores are retained for each of
     /// the game levels.
@@ -42,12 +42,12 @@ class LeaderBoard {
             requiresSave = addLeaderBoard(score: score,
                                           to: &leaderBoard.hardLeaderBoard)
         }
-        
+
         if requiresSave {
             saveLoaderBoard()
         }
     }
-    
+
     /// Emptys the saved leader board scores.
     func clearScores() {
         leaderBoard.mediumLeaderBoard.removeAll()
@@ -55,7 +55,7 @@ class LeaderBoard {
         leaderBoard.hardLeaderBoard.removeAll()
         saveLoaderBoard()
     }
-    
+
     /// Check the passed scores array to see if the new score should be added or discarded. If
     /// it should be added (i.e. it's a better score than one of the existing ones), then add the score
     /// and truncate the leader board arry to five items.
@@ -74,15 +74,15 @@ class LeaderBoard {
                 if score >= maxScore.gameScore { return false }
             }
         }
-        
+
         let scoreItem = LeaderBoardItem(gameDate: Date.now, gameScore: score)
-        
+
         scores.append(scoreItem)
         scores.sort(by: {$0.gameScore < $1.gameScore})
         if scores.count > 5 {
             scores.removeLast()
         }
-        
+
         return true
     }
 
@@ -91,22 +91,23 @@ class LeaderBoard {
     /// initialisation.
     private func loadLeaderBoard() {
         let loadFileUrl = fileUrl(file: Constants.leaderBoardFileName)
-        
+
         guard let gameData = try? Data(contentsOf: loadFileUrl) else { return }
         guard let decodedData = try? JSONDecoder().decode(LeaderBoardData.self, from: gameData) else { return }
 
         leaderBoard = decodedData
     }
-    
+
     /// Save the leader board to a JSON file.
     private func saveLoaderBoard() {
         let saveFileUrl = fileUrl(file: Constants.leaderBoardFileName)
 
         // Json encode and save the file
-        let encoded = try! JSONEncoder().encode(leaderBoard)
-        try? encoded.write(to: saveFileUrl, options: .atomic)
+        if let encoded = try? JSONEncoder().encode(leaderBoard) {
+            try? encoded.write(to: saveFileUrl, options: .atomic)
+        }
     }
-    
+
     /// Generate the file name to save the data to or to reload the data from.
     ///
     /// - Parameter gameDefinition: The definition of the game
@@ -127,7 +128,7 @@ struct LeaderBoardData: Codable {
 
 struct LeaderBoardItem: Codable, Identifiable {
     var id: UUID = UUID()
-    
+
     var playerName: String = NSFullUserName()
     var gameDate: Date
     var gameScore: Int

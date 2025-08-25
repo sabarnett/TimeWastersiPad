@@ -10,6 +10,7 @@
 //
 
 import AdventureGame
+import MatchedPairs
 import MineSweeper
 import NumberCombinations
 import Othello
@@ -36,10 +37,10 @@ struct GameViewFactory {
             AnyView(OthelloView(gameData: game))
         case .adventure:
             AnyView(AdventureGameView(gameData: game, game: "adv08"))
+        case .matchedPairs:
+            AnyView(MatchedPairsView(gameData: game))
 
         case .snake:
-            AnyView(Text(game.gameDefinition.description))
-        case .matchedPairs:
             AnyView(Text(game.gameDefinition.description))
         case .wordSearch:
             AnyView(Text(game.gameDefinition.description))
@@ -62,11 +63,11 @@ struct GameViewFactory {
             AnyView(Text("There are no settigs for Othello"))
         case .adventure:
             AnyView(Text("There are no settings for Pyramid of Doom"))
+        case .matchedPairs:
+            AnyView(MatchedPairsSettingsView())
 
         case .snake:
             AnyView(Text("Snake settings"))
-        case .matchedPairs:
-            AnyView(Text("Matched Pairs settings"))
         case .wordSearch:
             AnyView(Text("Word Search settings"))
         @unknown default:

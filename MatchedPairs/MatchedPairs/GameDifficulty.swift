@@ -15,9 +15,9 @@ enum GameDifficulty: String, Identifiable, CaseIterable, CustomStringConvertible
     case easy
     case medium
     case hard
-    
+
     var id: GameDifficulty { self }
-    
+
     var description: String {
         switch self {
         case .easy:
@@ -28,7 +28,7 @@ enum GameDifficulty: String, Identifiable, CaseIterable, CustomStringConvertible
             return "Hard (10 columns, 6 rows)"
         }
     }
-    
+
     var shortDescription: String {
         switch self {
         case .easy:
@@ -50,7 +50,7 @@ enum GameDifficulty: String, Identifiable, CaseIterable, CustomStringConvertible
             return 10
         }
     }
-    
+
     var rows: Int {
         switch self {
         case .easy:
