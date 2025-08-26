@@ -16,16 +16,16 @@ struct SquareView: View {
     var cellSize: CGFloat {
         switch gameDifficullty {
         case .beginner: return 60
-        case .intermediate: return 50
-        case .expert: return 35
+        case .intermediate: return 40
+        case .expert: return 30
         }
     }
 
     var textSize: CGFloat {
         switch gameDifficullty {
         case .beginner: return 30
-        case .intermediate: return 24
-        case .expert: return 18
+        case .intermediate: return 20
+        case .expert: return 15
         }
     }
 
@@ -55,6 +55,7 @@ struct SquareView: View {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(.black, .yellow)
                     .shadow(color: .black, radius: 3)
+                    .font(.system(size: textSize))
             }
         }
         .frame(width: cellSize, height: cellSize)

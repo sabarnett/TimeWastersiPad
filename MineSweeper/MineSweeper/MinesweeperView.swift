@@ -17,6 +17,7 @@ enum GameState {
 public struct MinesweeperView: View {
 
     @AppStorage(Constants.minePlaySounds) private var minePlaySounds = true
+    @AppStorage(Constants.mineGameDifficulty) private var gameDifficullty: GameDifficulty = .beginner
 
     @State private var game = MinesweeperGame()
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -115,6 +116,9 @@ public struct MinesweeperView: View {
                 break
             }
         }
+        .onChange(of: gameDifficullty) {
+            game.reset()
+        }
         .onReceive(timer) { _ in
             if showGamePlay || showLeaderBoard { return }
             guard game.isPlaying else { return }
@@ -126,7 +130,7 @@ public struct MinesweeperView: View {
         }
         .onDisappear {
             resetGame()
-            ticking.stop()
+            ticking?.stop()
         }
 
         .sheet(isPresented: $showGamePlay, onDismiss: {

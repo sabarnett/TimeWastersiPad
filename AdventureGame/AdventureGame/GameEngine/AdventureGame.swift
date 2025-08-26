@@ -322,7 +322,6 @@ extension Adventure {
                         return .actSuccess
                     }
                 case .actContinue:
-                    // TODO: Logic to executre all other actions
                     var index = actionIndex
                     while true {
                         index += 1
