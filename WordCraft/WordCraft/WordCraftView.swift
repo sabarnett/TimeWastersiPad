@@ -3,6 +3,7 @@
 //  Wordcraft
 //
 //  Created by Paul Hudson on 24/08/2024.
+//  Modified by Steve Barnett - 2025
 //
 
 import SwiftUI
@@ -23,28 +24,6 @@ public struct WordCraftView: View {
     public var body: some View {
         VStack {
             WordCraftToolBar(viewModel: viewModel)
-                .confirmationDialog(
-                    String("Reset the game?"),
-                    isPresented: $viewModel.showResetConfirmation,
-                    titleVisibility: .visible
-                ) {
-                    Button("Yes") { viewModel.reset() }
-                    Button("No", role: .cancel) { }
-                   } message: {
-                       Text("This action cannot be undone. Would you like to proceed?")
-                   }
-
-               .confirmationDialog(
-                   String("Reload saved game?"),
-                   isPresented: $viewModel.showReloadConfirmation,
-                   titleVisibility: .visible
-               ) {
-                   Button("Yes") { viewModel.restoreGame() }
-                   Button("No", role: .cancel) { }
-               } message: {
-                   Text("You will lose any current progress if you do this.")
-               }
-
             Spacer()
             VStack(alignment: .leading) {
                 WordCraftRuleView(viewModel: viewModel)
@@ -118,6 +97,17 @@ public struct WordCraftView: View {
         .sheet(isPresented: $viewModel.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)
         }
+        .alert("Reset Game?", isPresented: $viewModel.showResetConfirmation) {
+            Button("Yes", role: .destructive) { viewModel.reset() }
+        } message: {
+            Text("Are you sure you want to reset the current game. All progress will be lost.")
+        }
+        .alert("Reload Saved Game?", isPresented: $viewModel.showReloadConfirmation) {
+            Button("Yes", role: .destructive) { viewModel.restoreGame() }
+        } message: {
+            Text("Are you sure you want to reload the saved gave? Any current progress will be lost.")
+        }
+
         .onDisappear {
             viewModel.stopSounds()
         }

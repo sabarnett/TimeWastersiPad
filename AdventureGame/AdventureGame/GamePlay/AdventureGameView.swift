@@ -51,6 +51,28 @@ public struct AdventureGameView: View {
             .sheet(isPresented: $gameModel.showGamePlay) {
                 GamePlayView(game: gameData.gameDefinition)
             }
+
+            .alert("Reset Game?",
+                   isPresented: $gameModel.showResetConfirmation
+            ) {
+                Button("Yes", role: .destructive) {
+                    gameModel.restartGame()
+                    inputFocus = true
+                }
+            } message: {
+                Text("Are you sure you want to reset this game. All progress will be lost")
+            }
+
+            .alert("Reload Saved Game?",
+                   isPresented: $gameModel.showReloadConfirmation) {
+                Button("Yes", role: .destructive) {
+                    gameModel.restoreGame()
+                    inputFocus = true
+                }
+            } message: {
+                Text("Are you sure you want to reload the saved game. The current game will be lost.")
+            }
+
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
                     Button(action: {
@@ -88,33 +110,6 @@ public struct AdventureGameView: View {
             }
             .toast(toastMessage: $gameModel.notifyMessage)
 
-            .confirmationDialog(
-                String("Reset the game?"),
-                isPresented: $gameModel.showResetConfirmation,
-                titleVisibility: .visible
-            ) {
-                Button("Yes") {
-                    gameModel.restartGame()
-                    inputFocus = true
-                }
-                Button("No", role: .cancel) { }
-            } message: {
-                Text("This action cannot be undone. Would you like to proceed?")
-            }
-            .confirmationDialog(
-                String("Reload saved game?"),
-                isPresented: $gameModel.showReloadConfirmation,
-                titleVisibility: .visible
-            ) {
-                Button("Yes") {
-                    gameModel.restoreGame()
-                    inputFocus = true
-                }
-                Button("No", role: .cancel) { }
-            } message: {
-                Text("You will lose any current progress is you do this.")
-            }
-
             if gameModel.gameOver {
                 GameOverView(message: "Game Over!") {
                     withAnimation {
@@ -128,6 +123,7 @@ public struct AdventureGameView: View {
 
     private var gamePlayView: some View {
         VStack(spacing: 0) {
+
             ScrollView {
                 ForEach(gameModel.gameProgress) { gameProgress in
                     GameRowView(gameDataRow: gameProgress)
