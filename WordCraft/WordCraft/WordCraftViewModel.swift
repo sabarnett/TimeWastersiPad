@@ -70,7 +70,14 @@ class WordCraftViewModel {
     func selectLetter(_ key: KeyPress) {
         if key.key == KeyEquivalent("\r") && selected.count >= 3 {
             select(selected.last!)
+        // Backspace on the Mac
         } else if key.key == KeyEquivalent("\u{7F}") {
+            if selected.count >= 1 {
+                selected.removeLast()
+                selectedLetters = selected.map { $0 }
+            }
+        // Backspace on the Mac in iPad mode
+        } else if key.key == KeyEquivalent("\u{08}") {
             if selected.count >= 1 {
                 selected.removeLast()
                 selectedLetters = selected.map { $0 }

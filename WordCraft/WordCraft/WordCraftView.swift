@@ -14,6 +14,7 @@ public struct WordCraftView: View {
 
     @State private var viewModel = WordCraftViewModel()
     @State private var gameData: Game
+    @FocusState private var isFocused: Bool
 
     public init(gameData: Game) {
         self.gameData = gameData
@@ -100,12 +101,19 @@ public struct WordCraftView: View {
             }
         }
         .padding()
+
+        // Handle the keyboard when on the Mac. We have to make the
+        // view focusable and focussed or we will not get the
+        // keyPress event.
+        .focusable()
+        .focused($isFocused)
         .onKeyPress(action: { keyPress in
             viewModel.selectLetter(keyPress)
             return .handled
         })
         .onAppear {
             viewModel.playBackgroundSound()
+            isFocused = true
         }
         .sheet(isPresented: $viewModel.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)
