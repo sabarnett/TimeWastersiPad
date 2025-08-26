@@ -15,19 +15,23 @@ struct GameBoardView: View {
     var game: WordSearchViewModel
 
     var body: some View {
-        HStack(spacing: Constants.cellSpacing) {
-            ForEach(0..<game.gameBoard.count, id: \.self) { index in
-                VStack(spacing: Constants.cellSpacing) {
-                    let column = game.gameBoard[index]
+        VStack {
+            HStack(spacing: Constants.cellSpacing) {
+                ForEach(0..<game.gameBoard.count, id: \.self) { index in
+                    VStack(spacing: Constants.cellSpacing) {
+                        let column = game.gameBoard[index]
 
-                    ForEach(column) { letter in
-                            TileView(tile: letter)
-                            .onTapGesture {
-                                game.select(letter: letter)
+                        ForEach(column) { letter in
+                                TileView(tile: letter)
+                                .onTapGesture {
+                                    game.select(letter: letter)
+                                }
                             }
                         }
                     }
                 }
-            }
+
+            Spacer()
+        }
     }
 }

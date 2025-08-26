@@ -108,6 +108,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E8046A3C2E5DF140000A033C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E8046A412E5DF140000A033C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E82346DD2E49F76B00BF34CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +273,10 @@
 					ProjectRef = E85413DC2E5753E000CFC667 /* AdventureGame.xcodeproj */;
 				},
 				{
+					ProductGroup = E8046A412E5DF140000A033C /* Products */;
+					ProjectRef = E87CA3812E5CE85B001459A0 /* MatchedPairs.xcodeproj */;
+				},
+				{
 					ProductGroup = E8FF0DD72E50C06600D24375 /* Products */;
 					ProjectRef = E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */;
 				},
@@ -281,6 +299,10 @@
 				{
 					ProductGroup = E88D53782E549B78001ECD5E /* Products */;
 					ProjectRef = E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */;
+				},
+				{
+					ProductGroup = E8046A3C2E5DF140000A033C /* Products */;
+					ProjectRef = E87CA3B82E5CF709001459A0 /* WordSearch.xcodeproj */;
 				},
 			);
 			projectRoot = "";

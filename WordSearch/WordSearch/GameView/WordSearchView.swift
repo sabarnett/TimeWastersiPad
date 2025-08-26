@@ -41,7 +41,6 @@ public struct WordSearchView: View {
                         GameBoardView(game: game)
                         MatchedWordsView(game: game)
                     }
-                    .frame(width: (Constants.tileSize + 2) * CGFloat(Constants.tileCountPerRow))
 
                     TargetWordsListView(game: game)
                 }
@@ -105,15 +104,9 @@ public struct WordSearchView: View {
             .onDisappear {
                 game.stopSounds()
             }
-            // TODO: Why is this code here???
-//            .overlay(
-//                KeyEventHandlingView { event in
-//                    handleKeyPress(event)
-//                }
-//                .frame(width: 0, height: 0)  // Invisible but captures keyboard input
-//            )
             // Game over view
             if game.gameState == .endOfGame {
+                // swiftlint:disable:next redundant_discardable_let
                 let _ = game.stopSounds()
                 GameOverView {
                     game.newGame()
@@ -124,11 +117,6 @@ public struct WordSearchView: View {
         }
         .frame(width: viewWidth)
     }
-
-//    private func handleKeyPress(_ key: NSEvent) {
-//        guard let char = key.characters?.first else { return }
-//        game.hilightLetter(letter: char)
-//    }
 
     /// Format the number of seconds. We have to do it this way because we have
     /// four digits and do not want the separating comma.

@@ -19,6 +19,11 @@ struct TargetWordsListView: View {
             VStack {
                 ForEach(game.words, id: \.id) { word in
                     TargetWord(word: word)
+                        .onLongPressGesture(minimumDuration: 1.2) {
+                            // Long press - do a hint
+                            guard let letter = word.word.first else { return }
+                            game.hilightLetter(letter: letter)
+                        }
                 }
             }
         }
