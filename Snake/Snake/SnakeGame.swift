@@ -23,27 +23,27 @@ struct Position: Equatable, Hashable {
 
 @Observable
 class SnakeGame {
-    
+
     @ObservationIgnored
     @AppStorage(Constants.snakePlaySounds) var snakePlaySounds = true {
         didSet {
             updateSounds()
         }
     }
-    
+
     @ObservationIgnored
     @AppStorage(Constants.snakeGameSize) var snakeGameSize: SnakeGameSize = .medium
 
     @ObservationIgnored
     var leaderBoard: LeaderBoard = LeaderBoard()
-    
+
     var showGamePlay: Bool = false
     var snake: [Position] = []
     var food: Position = Position(x: 0, y: 0)
     var direction: Direction = .right
     var isGameOver = false
     var gridSize = 20
-    
+
     init() {
         gridSize = snakeGameSize.rawValue
         snake = [Position(x: gridSize / 2, y: gridSize / 2)]
@@ -53,10 +53,10 @@ class SnakeGame {
     func isSnakeHead(_ cell: Position) -> Bool {
         snake[0] == cell
     }
-    
+
     func moveSnake() {
         guard !isGameOver else { return }
-        
+
         var newHead = snake[0]
 
         switch direction {
@@ -88,7 +88,7 @@ class SnakeGame {
 
         // Move snake
         snake.insert(newHead, at: 0)
-        
+
         // Check for food
         if newHead == food {
             playBiteSound()
@@ -97,7 +97,7 @@ class SnakeGame {
             snake.removeLast()  // Remove the tail if no food is eaten
         }
     }
-    
+
     func changeDirection(newDirection: Direction) {
         // Prevent snake from reversing direction
         if (newDirection == .up && direction != .down) ||
@@ -107,7 +107,7 @@ class SnakeGame {
             direction = newDirection
         }
     }
-    
+
     func resetGame() {
         gridSize = snakeGameSize.rawValue
         snake = [Position(x: gridSize / 2, y: gridSize / 2)]
@@ -115,9 +115,9 @@ class SnakeGame {
         direction = .right
         isGameOver = false
     }
-    
+
     // MARK: - Souond functions
-    
+
     private var sounds: AVAudioPlayer!
     private var bite: AVAudioPlayer!
     private var backgroundURL: URL { soundFile(named: "background") }
@@ -129,7 +129,7 @@ class SnakeGame {
         guard snakePlaySounds else { return }
         playSound(backgroundURL, repeating: true, volume: 0.3)
     }
-    
+
     /// If the background music is playing, stop it.
     func stopSounds() {
         guard snakePlaySounds else { return }
@@ -143,14 +143,14 @@ class SnakeGame {
         bite = try? AVAudioPlayer(contentsOf: biteURL)
         bite.play()
     }
-    
+
     /// Toggle the playing of sounds. If toggled off, the current sound is stopped. If
     /// toggled on, then we start playing the ticking sound. It is unlikely that we were playing
     /// any other sound, so this is a safe bet.
     func toggleSounds() {
         snakePlaySounds.toggle()
     }
-    
+
     private func updateSounds() {
         speakerIcon = snakePlaySounds ? "speaker.slash.fill" : "speaker.fill"
 
@@ -160,7 +160,7 @@ class SnakeGame {
             sounds.stop()
         }
     }
-    
+
     /// Creates the URL of a sound file. The file must exist within the minesweeper project
     /// bundle.
     private func soundFile(named file: String) -> URL {
@@ -174,7 +174,7 @@ class SnakeGame {
     private func playSound(_ url: URL, repeating: Bool = false, volume: Float = 1) {
         guard snakePlaySounds else { return }
         if sounds != nil { sounds.stop() }
-        
+
         sounds = try? AVAudioPlayer(contentsOf: url)
         if sounds != nil {
             sounds.numberOfLoops = repeating ? -1 : 0
@@ -182,9 +182,9 @@ class SnakeGame {
             self.sounds.play()
         }
     }
-    
+
     // MARK: - Image assets
-    
+
     // convenient for specific image
     public func snakeHead() -> Image {
         return Image("snakeHead", bundle: Bundle(for: SnakeGame.self))

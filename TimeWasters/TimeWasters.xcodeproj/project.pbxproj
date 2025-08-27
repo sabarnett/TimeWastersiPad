@@ -128,6 +128,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E809594B2E5F930F00BEB1C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E82346DD2E49F76B00BF34CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +306,10 @@
 				{
 					ProductGroup = E8D25AE82E49F71900F29757 /* Products */;
 					ProjectRef = E8D25AE52E49F71800F29757 /* SharedComponents.xcodeproj */;
+				},
+				{
+					ProductGroup = E809594B2E5F930F00BEB1C3 /* Products */;
+					ProjectRef = E81FF8C82E5F8B090078EB22 /* Snake.xcodeproj */;
 				},
 				{
 					ProductGroup = E850C3652E54C1280046C253 /* Products */;

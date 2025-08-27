@@ -20,17 +20,17 @@ import SharedComponents
 public struct SnakeGameView: View {
 
     @Environment(\.colorScheme) private var colorScheme
-    
+
     @AppStorage(Constants.snakeGameSpeed) private var snakeGameSpeed: SnakeGameSpeed = .medium
-    
+
     @State public var gameData: Game
     @State private var game = SnakeGame()
     @State private var timer: Timer?
     @State private var pause: Bool = true
     @State private var showLeaderBoard: Bool = false
-    
+
     let cellSize: CGFloat = 20
-    
+
     var headAngle: CGFloat {
         switch game.direction {
         case .up:
@@ -43,20 +43,19 @@ public struct SnakeGameView: View {
             0
         }
     }
-    
+
     public init(gameData: Game) {
         self.gameData = gameData
     }
-    
+
     public var body: some View {
         ZStack {
             VStack {
                 topBarAndButtons
-                    .padding(.horizontal, 8)
-                
+
                 ZStack {
                     ForEach(game.snake, id: \.self) { segment in
-                        
+
                         if game.isSnakeHead(segment) {
                             game.snakeHead()
                                 .resizable()
@@ -72,14 +71,14 @@ public struct SnakeGameView: View {
                                           y: CGFloat(segment.y) * cellSize + cellSize / 2)
                         }
                     }
-                    
+
                     Image(systemName: "applelogo")
                         .scaleEffect(1.8)
                         .foregroundStyle(.red)
                         .frame(width: cellSize, height: cellSize)
                         .position(x: CGFloat(game.food.x) * cellSize + cellSize / 2,
                                   y: CGFloat(game.food.y) * cellSize + cellSize / 2)
-                    
+
                     if pause {
                         Image(systemName: "pause.circle.fill")
                             .scaleEffect(4)
@@ -90,8 +89,44 @@ public struct SnakeGameView: View {
                 .frame(width: cellSize * CGFloat(game.gridSize), height: cellSize * CGFloat(game.gridSize))
                 .background(Color.black)
                 .border(Color.red, width: 1)
-            }.disabled(game.isGameOver)
-                        
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button(action: {
+                        pause = true
+                        game.showGamePlay = true
+                    }, label: {
+                        Image(systemName: "questionmark.circle")
+                    })
+                    .help("Show game rules")
+
+                    Button(action: {
+                        pause = true
+                        showLeaderBoard = true
+                    }, label: {
+                        Image(systemName: "trophy.circle")
+                    })
+                    .help("Show the leader board")
+                }
+
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(action: {
+                        restartGame()
+                    }, label: {
+                        Image(systemName: "arrow.uturn.left.circle")
+                    })
+                    .help("Restart the game")
+
+                    Button(action: {
+                        game.toggleSounds()
+                    }, label: {
+                        Image(systemName: game.speakerIcon)
+                    })
+                    .help("Toggle sound effects")
+                }
+            }
+            .disabled(game.isGameOver)
+
             if game.isGameOver {
                 GameOverView(message: "Bad luck") {
                     withAnimation {
@@ -109,6 +144,7 @@ public struct SnakeGameView: View {
         }
         .frame(width: cellSize * CGFloat(game.gridSize + 2), height: cellSize * CGFloat(game.gridSize) + 80)
         .background(colorScheme == .dark ? Color.black : Color.white)
+
         // TODO: Find some other way to handle the keyboard
 //        .overlay(
 //            KeyEventHandlingView { event in
@@ -124,56 +160,22 @@ public struct SnakeGameView: View {
                             initialTab: game.snakeGameSize)
         }
     }
-    
+
     var topBarAndButtons: some View {
         HStack {
-            Button(action: {
-                pause = true
-                game.showGamePlay = true
-            }, label: {
-                Image(systemName: "questionmark.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Show game rules")
-
-            Button(action: {
-                pause = true
-                showLeaderBoard = true
-            }, label: {
-                Image(systemName: "trophy.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Show the leader board")
-
             Spacer()
-            
+
             Text(game.snake.count.formatted(.number.precision(.integerLength(3))))
                             .fixedSize()
                             .padding(.horizontal, 6)
                             .foregroundStyle(.red.gradient)
             Spacer()
-            
-            Button(action: {
-                restartGame()
-            }, label: {
-                Image(systemName: "arrow.uturn.left.circle.fill")
-            })
-            .buttonStyle(.plain)
-            .help("Restart the game")
-
-            Button(action: {
-                game.toggleSounds()
-            }, label: {
-                Image(systemName: game.speakerIcon)
-            })
-            .buttonStyle(.plain)
-            .help("Toggle sound effects")
         }
         .monospacedDigit()
         .font(.largeTitle)
         .clipShape(.rect(cornerRadius: 10))
     }
-    
+
     func startGameLoop() {
         pause = true
         game.playBackgroundSound()
@@ -187,12 +189,12 @@ public struct SnakeGameView: View {
             }
         }
     }
-    
+
     @MainActor func snakeMove() {
         guard pause == false else { return }
         game.moveSnake()
     }
-    
+
     // TODO: Find some other way to handle the keyboard
 //    func handleKeyPress(_ event: NSEvent) {
 //        switch event.keyCode {
@@ -210,7 +212,7 @@ public struct SnakeGameView: View {
 //            break
 //        }
 //    }
-    
+
     private func restartGame() {
         game.resetGame()
         startGameLoop()

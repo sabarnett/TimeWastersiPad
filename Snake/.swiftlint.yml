@@ -18,9 +18,9 @@ disabled_rules: # rule identifiers to exclude from running
 #  - todo
 #  - trailing_newline
 #  - trailing_semicolon
-  - trailing_whitespace
+#  - trailing_whitespace
 #  - type_body_length
-  - type_name
+#ß  - type_name
   - xctfail_message
 #  - variable_name_max_length
 #  - variable_name_min_length

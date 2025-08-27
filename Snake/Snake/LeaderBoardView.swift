@@ -16,9 +16,9 @@ struct LeaderBoardView: View {
 
     let leaderBoard: LeaderBoard
     let initialTab: SnakeGameSize
-    
+
     @State var gameLevel: SnakeGameSize = .small
-    
+
     var leaderItems: [LeaderBoardItem] {
         switch gameLevel {
         case .small:
@@ -29,25 +29,25 @@ struct LeaderBoardView: View {
             return leaderBoard.leaderBoard.largeLeaderBoard
         }
     }
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Leader Board").font(.title)
-            
+
             Picker("", selection: $gameLevel) {
                 Text("Small").tag(SnakeGameSize.small)
                 Text("Medium").tag(SnakeGameSize.medium)
                 Text("Large").tag(SnakeGameSize.large)
             }
             .pickerStyle(SegmentedPickerStyle())
-            
+
             List {
                 LeaderBoardItemHeader()
                 ForEach(leaderItems) { leaderItem in
                     LeaderBoardItemView(leaderItem: leaderItem)
                 }
             }.frame(minHeight: 200)
-            
+
             HStack {
                 Spacer()
                 Button(role: .cancel,
@@ -82,14 +82,14 @@ struct LeaderBoardItemHeader: View {
 struct LeaderBoardItemView: View {
     var leaderItem: LeaderBoardItem
     let dateFormatter: DateFormatter
-    
+
     init(leaderItem: LeaderBoardItem) {
         self.leaderItem = leaderItem
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
     }
-    
+
     var body: some View {
         HStack {
             Text(dateFormatter.string(from: leaderItem.gameDate))

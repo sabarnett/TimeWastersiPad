@@ -15,9 +15,9 @@ enum SnakeGameSize: Int, Identifiable, CaseIterable, CustomStringConvertible {
     case small = 14
     case medium = 20
     case large = 30
-    
+
     var id: Int { rawValue }
-    
+
     var description: String {
         switch self {
         case .small: return "Small"

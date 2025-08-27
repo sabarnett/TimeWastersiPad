@@ -12,17 +12,17 @@
 import SwiftUI
 
 public struct SnakeSettingsView: View {
-    
+
     @AppStorage(Constants.snakePlaySounds) private var snakePlaySounds = true
     @AppStorage(Constants.snakeGameSpeed) private var snakeGameSpeed: SnakeGameSpeed = .medium
     @AppStorage(Constants.snakeGameSize) private var snakeGameSize: SnakeGameSize = .medium
 
     public init() { }
-    
+
     public var body: some View {
         Form {
             Toggle("Play sounds", isOn: $snakePlaySounds)
-            
+
             Picker("Game speed", selection: $snakeGameSpeed) {
                 ForEach(SnakeGameSpeed.allCases) { speed in
                     Text(speed.description)
@@ -37,8 +37,6 @@ public struct SnakeSettingsView: View {
                 }
             }
         }
-        .frame(width: 350)
-        .padding()
     }
 }
 
