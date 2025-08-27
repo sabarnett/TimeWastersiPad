@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E81FF8C72E5F88420078EB22 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E81FF8C62E5F88420078EB22 /* SharedAssets.xcassets */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		E81FF8C62E5F88420078EB22 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
 		E8D25ADB2E49F71800F29757 /* SharedComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharedComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,6 +37,7 @@
 		E8D25AD12E49F71800F29757 = {
 			isa = PBXGroup;
 			children = (
+				E81FF8C62E5F88420078EB22 /* SharedAssets.xcassets */,
 				E8D25ADD2E49F71800F29757 /* SharedComponents */,
 				E8D25ADC2E49F71800F29757 /* Products */,
 			);
@@ -121,6 +127,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81FF8C72E5F88420078EB22 /* SharedAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

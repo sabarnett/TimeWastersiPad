@@ -16,17 +16,25 @@ public struct AboutView: View {
 
     public var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Image(uiImage: Bundle.main.icon ?? UIImage())
+            HStack(alignment: .top) {
+                Image(.gameNite)
                     .resizable()
                     .scaledToFill()
                     .clipped()
                     .clipShape(RoundedRectangle(cornerRadius: 22))
                     .frame(width: 100, height: 100, alignment: .center)
+                    .padding(.horizontal)
+//
+//                Image(uiImage: Bundle.main.icon ?? UIImage())
+//                    .resizable()
+//                    .scaledToFill()
+//                    .clipped()
+//                    .clipShape(RoundedRectangle(cornerRadius: 22))
+//                    .frame(width: 100, height: 100, alignment: .center)
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("\(Bundle.main.appName)")
-                        .font(.system(size: 20, weight: .bold))
+                        .font(.system(size: 30, weight: .bold))
                         .textSelection(.enabled)
 
                     Text("Ver: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild)) ")
