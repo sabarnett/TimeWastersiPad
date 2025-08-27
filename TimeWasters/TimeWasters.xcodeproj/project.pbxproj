@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E805C1502E508611005B69A4 /* MineSweeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E805C14F2E508611005B69A4 /* MineSweeper.framework */; };
 		E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E805C14F2E508611005B69A4 /* MineSweeper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E81FF8D62E5F8CE90078EB22 /* Snake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E81FF8D52E5F8CE90078EB22 /* Snake.framework */; };
+		E81FF8D72E5F8CE90078EB22 /* Snake.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E81FF8D52E5F8CE90078EB22 /* Snake.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; };
 		E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E85413EA2E57543300CFC667 /* AdventureGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E92E57543300CFC667 /* AdventureGame.framework */; };
@@ -49,6 +51,7 @@
 				E8FF0DED2E50C0FA00D24375 /* WordCraft.framework in Embed Frameworks */,
 				E88D54152E54A26C001ECD5E /* NumberCombinations.framework in Embed Frameworks */,
 				E88D54742E54B3C1001ECD5E /* Othello.framework in Embed Frameworks */,
+				E81FF8D72E5F8CE90078EB22 /* Snake.framework in Embed Frameworks */,
 				E87CA3F52E5CF76C001459A0 /* WordSearch.framework in Embed Frameworks */,
 				E85413EB2E57543300CFC667 /* AdventureGame.framework in Embed Frameworks */,
 				E88D54442E54AEC5001ECD5E /* TicTacToe.framework in Embed Frameworks */,
@@ -62,6 +65,8 @@
 /* Begin PBXFileReference section */
 		E805C13E2E508528005B69A4 /* MineSweeper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MineSweeper.xcodeproj; path = ../MineSweeper/MineSweeper.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E805C14F2E508611005B69A4 /* MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E81FF8C82E5F8B090078EB22 /* Snake.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Snake.xcodeproj; path = ../Snake/Snake.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E81FF8D52E5F8CE90078EB22 /* Snake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Snake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E85413DC2E5753E000CFC667 /* AdventureGame.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdventureGame.xcodeproj; path = ../AdventureGame/AdventureGame.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E85413E92E57543300CFC667 /* AdventureGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdventureGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E87CA3812E5CE85B001459A0 /* MatchedPairs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MatchedPairs.xcodeproj; path = ../MatchedPairs/MatchedPairs.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -98,6 +103,7 @@
 				E8FF0DEC2E50C0FA00D24375 /* WordCraft.framework in Frameworks */,
 				E88D54142E54A26C001ECD5E /* NumberCombinations.framework in Frameworks */,
 				E88D54732E54B3C1001ECD5E /* Othello.framework in Frameworks */,
+				E81FF8D62E5F8CE90078EB22 /* Snake.framework in Frameworks */,
 				E87CA3F42E5CF76C001459A0 /* WordSearch.framework in Frameworks */,
 				E85413EA2E57543300CFC667 /* AdventureGame.framework in Frameworks */,
 				E88D54432E54AEC5001ECD5E /* TicTacToe.framework in Frameworks */,
@@ -125,6 +131,7 @@
 		E82346DD2E49F76B00BF34CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E81FF8D52E5F8CE90078EB22 /* Snake.framework */,
 				E87CA3F32E5CF76C001459A0 /* WordSearch.framework */,
 				E87CA3B52E5CE8BD001459A0 /* MatchedPairs.framework */,
 				E85413E92E57543300CFC667 /* AdventureGame.framework */,
@@ -193,6 +200,7 @@
 				E87CA3812E5CE85B001459A0 /* MatchedPairs.xcodeproj */,
 				E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */,
 				E87CA3B82E5CF709001459A0 /* WordSearch.xcodeproj */,
+				E81FF8C82E5F8B090078EB22 /* Snake.xcodeproj */,
 				E82346DD2E49F76B00BF34CB /* Frameworks */,
 				E8DB6CBC2E49F69900A351A8 /* Products */,
 			);

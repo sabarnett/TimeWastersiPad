@@ -19,6 +19,7 @@ import SwiftUI
 import TicTacToe
 import WordCraft
 import WordSearch
+import Snake
 
 /// Single place to generate the game view or the game
 /// settings view
@@ -42,9 +43,8 @@ struct GameViewFactory {
             AnyView(MatchedPairsView(gameData: game))
         case .wordSearch:
             AnyView(WordSearchView(gameData: game))
-
         case .snake:
-            AnyView(Text(game.gameDefinition.description))
+            AnyView(SnakeGameView(gameData: game))
         @unknown default:
             fatalError("Unable to determine game view")
         }
@@ -68,9 +68,8 @@ struct GameViewFactory {
             AnyView(MatchedPairsSettingsView())
         case .wordSearch:
             AnyView(WordSearchSettingsView())
-
         case .snake:
-            AnyView(Text("Snake settings"))
+            AnyView(SnakeSettingsView())
         @unknown default:
             fatalError("Unable to determine game settings view")
         }
