@@ -17,7 +17,6 @@
 		E893247B2CBD5067005B30BC /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E89324702CBD5067005B30BC /* background.mp3 */; };
 		E893247C2CBD5067005B30BC /* bite.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E89324712CBD5067005B30BC /* bite.mp3 */; };
 		E893247D2CBD5067005B30BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324732CBD5067005B30BC /* Constants.swift */; };
-		E893247F2CBD5067005B30BC /* NSApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324752CBD5067005B30BC /* NSApplication+Extension.swift */; };
 		E89324802CBD5067005B30BC /* SnakeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324772CBD5067005B30BC /* SnakeGame.swift */; };
 		E89324812CBD5067005B30BC /* SnakeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324782CBD5067005B30BC /* SnakeGameView.swift */; };
 		E89324822CBD5067005B30BC /* SnakeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324792CBD5067005B30BC /* SnakeSettingsView.swift */; };
@@ -48,7 +47,6 @@
 		E89324702CBD5067005B30BC /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
 		E89324712CBD5067005B30BC /* bite.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bite.mp3; sourceTree = "<group>"; };
 		E89324732CBD5067005B30BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		E89324752CBD5067005B30BC /* NSApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extension.swift"; sourceTree = "<group>"; };
 		E89324762CBD5067005B30BC /* Snake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Snake.h; sourceTree = "<group>"; };
 		E89324772CBD5067005B30BC /* SnakeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGame.swift; sourceTree = "<group>"; };
 		E89324782CBD5067005B30BC /* SnakeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGameView.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 			children = (
 				E89324722CBD5067005B30BC /* Sounds */,
 				E89324732CBD5067005B30BC /* Constants.swift */,
-				E89324752CBD5067005B30BC /* NSApplication+Extension.swift */,
 				E89324772CBD5067005B30BC /* SnakeGame.swift */,
 				E89324782CBD5067005B30BC /* SnakeGameView.swift */,
 				E89324792CBD5067005B30BC /* SnakeSettingsView.swift */,
@@ -235,7 +232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E893247D2CBD5067005B30BC /* Constants.swift in Sources */,
-				E893247F2CBD5067005B30BC /* NSApplication+Extension.swift in Sources */,
 				E89324802CBD5067005B30BC /* SnakeGame.swift in Sources */,
 				E80B9BF92D08852C006814B7 /* LeaderBoardView.swift in Sources */,
 				E80B9BF72D08837E006814B7 /* LeaderBoard.swift in Sources */,

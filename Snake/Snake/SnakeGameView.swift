@@ -28,6 +28,7 @@ public struct SnakeGameView: View {
     @State private var timer: Timer?
     @State private var pause: Bool = true
     @State private var showLeaderBoard: Bool = false
+    @FocusState private var hasFocus: Bool
 
     let cellSize: CGFloat = 20
 
@@ -137,6 +138,7 @@ public struct SnakeGameView: View {
         }
         .onAppear {
             startGameLoop()
+            hasFocus = true
         }
         .onDisappear {
             game.stopSounds()
@@ -145,13 +147,16 @@ public struct SnakeGameView: View {
         .frame(width: cellSize * CGFloat(game.gridSize + 2), height: cellSize * CGFloat(game.gridSize) + 80)
         .background(colorScheme == .dark ? Color.black : Color.white)
 
-        // TODO: Find some other way to handle the keyboard
-//        .overlay(
-//            KeyEventHandlingView { event in
-//                handleKeyPress(event)
-//            }
-//                .frame(width: 0, height: 0)  // Invisible but captures keyboard input
-//        )
+        // This is a fix for running the game on the Mac. It allows
+        // the player to use the keyboard to control the game. The
+        // arrow keys switch direction and the space bar acts as a
+        // pause/resume key.
+        .focusable()
+        .focused($hasFocus)
+        .onKeyPress(action: { key in
+            handleKeyPress(key.key)
+            return .handled
+        })
         .sheet(isPresented: $game.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)
         }
@@ -195,23 +200,23 @@ public struct SnakeGameView: View {
         game.moveSnake()
     }
 
-    // TODO: Find some other way to handle the keyboard
-//    func handleKeyPress(_ event: NSEvent) {
-//        switch event.keyCode {
-//        case 49:    // Space bar
-//            pause.toggle()
-//        case 123:  // Left arrow
-//            game.changeDirection(newDirection: .left)
-//        case 124:  // Right arrow
-//            game.changeDirection(newDirection: .right)
-//        case 125:  // Down arrow
-//            game.changeDirection(newDirection: .down)
-//        case 126:  // Up arrow
-//            game.changeDirection(newDirection: .up)
-//        default:
-//            break
-//        }
-//    }
+    // Handle a keyboard press on the Mac
+    func handleKeyPress(_ key: KeyEquivalent) {
+        switch key {
+        case .space:
+            pause.toggle()
+        case .leftArrow:
+            game.changeDirection(newDirection: .left)
+        case .rightArrow:
+            game.changeDirection(newDirection: .right)
+        case .downArrow:
+            game.changeDirection(newDirection: .down)
+        case .upArrow:
+            game.changeDirection(newDirection: .up)
+        default:
+            break
+        }
+    }
 
     private func restartGame() {
         game.resetGame()
