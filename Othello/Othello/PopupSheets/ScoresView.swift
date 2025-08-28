@@ -30,14 +30,15 @@ struct ScoresView: View {
                     score: model.computerScore
                 )
             }
+            .listStyle(.plain)
         }
-        .frame(width: 230, alignment: .leading)
+        .frame(alignment: .leading)
     }
 
     private func scoreItem(title: String, color: Color, score: Int) -> some View {
         Section(content: {
             Text(score.formatted(.number))
-                .font(.system(size: 20))
+                .font(.system(size: 26))
                 .padding(.horizontal, 6)
                 .listRowSeparator(.hidden)
                 .listSectionSeparator(.hidden)

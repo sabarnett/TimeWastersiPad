@@ -40,7 +40,7 @@ public struct OthelloView: View {
                             .padding()
                     }
                     Spacer()
-                    ScoresView(model: model)
+                    ScoresView(model: model).frame(width: 250)
                 }
 
             }
