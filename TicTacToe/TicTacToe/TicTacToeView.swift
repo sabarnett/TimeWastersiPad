@@ -40,14 +40,14 @@ public struct TicTacToeView: View {
                 HStack {
                     Spacer()
                     VStack {
-                        GameGrid(model: model).frame(width: 380)
+                        GameGrid(model: model)
                         Text(model.messages)
                             .font(.title)
                             .padding()
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                     Spacer()
-                    ScoreView(model: model).frame(maxWidth: 200)
+                    ScoreView(model: model).frame(width: 250)
                 }
 
             }

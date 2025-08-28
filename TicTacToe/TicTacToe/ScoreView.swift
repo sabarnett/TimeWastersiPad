@@ -23,14 +23,14 @@ struct ScoreView: View {
                       score: model.computerWins)
             scoreItem(title: "🤲 Draws",
                       score: model.draws)
-        }
+        }.listStyle(.plain)
     }
 
     private func scoreItem(title: String, score: Int) -> some View {
         Section(content: {
             Text(score.formatted(.number))
-                .font(.system(size: 20))
-                .padding(.horizontal, 6)
+                .font(.system(size: 26))
+                .padding(.horizontal, 8)
                 .listRowSeparator(.hidden)
                 .listSectionSeparator(.hidden)
         }, header: {
