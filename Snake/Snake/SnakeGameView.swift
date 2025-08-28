@@ -127,6 +127,7 @@ public struct SnakeGameView: View {
                 }
             }
             .disabled(game.isGameOver)
+            .frame(width: cellSize * CGFloat(game.gridSize + 2), height: cellSize * CGFloat(game.gridSize) + 80)
 
             if game.isGameOver {
                 GameOverView(message: "Bad luck") {
@@ -135,6 +136,17 @@ public struct SnakeGameView: View {
                     }
                 }
             }
+            Color.clear
+                .overlay(alignment: .bottomTrailing) {
+                    GamePlayButtons(onButtonPress: { key in
+                        handleKeyPress(key)
+                    })
+                }
+                .overlay(alignment: .bottomLeading) {
+                    GamePlayButtons(onButtonPress: { key in
+                        handleKeyPress(key)
+                    })
+                }
         }
         .onAppear {
             startGameLoop()
@@ -144,7 +156,6 @@ public struct SnakeGameView: View {
             game.stopSounds()
             timer?.invalidate()
         }
-        .frame(width: cellSize * CGFloat(game.gridSize + 2), height: cellSize * CGFloat(game.gridSize) + 80)
         .background(colorScheme == .dark ? Color.black : Color.white)
 
         // This is a fix for running the game on the Mac. It allows

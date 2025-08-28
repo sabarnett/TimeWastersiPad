@@ -25,7 +25,7 @@ struct Position: Equatable, Hashable {
 class SnakeGame {
 
     @ObservationIgnored
-    @AppStorage(Constants.snakePlaySounds) var snakePlaySounds = true {
+    @AppStorage(Constants.snakePlaySounds) var snakePlaySounds = false {
         didSet {
             updateSounds()
         }

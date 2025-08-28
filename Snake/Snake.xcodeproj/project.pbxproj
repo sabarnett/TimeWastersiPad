@@ -21,6 +21,7 @@
 		E89324812CBD5067005B30BC /* SnakeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324782CBD5067005B30BC /* SnakeGameView.swift */; };
 		E89324822CBD5067005B30BC /* SnakeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324792CBD5067005B30BC /* SnakeSettingsView.swift */; };
 		E89324832CBD5067005B30BC /* Snake.h in Headers */ = {isa = PBXBuildFile; fileRef = E89324762CBD5067005B30BC /* Snake.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8F6AD622E60D64A00F493E5 /* GamePlayButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F6AD612E60D64A00F493E5 /* GamePlayButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,7 @@
 		E89324792CBD5067005B30BC /* SnakeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeSettingsView.swift; sourceTree = "<group>"; };
 		E89C52122CBAB24C00C3CFB7 /* Snake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Snake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C52412CBAB3BB00C3CFB7 /* SharedComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8F6AD612E60D64A00F493E5 /* GamePlayButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				E856958B2CBEBA1D00BC1730 /* SnakeGameSize.swift */,
 				E80B9BF62D08837E006814B7 /* LeaderBoard.swift */,
 				E80B9BF82D08852C006814B7 /* LeaderBoardView.swift */,
+				E8F6AD612E60D64A00F493E5 /* GamePlayButtons.swift */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E893247D2CBD5067005B30BC /* Constants.swift in Sources */,
+				E8F6AD622E60D64A00F493E5 /* GamePlayButtons.swift in Sources */,
 				E89324802CBD5067005B30BC /* SnakeGame.swift in Sources */,
 				E80B9BF92D08852C006814B7 /* LeaderBoardView.swift in Sources */,
 				E80B9BF72D08837E006814B7 /* LeaderBoard.swift in Sources */,
