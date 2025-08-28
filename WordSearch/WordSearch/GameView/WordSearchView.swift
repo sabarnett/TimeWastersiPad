@@ -85,6 +85,8 @@ public struct WordSearchView: View {
                     }
                 }
             }
+            .frame(width: viewWidth)
+
             .sheet(isPresented: $showGamePlay) {
                 GamePlayView(game: gameData.gameDefinition)
             }
@@ -115,7 +117,6 @@ public struct WordSearchView: View {
             }
 
         }
-        .frame(width: viewWidth)
     }
 
     /// Format the number of seconds. We have to do it this way because we have
