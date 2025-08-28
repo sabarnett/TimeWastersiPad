@@ -50,14 +50,14 @@ public struct WordSearchView: View {
                         Button(action: {
                             showGamePlay.toggle()
                         }, label: {
-                            Image(systemName: "questionmark.circle.fill")
+                            Image(systemName: "questionmark.circle")
                         })
                         .help("Show the game play")
 
                         Button(action: {
                             showLeaderBoard.toggle()
                         }, label: {
-                            Image(systemName: "trophy.circle.fill")
+                            Image(systemName: "trophy.circle")
                         })
                         .help("Show the leader board")
                     }
@@ -72,7 +72,7 @@ public struct WordSearchView: View {
                         Button(action: {
                             game.newGame()
                         }, label: {
-                            Image(systemName: "arrow.uturn.left.circle.fill")
+                            Image(systemName: "arrow.uturn.left.circle")
                         })
                         .help("Start a new game")
 

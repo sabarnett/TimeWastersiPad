@@ -45,7 +45,7 @@ public struct MatchedPairsView: View {
                         model.stopSounds()
                         showGamePlay.toggle()
                     }, label: {
-                        Image(systemName: "questionmark.circle.fill")
+                        Image(systemName: "questionmark.circle")
                     })
                     .help("Show the game play")
 
@@ -53,7 +53,7 @@ public struct MatchedPairsView: View {
                         model.stopSounds()
                         showLeaderBoard.toggle()
                     }, label: {
-                        Image(systemName: "trophy.circle.fill")
+                        Image(systemName: "trophy.circle")
                     })
                     .help("Show the leader board")
                 }
@@ -62,7 +62,7 @@ public struct MatchedPairsView: View {
                     Button(action: {
                         model.newGame()
                     }, label: {
-                        Image(systemName: "arrow.uturn.left.circle.fill")
+                        Image(systemName: "arrow.uturn.left.circle")
                     })
                     .help("Start a new game")
 

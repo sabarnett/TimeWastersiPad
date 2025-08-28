@@ -43,7 +43,7 @@ extension OthelloViewModel {
     }
 
     func updateSounds() {
-        speakerIcon = othelloPlaySounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = othelloPlaySounds ? "speaker.slash" : "speaker"
 
         if othelloPlaySounds {
             playSound(backgroundURL, repeating: true)

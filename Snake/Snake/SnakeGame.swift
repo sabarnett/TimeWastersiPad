@@ -122,7 +122,7 @@ class SnakeGame {
     private var bite: AVAudioPlayer!
     private var backgroundURL: URL { soundFile(named: "background") }
     private var biteURL: URL { soundFile(named: "bite") }
-    var speakerIcon: String = "speaker.fill"
+    var speakerIcon: String = "speaker"
 
     /// Play the background music
     func playBackgroundSound() {
@@ -152,7 +152,7 @@ class SnakeGame {
     }
 
     private func updateSounds() {
-        speakerIcon = snakePlaySounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = snakePlaySounds ? "speaker.slash" : "speaker"
 
         if snakePlaySounds {
             playSound(backgroundURL, repeating: true)

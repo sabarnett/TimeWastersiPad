@@ -52,7 +52,7 @@ struct SquareView: View {
                         .font(.system(size: textSize))
                 }
             } else if square.isFlagged {
-                Image(systemName: "exclamationmark.triangle.fill")
+                Image(systemName: "exclamationmark.triangle")
                     .foregroundStyle(.black, .yellow)
                     .shadow(color: .black, radius: 3)
                     .font(.system(size: textSize))

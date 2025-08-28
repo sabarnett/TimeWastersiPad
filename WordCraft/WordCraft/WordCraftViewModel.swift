@@ -27,7 +27,7 @@ class WordCraftViewModel {
     var usedWords = Set<String>()
     var score = 0
     var selectedLetters: [Tile] = []
-    var speakerIcon: String = "speaker.fill"
+    var speakerIcon: String = "speaker"
     var submittedWord: String?
     var showGamePlay: Bool = false
     var showResetConfirmation: Bool = false
@@ -64,7 +64,7 @@ class WordCraftViewModel {
         selectedLetters = []
         score = 0
 
-        speakerIcon = wordcraftPlaySounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = wordcraftPlaySounds ? "speaker.slash" : "speaker"
     }
 
     // A key was pressed on the keyboard; process return, backspace or a letter key.
@@ -350,7 +350,7 @@ extension WordCraftViewModel {
     }
 
     private func updateSounds() {
-        speakerIcon = wordcraftPlaySounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = wordcraftPlaySounds ? "speaker.slash" : "speaker"
 
         if wordcraftPlaySounds {
             playSound(backgroundURL, repeating: true)

@@ -57,7 +57,7 @@ class CombinationsViewModel {
     var success: Bool = false
 
     /// Determines which icon we need to use oon the tool bar for toggling the sounds
-    var speakerIcon: String = "speaker.fill"
+    var speakerIcon: String = "speaker"
 
     /// Tracks the start of the puzzle
     var gameStart: Date?
@@ -107,7 +107,7 @@ class CombinationsViewModel {
 
         formula = ""
         success = false
-        speakerIcon = playSounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = playSounds ? "speaker.slash" : "speaker"
         playBackgroundSound()
 
         gameStart = .now
@@ -233,7 +233,7 @@ class CombinationsViewModel {
     }
 
     private func updateSounds() {
-        speakerIcon = playSounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = playSounds ? "speaker.slash" : "speaker"
 
         if playSounds {
             playSound(backgroundURL, repeating: true)

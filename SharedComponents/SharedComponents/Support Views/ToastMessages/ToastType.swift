@@ -43,13 +43,13 @@ public enum ToastType {
     public var iconName: String {
         switch self {
         case .info:
-            return "info.circle.fill"
+            return "info.circle"
         case .warning:
-            return "exclamationmark.triangle.fill"
+            return "exclamationmark.triangle"
         case .error:
-            return "xmark.circle.fill"
+            return "xmark.circle"
         case .success:
-            return "checkmark.circle.fill"
+            return "checkmark.circle"
         }
     }
 }

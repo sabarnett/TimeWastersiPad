@@ -34,13 +34,13 @@ class TicTacToeGameModel: ObservableObject {
     @Published var showGamePlay: Bool = false
     @Published var gameState: GameState = .active
 
-    @Published var speakerIcon: String = "speaker.fill"
+    @Published var speakerIcon: String = "speaker"
 
     @Published var notifyMessage: ToastConfig?
 
     init() {
         initialiseGameBoard()
-        speakerIcon = playSounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = playSounds ? "speaker.slash" : "speaker"
     }
 
     /// Accept the players move
@@ -204,7 +204,7 @@ class TicTacToeGameModel: ObservableObject {
     func toggleSounds() {
         playSounds.toggle()
 
-        speakerIcon = playSounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = playSounds ? "speaker.slash" : "speaker"
 
         if !playSounds {
             sounds.stop()

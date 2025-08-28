@@ -130,7 +130,7 @@ extension Game {
                        ),
                        credits: "Steve Barnett",
                        link: "http://www.sabarnett.co.uk",
-                       gameIcon: "signpost.right.and.left.fill",
+                       gameIcon: "signpost.right.and.left",
                        hasSettings: false
         )
     }
@@ -174,7 +174,7 @@ extension Game {
                        ),
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
-                       gameIcon: "circle.grid.3x3.fill",
+                       gameIcon: "circle.grid.3x3",
                        hasSettings: false
         )
     }
@@ -242,7 +242,7 @@ extension Game {
                        ),
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
-                       gameIcon: "wonsign.square.fill",
+                       gameIcon: "wonsign.square",
                        hasSettings: true
         )
     }

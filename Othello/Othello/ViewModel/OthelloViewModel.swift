@@ -46,7 +46,7 @@ class OthelloViewModel: ObservableObject {
 
     init() {
         newGame()
-        speakerIcon = othelloPlaySounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = othelloPlaySounds ? "speaker.slash" : "speaker"
         if othelloPlaySounds {
             playBackgroundSound()
         }

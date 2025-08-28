@@ -78,7 +78,7 @@ public struct AdventureGameView: View {
                     Button(action: {
                         gameModel.showGamePlay.toggle()
                     }, label: {
-                        Image(systemName: "questionmark.circle.fill")
+                        Image(systemName: "questionmark.circle")
                     })
                     .help("Show game rules")
                 }
@@ -86,21 +86,21 @@ public struct AdventureGameView: View {
                     Button(action: {
                         gameModel.showResetConfirmation = true
                     }, label: {
-                        Image(systemName: "arrow.uturn.left.circle.fill")
+                        Image(systemName: "arrow.uturn.left.circle")
                     })
                     .help("Restart the game.")
 
                     Button(action: {
                         gameModel.saveGame()
                     }, label: {
-                        Image(systemName: "tray.and.arrow.down.fill")
+                        Image(systemName: "tray.and.arrow.down")
                     })
                     .help("Save the current game state.")
 
                     Button(action: {
                         gameModel.showReloadConfirmation = true
                     }, label: {
-                        Image(systemName: "tray.and.arrow.up.fill")
+                        Image(systemName: "tray.and.arrow.up")
                     })
                     .help("Reload the last saved game.")
                 }

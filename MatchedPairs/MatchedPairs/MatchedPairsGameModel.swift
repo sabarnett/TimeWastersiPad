@@ -214,7 +214,7 @@ class MatchedPairsGameModel {
     }
 
     private func updateSounds() {
-        speakerIcon = playSounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = playSounds ? "speaker.slash" : "speaker"
 
         if playSounds {
             playSound(backgroundURL, repeating: true)

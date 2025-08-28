@@ -90,7 +90,7 @@ public struct MinesweeperView: View {
                     Button(action: {
                         toggleSounds()
                     }, label: {
-                        Image(systemName: minePlaySounds ? "speaker.slash.fill" : "speaker.fill")
+                        Image(systemName: minePlaySounds ? "speaker.slash" : "speaker")
                     })
                     .help("Toggle sounds")
                 }

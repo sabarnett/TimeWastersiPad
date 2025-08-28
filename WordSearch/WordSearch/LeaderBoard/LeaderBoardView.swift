@@ -68,7 +68,7 @@ struct LeaderBoardView: View {
             Button(action: {
                 leaderBoard.clearScores()
             }, label: {
-                Image(systemName: "square.stack.3d.up.slash.fill")
+                Image(systemName: "square.stack.3d.up.slash")
             })
             .buttonStyle(.plain)
             .help("Clear the leader board scores")

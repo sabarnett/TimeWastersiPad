@@ -23,6 +23,6 @@ struct Constants {
     static let leaderBoardFileName = "MatchedPairsLeaderBoard"
 
     // Sounds
-    static let soundsOn = "speaker.fill"
-    static let soundsOff = "speaker.slash.fill"
+    static let soundsOn = "speaker"
+    static let soundsOff = "speaker.slash"
 }

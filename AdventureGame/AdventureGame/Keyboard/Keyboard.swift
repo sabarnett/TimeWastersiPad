@@ -88,7 +88,7 @@ struct Keyboard: View {
                     if currentCommand.isEmpty { return }
                     currentCommand.removeLast()
                 } label: {
-                    Image(systemName: "delete.backward.fill")
+                    Image(systemName: "delete.backward")
                         .font(.system(size: keyboardModel.buttonFontSize, weight: .heavy))
                         .frame(width: keyboardModel.buttonWidth * 2, height: keyboardModel.buttonHeight)
                         .foregroundColor(.white)

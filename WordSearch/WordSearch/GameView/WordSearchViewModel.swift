@@ -43,8 +43,8 @@ class WordSearchViewModel {
     var gameBoard: [[Letter]] = []
     var matchedWords: [MatchedWord] = []
     var gameState: GameState = .playing
-    var speakerIcon: String = "speaker.fill"
-    var hintsIcon: String = "eye.fill"
+    var speakerIcon: String = "speaker"
+    var hintsIcon: String = "eye"
     var secondsElapsed: Int = 0
     var leaderBoard = LeaderBoard()
 
@@ -63,14 +63,14 @@ class WordSearchViewModel {
         generateRandomWords()
         generateGameGrid()
 
-        speakerIcon = wordsearchPlaySounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = wordsearchPlaySounds ? "speaker.slash" : "speaker"
         gameState = .playing
     }
 
     /// Toggle the ability to show hints using the keyboard
     func allowHints() {
         allowShowHints.toggle()
-        hintsIcon = allowShowHints ? "eye.fill" : "eye.slash.fill"
+        hintsIcon = allowShowHints ? "eye" : "eye.slash"
     }
 
     /// Locate every occurence of a letter and set it's selected property to true causing it to be highlighted.
@@ -342,7 +342,7 @@ class WordSearchViewModel {
     }
 
     private func updateSounds() {
-        speakerIcon = wordsearchPlaySounds ? "speaker.slash.fill" : "speaker.fill"
+        speakerIcon = wordsearchPlaySounds ? "speaker.slash" : "speaker"
 
         if wordsearchPlaySounds {
             playSound(backgroundURL, repeating: true)
