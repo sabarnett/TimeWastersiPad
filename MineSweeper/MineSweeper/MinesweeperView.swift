@@ -43,26 +43,7 @@ public struct MinesweeperView: View {
             VStack {
                 gameStatusDisplay
 
-                Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                    ForEach(0..<game.rows.count, id: \.self) { row in
-                        GridRow {
-                            ForEach(game.rows[row]) { square in
-                                SquareView(square: square)
-                                    .onTapGesture {
-                                        game.select(square)
-                                    }
-                                    .onLongPressGesture {
-                                        game.flag(square)
-                                    }
-                            }
-                        }
-                    }
-                }
-                .font(.largeTitle)
-                .onAppear(perform: game.createGrid)
-                .clipShape(.rect(cornerRadius: 6))
-                .padding([.horizontal, .bottom])
-                .opacity(game.isWaiting || game.isPlaying ? 1 : 0.5)
+                GameGridView(game: game)
 
                 Spacer()
             }

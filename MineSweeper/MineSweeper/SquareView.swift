@@ -12,30 +12,9 @@ struct SquareView: View {
     @AppStorage(Constants.mineGameDifficulty) private var gameDifficullty: GameDifficulty = .beginner
 
     var square: Square
-
-    var cellSize: CGFloat {
-        switch gameDifficullty {
-        case .beginner: return 60
-        case .intermediate: return 40
-        case .expert: return 30
-        }
-    }
-
-    var textSize: CGFloat {
-        switch gameDifficullty {
-        case .beginner: return 30
-        case .intermediate: return 20
-        case .expert: return 15
-        }
-    }
-
-    var color: Color {
-        if square.isRevealed {
-            .gray.opacity(0.2)
-        } else {
-            .gray
-        }
-    }
+    var cellSize: CGFloat
+    var textSize: CGFloat { cellSize * 0.6 }
+    var color: Color { square.isRevealed ? .gray.opacity(0.2) : .gray }
 
     var body: some View {
         ZStack {
@@ -63,5 +42,5 @@ struct SquareView: View {
 }
 
 #Preview {
-    SquareView(square: Square(row: 0, column: 0))
+    SquareView(square: Square(row: 0, column: 0), cellSize: 30.0)
 }

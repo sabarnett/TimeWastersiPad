@@ -12,6 +12,7 @@
 		E80ABFED2CC00B0E00740D82 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80ABFEC2CC00B0E00740D82 /* Constants.swift */; };
 		E8264C222D0468770023287C /* LeaderBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8264C212D0468770023287C /* LeaderBoard.swift */; };
 		E862BCFE2C9989A0003D9BA5 /* MinesweeperSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E862BCFD2C9989A0003D9BA5 /* MinesweeperSettings.swift */; };
+		E864B3F72E69D6C300A9A54A /* GameGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E864B3F62E69D6C300A9A54A /* GameGridView.swift */; };
 		E8CB0A5A2D07395F005BA139 /* LeaderBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB0A592D07395F005BA139 /* LeaderBoardView.swift */; };
 		E8EA11532C8F3C760078A9A6 /* MineSweeper.h in Headers */ = {isa = PBXBuildFile; fileRef = E8EA11522C8F3C760078A9A6 /* MineSweeper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8EA11692C8F42D00078A9A6 /* MinesweeperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EA11642C8F42D00078A9A6 /* MinesweeperView.swift */; };
@@ -42,6 +43,7 @@
 		E80ABFEC2CC00B0E00740D82 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E8264C212D0468770023287C /* LeaderBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoard.swift; sourceTree = "<group>"; };
 		E862BCFD2C9989A0003D9BA5 /* MinesweeperSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperSettings.swift; sourceTree = "<group>"; };
+		E864B3F62E69D6C300A9A54A /* GameGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGridView.swift; sourceTree = "<group>"; };
 		E8CB0A592D07395F005BA139 /* LeaderBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardView.swift; sourceTree = "<group>"; };
 		E8EA114F2C8F3C760078A9A6 /* MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8EA11522C8F3C760078A9A6 /* MineSweeper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineSweeper.h; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				E8EA11672C8F42D00078A9A6 /* MinesweeperGame.swift */,
 				E893E43F2D8A173A0092C7C9 /* Leader Board */,
 				E8EA11642C8F42D00078A9A6 /* MinesweeperView.swift */,
+				E864B3F62E69D6C300A9A54A /* GameGridView.swift */,
 				E8EA11682C8F42D00078A9A6 /* Square.swift */,
 				E8EA11652C8F42D00078A9A6 /* SquareView.swift */,
 				E8EA11522C8F3C760078A9A6 /* MineSweeper.h */,
@@ -235,6 +238,7 @@
 			files = (
 				E8EA116D2C8F42D00078A9A6 /* Square.swift in Sources */,
 				E8264C222D0468770023287C /* LeaderBoard.swift in Sources */,
+				E864B3F72E69D6C300A9A54A /* GameGridView.swift in Sources */,
 				E8EA11692C8F42D00078A9A6 /* MinesweeperView.swift in Sources */,
 				E8CB0A5A2D07395F005BA139 /* LeaderBoardView.swift in Sources */,
 				E862BCFE2C9989A0003D9BA5 /* MinesweeperSettings.swift in Sources */,
