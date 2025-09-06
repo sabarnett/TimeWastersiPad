@@ -21,6 +21,12 @@ class LeaderBoard {
         loadLeaderBoard()
     }
 
+    func clear() {
+        leaderBoard.beginnerLeaderBoard = []
+        leaderBoard.intermediateLeaderBoard = []
+        leaderBoard.expertLeaderBoard = []
+    }
+
     func addLeader(score: Int, forLevel level: GameDifficulty) {
         // based on the game level, add the score to the leader board
         // if it is better than any other score.
@@ -48,7 +54,7 @@ class LeaderBoard {
         }
 
         leaderBoard.beginnerLeaderBoard.append(LeaderBoardItem(gameDate: Date.now, gameScore: score))
-        let newScores = leaderBoard.beginnerLeaderBoard.sorted(by: { $0.gameScore > $1.gameScore })
+        let newScores = leaderBoard.beginnerLeaderBoard.sorted(by: { $0.gameScore < $1.gameScore })
 
         leaderBoard.beginnerLeaderBoard = Array(newScores.prefix(5))
         return true
@@ -62,7 +68,7 @@ class LeaderBoard {
         }
 
         leaderBoard.intermediateLeaderBoard.append(LeaderBoardItem(gameDate: Date.now, gameScore: score))
-        let newScores = leaderBoard.intermediateLeaderBoard.sorted(by: { $0.gameScore > $1.gameScore })
+        let newScores = leaderBoard.intermediateLeaderBoard.sorted(by: { $0.gameScore < $1.gameScore })
 
         leaderBoard.intermediateLeaderBoard = Array(newScores.prefix(5))
         return true
@@ -76,7 +82,7 @@ class LeaderBoard {
         }
 
         leaderBoard.expertLeaderBoard.append(LeaderBoardItem(gameDate: Date.now, gameScore: score))
-        let newScores = leaderBoard.expertLeaderBoard.sorted(by: { $0.gameScore > $1.gameScore })
+        let newScores = leaderBoard.expertLeaderBoard.sorted(by: { $0.gameScore < $1.gameScore })
 
         leaderBoard.expertLeaderBoard = Array(newScores.prefix(5))
         return true
@@ -127,7 +133,6 @@ struct LeaderBoardData: Codable {
 struct LeaderBoardItem: Codable, Identifiable {
     var id: UUID = UUID()
 
-    var playerName: String = NSFullUserName()
     var gameDate: Date
     var gameScore: Int
 }

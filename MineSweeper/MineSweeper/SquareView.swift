@@ -36,6 +36,12 @@ struct SquareView: View {
                     .shadow(color: .black, radius: 3)
                     .font(.system(size: textSize))
             }
+            // Include to highlight mine cells during testing
+//            else if square.hasMine {
+//                Text("*")
+//                    .font(.system(size: textSize * 1.3))
+//                    .shadow(color: .red, radius: 1)
+//            }
         }
         .frame(width: cellSize, height: cellSize)
     }

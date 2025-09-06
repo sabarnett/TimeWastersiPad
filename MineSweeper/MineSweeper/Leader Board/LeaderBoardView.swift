@@ -17,21 +17,41 @@ struct LeaderBoardView: View {
     let leaderBoard: LeaderBoard
     let initialTab: GameDifficulty
 
+    @State var showConfirmation: Bool = false
     @State private var gameLevel: GameDifficulty = .beginner
     var leaderItems: [LeaderBoardItem] {
         switch gameLevel {
         case .beginner:
             return leaderBoard.leaderBoard.beginnerLeaderBoard
+                .sorted(by: {lhs, rhs in
+                    return lhs.gameScore < rhs.gameScore
+                })
         case .intermediate:
             return leaderBoard.leaderBoard.intermediateLeaderBoard
+                .sorted(by: {lhs, rhs in
+                    return lhs.gameScore < rhs.gameScore
+                })
         case .expert:
             return leaderBoard.leaderBoard.expertLeaderBoard
+                .sorted(by: {lhs, rhs in
+                    return lhs.gameScore < rhs.gameScore
+                })
         }
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Leader Board").font(.title)
+            HStack {
+                Text("Leader Board")
+                    .font(.title)
+                Button(role: .destructive,
+                       action: { showConfirmation = true },
+                       label: { Image(systemName: "trash") })
+                Spacer()
+                Button(role: .cancel,
+                       action: { dismiss() },
+                       label: { Image(systemName: "xmark.app").scaleEffect(1.8) })
+            }
 
             Picker("", selection: $gameLevel) {
                 Text("Beginner").tag(GameDifficulty.beginner)
@@ -45,16 +65,26 @@ struct LeaderBoardView: View {
                 ForEach(leaderItems) { leaderItem in
                     LeaderBoardItemView(leaderItem: leaderItem)
                 }
-            }.frame(minHeight: 200)
-
-            HStack {
-                Spacer()
-                Button(role: .cancel,
-                       action: { dismiss() },
-                       label: { Text("Close") })
-                .buttonStyle(.borderedProminent)
-                .tint(.accentColor)
             }
+            .listStyle(.plain)
+            .alert(
+                "Clear Leader Board?",
+                isPresented: $showConfirmation,
+                actions: {
+                    Button(
+                        role: .destructive,
+                        action: { leaderBoard.clear() },
+                           label: { Text("Yes")}
+                    )
+                    Button(
+                        role: .cancel,
+                        action: { },
+                           label: { Text("No") }
+                    )
+                },
+                message: {
+                Text("Pressing Yes will clear all leader board history. Are you sure?")
+            })
         }
         .padding()
         .onAppear {
@@ -69,8 +99,6 @@ struct LeaderBoardItemHeader: View {
             Text("Date")
                 .font(.headline)
                 .frame(minWidth: 160, maxWidth: 160, alignment: .leading)
-            Text("Player")
-                .font(.headline)
             Spacer()
             Text("Seconds")
                 .font(.headline)
@@ -93,7 +121,6 @@ struct LeaderBoardItemView: View {
         HStack {
             Text(dateFormatter.string(from: leaderItem.gameDate))
                 .frame(minWidth: 160, maxWidth: 160, alignment: .leading)
-            Text(leaderItem.playerName)
             Spacer()
             Text("\(leaderItem.gameScore)")
         }
