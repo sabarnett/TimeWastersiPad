@@ -14,27 +14,49 @@ import SwiftUI
 struct LeaderBoardView: View {
     @Environment(\.dismiss) private var dismiss
 
+    @State var showConfirmation: Bool = false
+
     let leaderBoard: LeaderBoard
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Leader Board").font(.title)
+            HStack {
+                Text("Leader Board")
+                    .font(.title)
+                Button(role: .destructive,
+                       action: { showConfirmation = true },
+                       label: { Image(systemName: "trash") })
+                Spacer()
+                Button(role: .cancel,
+                       action: { dismiss() },
+                       label: { Image(systemName: "xmark.app").scaleEffect(1.8) })
+            }
 
             List {
                 LeaderBoardItemHeader()
                 ForEach(leaderBoard.leaderBoard.gameTimes) { leaderItem in
                     LeaderBoardItemView(leaderItem: leaderItem)
                 }
-            }.frame(minHeight: 200)
-
-            HStack {
-                Spacer()
-                Button(role: .cancel,
-                       action: { dismiss() },
-                       label: { Text("Close") })
-                .buttonStyle(.borderedProminent)
-                .tint(.accentColor)
             }
+            .listStyle(.plain)
+            .alert(
+                "Clear Leader Board?",
+                isPresented: $showConfirmation,
+                actions: {
+                    Button(
+                        role: .destructive,
+                        action: { leaderBoard.clear() },
+                        label: { Text("Yes")}
+                    )
+                    Button(
+                        role: .cancel,
+                        action: { },
+                        label: { Text("No") }
+                    )
+                },
+                message: {
+                    Text("Pressing Yes will clear all leader board history. Are you sure?")
+                })
         }
         .padding()
     }
@@ -44,9 +66,6 @@ struct LeaderBoardItemHeader: View {
     var body: some View {
         HStack {
             Text("Date")
-                .font(.headline)
-                .frame(minWidth: 160, maxWidth: 160, alignment: .leading)
-            Text("Player")
                 .font(.headline)
             Spacer()
             Text("Seconds")
@@ -69,8 +88,6 @@ struct LeaderBoardItemView: View {
     var body: some View {
         HStack {
             Text(dateFormatter.string(from: leaderItem.gameDate))
-                .frame(minWidth: 160, maxWidth: 160, alignment: .leading)
-            Text(leaderItem.playerName)
             Spacer()
             Text("\(leaderItem.gameScore)")
         }

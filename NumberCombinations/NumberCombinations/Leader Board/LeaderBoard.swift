@@ -21,6 +21,11 @@ class LeaderBoard {
         loadLeaderBoard()
     }
 
+    func clear() {
+        leaderBoard.gameTimes = []
+        saveLoaderBoard()
+    }
+
     func addLeader(score: Int) {
         // Save the score to the high scores list if it is faster than
         // an existing entry
@@ -31,7 +36,7 @@ class LeaderBoard {
         }
 
         leaderBoard.gameTimes.append(LeaderBoardItem(gameDate: Date.now, gameScore: score))
-        let newScores = leaderBoard.gameTimes.sorted(by: { $0.gameScore > $1.gameScore })
+        let newScores = leaderBoard.gameTimes.sorted(by: { $0.gameScore < $1.gameScore })
 
         leaderBoard.gameTimes = Array(newScores.prefix(5))
 
@@ -79,8 +84,6 @@ struct LeaderBoardData: Codable {
 
 struct LeaderBoardItem: Codable, Identifiable {
     var id: UUID = UUID()
-
-    var playerName: String = NSFullUserName()
     var gameDate: Date
     var gameScore: Int
 }

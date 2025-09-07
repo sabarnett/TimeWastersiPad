@@ -25,6 +25,7 @@ class LeaderBoard {
         leaderBoard.beginnerLeaderBoard = []
         leaderBoard.intermediateLeaderBoard = []
         leaderBoard.expertLeaderBoard = []
+        saveLoaderBoard()
     }
 
     func addLeader(score: Int, forLevel level: GameDifficulty) {
