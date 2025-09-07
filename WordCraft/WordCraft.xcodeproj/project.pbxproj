@@ -71,6 +71,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E85847482E6D815E00C375F1 /* SaveAndRestore */ = {
+			isa = PBXGroup;
+			children = (
+				E81BBF332CE1066200B83511 /* GameSave.swift */,
+			);
+			path = SaveAndRestore;
+			sourceTree = "<group>";
+		};
+		E85847492E6D818500C375F1 /* GamePlay */ = {
+			isa = PBXGroup;
+			children = (
+				E872D6C72C9B18A10011FE38 /* WordCraftView.swift */,
+				E83B64D02CBD46A200030203 /* WordCraftToolBar.swift */,
+				E83B64CE2CBD434500030203 /* WordCraft RuleView.swift */,
+				E872D6D52C9B1BF20011FE38 /* GameBoardView.swift */,
+				E872D6D32C9B1BBE0011FE38 /* RecentWordsView.swift */,
+				E872D6C82C9B18A10011FE38 /* WordCraftViewModel.swift */,
+			);
+			path = GamePlay;
+			sourceTree = "<group>";
+		};
+		E858474A2E6D819A00C375F1 /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				E8A45ACE2CB818240086AE90 /* WordCraftSettingsView.swift */,
+			);
+			path = "Helper Views";
+			sourceTree = "<group>";
+		};
+		E858474B2E6D81B200C375F1 /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				E872D6C92C9B18A10011FE38 /* Rule.swift */,
+				E872D6C62C9B18A10011FE38 /* Tile.swift */,
+			);
+			path = GameObjects;
+			sourceTree = "<group>";
+		};
 		E867CB322CB5BA2600689399 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,19 +138,13 @@
 		E872D6B62C9B18470011FE38 /* WordCraft */ = {
 			isa = PBXGroup;
 			children = (
-				E872D6C82C9B18A10011FE38 /* WordCraftViewModel.swift */,
-				E872D6C72C9B18A10011FE38 /* WordCraftView.swift */,
-				E83B64D02CBD46A200030203 /* WordCraftToolBar.swift */,
-				E83B64CE2CBD434500030203 /* WordCraft RuleView.swift */,
-				E872D6D52C9B1BF20011FE38 /* GameBoardView.swift */,
-				E872D6D32C9B1BBE0011FE38 /* RecentWordsView.swift */,
-				E872D6C92C9B18A10011FE38 /* Rule.swift */,
-				E872D6C62C9B18A10011FE38 /* Tile.swift */,
-				E8A45ACE2CB818240086AE90 /* WordCraftSettingsView.swift */,
+				E85847492E6D818500C375F1 /* GamePlay */,
+				E858474B2E6D81B200C375F1 /* GameObjects */,
+				E858474A2E6D819A00C375F1 /* Helper Views */,
 				E88A09272CB9636100F5A07F /* Constants.swift */,
 				E872D6B72C9B18470011FE38 /* WordCraft.h */,
 				E8A45AC92CB809360086AE90 /* Sounds */,
-				E81BBF332CE1066200B83511 /* GameSave.swift */,
+				E85847482E6D815E00C375F1 /* SaveAndRestore */,
 			);
 			path = WordCraft;
 			sourceTree = "<group>";
