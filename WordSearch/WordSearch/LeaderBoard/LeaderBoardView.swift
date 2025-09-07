@@ -80,17 +80,15 @@ struct LeaderBoardView: View {
 
     func headerView() -> some View {
         HStack {
-            HStack {
-                Text("Leader Board")
-                    .font(.title)
-                Button(role: .destructive,
-                       action: { showConfirmation = true },
-                       label: { Image(systemName: "trash") })
-                Spacer()
-                Button(role: .cancel,
-                       action: { dismiss() },
-                       label: { Image(systemName: "xmark.app").scaleEffect(1.8) })
-            }
+            Text("Leader Board")
+                .font(.title)
+            Button(role: .destructive,
+                   action: { showConfirmation = true },
+                   label: { Image(systemName: "trash") })
+            Spacer()
+            Button(role: .cancel,
+                   action: { dismiss() },
+                   label: { Image(systemName: "xmark.app").scaleEffect(1.8) })
         }
     }
 }

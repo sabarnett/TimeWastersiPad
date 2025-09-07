@@ -21,6 +21,13 @@ class LeaderBoard {
         loadLeaderBoard()
     }
 
+    func clear() {
+        leaderBoard.smallLeaderBoard = []
+        leaderBoard.mediumLeaderBoard = []
+        leaderBoard.largeLeaderBoard = []
+        saveLoaderBoard()
+    }
+
     func addLeader(score: Int, forLevel level: SnakeGameSize) {
         // based on the game level, add the score to the leader board
         // if it is better than any other score.
@@ -42,8 +49,9 @@ class LeaderBoard {
 
     private func addScoreToSmall(score: Int) -> Bool {
         if leaderBoard.smallLeaderBoard.count == 5 {
-            if let maxScore = leaderBoard.smallLeaderBoard.max(by: { $0.gameScore < $1.gameScore }) {
-                if score >= maxScore.gameScore { return false }
+            // Get the smallest score and make sure the new score is greater than the old minimum.
+            if let minScore = leaderBoard.smallLeaderBoard.min(by: { $0.gameScore < $1.gameScore }) {
+                if score <= minScore.gameScore { return false }
             }
         }
 
@@ -56,8 +64,9 @@ class LeaderBoard {
 
     private func addScoreToMedium(score: Int) -> Bool {
         if leaderBoard.mediumLeaderBoard.count == 5 {
-            if let maxScore = leaderBoard.mediumLeaderBoard.max(by: { $0.gameScore < $1.gameScore }) {
-                if score >= maxScore.gameScore { return false }
+            // Get the smallest score and make sure the new score is greater than the old minimum.
+            if let minScore = leaderBoard.mediumLeaderBoard.min(by: { $0.gameScore < $1.gameScore }) {
+                if score <= minScore.gameScore { return false }
             }
         }
 
@@ -70,8 +79,9 @@ class LeaderBoard {
 
     private func addScoreToLarge(score: Int) -> Bool {
         if leaderBoard.largeLeaderBoard.count == 5 {
-            if let maxScore = leaderBoard.largeLeaderBoard.max(by: { $0.gameScore < $1.gameScore }) {
-                if score >= maxScore.gameScore { return false }
+            // Get the smallest score and make sure the new score is greater than the old minimum.
+            if let minScore = leaderBoard.largeLeaderBoard.max(by: { $0.gameScore < $1.gameScore }) {
+                if score <= minScore.gameScore { return false }
             }
         }
 
@@ -124,8 +134,6 @@ struct LeaderBoardData: Codable {
 
 struct LeaderBoardItem: Codable, Identifiable {
     var id: UUID = UUID()
-
-    var playerName: String = NSFullUserName()
     var gameDate: Date
     var gameScore: Int
 }
