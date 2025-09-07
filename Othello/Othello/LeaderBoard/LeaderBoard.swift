@@ -56,7 +56,7 @@ class LeaderBoard {
     }
 
     /// Clear the leader board
-    func clearScores() {
+    func clear() {
         leaderBoard.playerLeaderBoard.removeAll()
         leaderBoard.computerLeaderBoard.removeAll()
         saveLoaderBoard()

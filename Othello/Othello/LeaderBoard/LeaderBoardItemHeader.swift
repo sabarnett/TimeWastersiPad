@@ -16,12 +16,14 @@ struct LeaderBoardItemHeader: View {
         HStack {
             Text("Date")
                 .font(.headline)
-                .frame(minWidth: 160, maxWidth: 160, alignment: .leading)
+            Spacer()
             Text("Player")
                 .font(.headline)
-            Spacer()
+                .frame(width: 65, alignment: .center)
             Text("Score")
                 .font(.headline)
-        }.foregroundStyle(.orange.opacity(0.85))
+                .frame(width: 65, alignment: .trailing)
+        }
+        .foregroundStyle(.orange.opacity(0.85))
     }
 }

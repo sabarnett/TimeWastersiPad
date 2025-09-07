@@ -25,10 +25,15 @@ struct LeaderBoardItemView: View {
     var body: some View {
         HStack {
             Text(dateFormatter.string(from: leaderItem.gameDate))
-                .frame(minWidth: 160, maxWidth: 160, alignment: .leading)
-            Text(leaderItem.playerName)
             Spacer()
+            Image(systemName: leaderItem.playerName == "Computer"
+                  ? "dot.scope.laptopcomputer"
+                  : "person")
+            .scaleEffect(1.2)
+            .frame(width: 65, alignment: .center)
+
             Text("\(leaderItem.gameScore)")
+                .frame(width: 65, alignment: .trailing)
         }
     }
 }

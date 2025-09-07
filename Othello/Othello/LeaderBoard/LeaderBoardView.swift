@@ -18,6 +18,7 @@ struct LeaderBoardView: View {
     let initialTab: LeaderBoardScoreFor
 
     @State var gameLevel: LeaderBoardScoreFor = .player
+    @State var showConfirmation: Bool = false
 
     var leaderItems: [LeaderBoardItem] {
         leaderBoard
@@ -35,10 +36,27 @@ struct LeaderBoardView: View {
                     ForEach(leaderItems) { leaderItem in
                         LeaderBoardItemView(leaderItem: leaderItem)
                     }
-                }.frame(minHeight: 200)
+                }
+                .listStyle(.plain)
+                .alert(
+                    "Clear Leader Board?",
+                    isPresented: $showConfirmation,
+                    actions: {
+                        Button(
+                            role: .destructive,
+                            action: { leaderBoard.clear() },
+                            label: { Text("Yes")}
+                        )
+                        Button(
+                            role: .cancel,
+                            action: { },
+                            label: { Text("No") }
+                        )
+                    },
+                    message: {
+                        Text("Pressing Yes will clear all leader board history. Are you sure?")
+                    })
             }
-
-            footerView()
         }
         .padding()
         .onAppear {
@@ -50,25 +68,13 @@ struct LeaderBoardView: View {
         HStack {
             Text("Leader Board")
                 .font(.title)
-            Spacer()
-            Button(action: {
-                leaderBoard.clearScores()
-            }, label: {
-                Image(systemName: "square.stack.3d.up.slash")
-            })
-            .buttonStyle(.plain)
-            .help("Clear the leader board scores")
-        }
-    }
-
-    func footerView() -> some View {
-        HStack {
+            Button(role: .destructive,
+                   action: { showConfirmation = true },
+                   label: { Image(systemName: "trash") })
             Spacer()
             Button(role: .cancel,
                    action: { dismiss() },
-                   label: { Text("Close") })
-            .buttonStyle(.borderedProminent)
-            .tint(.accentColor)
+                   label: { Image(systemName: "xmark.app").scaleEffect(1.8) })
         }
     }
 }
