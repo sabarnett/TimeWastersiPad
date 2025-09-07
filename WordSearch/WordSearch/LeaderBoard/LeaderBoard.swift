@@ -52,7 +52,7 @@ class LeaderBoard {
     }
 
     /// Emptys the saved leader board scores.
-    func clearScores() {
+    func clear() {
         leaderBoard.mediumLeaderBoard.removeAll()
         leaderBoard.easyLeaderBoard.removeAll()
         leaderBoard.hardLeaderBoard.removeAll()
@@ -130,8 +130,6 @@ struct LeaderBoardData: Codable {
 
 struct LeaderBoardItem: Codable, Identifiable {
     var id: UUID = UUID()
-
-    var playerName: String = NSFullUserName()
     var gameDate: Date
     var gameScore: Int
 }
