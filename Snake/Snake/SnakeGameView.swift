@@ -138,14 +138,16 @@ public struct SnakeGameView: View {
             }
             Color.clear
                 .overlay(alignment: .bottomTrailing) {
-                    GamePlayButtons(onButtonPress: { key in
+                    GamePlayButtons(isPaused: $pause) { key in
                         handleKeyPress(key)
-                    })
+                    }
+                    .frame(width: 250, height: 250)
                 }
                 .overlay(alignment: .bottomLeading) {
-                    GamePlayButtons(onButtonPress: { key in
+                    GamePlayButtons(isPaused: $pause) { key in
                         handleKeyPress(key)
-                    })
+                    }
+                    .frame(width: 250, height: 250)
                 }
         }
         .onAppear {

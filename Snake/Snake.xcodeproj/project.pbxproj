@@ -21,7 +21,10 @@
 		E89324812CBD5067005B30BC /* SnakeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324782CBD5067005B30BC /* SnakeGameView.swift */; };
 		E89324822CBD5067005B30BC /* SnakeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89324792CBD5067005B30BC /* SnakeSettingsView.swift */; };
 		E89324832CBD5067005B30BC /* Snake.h in Headers */ = {isa = PBXBuildFile; fileRef = E89324762CBD5067005B30BC /* Snake.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8F6AD622E60D64A00F493E5 /* GamePlayButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F6AD612E60D64A00F493E5 /* GamePlayButtons.swift */; };
+		E8F052362E6EE0070052299B /* GamePlayButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F052352E6EE0070052299B /* GamePlayButtons.swift */; };
+		E8F052392E6EE86B0052299B /* SegmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F052382E6EE86B0052299B /* SegmentButton.swift */; };
+		E8F0523B2E6EE8850052299B /* SegmentShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F0523A2E6EE8850052299B /* SegmentShape.swift */; };
+		E8F0523D2E6EE89A0052299B /* PressableButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F0523C2E6EE89A0052299B /* PressableButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,7 +57,10 @@
 		E89324792CBD5067005B30BC /* SnakeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeSettingsView.swift; sourceTree = "<group>"; };
 		E89C52122CBAB24C00C3CFB7 /* Snake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Snake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C52412CBAB3BB00C3CFB7 /* SharedComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8F6AD612E60D64A00F493E5 /* GamePlayButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayButtons.swift; sourceTree = "<group>"; };
+		E8F052352E6EE0070052299B /* GamePlayButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayButtons.swift; sourceTree = "<group>"; };
+		E8F052382E6EE86B0052299B /* SegmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentButton.swift; sourceTree = "<group>"; };
+		E8F0523A2E6EE8850052299B /* SegmentShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentShape.swift; sourceTree = "<group>"; };
+		E8F0523C2E6EE89A0052299B /* PressableButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressableButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		E893247A2CBD5067005B30BC /* Snake */ = {
 			isa = PBXGroup;
 			children = (
+				E8F052372E6EE84E0052299B /* GamePlayButtons */,
 				E89324722CBD5067005B30BC /* Sounds */,
 				E89324732CBD5067005B30BC /* Constants.swift */,
 				E89324772CBD5067005B30BC /* SnakeGame.swift */,
@@ -91,7 +98,6 @@
 				E856958B2CBEBA1D00BC1730 /* SnakeGameSize.swift */,
 				E80B9BF62D08837E006814B7 /* LeaderBoard.swift */,
 				E80B9BF82D08852C006814B7 /* LeaderBoardView.swift */,
-				E8F6AD612E60D64A00F493E5 /* GamePlayButtons.swift */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -121,6 +127,17 @@
 				E89C52412CBAB3BB00C3CFB7 /* SharedComponents.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8F052372E6EE84E0052299B /* GamePlayButtons */ = {
+			isa = PBXGroup;
+			children = (
+				E8F052352E6EE0070052299B /* GamePlayButtons.swift */,
+				E8F052382E6EE86B0052299B /* SegmentButton.swift */,
+				E8F0523A2E6EE8850052299B /* SegmentShape.swift */,
+				E8F0523C2E6EE89A0052299B /* PressableButtonStyle.swift */,
+			);
+			path = GamePlayButtons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,14 +252,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E893247D2CBD5067005B30BC /* Constants.swift in Sources */,
-				E8F6AD622E60D64A00F493E5 /* GamePlayButtons.swift in Sources */,
 				E89324802CBD5067005B30BC /* SnakeGame.swift in Sources */,
 				E80B9BF92D08852C006814B7 /* LeaderBoardView.swift in Sources */,
+				E8F052362E6EE0070052299B /* GamePlayButtons.swift in Sources */,
 				E80B9BF72D08837E006814B7 /* LeaderBoard.swift in Sources */,
 				E856958A2CBEB1B200BC1730 /* SnakeGameSpeed.swift in Sources */,
 				E856958C2CBEBA1D00BC1730 /* SnakeGameSize.swift in Sources */,
+				E8F0523D2E6EE89A0052299B /* PressableButtonStyle.swift in Sources */,
 				E89324812CBD5067005B30BC /* SnakeGameView.swift in Sources */,
 				E89324822CBD5067005B30BC /* SnakeSettingsView.swift in Sources */,
+				E8F052392E6EE86B0052299B /* SegmentButton.swift in Sources */,
+				E8F0523B2E6EE8850052299B /* SegmentShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
