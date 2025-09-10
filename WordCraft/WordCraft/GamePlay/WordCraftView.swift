@@ -27,19 +27,22 @@ public struct WordCraftView: View {
             VStack {
                 WordCraftToolBar(viewModel: viewModel)
                 WordCraftRuleView(viewModel: viewModel)
-                Spacer()
-                HStack {
-                    VStack(alignment: .leading) {
+                    .padding(.bottom, 20)
+
+                GeometryReader { proxy in
+                        let boardWidth = proxy.size.width
+                        let cellWidth = boardWidth / CGFloat(viewModel.columns.count + 1)
+
                         HStack {
                             Spacer()
-                            GameBoardView(viewModel: viewModel)
+                            GameBoardView(viewModel: viewModel,
+                                          cellWidth: cellWidth)
                             Spacer()
                         }
                     }
-                }
-                Spacer()
             }
-            // We may have a word list on the right edge
+
+            // Optionally puts a list of used words on the right
             if wordcraftShowUsedWords {
                 Spacer()
                 RecentWordsView(viewModel: viewModel)
@@ -47,45 +50,29 @@ public struct WordCraftView: View {
                                 ? Color.gray.opacity(0.6)
                                 : Color.gray.opacity(0.2))
             }
-
         }
         .toolbar {
             ToolbarItemGroup(placement: .topBarLeading) {
-                Button(action: {
-                    viewModel.showGamePlay.toggle()
-                }, label: {
-                    Image(systemName: "questionmark.circle")
-                })
+                Button(action: { viewModel.showGamePlay.toggle() },
+                       label: { Image(systemName: "questionmark.circle") })
                 .help("Show game rules")
             }
 
             ToolbarItemGroup(placement: .topBarTrailing) {
-                Button(action: {
-                    viewModel.showResetConfirmation = true
-                }, label: {
-                    Image(systemName: "arrow.uturn.left.circle")
-                })
+                Button(action: { viewModel.showResetConfirmation = true },
+                       label: { Image(systemName: "arrow.uturn.left.circle") })
                 .help("Restart the game")
 
-                Button(action: {
-                    viewModel.saveGame()
-                }, label: {
-                    Image(systemName: "tray.and.arrow.down")
-                })
+                Button(action: { viewModel.saveGame() },
+                       label: { Image(systemName: "tray.and.arrow.down") })
                 .help("Save the current game state.")
 
-                Button(action: {
-                    viewModel.showReloadConfirmation = true
-                }, label: {
-                    Image(systemName: "tray.and.arrow.up")
-                })
+                Button(action: { viewModel.showReloadConfirmation = true },
+                       label: { Image(systemName: "tray.and.arrow.up") })
                 .help("Reload the last saved game.")
 
-                Button(action: {
-                    viewModel.toggleSounds()
-                }, label: {
-                    Image(systemName: viewModel.speakerIcon)
-                })
+                Button(action: { viewModel.toggleSounds() },
+                       label: { Image(systemName: viewModel.speakerIcon) })
                 .help("Toggle sound effects")
             }
         }

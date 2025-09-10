@@ -17,6 +17,8 @@ struct GameBoardView: View {
 
     @State var viewModel: WordCraftViewModel
 
+    var cellWidth: CGFloat
+
     var body: some View {
         VStack {
             HStack(spacing: 2) {
@@ -31,7 +33,7 @@ struct GameBoardView: View {
                                 Text(tile.letter)
                                     .font(.largeTitle.weight(.bold))
                                     .fontDesign(.rounded)
-                                    .frame(width: 120, height: 50)
+                                    .frame(width: cellWidth, height: cellWidth * 0.4)
                                     .foregroundStyle(viewModel.foreground(for: tile))
                                     .background(viewModel.background(for: tile).gradient)
                             }
