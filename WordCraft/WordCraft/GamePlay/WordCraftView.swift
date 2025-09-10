@@ -23,10 +23,9 @@ public struct WordCraftView: View {
 
     public var body: some View {
         NavigationSplitView(columnVisibility: $columnsVisible) {
-            List {
-                RecentWordsView(viewModel: viewModel)
-            }
-            .navigationBarHidden(true)
+            RecentWordsView(viewModel: viewModel)
+                .navigationBarHidden(true)
+
         } detail: {
             VStack {
                 WordCraftToolBar(viewModel: viewModel)

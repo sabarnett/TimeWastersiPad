@@ -12,28 +12,42 @@
 import SwiftUI
 
 struct RecentWordsView: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     @State var viewModel: WordCraftViewModel
 
     var body: some View {
-        Section(content: {
-            ForEach(viewModel.usedWords.sorted(), id: \.self) { word in
-                Text(word)
-                    .fontWeight(.semibold)
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .frame(alignment: .leading)
+
+        ZStack {
+            if colorScheme == .dark {
+                Color.gray.opacity(0.3).ignoresSafeArea()
+            } else {
+                Color.gray.opacity(0.2).ignoresSafeArea()
             }
-        }, header: {
-            Text("Used Words").font(.title)
-                .listSectionSeparator(.hidden)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 5)
-                .padding(.horizontal, 10)
-                .background {
-                    Color.accentColor.opacity(0.4)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
+
+            VStack(alignment: .leading) {
+                Text("Used Words")
+                    .font(.title)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background {
+                        Color.accentColor.opacity(0.4)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    }
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 6) {
+                        ForEach(viewModel.usedWords.sorted(), id: \.self) { word in
+                            Text(word)
+                                .fontWeight(.semibold)
+                                .padding(.horizontal, 12)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
                 }
-        })
-        .listSectionSeparator(.hidden)
+            }
+            .padding()
+        }
     }
 }
