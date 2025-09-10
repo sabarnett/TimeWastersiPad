@@ -15,19 +15,25 @@ struct RecentWordsView: View {
     @State var viewModel: WordCraftViewModel
 
     var body: some View {
-        List(selection: $viewModel.submittedWord) {
+        Section(content: {
             ForEach(viewModel.usedWords.sorted(), id: \.self) { word in
                 Text(word)
                     .fontWeight(.semibold)
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
-                    .listRowBackground(Color.clear)
-                    .padding(0)
+                    .frame(alignment: .leading)
             }
-        }
-        .listStyle(.plain)
+        }, header: {
+            Text("Used Words").font(.title)
+                .listSectionSeparator(.hidden)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 5)
+                .padding(.horizontal, 10)
+                .background {
+                    Color.accentColor.opacity(0.4)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                }
+        })
         .listSectionSeparator(.hidden)
-        .environment(\.defaultMinListRowHeight, 0) // HERE
-        .frame(width: 240)
     }
 }

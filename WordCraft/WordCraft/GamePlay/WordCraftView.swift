@@ -12,10 +12,9 @@ import SharedComponents
 public struct WordCraftView: View {
     @Environment(\.colorScheme) private var colorScheme
 
-    @AppStorage(Constants.wordcraftShowUsedWords) private var wordcraftShowUsedWords = true
-
     @State private var viewModel = WordCraftViewModel()
     @State private var gameData: Game
+    @State var columnsVisible: NavigationSplitViewVisibility = .all
     @FocusState private var isFocused: Bool
 
     public init(gameData: Game) {
@@ -23,32 +22,28 @@ public struct WordCraftView: View {
     }
 
     public var body: some View {
-        HStack {
+        NavigationSplitView(columnVisibility: $columnsVisible) {
+            List {
+                RecentWordsView(viewModel: viewModel)
+            }
+            .navigationBarHidden(true)
+        } detail: {
             VStack {
                 WordCraftToolBar(viewModel: viewModel)
                 WordCraftRuleView(viewModel: viewModel)
                     .padding(.bottom, 20)
 
                 GeometryReader { proxy in
-                        let boardWidth = proxy.size.width
-                        let cellWidth = boardWidth / CGFloat(viewModel.columns.count + 1)
+                    let boardWidth = proxy.size.width
+                    let cellWidth = boardWidth / CGFloat(viewModel.columns.count + 1)
 
-                        HStack {
-                            Spacer()
-                            GameBoardView(viewModel: viewModel,
-                                          cellWidth: cellWidth)
-                            Spacer()
-                        }
+                    HStack {
+                        Spacer()
+                        GameBoardView(viewModel: viewModel,
+                                      cellWidth: cellWidth)
+                        Spacer()
                     }
-            }
-
-            // Optionally puts a list of used words on the right
-            if wordcraftShowUsedWords {
-                Spacer()
-                RecentWordsView(viewModel: viewModel)
-                    .background(colorScheme == .dark
-                                ? Color.gray.opacity(0.6)
-                                : Color.gray.opacity(0.2))
+                }
             }
         }
         .toolbar {
@@ -76,7 +71,6 @@ public struct WordCraftView: View {
                 .help("Toggle sound effects")
             }
         }
-        .padding()
 
         // Handle the keyboard when on the Mac. We have to make the
         // view focusable and focussed or we will not get the

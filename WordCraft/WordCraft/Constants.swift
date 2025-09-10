@@ -13,6 +13,5 @@ import Foundation
 
 struct Constants {
     static let wordcraftPlaySounds = "wordcraftPlaySounds"
-    static let wordcraftShowUsedWords = "wordcraftShowUsedWords"
     static let wordcraftShowSelectedLetters = "wordcraftShowSelectedLetters"
 }
