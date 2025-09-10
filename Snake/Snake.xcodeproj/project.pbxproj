@@ -11,6 +11,7 @@
 		E80B9BF92D08852C006814B7 /* LeaderBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80B9BF82D08852C006814B7 /* LeaderBoardView.swift */; };
 		E81FF8D22E5F8CDB0078EB22 /* SharedComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E81FF8D12E5F8CDB0078EB22 /* SharedComponents.framework */; };
 		E81FF8D32E5F8CDB0078EB22 /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E81FF8D12E5F8CDB0078EB22 /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E834B3F62E71B6D4008E89CB /* SnakeGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E834B3F52E71B6D4008E89CB /* SnakeGameBoard.swift */; };
 		E856958A2CBEB1B200BC1730 /* SnakeGameSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85695892CBEB1B200BC1730 /* SnakeGameSpeed.swift */; };
 		E856958C2CBEBA1D00BC1730 /* SnakeGameSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E856958B2CBEBA1D00BC1730 /* SnakeGameSize.swift */; };
 		E86B7BFB2CC69BDC00F3FCDC /* SnakeGame.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E86B7BFA2CC69BDC00F3FCDC /* SnakeGame.xcassets */; };
@@ -45,6 +46,7 @@
 		E80B9BF62D08837E006814B7 /* LeaderBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoard.swift; sourceTree = "<group>"; };
 		E80B9BF82D08852C006814B7 /* LeaderBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardView.swift; sourceTree = "<group>"; };
 		E81FF8D12E5F8CDB0078EB22 /* SharedComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E834B3F52E71B6D4008E89CB /* SnakeGameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGameBoard.swift; sourceTree = "<group>"; };
 		E85695892CBEB1B200BC1730 /* SnakeGameSpeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGameSpeed.swift; sourceTree = "<group>"; };
 		E856958B2CBEBA1D00BC1730 /* SnakeGameSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGameSize.swift; sourceTree = "<group>"; };
 		E86B7BFA2CC69BDC00F3FCDC /* SnakeGame.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SnakeGame.xcassets; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				E89324732CBD5067005B30BC /* Constants.swift */,
 				E89324772CBD5067005B30BC /* SnakeGame.swift */,
 				E89324782CBD5067005B30BC /* SnakeGameView.swift */,
+				E834B3F52E71B6D4008E89CB /* SnakeGameBoard.swift */,
 				E89324792CBD5067005B30BC /* SnakeSettingsView.swift */,
 				E89324762CBD5067005B30BC /* Snake.h */,
 				E85695892CBEB1B200BC1730 /* SnakeGameSpeed.swift */,
@@ -254,6 +257,7 @@
 				E893247D2CBD5067005B30BC /* Constants.swift in Sources */,
 				E89324802CBD5067005B30BC /* SnakeGame.swift in Sources */,
 				E80B9BF92D08852C006814B7 /* LeaderBoardView.swift in Sources */,
+				E834B3F62E71B6D4008E89CB /* SnakeGameBoard.swift in Sources */,
 				E8F052362E6EE0070052299B /* GamePlayButtons.swift in Sources */,
 				E80B9BF72D08837E006814B7 /* LeaderBoard.swift in Sources */,
 				E856958A2CBEB1B200BC1730 /* SnakeGameSpeed.swift in Sources */,

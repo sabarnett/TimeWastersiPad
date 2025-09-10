@@ -30,21 +30,6 @@ public struct SnakeGameView: View {
     @State private var showLeaderBoard: Bool = false
     @FocusState private var hasFocus: Bool
 
-    let cellSize: CGFloat = 20
-
-    var headAngle: CGFloat {
-        switch game.direction {
-        case .up:
-            270
-        case .down:
-            90
-        case .left:
-            180
-        case .right:
-            0
-        }
-    }
-
     public init(gameData: Game) {
         self.gameData = gameData
     }
@@ -54,43 +39,26 @@ public struct SnakeGameView: View {
             VStack {
                 topBarAndButtons
 
-                ZStack {
-                    ForEach(game.snake, id: \.self) { segment in
+                GeometryReader { proxy in
+                    let maxWidth = proxy.size.height > proxy.size.width
+                    ? proxy.size.width
+                    : proxy.size.height
+                    let cellSize = maxWidth / CGFloat(game.gridSize + 3)
 
-                        if game.isSnakeHead(segment) {
-                            game.snakeHead()
-                                .resizable()
-                                .frame(width: cellSize, height: cellSize)
-                                .rotationEffect(Angle(degrees: headAngle))
-                                .position(x: CGFloat(segment.x) * cellSize + cellSize / 2,
-                                          y: CGFloat(segment.y) * cellSize + cellSize / 2)
-                        } else {
-                            Rectangle()
-                                .fill(Color.green)
-                                .frame(width: cellSize, height: cellSize)
-                                .position(x: CGFloat(segment.x) * cellSize + cellSize / 2,
-                                          y: CGFloat(segment.y) * cellSize + cellSize / 2)
-                        }
-                    }
-
-                    Image(systemName: "applelogo")
-                        .scaleEffect(1.8)
-                        .foregroundStyle(.red)
-                        .frame(width: cellSize, height: cellSize)
-                        .position(x: CGFloat(game.food.x) * cellSize + cellSize / 2,
-                                  y: CGFloat(game.food.y) * cellSize + cellSize / 2)
-
-                    if pause {
-                        Image(systemName: "pause.circle.fill")
-                            .scaleEffect(4)
-                            .zIndex(1)
-                            .foregroundStyle(.white)
+                    HStack {
+                        Spacer()
+                        SnakeGameBoard(game: game,
+                                       cellSize: cellSize,
+                                       pause: pause)
+                        .frame(width: cellSize * CGFloat(game.gridSize),
+                               height: cellSize * CGFloat(game.gridSize))
+                        .background(Color.black)
+                        .border(Color.red, width: 1)
+                        Spacer()
                     }
                 }
-                .frame(width: cellSize * CGFloat(game.gridSize), height: cellSize * CGFloat(game.gridSize))
-                .background(Color.black)
-                .border(Color.red, width: 1)
             }
+            .disabled(game.isGameOver)
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
                     Button(action: {
@@ -126,8 +94,6 @@ public struct SnakeGameView: View {
                     .help("Toggle sound effects")
                 }
             }
-            .disabled(game.isGameOver)
-            .frame(width: cellSize * CGFloat(game.gridSize + 2), height: cellSize * CGFloat(game.gridSize) + 80)
 
             if game.isGameOver {
                 GameOverView(message: "Bad luck") {
@@ -184,9 +150,9 @@ public struct SnakeGameView: View {
             Spacer()
 
             Text(game.snake.count.formatted(.number.precision(.integerLength(3))))
-                            .fixedSize()
-                            .padding(.horizontal, 6)
-                            .foregroundStyle(.red.gradient)
+                .fixedSize()
+                .padding(.horizontal, 6)
+                .foregroundStyle(.red.gradient)
             Spacer()
         }
         .monospacedDigit()
