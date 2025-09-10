@@ -19,9 +19,15 @@ struct RecentWordsView: View {
             ForEach(viewModel.usedWords.sorted(), id: \.self) { word in
                 Text(word)
                     .fontWeight(.semibold)
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+                    .padding(0)
             }
         }
-        .frame(width: 200)
         .listStyle(.plain)
+        .listSectionSeparator(.hidden)
+        .environment(\.defaultMinListRowHeight, 0) // HERE
+        .frame(width: 240)
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 import SharedComponents
 
 public struct WordCraftView: View {
+    @Environment(\.colorScheme) private var colorScheme
 
     @AppStorage(Constants.wordcraftShowUsedWords) private var wordcraftShowUsedWords = true
 
@@ -22,22 +23,31 @@ public struct WordCraftView: View {
     }
 
     public var body: some View {
-        VStack {
-            WordCraftToolBar(viewModel: viewModel)
-            Spacer()
-            VStack(alignment: .leading) {
+        HStack {
+            VStack {
+                WordCraftToolBar(viewModel: viewModel)
                 WordCraftRuleView(viewModel: viewModel)
-
-                HStack(spacing: 5) {
-                    GameBoardView(viewModel: viewModel)
-                    if wordcraftShowUsedWords {
-                        RecentWordsView(viewModel: viewModel)
+                Spacer()
+                HStack {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Spacer()
+                            GameBoardView(viewModel: viewModel)
+                            Spacer()
+                        }
                     }
                 }
-                .frame(height: 460)
+                Spacer()
+            }
+            // We may have a word list on the right edge
+            if wordcraftShowUsedWords {
+                Spacer()
+                RecentWordsView(viewModel: viewModel)
+                    .background(colorScheme == .dark
+                                ? Color.gray.opacity(0.6)
+                                : Color.gray.opacity(0.2))
             }
 
-            Spacer()
         }
         .toolbar {
             ToolbarItemGroup(placement: .topBarLeading) {
