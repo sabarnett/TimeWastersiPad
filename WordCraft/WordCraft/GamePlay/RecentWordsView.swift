@@ -12,19 +12,12 @@
 import SwiftUI
 
 struct RecentWordsView: View {
-    @Environment(\.colorScheme) private var colorScheme
-
     @State var viewModel: WordCraftViewModel
 
     var body: some View {
 
         ZStack {
-            if colorScheme == .dark {
-                Color.gray.opacity(0.3).ignoresSafeArea()
-            } else {
-                Color.gray.opacity(0.2).ignoresSafeArea()
-            }
-
+            Color(.systemGroupedBackground).ignoresSafeArea()
             VStack(alignment: .leading) {
                 Text("Used Words")
                     .font(.title)
