@@ -16,23 +16,19 @@ struct ScoresView: View {
     @ObservedObject var model: OthelloViewModel
 
     var body: some View {
-        VStack {
-            List {
-                scoreItem(
-                    title: "Player Score",
-                    color: Constants.playerColor,
-                    score: model.playerScore
-                )
+        List {
+            scoreItem(
+                title: "Player Score",
+                color: Constants.playerColor,
+                score: model.playerScore
+            )
 
-                scoreItem(
-                    title: "Computer Score",
-                    color: Constants.computerColor,
-                    score: model.computerScore
-                )
-            }
-            .listStyle(.plain)
+            scoreItem(
+                title: "Computer Score",
+                color: Constants.computerColor,
+                score: model.computerScore
+            )
         }
-        .frame(alignment: .leading)
     }
 
     private func scoreItem(title: String, color: Color, score: Int) -> some View {

@@ -19,6 +19,7 @@ public struct OthelloView: View {
 
     @State private var isGameOver: Bool = false
     @State private var showLeaderBoard: Bool = false
+    @State private var columns: NavigationSplitViewVisibility = .all
 
     var gameOverMessage: String {
         model.gameState == .playerWin ? "😀 You win!" : "🤖 I win this time."
@@ -30,20 +31,24 @@ public struct OthelloView: View {
 
     public var body: some View {
         ZStack {
-            VStack(alignment: .leading) {
-                HStack(spacing: 2) {
-                    Spacer()
-                    VStack {
-                        GameBoardView(model: model)
-                        Text(model.statusMessage)
-                            .font(.title)
-                            .padding()
+            NavigationSplitView(columnVisibility: $columns,
+                                sidebar: {
+                ScoresView(model: model)
+                    .navigationBarHidden(true)
+            }, detail: {
+                VStack(alignment: .leading) {
+                    HStack(spacing: 2) {
+                        Spacer()
+                        VStack {
+                            GameBoardView(model: model)
+                            Text(model.statusMessage)
+                                .font(.title)
+                                .padding()
+                        }
+                        Spacer()
                     }
-                    Spacer()
-                    ScoresView(model: model).frame(width: 250)
                 }
-
-            }
+            })
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
                     Button(action: {
@@ -104,7 +109,6 @@ public struct OthelloView: View {
                 isGameOver = true
             }
         }
-        .padding()
         .sheet(isPresented: $showLeaderBoard) {
             LeaderBoardView(leaderBoard: model.leaderBoard,
                             initialTab: .player)
