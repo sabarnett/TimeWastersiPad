@@ -13,6 +13,8 @@ import SwiftUI
 
 struct GameBoardView: View {
     var game: WordSearchViewModel
+    var cellSize: CGFloat
+    var fontSize: CGFloat
 
     var body: some View {
         VStack {
@@ -22,16 +24,19 @@ struct GameBoardView: View {
                         let column = game.gameBoard[index]
 
                         ForEach(column) { letter in
-                                TileView(tile: letter)
+                            TileView(tile: letter, cellSize: cellSize, fontSize: fontSize)
                                 .onTapGesture {
                                     game.select(letter: letter)
                                 }
-                            }
                         }
                     }
                 }
+            }
 
             Spacer()
+        }.overlay {
+            MatchedWordsView(game: game,
+                             cellSize: cellSize)
         }
     }
 }

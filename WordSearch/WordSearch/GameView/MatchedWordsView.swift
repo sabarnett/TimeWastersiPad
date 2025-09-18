@@ -13,6 +13,7 @@ import SwiftUI
 
 struct MatchedWordsView: View {
     var game: WordSearchViewModel
+    var cellSize: CGFloat
 
     var body: some View {
         ZStack {
@@ -67,8 +68,8 @@ struct MatchedWordsView: View {
     /// We add 2 to the X position to account for the spacing of the ZStack it is
     /// contained in.
     func transX(xPos: Int) -> CGFloat {
-        (Constants.tileSize + 2) * CGFloat(xPos) + 2
-        + (Constants.tileSize / 2)
+        (cellSize + 2) * CGFloat(xPos) + 2
+        + (cellSize / 2)
     }
 
     /// Given the row number, calculate the center of the cell
@@ -76,11 +77,12 @@ struct MatchedWordsView: View {
     /// - Returns: The X position of the middle of the cell
     ///
     func transY(yPos: Int) -> CGFloat {
-        ((Constants.tileSize + 2) * CGFloat(yPos))
-        + (Constants.tileSize / 2)
+        ((cellSize + 2) * CGFloat(yPos))
+        + (cellSize / 2)
     }
 }
 
 #Preview {
-    MatchedWordsView(game: WordSearchViewModel())
+    MatchedWordsView(game: WordSearchViewModel(),
+                     cellSize: 30)
 }

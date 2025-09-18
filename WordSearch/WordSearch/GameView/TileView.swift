@@ -16,6 +16,9 @@ struct TileView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var tile: Letter
+    var cellSize: CGFloat
+    var fontSize: CGFloat
+
     private var backgroundColour: Color {
         if tile.selected {
             return .blue.opacity(0.6)
@@ -25,14 +28,15 @@ struct TileView: View {
     }
 
     private var foregroundColour: Color {
-        tile.selected ? .white : .black
+        print("Tile size: \(Constants.tileSize), fontSize: 24")
+        return tile.selected ? .white : .black
     }
 
     var body: some View {
         Text(String(tile.letter).uppercased())
-            .font(.system(size: 24))
+            .font(.system(size: fontSize))
             .fontDesign(.rounded)
-            .frame(width: Constants.tileSize, height: Constants.tileSize)
+            .frame(width: cellSize, height: cellSize)
             .foregroundStyle(foregroundColour)
             .background(backgroundColour)
     }

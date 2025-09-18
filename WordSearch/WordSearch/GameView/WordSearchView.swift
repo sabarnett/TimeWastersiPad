@@ -24,69 +24,31 @@ public struct WordSearchView: View {
         self.gameData = gameData
     }
 
-    var viewWidth: CGFloat {
-        (Constants.tileSize + 2) * CGFloat(Constants.tileCountPerRow)
-        + Constants.wordListWidth
-        + 32.0
-    }
-
     public var body: some View {
         ZStack {
-            // Game board
             VStack {
                 gameStatusDisplay
 
                 HStack(spacing: 8) {
-                    ZStack {
-                        GameBoardView(game: game)
-                        MatchedWordsView(game: game)
+                    GeometryReader { proxy in
+                        HStack {
+                            Spacer()
+                            GameBoardView(game: game,
+                                          cellSize: cellSize(proxy: proxy),
+                                          fontSize: fontSize(proxy: proxy))
+                            Spacer()
+                        }
                     }
 
                     TargetWordsListView(game: game)
+                        .frame(minWidth: 200)
                 }
                 .padding([.leading, .trailing, .bottom])
                 .toolbar {
-                    ToolbarItemGroup(placement: .topBarLeading) {
-                        Button(action: {
-                            showGamePlay.toggle()
-                        }, label: {
-                            Image(systemName: "questionmark.circle")
-                        })
-                        .help("Show the game play")
-
-                        Button(action: {
-                            showLeaderBoard.toggle()
-                        }, label: {
-                            Image(systemName: "trophy.circle")
-                        })
-                        .help("Show the leader board")
-                    }
-                    ToolbarItemGroup(placement: .topBarTrailing) {
-                        Button(action: {
-                            game.allowHints()
-                        }, label: {
-                            Image(systemName: game.hintsIcon)
-                        })
-                        .help("Allow hints")
-
-                        Button(action: {
-                            game.newGame()
-                        }, label: {
-                            Image(systemName: "arrow.uturn.left.circle")
-                        })
-                        .help("Start a new game")
-
-                        Button(action: {
-                            game.toggleSounds()
-                        }, label: {
-                            Image(systemName: game.speakerIcon)
-                        })
-                        .help("Toggle sound effects")
-                    }
+                    topBarLeadingToolbar
+                    topBarTrailing
                 }
             }
-            .frame(width: viewWidth)
-
             .sheet(isPresented: $showGamePlay) {
                 GamePlayView(game: gameData.gameDefinition)
             }
@@ -106,7 +68,6 @@ public struct WordSearchView: View {
             .onDisappear {
                 game.stopSounds()
             }
-            // Game over view
             if game.gameState == .endOfGame {
                 // swiftlint:disable:next redundant_discardable_let
                 let _ = game.stopSounds()
@@ -153,6 +114,72 @@ public struct WordSearchView: View {
         .background(.black)
         .clipShape(.rect(cornerRadius: 10))
         .padding(.top)
+    }
+
+    /// Defines the content of the toolbar that is aligned to the top/leading.
+    @ToolbarContentBuilder
+    private var topBarLeadingToolbar: some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarLeading) {
+            Button(action: {
+                showGamePlay.toggle()
+            }, label: {
+                Image(systemName: "questionmark.circle")
+            })
+            .help("Show the game play")
+
+            Button(action: {
+                showLeaderBoard.toggle()
+            }, label: {
+                Image(systemName: "trophy.circle")
+            })
+            .help("Show the leader board")
+        }
+    }
+
+    /// Defines the content of the toolbar that is aligned to the top/trailing
+    @ToolbarContentBuilder
+    private var topBarTrailing: some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarTrailing) {
+            Button(action: {
+                game.allowHints()
+            }, label: {
+                Image(systemName: game.hintsIcon)
+            })
+            .help("Allow hints")
+
+            Button(action: {
+                game.newGame()
+            }, label: {
+                Image(systemName: "arrow.uturn.left.circle")
+            })
+            .help("Start a new game")
+
+            Button(action: {
+                game.toggleSounds()
+            }, label: {
+                Image(systemName: game.speakerIcon)
+            })
+            .help("Toggle sound effects")
+        }
+    }
+    
+    /// Calculates the sie of the font to use on the individual cells. It is based on
+    /// the cell size.
+    /// - Parameter proxy: The proxy from the GeometryReader that defines the
+    /// amount of space available for the view
+    /// - Returns: The font size to use for each letter button.
+    private func fontSize(proxy: GeometryProxy) -> CGFloat {
+        cellSize(proxy: proxy) * 0.5
+    }
+    
+    /// Calculates the size of the button to create for each letter in the grid.
+    /// - Parameter proxy: The proxy from the GeometryReader that defines the
+    /// amount of space available for the view
+    /// - Returns: The size to use for each cell based on the amount of available space.
+    /// We allow for a gap equivalent to one cell around the game board.
+    private func cellSize(proxy: GeometryProxy) -> CGFloat {
+        let minDimension = min(proxy.size.width, proxy.size.height)
+        return minDimension / CGFloat(game.gameBoard.count + 1)
     }
 }
 
