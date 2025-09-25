@@ -162,7 +162,7 @@ public struct WordSearchView: View {
             .help("Toggle sound effects")
         }
     }
-    
+
     /// Calculates the sie of the font to use on the individual cells. It is based on
     /// the cell size.
     /// - Parameter proxy: The proxy from the GeometryReader that defines the
@@ -171,7 +171,7 @@ public struct WordSearchView: View {
     private func fontSize(proxy: GeometryProxy) -> CGFloat {
         cellSize(proxy: proxy) * 0.5
     }
-    
+
     /// Calculates the size of the button to create for each letter in the grid.
     /// - Parameter proxy: The proxy from the GeometryReader that defines the
     /// amount of space available for the view

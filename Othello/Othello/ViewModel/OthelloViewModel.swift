@@ -37,7 +37,7 @@ class OthelloViewModel: ObservableObject {
 
     @Published var notifyMessage: ToastConfig?
 
-    private var allTiles: [Tile] { gameBoard.flatMap({$0}) }
+    internal var allTiles: [Tile] { gameBoard.flatMap({$0}) }
 
     var sounds: AVAudioPlayer!
     var chimeSound: AVAudioPlayer!
@@ -180,28 +180,6 @@ class OthelloViewModel: ObservableObject {
         return board
     }
 
-    /// Mark the cells the player could potentially select. After they have been on
-    /// the scteen for 3.5 seconds, clear them away again.
-    @MainActor
-    func showHint() {
-        objectWillChange.send()
-        markPlayerPotentialMoves()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-            self.resetHints()
-        }
-    }
-
-    /// If there are cells highlighted as potential user moves, reset them back to empty. This
-    /// will remove them from the game board.
-    private func resetHints() {
-        let marked = allTiles.filter({$0.state == .potentialPlayerMove})
-        if marked.count == 0 { return }
-
-        objectWillChange.send()
-        marked.forEach {$0.state = .empty}
-    }
-
     /// Check that the move is valid. If it is, return a list of tile positions that need to
     /// be flipped to the new player state.
     private func isValidMove(board: GameBoard, tileState: TileState, xPos: Int, yPos: Int) -> [BoardLocation]? {
@@ -251,19 +229,6 @@ class OthelloViewModel: ObservableObject {
         return xPos >= 0 && xPos < boardWidth && yPos >= 0 && yPos < boardHeight
     }
 
-    /// Using a copy of the current game board, determine what moves the player has
-    /// and mark them as potential moves. The view can then be updated to highlight
-    /// those moves.
-    private func markPlayerPotentialMoves() {
-        // We need to copy the board, so we do not modify the active gane
-        let boardCopy = getBoardCopy(gameBoard)
-        let validMoves = getValidMoves(board: boardCopy, tileState: .player)
-
-        validMoves.forEach { location in
-            gameBoard[location.xPos][location.yPos].state = .potentialPlayerMove
-        }
-    }
-
     /// Determine which moves are valid. We cycle through all cells in the game board and check
     /// whether that cell is a valid cell to select. If it is, we add it to an array of valid moves. We can
     /// use this to determine what cells the computer can move to.
@@ -273,7 +238,7 @@ class OthelloViewModel: ObservableObject {
     ///   - tileState: Whether this is a computer or player move
     ///
     /// - Returns: An array of possible moves.
-    private func getValidMoves(board: GameBoard, tileState: TileState) -> [BoardLocation] {
+    internal func getValidMoves(board: GameBoard, tileState: TileState) -> [BoardLocation] {
         var validMoves: [BoardLocation] = []
 
         // We must have at least one of the selected tiles on the board
@@ -379,7 +344,7 @@ class OthelloViewModel: ObservableObject {
     /// This function is responsible for creating an empty game board and then copying the
     /// content of the passed in game board. The resulting board is a duplicate of the input
     /// one, but with new and unrelated Tile objects.
-    private func getBoardCopy(_ board: GameBoard) -> [[Tile]] {
+    internal func getBoardCopy(_ board: GameBoard) -> [[Tile]] {
         let copy = createBoard()
 
         for xPos in 0..<boardWidth {
