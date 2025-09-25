@@ -37,15 +37,15 @@ public struct OthelloView: View {
                     .navigationBarHidden(true)
             }, detail: {
                 VStack(alignment: .leading) {
-                    HStack(spacing: 2) {
-                        Spacer()
-                        VStack {
-                            GameBoardView(model: model)
-                            Text(model.statusMessage)
-                                .font(.title)
-                                .padding()
+                    VStack {
+                        Text(model.statusMessage)
+                            .font(.title)
+                        GeometryReader { proxy in
+                            let minSize = min(proxy.size.width, proxy.size.height)
+                            let cellSize = minSize / (CGFloat(model.gameBoard.count) + 1.2)
+
+                            GameBoardView(model: model, cellSize: cellSize)
                         }
-                        Spacer()
                     }
                 }
             })
@@ -99,9 +99,9 @@ public struct OthelloView: View {
             if isGameOver {
                 GameOverView(message: gameOverMessage,
                              buttonCaption: "New Game") {
-                                 isGameOver = false
-                                 model.newGame()
-                             }
+                    isGameOver = false
+                    model.newGame()
+                }
             }
         }
         .onChange(of: model.gameState) { _, new in

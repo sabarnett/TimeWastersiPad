@@ -14,10 +14,9 @@ import SwiftUI
 struct TileView: View {
 
     @Binding var tile: Tile
+    var pieceSize: CGFloat
 
     var onTap: (() -> Void)
-
-    private let pieceSize = 55.0
 
     var body: some View {
         ZStack {
@@ -58,7 +57,7 @@ struct TileView: View {
 }
 
 #Preview {
-    TileView(tile: .constant(Tile())) {
+    TileView(tile: .constant(Tile()), pieceSize: 56.0) {
         print("Tile tapped")
     }
 }

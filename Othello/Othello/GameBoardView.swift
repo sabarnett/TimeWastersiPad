@@ -14,20 +14,24 @@ import SwiftUI
 struct GameBoardView: View {
 
     @ObservedObject var model: OthelloViewModel
+    var cellSize: CGFloat
 
     var body: some View {
             HStack {
-                ForEach(0..<model.gameBoard.count, id: \.self) { idx in
-                    let column = $model.gameBoard[idx]
+                Spacer()
+                    ForEach(0..<model.gameBoard.count, id: \.self) { idx in
+                        let column = $model.gameBoard[idx]
 
-                    VStack(spacing: 2) {
-                        ForEach(column) { $tile in
-                            TileView(tile: $tile) {
-                                playersMove(tile)
+                        VStack(spacing: 2) {
+                            ForEach(column) { $tile in
+                                TileView(tile: $tile, pieceSize: cellSize) {
+                                    playersMove(tile)
+                                }
                             }
+                            Spacer()
                         }
                     }
-                }
+                Spacer()
             }
             .onChange(of: model.gameState) { _, new in
                 // If the player has no valid moves, the computer
@@ -54,5 +58,5 @@ struct GameBoardView: View {
 }
 
 #Preview {
-    GameBoardView(model: OthelloViewModel())
+    GameBoardView(model: OthelloViewModel(), cellSize: 56.0)
 }
