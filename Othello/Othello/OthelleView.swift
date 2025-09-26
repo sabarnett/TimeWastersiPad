@@ -42,7 +42,7 @@ public struct OthelloView: View {
                             .font(.title)
                         GeometryReader { proxy in
                             let minSize = min(proxy.size.width, proxy.size.height)
-                            let cellSize = minSize / (CGFloat(model.gameBoard.count) + 1.2)
+                            let cellSize = minSize / (CGFloat(model.tileCount) + 1.2)
 
                             GameBoardView(model: model, cellSize: cellSize)
                         }

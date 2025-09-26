@@ -19,8 +19,8 @@ struct GameBoardView: View {
     var body: some View {
             HStack {
                 Spacer()
-                    ForEach(0..<model.gameBoard.count, id: \.self) { idx in
-                        let column = $model.gameBoard[idx]
+                ForEach(0..<model.tileCount, id: \.self) { idx in
+                    let column = $model.gameBoard.board[idx]
 
                         VStack(spacing: 2) {
                             ForEach(column) { $tile in
