@@ -22,7 +22,6 @@ struct Toast: View {
             if let toast = toastMessage {
                 HStack(spacing: 4) {
                     Image(systemName: toast.icon)
-                        .scaleEffect(1.2)
                     VStack(alignment: .leading, spacing: 0) {
                         if let title = toast.title {
                             Text(title)
@@ -35,15 +34,15 @@ struct Toast: View {
                     }
                     Spacer()
                 }
-                .font(.system(size: 16))
+                .font(.system(size: 24))
                 .foregroundStyle(toast.type.foregroundColor)
 
                 // Padding round the internal content
                 .padding(.vertical, 6)
                 .padding(.leading, 8)
-                .frame(width: 270)
+                .frame(width: 360)
 
-                .background(RoundedRectangle(cornerRadius: 20).fill(toast.type.backgroundColor.gradient))
+                .background(RoundedRectangle(cornerRadius: 15).fill(toast.type.backgroundColor.gradient))
 
                 // Padding above or below the message
                 .padding(.vertical, 20)
