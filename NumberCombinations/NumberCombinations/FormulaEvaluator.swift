@@ -167,20 +167,8 @@ struct FormulaEvaluator {
             case .operatorSymbol(let oper):
                 guard let right = stack.popLast() else { throw EvaluationErrors.incompleteFormula }
                 guard let left = stack.popLast() else { throw EvaluationErrors.incompleteFormula }
-                let result: ResultType
-                switch oper {
-                case "+":
-                    result = left + right
-                case "-":
-                    result = left - right
-                case "*":
-                    result = left * right
-                case "/":
-                    if right == 0 { throw EvaluationErrors.divideByZero }
-                    result = left / right
-                default:
-                    throw EvaluationErrors.unknownOperator(oper: oper)
-                }
+                let result = try evaluateOperatorSymbol(oper, left: left, right: right)
+
                 stack.append(result)
             default:
                 throw EvaluationErrors.unexpectedToken
@@ -188,5 +176,22 @@ struct FormulaEvaluator {
         }
 
         return stack.popLast()!
+    }
+
+    private func evaluateOperatorSymbol(_ oper: Character, left: ResultType, right: ResultType) throws -> ResultType {
+        switch oper {
+        case "+":
+            return left + right
+        case "-":
+            return left - right
+        case "*":
+            return left * right
+        case "/":
+            if right == 0 { throw EvaluationErrors.divideByZero }
+            return left / right
+        default:
+            throw EvaluationErrors.unknownOperator(oper: oper)
+        }
+
     }
 }

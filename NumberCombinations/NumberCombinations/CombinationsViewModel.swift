@@ -191,7 +191,7 @@ class CombinationsViewModel {
     func showSolution() {
         notifyMessage = ToastConfig(
             title: "Formula",
-            message: usedFormula,
+            message: usedFormula.replacingOccurrences(of: ".0", with: ""),
             icon: "squareshape.split.2x2",
             type: .info,
             showDuration: 5
