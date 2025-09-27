@@ -34,7 +34,7 @@ struct GameItemButtonView: View {
                 }
         }
         .padding(8)
-        .foregroundStyle(.white)
+        .foregroundStyle(.primary)
     }
 }
 

@@ -26,7 +26,7 @@ struct GameMenuView: View {
             Text("Time Wasters")
                 .font(.largeTitle)
                 .bold()
-                .foregroundStyle(.white)
+                .foregroundStyle(.primary)
 
             VStack(alignment: .leading) {
                 ScrollView {
@@ -35,7 +35,6 @@ struct GameMenuView: View {
                             showInfoFor = game
                         })
                         .padding(.bottom, 4)
-                        .padding(.horizontal, 8)
                         .onTapGesture {
                             selectedGame = game
                         }
@@ -45,8 +44,8 @@ struct GameMenuView: View {
             }
             .padding(4)
             .background {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(Color(uiColor: UIColor(_colorLiteralRed: 0.26, green: 0.26, blue: 0.29, alpha: 1)))
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(.gameMenuBackground)
             }
         }
 

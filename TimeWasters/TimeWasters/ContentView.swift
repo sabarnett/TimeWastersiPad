@@ -19,12 +19,9 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility,
         sidebar: {
-            ZStack {
-                Color.black.ignoresSafeArea()
-                GameMenuView(selectedGame: $selectedGame)
-                    .navigationTitle("")
-                    .padding()
-            }
+            GameMenuView(selectedGame: $selectedGame)
+                .navigationTitle("")
+                .padding()
         }, detail: {
             if selectedGame == nil {
                 ContentUnavailableView("Select a Game",
