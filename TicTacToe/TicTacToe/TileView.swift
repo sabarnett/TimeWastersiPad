@@ -14,6 +14,7 @@ import SwiftUI
 struct TileView: View {
     @Binding var tile: PuzzleTile
 
+    var tileSize: CGFloat
     var onTap: (() -> Void)
 
     var body: some View {
@@ -22,9 +23,9 @@ struct TileView: View {
                 onTap()
             }, label: {
                 Text(tile.tileImage)
-                    .font(.system(size: 60, weight: .bold))
+                    .font(.system(size: tileSize * 0.6, weight: .bold))
                     .padding()
-                    .frame(width: 90, height: 90)
+                    .frame(width: tileSize, height: tileSize)
                     .background(tile.tileColour.gradient)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
 
@@ -38,9 +39,9 @@ struct TileView: View {
                 onTap()
             }, label: {
                 Text(tile.tileImage)
-                    .font(.system(size: 60, weight: .bold))
+                    .font(.system(size: tileSize * 0.6, weight: .bold))
                     .padding()
-                    .frame(width: 90, height: 90)
+                    .frame(width: tileSize, height: tileSize)
                     .background(tile.tileColour.gradient)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
 
@@ -54,6 +55,6 @@ struct TileView: View {
 }
 
 #Preview {
-    TileView(tile: .constant(PuzzleTile.init(state: .empty))) {
+    TileView(tile: .constant(PuzzleTile.init(state: .empty)), tileSize: 90.0) {
     }
 }

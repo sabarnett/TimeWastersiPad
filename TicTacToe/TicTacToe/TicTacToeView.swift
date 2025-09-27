@@ -39,12 +39,19 @@ public struct TicTacToeView: View {
             VStack {
                 HStack {
                     Spacer()
-                    VStack {
-                        GameGrid(model: model)
-                        Text(model.messages)
-                            .font(.title)
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .center)
+                    GeometryReader { proxy in
+                        VStack {
+                            Spacer()
+                            let minDimension = min(proxy.size.width, proxy.size.height)
+                            let tileSize = minDimension / 4.0
+
+                            GameGrid(model: model, tileSize: tileSize)
+                            Text(model.messages)
+                                .font(.title)
+                                .padding()
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            Spacer()
+                        }
                     }
                     Spacer()
                     ScoreView(model: model).frame(width: 250)

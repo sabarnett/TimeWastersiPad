@@ -14,15 +14,23 @@ import SwiftUI
 struct GameGrid: View {
     @ObservedObject var model = TicTacToeGameModel()
 
-    let columns = [
-        GridItem(.fixed(90.00), spacing: 10),
-        GridItem(.fixed(90.00), spacing: 10),
-        GridItem(.fixed(90.00), spacing: 10)]
+    let tileSize: CGFloat
+    var columns: [GridItem]
+
+    init(model: TicTacToeGameModel, tileSize: CGFloat) {
+        self.model = model
+        self.tileSize = tileSize
+        columns = [
+            GridItem(.fixed(tileSize), spacing: 10),
+            GridItem(.fixed(tileSize), spacing: 10),
+            GridItem(.fixed(tileSize), spacing: 10)
+        ]
+    }
 
     var body: some View {
         LazyVGrid(columns: columns) {
             ForEach($model.gameBoard) { $tile in
-                TileView(tile: $tile) {
+                TileView(tile: $tile, tileSize: tileSize) {
                     if model.playersGo {
                         handleTileSelect(tile)
                     }
@@ -56,5 +64,5 @@ struct GameGrid: View {
 }
 
 #Preview {
-    GameGrid()
+    GameGrid(model: TicTacToeGameModel(), tileSize: 90.0)
 }
