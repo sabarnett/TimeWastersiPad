@@ -13,8 +13,6 @@ import SharedComponents
 import SwiftUI
 
 struct GameMenuView: View {
-    @Environment(\.colorScheme) private var colorScheme
-
     @Binding var selectedGame: Game?
 
     @State private var showInfoFor: Game?

@@ -14,7 +14,11 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @AppStorage(Constants.displayMode) var displayMode: DisplayMode = .system
+    @Environment(\.colorScheme) private var colorScheme
+
+    @AppStorage(Constants.displayMode) private var displayMode = DisplayMode.system
+
+    @State private var displayStyle: ColorScheme?
 
     var body: some View {
         NavigationStack {
@@ -46,7 +50,26 @@ struct SettingsView: View {
                        action: { dismiss() },
                        label: { Image(systemName: "xmark.app").scaleEffect(1.3) })
             }
-            .preferredColorScheme(displayMode.colorScheme)
+            .preferredColorScheme(displayStyle)
+        }
+        .onAppear {
+            displayStyle = displayMode.colorScheme
+        }
+        .onChange(of: displayMode) {
+            // This is a massive fudge. When we change the color scheme,
+            // the app will change but the settings sheet will not. This
+            // is almost certainly a bug, but it is one that persists.
+            //
+            // To work round this, we trap the user changing the display
+            // mode and set the preferred color scheme to be either
+            // light or dark be the opposite of the current system
+            // color scheme. It only affects this view while the
+            // view is being displayed.
+            if displayMode == .system {
+                displayStyle = (colorScheme == .dark) ? .light : .dark
+            } else {
+                displayStyle = displayMode.colorScheme
+            }
         }
     }
 }
