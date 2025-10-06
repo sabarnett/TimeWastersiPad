@@ -28,8 +28,7 @@ struct TileView: View {
     }
 
     private var foregroundColour: Color {
-        print("Tile size: \(Constants.tileSize), fontSize: 24")
-        return tile.selected ? .white : .black
+        tile.selected ? .white : .black
     }
 
     var body: some View {

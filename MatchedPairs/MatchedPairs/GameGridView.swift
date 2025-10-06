@@ -13,9 +13,10 @@ import SwiftUI
 
 struct GameGridView: View {
 
+    @Environment(MatchedPairsGameModel.self) var model
     @State private var showDelay: CGFloat = 0
 
-    var model: MatchedPairsGameModel
+    var onSelect: (Tile) -> Void
 
     var gamePlayColumns: [GridItem] {
         Array(repeating: GridItem(.fixed(85.00), spacing: 3), count: model.columns)
@@ -25,9 +26,7 @@ struct GameGridView: View {
         LazyVGrid(columns: gamePlayColumns) {
             ForEach(model.tiles) { tile in
                 TileView(tile: tile) {
-                    withAnimation {
-                        model.select(tile)
-                    }
+                    onSelect(tile)
                 }
                 .environment(model)
             }
@@ -37,5 +36,6 @@ struct GameGridView: View {
 }
 
 #Preview {
-    GameGridView(model: MatchedPairsGameModel())
+    GameGridView { _ in }
+        .environment(MatchedPairsGameModel())
 }

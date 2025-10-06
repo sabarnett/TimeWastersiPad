@@ -32,8 +32,10 @@ class MatchedPairsGameModel {
     @ObservationIgnored
     @AppStorage(Constants.cardBackground) private var cardBg: CardBackgrounds = .one
 
-    var leaderBoard = LeaderBoard()
+    @ObservationIgnored
     var tiles: [Tile] = []
+
+    var leaderBoard = LeaderBoard()
     var columns: Int = 6
     var rows: Int = 4
     var gameState: GameState = .playing
@@ -127,8 +129,8 @@ class MatchedPairsGameModel {
 
         moves += 1
         turnCardsDownIfRequired()
-
         tiles[tileIndex].isFaceUp = true
+
         checkForMatch()
         checkForEndOfGame()
     }

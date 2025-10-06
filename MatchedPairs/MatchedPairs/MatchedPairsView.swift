@@ -14,7 +14,7 @@ import SharedComponents
 
 public struct MatchedPairsView: View {
     @State public var gameData: Game
-    @State var model: MatchedPairsGameModel
+    @State var model = MatchedPairsGameModel()
 
     @State private var showGamePlay: Bool = false
     @State private var showLeaderBoard: Bool = false
@@ -26,7 +26,6 @@ public struct MatchedPairsView: View {
 
     public init(gameData: Game) {
         self.gameData = gameData
-        self.model = MatchedPairsGameModel()
     }
 
     public var body: some View {
@@ -34,9 +33,14 @@ public struct MatchedPairsView: View {
             VStack {
                 gameStatusDisplay
                 Spacer()
-                GameGridView(model: model)
+                GameGridView { tile in
+                    withAnimation {
+                        model.select(tile)
+                    }
+                }
                     .padding()
                     .disabled(model.gameState != .playing)
+                    .environment(model)
                 Spacer()
             }
             .toolbar {

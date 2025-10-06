@@ -13,17 +13,13 @@ import SharedComponents
 import SwiftUI
 
 struct GameView: View {
-    @Binding var game: Game?
+    var game: Game
 
     var body: some View {
-        if let game {
-            GameViewFactory().gameView(for: game)
-        } else {
-            Text("No game selected")
-        }
+        GameViewFactory().gameView(for: game)
     }
 }
 
 #Preview {
-    GameView(game: .constant(nil))
+    GameView(game: Game.wordcraft)
 }
