@@ -21,8 +21,17 @@ public struct MatchedPairsView: View {
     @State private var showLeaderBoard: Bool = false
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
-    var windowWidth: Double {
-        (87.0 * Double(model.columns)) + 16.0
+    func cardWidth(_ proxy: GeometryProxy) -> CGFloat {
+        let rows = CGFloat(model.rows)
+        let cols = CGFloat(model.columns)
+
+        let maxWidth = proxy.size.width / rows
+        let maxHeight = proxy.size.height / cols
+
+        if maxWidth < maxHeight {
+            return maxWidth
+        }
+        return maxHeight * 0.8
     }
 
     public init(gameData: Game) {
@@ -34,14 +43,17 @@ public struct MatchedPairsView: View {
             VStack {
                 gameStatusDisplay
                 Spacer()
-                GameGridView { tile in
-                    withAnimation {
-                        model.select(tile)
+                GeometryReader { proxy in
+
+                    GameGridView(gridItemWidth: cardWidth(proxy)) { tile in
+                        withAnimation {
+                            model.select(tile)
+                        }
                     }
-                }
                     .padding()
                     .disabled(model.gameState != .playing)
                     .environmentObject(model)
+                }
                 Spacer()
             }
             .toolbar {
@@ -119,9 +131,7 @@ public struct MatchedPairsView: View {
         }
 
         .onChange(of: gameDifficulty) {
-            print("Game difficulty change")
             model.newGame()
-            print("Game difficulty change done")
         }
     }
 

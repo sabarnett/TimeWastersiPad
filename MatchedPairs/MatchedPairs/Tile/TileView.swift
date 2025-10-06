@@ -24,6 +24,7 @@ struct TileView: View {
 
     let myBundle = Bundle(for: MatchedPairsGameModel.self)
     var tile: Tile
+    var cardWidth: CGFloat = 20.0
     var onTap: (() -> Void)
 
     /// Defines the delay before a tile should be displayed on the screen. It is
@@ -73,14 +74,14 @@ struct TileView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundStyle(.green)
                     .font(.system(size: 35))
-                    .frame(width: 80, height: 70)
+                    .frame(width: cardWidth, height: 70)
                     .shadow(color: Color(red: 0.50, green: 0.50, blue: 0.50),
                                            radius: 10.00, x: 5.00, y: 5.00)
             } else {
                 Image(model.cardBackground, bundle: myBundle)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 80)
+                    .frame(width: cardWidth)
 
                     .rotation3DEffect(.degrees(tile.isFaceUp ? 180 : 0), axis: (x: 0, y: 1, z: 0))
                     .opacity(tile.isFaceUp ? 0 : 1)
@@ -100,7 +101,7 @@ struct TileView: View {
                 Image(tile.face, bundle: myBundle)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 80)
+                    .frame(width: cardWidth)
                     .rotation3DEffect(.degrees(tile.isFaceUp ? 0 : -180), axis: (x: 0, y: 1, z: 0))
                     .opacity(tile.isFaceUp ? 1 : -1)
                     .accessibility(hidden: !tile.isFaceUp)
@@ -120,10 +121,10 @@ struct TileView: View {
             ZStack(alignment: .bottomLeading) {
                 Rectangle()
                     .fill(countdownRed)
-                    .frame(width: 60, height: 8, alignment: .leading)
+                    .frame(width: cardWidth * 0.75, height: 8, alignment: .leading)
                 Rectangle()
                     .fill(countdownBlack)
-                    .frame(width: beginCountdown ? 0 : 60, height: 8, alignment: .leading)
+                    .frame(width: beginCountdown ? 0 : cardWidth * 0.75, height: 8, alignment: .leading)
             }.offset(y: 45)
         }
     }

@@ -16,16 +16,17 @@ struct GameGridView: View {
     @EnvironmentObject var model: MatchedPairsGameModel
     @State private var showDelay: CGFloat = 0
 
+    var gridItemWidth: CGFloat
     var onSelect: (Tile) -> Void
 
     var gamePlayColumns: [GridItem] {
-        Array(repeating: GridItem(.fixed(85.00), spacing: 3), count: model.columns)
+        Array(repeating: GridItem(.fixed(gridItemWidth), spacing: 3), count: model.columns)
     }
 
     var body: some View {
         LazyVGrid(columns: gamePlayColumns) {
             ForEach(model.tiles) { tile in
-                TileView(tile: tile) {
+                TileView(tile: tile, cardWidth: gridItemWidth - 5.0) {
                     onSelect(tile)
                 }
                 .environmentObject(model)
@@ -36,6 +37,6 @@ struct GameGridView: View {
 }
 
 #Preview {
-    GameGridView { _ in }
+    GameGridView(gridItemWidth: 85.0) { _ in }
         .environmentObject(MatchedPairsGameModel())
 }
