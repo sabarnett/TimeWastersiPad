@@ -17,31 +17,25 @@ enum GameState {
     case gameOver
 }
 
-@Observable
-class MatchedPairsGameModel {
-    @ObservationIgnored
+class MatchedPairsGameModel: ObservableObject {
     @AppStorage(Constants.playSound) var playSounds = true {
         didSet {
             updateSounds()
         }
     }
 
-    @ObservationIgnored
     @AppStorage(Constants.gameDifficulty) var gameDifficulty: GameDifficulty = .easy
-
-    @ObservationIgnored
     @AppStorage(Constants.cardBackground) private var cardBg: CardBackgrounds = .one
 
-    @ObservationIgnored
-    var tiles: [Tile] = []
+    @Published var tiles: [Tile] = []
+    @Published var gameState: GameState = .playing
+    @Published var moves: Int = 0
+    @Published var time: Int = 0
 
     var leaderBoard = LeaderBoard()
     var columns: Int = 6
     var rows: Int = 4
-    var gameState: GameState = .playing
     var cardBackground: String { cardBg.cardImage }
-    var moves: Int = 0
-    var time: Int = 0
 
     /// Determines which icon we need to use on the tool bar for toggling the sounds
     var speakerIcon: String = Constants.soundsOn
@@ -56,7 +50,6 @@ class MatchedPairsGameModel {
         columns = gameDifficulty.columns
         rows = gameDifficulty.rows
 
-        tiles.removeAll(keepingCapacity: true)
         tiles = gameTiles()
 
         moves = 0
@@ -76,16 +69,16 @@ class MatchedPairsGameModel {
     private func gameTiles() -> [Tile] {
         let cardNames: [String] = allPotentialCards()
 
-        // 10x6 grid of tiles
-        var tileSetup: [Tile] = []
+        // Grid of tiles
+        var tileBuild: [Tile] = []
         for index in 0..<(columns*rows)/2 {
             let tileOne = Tile(face: cardNames[index])
-            tileSetup.append(tileOne)
+            tileBuild.append(tileOne)
             let tileTwo = Tile(face: cardNames[index])
-            tileSetup.append(tileTwo)
+            tileBuild.append(tileTwo)
         }
 
-        return tileSetup.shuffled()
+        return tileBuild.shuffled()
     }
 
     /// Generate a list of the names of all of the potential cards we could have in

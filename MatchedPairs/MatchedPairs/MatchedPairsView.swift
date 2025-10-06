@@ -13,8 +13,9 @@ import SwiftUI
 import SharedComponents
 
 public struct MatchedPairsView: View {
+    @AppStorage(Constants.gameDifficulty) var gameDifficulty: GameDifficulty = .easy
     @State public var gameData: Game
-    @State var model = MatchedPairsGameModel()
+    @StateObject private var model = MatchedPairsGameModel()
 
     @State private var showGamePlay: Bool = false
     @State private var showLeaderBoard: Bool = false
@@ -40,7 +41,7 @@ public struct MatchedPairsView: View {
                 }
                     .padding()
                     .disabled(model.gameState != .playing)
-                    .environment(model)
+                    .environmentObject(model)
                 Spacer()
             }
             .toolbar {
@@ -115,6 +116,12 @@ public struct MatchedPairsView: View {
             if newState == .gameOver {
                 model.stopSounds()
             }
+        }
+
+        .onChange(of: gameDifficulty) {
+            print("Game difficulty change")
+            model.newGame()
+            print("Game difficulty change done")
         }
     }
 

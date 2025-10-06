@@ -13,7 +13,7 @@ import SwiftUI
 
 struct GameGridView: View {
 
-    @Environment(MatchedPairsGameModel.self) var model
+    @EnvironmentObject var model: MatchedPairsGameModel
     @State private var showDelay: CGFloat = 0
 
     var onSelect: (Tile) -> Void
@@ -28,7 +28,7 @@ struct GameGridView: View {
                 TileView(tile: tile) {
                     onSelect(tile)
                 }
-                .environment(model)
+                .environmentObject(model)
             }
         }
 
@@ -37,5 +37,5 @@ struct GameGridView: View {
 
 #Preview {
     GameGridView { _ in }
-        .environment(MatchedPairsGameModel())
+        .environmentObject(MatchedPairsGameModel())
 }

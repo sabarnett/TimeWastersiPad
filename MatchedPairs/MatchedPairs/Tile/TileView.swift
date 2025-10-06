@@ -13,7 +13,7 @@ import SwiftUI
 
 struct TileView: View {
 
-    @Environment(MatchedPairsGameModel.self) var model
+    @EnvironmentObject var model: MatchedPairsGameModel
 
     @AppStorage(Constants.autoFlip) private var autoFlip: Bool = false
     @AppStorage(Constants.autoFlipDelay) private var autoFlipDelay: Double = 5
@@ -143,5 +143,5 @@ struct TileView: View {
 
 #Preview {
     TileView(tile: Tile(face: "diamond_01")) {}
-        .environment(MatchedPairsGameModel())
+        .environmentObject(MatchedPairsGameModel())
 }
