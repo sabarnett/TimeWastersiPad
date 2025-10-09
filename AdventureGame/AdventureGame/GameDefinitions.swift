@@ -50,9 +50,6 @@ public class GameDefinitions {
                 let decoder = JSONDecoder()
 
                 gamesList = try decoder.decode(GamesList.self, from: JSONData!)
-                for game in games {
-                    print(game.title)
-                }
             } catch {
                 print(error)
             }
