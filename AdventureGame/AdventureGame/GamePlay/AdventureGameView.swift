@@ -31,15 +31,13 @@ public struct AdventureGameView: View {
         ZStack {
             VStack {
                 NavigationSplitView(columnVisibility: $columnsVisible) {
-                    List {
+                    ScrollView {
                         carriedItemsView
-                        Spacer().frame(height: 32)
-                            .listRowSeparator(.hidden)
-                            .listSectionSeparator(.hidden)
+                        Divider().frame(height: 32)
                         treasureItemsView
-                            .listRowSeparator(.hidden)
-                            .listSectionSeparator(.hidden)
-                    }.navigationBarHidden(true)
+                    }
+                    .navigationBarHidden(true)
+                    .padding(12)
                 } detail: {
                     VStack {
                         gamePlayView
@@ -48,6 +46,7 @@ public struct AdventureGameView: View {
                 }
             }
             .background(colorScheme == .dark ? Color.black : Color.white)
+            .environment(\.defaultMinListRowHeight, 10)
             .sheet(isPresented: $gameModel.showGamePlay) {
                 GamePlayView(game: gameData.gameDefinition)
             }
@@ -157,9 +156,8 @@ public struct AdventureGameView: View {
         Section(content: {
             ForEach(gameModel.carriedItems, id: \.self) { item in
                 Text(item)
-                    .font(.system(size: 14))
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
+                    .font(.title3)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }, header: {
             HStack {
@@ -170,7 +168,7 @@ public struct AdventureGameView: View {
             .listSectionSeparator(.hidden)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 5)
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 20)
             .background {
                 Color.accentColor.opacity(0.4)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
@@ -183,9 +181,8 @@ public struct AdventureGameView: View {
         Section(content: {
             ForEach(gameModel.treasureItems, id: \.self) { item in
                 Text(item)
-                    .font(.system(size: 14))
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
+                    .font(.title3)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }, header: {
             HStack {
@@ -195,7 +192,7 @@ public struct AdventureGameView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 5)
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 20)
             .background {
                 Color.accentColor.opacity(0.4)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
