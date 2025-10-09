@@ -73,36 +73,8 @@ public struct AdventureGameView: View {
             }
 
             .toolbar {
-                ToolbarItemGroup(placement: .topBarLeading) {
-                    Button(action: {
-                        gameModel.showGamePlay.toggle()
-                    }, label: {
-                        Image(systemName: "questionmark.circle")
-                    })
-                    .help("Show game rules")
-                }
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button(action: {
-                        gameModel.showResetConfirmation = true
-                    }, label: {
-                        Image(systemName: "arrow.uturn.left.circle")
-                    })
-                    .help("Restart the game.")
-
-                    Button(action: {
-                        gameModel.saveGame()
-                    }, label: {
-                        Image(systemName: "tray.and.arrow.down")
-                    })
-                    .help("Save the current game state.")
-
-                    Button(action: {
-                        gameModel.showReloadConfirmation = true
-                    }, label: {
-                        Image(systemName: "tray.and.arrow.up")
-                    })
-                    .help("Reload the last saved game.")
-                }
+                topBarLeadingToolbar
+                topBarTrailingToolbar
             }
             .onAppear {
                 inputFocus = true
@@ -199,6 +171,38 @@ public struct AdventureGameView: View {
             }
         })
         .listSectionSeparator(.hidden)
+    }
+
+    var topBarLeadingToolbar: some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarLeading) {
+            Button(action: {
+                gameModel.showGamePlay.toggle()
+            }, label: {
+                Image(systemName: "questionmark.circle")
+            })
+        }
+    }
+
+    var topBarTrailingToolbar: some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarTrailing) {
+            Button(action: {
+                gameModel.showResetConfirmation = true
+            }, label: {
+                Image(systemName: "arrow.uturn.left.circle")
+            })
+
+            Button(action: {
+                gameModel.saveGame()
+            }, label: {
+                Image(systemName: "tray.and.arrow.down")
+            })
+
+            Button(action: {
+                gameModel.showReloadConfirmation = true
+            }, label: {
+                Image(systemName: "tray.and.arrow.up")
+            })
+        }
     }
 }
 
