@@ -72,6 +72,16 @@ public struct AdventureGameView: View {
                 Text("Are you sure you want to reload the saved game. The current game will be lost.")
             }
 
+            .alert("Save Game?",
+                   isPresented: $gameModel.showSaveConfirmation) {
+                Button("Yes", role: .destructive) {
+                    gameModel.saveGame()
+                    inputFocus = true
+                }
+            } message: {
+                Text("Saving this game will overwrite any previous saved game. Are you happy to do that?")
+            }
+
             .toolbar {
                 topBarLeadingToolbar
                 topBarTrailingToolbar
@@ -192,7 +202,7 @@ public struct AdventureGameView: View {
             })
 
             Button(action: {
-                gameModel.saveGame()
+                gameModel.showSaveConfirmation = true
             }, label: {
                 Image(systemName: "tray.and.arrow.down")
             })
