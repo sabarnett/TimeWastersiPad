@@ -24,13 +24,6 @@ public struct AboutView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 22))
                     .frame(width: 100, height: 100, alignment: .center)
                     .padding(.horizontal)
-//
-//                Image(uiImage: Bundle.main.icon ?? UIImage())
-//                    .resizable()
-//                    .scaledToFill()
-//                    .clipped()
-//                    .clipShape(RoundedRectangle(cornerRadius: 22))
-//                    .frame(width: 100, height: 100, alignment: .center)
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("\(Bundle.main.appName)")
@@ -42,7 +35,7 @@ public struct AboutView: View {
                 }
                 .foregroundStyle(.primary)
             }
-            .padding([.leading, .top, .trailing], 12)
+            .padding(24)
 
             VStack(alignment: .leading, spacing: 8) {
                 LabeledContent("Appliation support from") {

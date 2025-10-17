@@ -13,6 +13,7 @@ import SharedComponents
 import SwiftUI
 
 struct GameMenuView: View {
+    @Namespace var animation
     @Binding var selectedGame: Game?
 
     @State private var showAbout = false
@@ -29,26 +30,21 @@ struct GameMenuView: View {
                 ScrollView {
                     ForEach(Game.allCases, id: \.self) { game in
                         GameItemButtonView(game: game)
-                        .padding(.bottom, 4)
+                        .padding(.bottom, 16)
                         .onTapGesture {
                             selectedGame = game
                         }
                     }
                 }
-                .padding(.top, 4)
             }
-            .padding(4)
-//            .background {
-//                RoundedRectangle(cornerRadius: 18, style: .continuous)
-//                    .fill(.gameMenuBackground)
-//            }
         }
         .sheet(isPresented: $showSettings) {
             SettingsView()
+                .navigationTransition(.zoom(sourceID: "settings", in: animation))
         }
         .sheet(isPresented: $showAbout) {
             AboutView()
-                .presentationDetents([.height(350)])
+                .navigationTransition(.zoom(sourceID: "aboutBox", in: animation))
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {
@@ -57,6 +53,7 @@ struct GameMenuView: View {
                 }, label: {
                     Image(systemName: "gearshape")
                 })
+                .matchedTransitionSource(id: "settings", in: animation)
             }
 
             ToolbarItem(placement: .bottomBar) {
@@ -72,6 +69,7 @@ struct GameMenuView: View {
                    label: {
                 Image(systemName: "info.circle")
             })
+            .matchedTransitionSource(id: "aboutBox", in: animation)
         }
     }
 }
