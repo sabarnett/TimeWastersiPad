@@ -46,9 +46,19 @@ struct SettingsView: View {
             .listStyle(.plain)
             .navigationTitle("Game Settings")
             .toolbar {
-                Button(role: .cancel,
-                       action: { dismiss() },
-                       label: { Image(systemName: "xmark.app").scaleEffect(1.3) })
+                ToolbarItem {
+                    if #available(iOS 26.0, *) {
+                        Button(role: .close,
+                               action: { dismiss() }
+                        )
+                        .glassEffect()
+                    } else {
+                        Button(role: .cancel,
+                               action: { dismiss() },
+                               label: { Image(systemName: "xmark.app").scaleEffect(1.3) }
+                        )
+                    }
+                }
             }
             .preferredColorScheme(displayStyle)
         }
