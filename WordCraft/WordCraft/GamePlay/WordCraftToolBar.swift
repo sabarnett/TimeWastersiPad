@@ -19,7 +19,7 @@ struct WordCraftToolBar: View {
         HStack {
             Spacer()
 
-            Text(viewModel.score.formatted(.number.precision(.integerLength(3))))
+            Text(viewModel.score.formatted(.number.precision(.integerLength(3...6))))
                 .fixedSize()
                 .padding(.horizontal, 6)
                 .foregroundStyle(.red.gradient)
