@@ -15,7 +15,6 @@ import SwiftUI
 struct GameMenuView: View {
     @Binding var selectedGame: Game?
 
-    @State private var showInfoFor: Game?
     @State private var showAbout = false
     @State private var showSettings = false
 
@@ -29,26 +28,20 @@ struct GameMenuView: View {
             VStack(alignment: .leading) {
                 ScrollView {
                     ForEach(Game.allCases, id: \.self) { game in
-                        GameItemButtonView(game: game.gameDefinition, infoPressed: {
-                            showInfoFor = game
-                        })
+                        GameItemButtonView(game: game)
                         .padding(.bottom, 4)
                         .onTapGesture {
                             selectedGame = game
                         }
                     }
                 }
-                .padding(.top, 16)
+                .padding(.top, 4)
             }
             .padding(4)
-            .background {
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .fill(.gameMenuBackground)
-            }
-        }
-
-        .sheet(item: $showInfoFor) { game in
-            GameInfoView(gameData: game.gameDefinition)
+//            .background {
+//                RoundedRectangle(cornerRadius: 18, style: .continuous)
+//                    .fill(.gameMenuBackground)
+//            }
         }
         .sheet(isPresented: $showSettings) {
             SettingsView()

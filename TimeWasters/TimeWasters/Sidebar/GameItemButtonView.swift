@@ -14,30 +14,42 @@ import SwiftUI
 
 struct GameItemButtonView: View {
     @Environment(\.colorScheme) private var colorScheme
-
-    var game: GameDefinition
-    var infoPressed: () -> Void
+    @Namespace var animation
+    @State private var showInfoFor: Game?
+    var game: Game
 
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Image(systemName: game.gameIcon)
-                    Text(game.title)
+                    Image(systemName: game.gameDefinition.gameIcon)
+                    Text(game.gameDefinition.title)
+                        .font(.callout)
                         .bold()
                 }
             }
             Spacer()
-            Image(systemName: "info.square")
-                .onTapGesture {
-                    infoPressed()
+            if #available(iOS 26.0, *) {
+                Button("", systemImage: "info.circle") {
+                    showInfoFor = game
                 }
+                .glassEffect()
+                .matchedTransitionSource(id: "showInfo", in: animation)
+            } else {
+                Button("", systemImage: "info.circle") {
+                    showInfoFor = game
+                }
+                .matchedTransitionSource(id: "showInfo", in: animation)
+            }
         }
-        .padding(8)
         .foregroundStyle(.primary)
+        .sheet(item: $showInfoFor) { game in
+            GameInfoView(gameData: game.gameDefinition)
+                .navigationTransition(.zoom(sourceID: "showInfo", in: animation))
+        }
     }
 }
 
 #Preview {
-    GameItemButtonView(game: GameDefinition.example, infoPressed: { })
+    GameItemButtonView(game: Game.adventure)
 }
