@@ -11,6 +11,7 @@
 
 import SwiftUI
 
+// swiftlint:disable inclusive_language
 public enum Game: String, CaseIterable, Identifiable {
     case minesweeper, wordcraft, numberCombinations, ticTacToe,
          othello,
@@ -283,3 +284,4 @@ extension Game {
         text.joined(separator: "\n\n")
     }
 }
+// swiftlint:enable inclusive_language
