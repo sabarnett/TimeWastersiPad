@@ -14,7 +14,8 @@ import SwiftUI
 public enum Game: String, CaseIterable, Identifiable {
     case minesweeper, wordcraft, numberCombinations, ticTacToe,
          othello,
-         snake, adventure, matchedPairs, wordSearch
+         snake, adventure, matchedPairs, wordSearch,
+         codeMaster
 
     public var id: Game { self }
 
@@ -38,6 +39,8 @@ public enum Game: String, CaseIterable, Identifiable {
             return matchedPairsGame()
         case .wordSearch:
             return wordSearchGame()
+        case .codeMaster:
+            return codeMasterGame()
         }
     }
 }
@@ -243,6 +246,28 @@ extension Game {
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
                        gameIcon: "wonsign.square",
+                       hasSettings: true
+        )
+    }
+
+    // MARK: - Word Search
+    private func codeMasterGame() -> GameDefinition {
+        GameDefinition(id: Game.codeMaster,
+                       title: "Code Master",
+                       tagLine: "Can you find the secret code?",
+                       description: textBlock(
+                        "This is a game of skill and logic.",
+                        "Your task is to find the secret code.",
+                        "Use the keyboard to select key items."
+                       ),
+                       gamePlay: textBlock(
+                        "You will be presented with a secret code and a 'keyboard' of options.",
+                        "your job is to work out what keys have been used and in what order.",
+                        "The game is complete when you identify the secret key."
+                       ),
+                       credits: "Steven Barnett",
+                       link: "http://www.sabarnett.co.uk",
+                       gameIcon: "circle.grid.3x3.fill",
                        hasSettings: true
         )
     }

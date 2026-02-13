@@ -20,6 +20,7 @@ import TicTacToe
 import WordCraft
 import WordSearch
 import Snake
+import CodeMaster
 
 /// Single place to generate the game view or the game
 /// settings view
@@ -45,6 +46,8 @@ struct GameViewFactory {
             AnyView(WordSearchView(gameData: game))
         case .snake:
             AnyView(SnakeGameView(gameData: game))
+        case .codeMaster:
+            AnyView(CodeMasterGameView(gameData: game))
         @unknown default:
             fatalError("Unable to determine game view")
         }
@@ -70,9 +73,10 @@ struct GameViewFactory {
             AnyView(WordSearchSettingsView())
         case .snake:
             AnyView(SnakeSettingsView())
+        case .codeMaster:
+            AnyView(CodeMasterSettingsView())
         @unknown default:
             fatalError("Unable to determine game settings view")
         }
     }
-
 }
