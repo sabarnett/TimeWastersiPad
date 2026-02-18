@@ -257,13 +257,14 @@ extension Game {
                        title: "Code Master",
                        tagLine: "Can you find the secret code?",
                        description: textBlock(
-                        "This is a game of skill and logic.",
-                        "Your task is to find the secret code.",
-                        "Use the keyboard to select key items."
+                        "Code Master is a classic code-breaking board game. The computer secretly arranges a sequence of colored pegs or Emojis — Between 3 and 6 depending on the options — in a row hidden behind a shield. The player then tries to guess the exact sequence with as few tries as possible.",
+                        "After each guess, the player gets feedback using small black and white pegs. A black peg means you placed a correct color/Emoji in the correct position, while a white peg means a correct color/Emoji is present but in the wrong position. No peg means that color isn't in the code at all. The feedback doesn't reveal which specific pegs earned which response, adding an extra layer of deduction.",
+                        "The player uses logic and process of elimination to narrow down the possibilities with each turn. When they crack the code, they win.",
+                        "The game is over when all pegs match exactly. The number of moves takenis your score."
                        ),
                        gamePlay: textBlock(
-                        "You will be presented with a secret code and a 'keyboard' of options.",
-                        "your job is to work out what keys have been used and in what order.",
+                        "Depending on the difficulty level and selected theme, you are presented with a secret code (greyed out). There will also be a 'keyboard' along the bottom of the screen showing all possible pegs that can be in the secret code.",
+                        "Your job is to work out what pegs have been used and in what order. Select the pegs from the keyboard and, once you are sure you have the code, press the Guess button. You will get feedback using black and white pegs. A black peg means you placed a correct color/Emoji in the correct position, while a white peg means a correct color/Emoji is present but in the wrong position. ",
                         "The game is complete when you identify the secret key."
                        ),
                        credits: "Steven Barnett",
