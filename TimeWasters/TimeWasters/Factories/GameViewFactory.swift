@@ -20,7 +20,7 @@ import TicTacToe
 import WordCraft
 import WordSearch
 import Snake
-import CodeMaster
+import CodeMasters
 
 /// Single place to generate the game view or the game
 /// settings view
