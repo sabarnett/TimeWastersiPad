@@ -20,12 +20,13 @@ At present, this Mac app contains nine games;
 * Othello
 * Matched Pairs
 * Word Search
+* Code Master
 
 These are a mixture of games I have adapted and games I have written myself. 
 
 * Minesweeper and WordCraft were created by [Paul Hudson in his Hacking with Swift+ live streams]( https://www.hackingwithswift.com/plus ). I have 'messed' with them to extend the games. 
 
-* Snake, Number Combinations, Tic Tac Toe, Othello, Matched Pairs and Word Search are mine. I've picked up the basic logic from web articles but have written the code myself.
+* Snake, Number Combinations, Tic Tac Toe, Othello, Matched Pairs, Word Search and Code Master are mine. I've picked up the basic logic from web articles but have written the code myself.
 
 * Pyramid of Doom is a Stott Adams game from way back when the TRS-80 was still cool - this is my port of that game, taken from the original C code and ported to Swift. I then added a SwiftUI front end as the original game was a console line game.
 
@@ -150,6 +151,29 @@ The game supports three levels of play:
 * Hard - where words are arranged in all vertical, horizontal or diagonal directions.
 
 Recognising that this can be a difficult game to complete, there is also a hint mode where the player can type a single letter on the keyboard and all occurrences of that letter will be highlighted. So as to not make the game too easy, they are only highlighted for 2 seconds and it incurs a 10 second penalty on your score. 
+
+## Code Master
+
+Back in the day, there was a craze for a game called Master Mind. The premise was quite simple; player one created a code using coloured pegs and player two had to guess the code. When a guess was made, the player would be told how many pegs they had correct and in the correct place and how many pegs they had correct but in the wrong place. By a process of elimination and logical deduction, the player could deduce the code. Code Master is a variant of that game.
+
+![CodeMaster](./Images/twiCodeMaster.png)
+
+In the original game, you had ten moves to correctly guess the code before you lost the game. My variant lets you try as many times as you like and records the number of attempts for the leader board. 
+
+In another change from the original game, I have set up the game to support four levels of play. As a player, you can set the game level you want to play at or have the game randomly select a level:
+
+* Easy - where the code is limited to three items,
+* Medium - where the game works like the original with four items,
+* Hard - where we step up and have five item codes,
+* Very Hard - where we get fiendishly difficult with six items.
+
+I also modified the game to move from just coloured pegs. Games now have a theme which could be coloured pegs or could be themed emojis. The player can elect to use a specific theme or have the system randomly generate a theme for the game.
+
+Recognising that the game can be difficult at the hard and very hard levels, I relented and added a facility where you can see the code. This ends the game, but also takes away some of the frustration when you're struggling.
+
+![CodeMaster](./Images/twiCodeReveal.png)
+
+While not a 100% faithful recreation of the original game, this implementation can be used to play the original or to play one of the variants for more or less difficulty.
 
 ## Overviews
 
