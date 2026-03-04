@@ -18,7 +18,7 @@ public struct CodeMasterGameView: View {
 
     @State public var gameData: Game
     @State private var selection: Int = 0
-    @StateObject private var game: CodeMasterGame = CodeMasterGame()
+    @State private var game: CodeMasterGame = CodeMasterGame()
     @State private var showLeaderBoard = false
     @State private var showMasterCode = false
 
@@ -102,12 +102,9 @@ public struct CodeMasterGameView: View {
                 }
             }
         }
-        .onAppear {
-            game.playBackgroundSound()
-        }
-        .onDisappear {
-            game.stopSounds()
-        }
+        .task { game.restart() }
+        .onAppear { game.playBackgroundSound() }
+        .onDisappear { game.stopSounds() }
         .background(colorScheme == .dark ? Color.black : Color.white)
 
         .sheet(isPresented: $game.showGamePlay) {

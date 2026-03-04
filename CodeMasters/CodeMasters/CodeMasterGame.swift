@@ -13,29 +13,33 @@ import SwiftUI
 import AVKit
 import Combine
 
+@Observable
 class CodeMasterGame: ObservableObject {
 
+    @ObservationIgnored
     @AppStorage(Constants.cmPlaySounds) var cmPlaySounds = false {
         didSet {
             updateSounds()
         }
     }
 
+    @ObservationIgnored
     @AppStorage(Constants.cmGameLevel) var cmGameLevel: CodeMasterGameLevel = .medium
+    @ObservationIgnored
     @AppStorage(Constants.cmGameTheme) var cmGameTheme: String = Themes.Random
 
     var leaderBoard: LeaderBoard = LeaderBoard()
 
-    @Published var showGamePlay: Bool = false
-    @Published var isGameOver = false
+    var showGamePlay: Bool = false
+    var isGameOver = false
 
-    @Published var masterCode: Code = Code(kind: .master(reveal: false), pegCount: 4)
-    @Published var guess: Code = Code(kind: .guess, pegCount: 4)
-    @Published var attempts = [Code]()
-    @Published var pegChoices = [Peg]()
-    @Published var themeName: String = "None"
-    @Published var pegCount: Int = 4
-    @Published var gameLevel: CodeMasterGameLevel = .easy
+    var masterCode: Code = Code(kind: .master(reveal: false), pegCount: 4)
+    var guess: Code = Code(kind: .guess, pegCount: 4)
+    var attempts = [Code]()
+    var pegChoices = [Peg]()
+    var themeName: String = "None"
+    var pegCount: Int = 4
+    var gameLevel: CodeMasterGameLevel = .easy
 
     var canGuess: Bool {
         // Cannot guess until all pegs have a value
@@ -49,9 +53,10 @@ class CodeMasterGame: ObservableObject {
         return true
     }
 
-    init() {
-        self.restart()
-    }
+    // Note: This init can be called more than once, so we should not
+    // start the game here. Any attempt to start the game here may
+    // cause problems with the sound being initialised more than once.
+    init() { }
 
     func changeGuessPeg(at index: Int, to: Peg) {
         guess.pegs[index] = to
