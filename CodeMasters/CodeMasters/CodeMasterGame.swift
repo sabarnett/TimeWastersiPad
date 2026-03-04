@@ -11,10 +11,9 @@
 
 import SwiftUI
 import AVKit
-import Combine
 
 @Observable
-class CodeMasterGame: ObservableObject {
+class CodeMasterGame {
 
     @ObservationIgnored
     @AppStorage(Constants.cmPlaySounds) var cmPlaySounds = false {
