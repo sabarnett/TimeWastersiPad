@@ -13,46 +13,6 @@ import SwiftUI
 import AVKit
 import Combine
 
-enum CodeMasterGameLevel: String, Identifiable, CaseIterable, CustomStringConvertible  {
-    case random, easy, medium, hard, veryhard
-
-    var id: String { rawValue }
-
-    var description: String {
-        switch self {
-        case .random: return "Random"
-        case .easy: return "Easy"
-        case .medium: return "Medium"
-        case .hard: return "Hard"
-        case .veryhard: return "Very Hard"
-        }
-    }
-
-    static var randomLevel: CodeMasterGameLevel {
-        while(true) {
-            if let randomLevel = CodeMasterGameLevel.allCases.randomElement(),
-               randomLevel != .random {
-                return randomLevel
-            }
-        }
-    }
-
-    var pegCount: Int {
-        switch self {
-        case .random:
-            Int.random(in: 3...6)
-        case .easy:
-            3
-        case .medium:
-            4
-        case .hard:
-            5
-        case .veryhard:
-            6
-        }
-    }
-}
-
 class CodeMasterGame: ObservableObject {
 
     @AppStorage(Constants.cmPlaySounds) var cmPlaySounds = false {
