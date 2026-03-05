@@ -13,24 +13,26 @@ import AVKit
 import SwiftUI
 import SharedComponents
 
-class OthelloViewModel: ObservableObject {
+@Observable
+class OthelloViewModel {
 
+    @ObservationIgnored
     @AppStorage(Constants.othelloPlaySounds) var othelloPlaySounds = true {
         didSet {
             updateSounds()
         }
     }
 
-    @Published var gameBoard = GameBoard()
-    @Published var playerScore = 0
-    @Published var computerScore = 0
-    @Published var statusMessage = " "
-    @Published var gameState: GameState = .playerMove
-    @Published var showGamePlay: Bool = false
-    @Published var speakerIcon = ""
-    @Published var leaderBoard = LeaderBoard()
+    var gameBoard = GameBoard()
+    var playerScore = 0
+    var computerScore = 0
+    var statusMessage = " "
+    var gameState: GameState = .playerMove
+    var showGamePlay: Bool = false
+    var speakerIcon = ""
+    var leaderBoard = LeaderBoard()
 
-    @Published var notifyMessage: ToastConfig?
+    var notifyMessage: ToastConfig?
 
     var tiles: [[Tile]] { gameBoard.board }
     var tileCount: Int { gameBoard.board.count }
@@ -40,12 +42,9 @@ class OthelloViewModel: ObservableObject {
     var backgroundURL: URL { soundFile(named: "background") }
     var chimeURL: URL { soundFile(named: "chime") }
 
+    // Do not initialise the game here as the init can be called more than once.
     init() {
-        newGame()
         speakerIcon = othelloPlaySounds ? "speaker.slash" : "speaker"
-        if othelloPlaySounds {
-            playBackgroundSound()
-        }
     }
 
     /// Starts a new game. This involves creating a new game board, setting
@@ -68,6 +67,10 @@ class OthelloViewModel: ObservableObject {
             statusMessage = "You go first!"
             gameState = .playerMove
         }
+
+        if othelloPlaySounds {
+            playBackgroundSound()
+        }
     }
 
     /// Player selected a tile, ensure the move is valid and flip the tile
@@ -81,8 +84,6 @@ class OthelloViewModel: ObservableObject {
 
         gameState = .computerMove
         resetHints()
-
-        objectWillChange.send()
 
         let position = gameBoard.findTile(selectedTile.id)
         if !makeMove(board: gameBoard, tileState: .player, xPos: position.xPos, yPos: position.yPos) {
@@ -320,7 +321,6 @@ class OthelloViewModel: ObservableObject {
     /// the scteen for 3.5 seconds, clear them away again.
     @MainActor
     func showHint() {
-        objectWillChange.send()
         markPlayerPotentialMoves()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
@@ -334,7 +334,6 @@ class OthelloViewModel: ObservableObject {
         let marked = gameBoard.allTiles.filter({$0.state == .potentialPlayerMove})
         if marked.count == 0 { return }
 
-        objectWillChange.send()
         marked.forEach {$0.state = .empty}
     }
 

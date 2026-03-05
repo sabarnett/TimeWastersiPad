@@ -15,7 +15,7 @@ import SharedComponents
 public struct OthelloView: View {
 
     @State public var gameData: Game
-    @StateObject private var model: OthelloViewModel = OthelloViewModel()
+    @State private var model: OthelloViewModel = OthelloViewModel()
 
     @State private var isGameOver: Bool = false
     @State private var showLeaderBoard: Bool = false
@@ -104,6 +104,7 @@ public struct OthelloView: View {
                 }
             }
         }
+        .task { model.newGame() }
         .onChange(of: model.gameState) { _, new in
             if new == .playerWin || new == .computerWin {
                 isGameOver = true

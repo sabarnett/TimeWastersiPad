@@ -18,14 +18,15 @@ enum TileState {
     case potentialPlayerMove
 }
 
-class Tile: Identifiable, ObservableObject {
+@Observable
+class Tile: Identifiable {
     let id = UUID()
 
     static func == (lhs: Tile, rhs: Tile) -> Bool {
         lhs.id == rhs.id
     }
 
-    @Published var state: TileState = .empty
+    var state: TileState = .empty
 
     var foregroundColor: Color {
         switch state {

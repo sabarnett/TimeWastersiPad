@@ -13,7 +13,7 @@ import SwiftUI
 
 struct GameBoardView: View {
 
-    @ObservedObject var model: OthelloViewModel
+    @State var model: OthelloViewModel
     var cellSize: CGFloat
 
     var body: some View {

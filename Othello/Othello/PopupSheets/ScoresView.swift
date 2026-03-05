@@ -13,7 +13,7 @@ import SwiftUI
 
 struct ScoresView: View {
 
-    @ObservedObject var model: OthelloViewModel
+    @State var model: OthelloViewModel
 
     var body: some View {
         List {
