@@ -15,7 +15,7 @@ import SharedComponents
 public struct MatchedPairsView: View {
     @AppStorage(Constants.gameDifficulty) var gameDifficulty: GameDifficulty = .easy
     @State public var gameData: Game
-    @StateObject private var model = MatchedPairsGameModel()
+    @State private var model = MatchedPairsGameModel()
 
     @State private var showGamePlay: Bool = false
     @State private var showLeaderBoard: Bool = false
@@ -45,17 +45,17 @@ public struct MatchedPairsView: View {
                 Spacer()
                 GeometryReader { proxy in
 
-                    GameGridView(gridItemWidth: cardWidth(proxy)) { tile in
+                    GameGridView(model: model, gridItemWidth: cardWidth(proxy)) { tile in
                         withAnimation {
                             model.select(tile)
                         }
                     }
                     .padding()
                     .disabled(model.gameState != .playing)
-                    .environmentObject(model)
                 }
                 Spacer()
             }
+            .task { model.newGame() }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
                     Button(action: {

@@ -17,20 +17,26 @@ enum GameState {
     case gameOver
 }
 
-class MatchedPairsGameModel: ObservableObject {
+@Observable
+class MatchedPairsGameModel {
+
+    @ObservationIgnored
     @AppStorage(Constants.playSound) var playSounds = true {
         didSet {
             updateSounds()
         }
     }
 
+    @ObservationIgnored
     @AppStorage(Constants.gameDifficulty) var gameDifficulty: GameDifficulty = .easy
+
+    @ObservationIgnored
     @AppStorage(Constants.cardBackground) private var cardBg: CardBackgrounds = .one
 
-    @Published var tiles: [Tile] = []
-    @Published var gameState: GameState = .playing
-    @Published var moves: Int = 0
-    @Published var time: Int = 0
+    var tiles: [Tile] = []
+    var gameState: GameState = .playing
+    var moves: Int = 0
+    var time: Int = 0
 
     var leaderBoard = LeaderBoard()
     var columns: Int = 6
@@ -40,9 +46,9 @@ class MatchedPairsGameModel: ObservableObject {
     /// Determines which icon we need to use on the tool bar for toggling the sounds
     var speakerIcon: String = Constants.soundsOn
 
-    init() {
-        newGame()
-    }
+    // Do not do initialisation here if it affects sounds or game state. As
+    // this is an @Observable class, the init could be called more than once.
+    init() { }
 
     /// Starts a new game, generating a new card deck and a new card background. It
     /// resets the score and the timer.
