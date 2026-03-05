@@ -13,33 +13,51 @@ import SwiftUI
 import SharedComponents
 import AVKit
 
-enum GameState {
+enum GameState: CustomStringConvertible {
     case active
     case draw
     case playerWin
     case computerWin
+
+    var description: String {
+        switch self {
+        case .active: "Active"
+        case .draw: "Draw"
+        case .playerWin: "Player Win"
+        case .computerWin: "Computer Win"
+        }
+    }
 }
 
-class TicTacToeGameModel: ObservableObject {
+@Observable
+class TicTacToeGameModel {
 
+    @ObservationIgnored
     @AppStorage(Constants.PlayerWins) var playerWins = 0
+
+    @ObservationIgnored
     @AppStorage(Constants.ComputerWins) var computerWins = 0
+
+    @ObservationIgnored
     @AppStorage(Constants.DrawsCount) var draws = 0
+
+    @ObservationIgnored
     @AppStorage(Constants.PlaySounds) var playSounds: Bool = true
 
-    @Published var gameBoard: [PuzzleTile] = []
-    @Published var messages: String = "Your Move"
-    @Published var playersGo: Bool = true
+    var gameBoard: [PuzzleTile] = []
+    var messages: String = "Your Move"
+    var playersGo: Bool = true
 
-    @Published var showGamePlay: Bool = false
-    @Published var gameState: GameState = .active
+    var showGamePlay: Bool = false
+    var gameState: GameState = .active
 
-    @Published var speakerIcon: String = "speaker"
+    var speakerIcon: String = "speaker"
 
-    @Published var notifyMessage: ToastConfig?
+    var notifyMessage: ToastConfig?
 
+    // Do not initialise the game from here. Because we are an @Observable, the .init can
+    // be called more than once.
     init() {
-        initialiseGameBoard()
         speakerIcon = playSounds ? "speaker.slash" : "speaker"
     }
 
@@ -63,7 +81,6 @@ class TicTacToeGameModel: ObservableObject {
         guard playersGo else { return false }
 
         playersGo.toggle()
-        objectWillChange.send()
 
         playPlayerClick()
         tile.state = .player

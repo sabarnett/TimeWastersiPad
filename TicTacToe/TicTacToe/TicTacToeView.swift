@@ -15,7 +15,7 @@ import SharedComponents
 public struct TicTacToeView: View {
 
     @State public var gameData: Game
-    @StateObject var model = TicTacToeGameModel()
+    @State var model = TicTacToeGameModel()
 
     var gameOverMessage: String {
         switch model.gameState {
@@ -94,6 +94,7 @@ public struct TicTacToeView: View {
                 }
             }
         }
+        .task { model.newGame() }
         .toast(toastMessage: $model.notifyMessage)
         .sheet(isPresented: $model.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)

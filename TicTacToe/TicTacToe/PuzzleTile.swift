@@ -17,9 +17,10 @@ enum TileState {
     case computer
 }
 
-class PuzzleTile: Identifiable, ObservableObject {
+@Observable
+class PuzzleTile: Identifiable {
     var id: UUID = UUID()
-    @Published var state: TileState
+    var state: TileState
 
     init(state: TileState) {
         self.state = state

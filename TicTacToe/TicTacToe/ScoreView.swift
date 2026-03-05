@@ -13,16 +13,23 @@ import SwiftUI
 
 struct ScoreView: View {
 
-    @ObservedObject var model: TicTacToeGameModel
+    @State var model: TicTacToeGameModel
 
     var body: some View {
         List {
-            scoreItem(title: "😀 Your Score",
+            scoreItem(title: "😀 Player Wins",
                       score: model.playerWins)
-            scoreItem(title: "🤖 My Score",
+            scoreItem(title: "🤖 Computer Wins",
                       score: model.computerWins)
             scoreItem(title: "🤲 Draws",
                       score: model.draws)
+
+            // This is a fudge. None of the score properties are observed, so the
+            // view does not update when they change. By including the game state,
+            // we will refresh this view when the model changes.
+            Text("\(model.gameState.description)")
+                .opacity(0)
+
         }.listStyle(.plain)
     }
 

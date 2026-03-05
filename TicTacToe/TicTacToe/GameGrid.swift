@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct GameGrid: View {
-    @ObservedObject var model = TicTacToeGameModel()
+    @Bindable var model: TicTacToeGameModel
 
     let tileSize: CGFloat
     var columns: [GridItem]
