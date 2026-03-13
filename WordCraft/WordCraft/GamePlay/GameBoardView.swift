@@ -43,6 +43,14 @@ struct GameBoardView: View {
                     }
                 }
             }
+            HStack {
+                Button("Refresh Letters") {
+                    withAnimation {
+                        viewModel.refreshLetters()
+                    }
+                }
+                .buttonStyle(.bordered)
+            }
             if wordcraftShowSelectedLetters {
                 HStack {
                     ForEach(viewModel.selectedLetters, id: \.self) { tile in

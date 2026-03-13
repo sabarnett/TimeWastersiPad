@@ -57,7 +57,7 @@ public struct WordCraftView: View {
                        label: { Image(systemName: "arrow.uturn.left.circle") })
                 .help("Restart the game")
 
-                Button(action: { viewModel.saveGame() },
+                Button(action: { viewModel.showSaveGameConfirmation = true },
                        label: { Image(systemName: "tray.and.arrow.down") })
                 .help("Save the current game state.")
 
@@ -96,6 +96,11 @@ public struct WordCraftView: View {
             Button("Yes", role: .destructive) { viewModel.restoreGame() }
         } message: {
             Text("Are you sure you want to reload the saved gave? Any current progress will be lost.")
+        }
+        .alert("Save Game?", isPresented: $viewModel.showSaveGameConfirmation) {
+            Button("Yes", role: .destructive) { viewModel.saveGame() }
+        } message: {
+            Text("Are you sure you want to save this gave? Any previously saved game will be lost.")
         }
 
         .onDisappear {

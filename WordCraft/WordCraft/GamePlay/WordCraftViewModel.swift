@@ -32,6 +32,7 @@ class WordCraftViewModel {
     var showGamePlay: Bool = false
     var showResetConfirmation: Bool = false
     var showReloadConfirmation: Bool = false
+    var showSaveGameConfirmation: Bool = false
 
     private var targetLetter = "A"
     private var targetLength = 0
@@ -45,6 +46,15 @@ class WordCraftViewModel {
     }
 
     func reset() {
+        refreshLetters()
+
+        usedWords = []
+        score = 0
+
+        speakerIcon = wordcraftPlaySounds ? "speaker.slash" : "speaker"
+    }
+
+    func refreshLetters() {
         columns = [[Tile]]()
 
         for col in 0..<5 {
@@ -59,12 +69,8 @@ class WordCraftViewModel {
         }
 
         selectRule()
-        usedWords = []
-        selected.removeAll()
         selectedLetters = []
-        score = 0
-
-        speakerIcon = wordcraftPlaySounds ? "speaker.slash" : "speaker"
+        selected.removeAll()
     }
 
     // A key was pressed on the keyboard; process return, backspace or a letter key.
