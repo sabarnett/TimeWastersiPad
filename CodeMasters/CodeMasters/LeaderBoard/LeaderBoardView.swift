@@ -36,56 +36,89 @@ struct LeaderBoardView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Leader Board")
-                    .font(.title)
-                Button(role: .destructive,
-                       action: { showConfirmation = true },
-                       label: { Image(systemName: "trash") })
-                Spacer()
-                Button(role: .cancel,
-                       action: { dismiss() },
-                       label: { Image(systemName: "xmark.app").scaleEffect(1.8) })
-            }
+        NavigationStack {
+            VStack(alignment: .leading) {
+                //                HStack {
+                //                    Text("Leader Board")
+                //                        .font(.title)
+                //                    Button(role: .destructive,
+                //                           action: { showConfirmation = true },
+                //                           label: { Image(systemName: "trash") })
+                //                    Spacer()
+                //                    Button(role: .cancel,
+                //                           action: { dismiss() },
+                //                           label: { Image(systemName: "xmark.app").scaleEffect(1.8) })
+                //                }
 
-            Picker("", selection: $gameLevel) {
-                Text("Easy").tag(CodeMasterGameLevel.easy)
-                Text("Medium").tag(CodeMasterGameLevel.medium)
-                Text("Hard").tag(CodeMasterGameLevel.hard)
-                Text("Very Hard").tag(CodeMasterGameLevel.veryhard)
-            }
-            .pickerStyle(SegmentedPickerStyle())
+                Picker("", selection: $gameLevel) {
+                    Text("Easy").tag(CodeMasterGameLevel.easy)
+                    Text("Medium").tag(CodeMasterGameLevel.medium)
+                    Text("Hard").tag(CodeMasterGameLevel.hard)
+                    Text("Very Hard").tag(CodeMasterGameLevel.veryhard)
+                }
+                .pickerStyle(SegmentedPickerStyle())
 
-            List {
-                LeaderBoardItemHeader()
-                ForEach(leaderItems) { leaderItem in
-                    LeaderBoardItemView(leaderItem: leaderItem)
+                List {
+                    LeaderBoardItemHeader()
+                    ForEach(leaderItems) { leaderItem in
+                        LeaderBoardItemView(leaderItem: leaderItem)
+                    }
+                }
+                .listStyle(.plain)
+                .alert(
+                    "Clear Leader Board?",
+                    isPresented: $showConfirmation,
+                    actions: {
+                        Button(
+                            role: .destructive,
+                            action: { leaderBoard.clear() },
+                            label: { Text("Yes")}
+                        )
+                        Button(
+                            role: .cancel,
+                            action: { },
+                            label: { Text("No") }
+                        )
+                    },
+                    message: {
+                        Text("Pressing Yes will clear all leader board history. Are you sure?")
+                    })
+            }
+            .navigationTitle("Leader Board")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                if #available(iOS 26.0, *) {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(role: .destructive,
+                               action: { showConfirmation = true },
+                               label: { Image(systemName: "trash") })
+                        .tint(.red)
+                    }
+
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(role: .close,
+                               action: { dismiss() }
+                        )
+                    }
+                } else {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(role: .destructive,
+                               action: { showConfirmation = true },
+                               label: { Image(systemName: "trash") })
+                        .tint(.red)
+                    }
+
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(role: .cancel,
+                               action: { dismiss() },
+                               label: { Image(systemName: "xmark.app").scaleEffect(1.3) }
+                        )
+                    }
                 }
             }
-            .listStyle(.plain)
-            .alert(
-                "Clear Leader Board?",
-                isPresented: $showConfirmation,
-                actions: {
-                    Button(
-                        role: .destructive,
-                        action: { leaderBoard.clear() },
-                        label: { Text("Yes")}
-                    )
-                    Button(
-                        role: .cancel,
-                        action: { },
-                        label: { Text("No") }
-                    )
-                },
-                message: {
-                    Text("Pressing Yes will clear all leader board history. Are you sure?")
-                })
-        }
-        .padding()
-        .onAppear {
-            gameLevel = initialTab
+            .onAppear {
+                gameLevel = initialTab
+            }
         }
     }
 }
