@@ -28,12 +28,7 @@ public struct GameInfoView: View {
     public var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-//                HStack {
-//                    Text(gameData.title)
-//                        .font(.title)
-//                    Spacer()
-//
-//                }
+                Text(gameData.title).font(.title)
                 Text(gameData.tagLine).font(.title2)
                 ScrollView {
                     Text(gameData.description)
@@ -48,7 +43,6 @@ public struct GameInfoView: View {
                     .foregroundStyle(.primary)
                 }
             }
-            .navigationTitle(gameData.title)
             .toolbar {
                 ToolbarItem {
                     if #available(iOS 26.0, *) {
