@@ -29,18 +29,10 @@ struct GameItemButtonView: View {
                 }
             }
             Spacer()
-            if #available(iOS 26.0, *) {
-                Button("", systemImage: "info.circle") {
-                    showInfoFor = game
-                }
-                .glassEffect()
-                .matchedTransitionSource(id: "showInfo", in: animation)
-            } else {
-                Button("", systemImage: "info.circle") {
-                    showInfoFor = game
-                }
-                .matchedTransitionSource(id: "showInfo", in: animation)
+            Button("", systemImage: "info.circle") {
+                showInfoFor = game
             }
+            .matchedTransitionSource(id: "showInfo", in: animation)
         }
         .foregroundStyle(.primary)
         .sheet(item: $showInfoFor) { game in
