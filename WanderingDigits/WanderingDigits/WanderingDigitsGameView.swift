@@ -42,8 +42,7 @@ public struct WanderingDigitsGameView: View {
             GamePlayView(game: gameData.gameDefinition)
         }
         .sheet(isPresented: $showLeaderBoard) {
-            //                LeaderBoardView(leaderBoard: game.leaderBoard,
-            //                                initialTab: game.cmGameLevel)
+            LeaderBoardView(leaderBoard: game.leaderBoard)
         }
         .sheet(isPresented: $showMasterCode, onDismiss: {
             withAnimation { game.restart() }

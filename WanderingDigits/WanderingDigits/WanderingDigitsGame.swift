@@ -26,6 +26,8 @@ final class WanderingDigitsGame {
     var isGameOver = false
     var attemptsCount = 0
 
+    var leaderBoard = LeaderBoard()
+
     func restart() {
         // TODO: setup the game
     }
