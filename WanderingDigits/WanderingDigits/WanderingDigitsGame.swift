@@ -13,7 +13,7 @@ import SwiftUI
 import AVKit
 
 @Observable
-final class WonderingDigitsGame {
+final class WanderingDigitsGame {
 
     @ObservationIgnored
     @AppStorage(Constants.wdPlaySounds) var wdPlaySounds = false {
@@ -91,7 +91,7 @@ final class WonderingDigitsGame {
     /// Creates the URL of a sound file. The file must exist within the minesweeper project
     /// bundle.
     private func soundFile(named file: String) -> URL {
-        let bun = Bundle(for: WonderingDigitsGame.self)
+        let bun = Bundle(for: WanderingDigitsGame.self)
         let sound = bun.path(forResource: file, ofType: "mp3")
         return URL(fileURLWithPath: sound!)
     }

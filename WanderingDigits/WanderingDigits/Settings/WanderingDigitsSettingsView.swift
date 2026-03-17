@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-public struct WonderingDigitsSettingsView: View {
+public struct WanderingDigitsSettingsView: View {
 
     @AppStorage(Constants.wdPlaySounds) private var wdPlaySounds = true
 
@@ -25,5 +25,5 @@ public struct WonderingDigitsSettingsView: View {
 }
 
 #Preview {
-    WonderingDigitsSettingsView()
+    WanderingDigitsSettingsView()
 }

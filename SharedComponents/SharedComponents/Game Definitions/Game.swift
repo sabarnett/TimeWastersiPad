@@ -16,7 +16,7 @@ public enum Game: String, CaseIterable, Identifiable {
     case minesweeper, wordcraft, numberCombinations, ticTacToe,
          othello,
          snake, adventure, matchedPairs, wordSearch,
-         codeMaster, wonderingDigits
+         codeMaster, wanderingDigits
 
     public var id: Game { self }
 
@@ -42,8 +42,8 @@ public enum Game: String, CaseIterable, Identifiable {
             return wordSearchGame()
         case .codeMaster:
             return codeMasterGame()
-        case .wonderingDigits:
-            return wonderingDigitsGame()
+        case .wanderingDigits:
+            return wanderingDigitsGame()
         }
     }
 }
@@ -276,21 +276,21 @@ extension Game {
         )
     }
 
-    // MARK: - Wondering Digits
-    private func wonderingDigitsGame() -> GameDefinition {
-        GameDefinition(id: Game.wonderingDigits,
-                       title: "Wondering Digits",
-                       tagLine: "Spots the out of place number?",
+    // MARK: - Wandering Digits
+    private func wanderingDigitsGame() -> GameDefinition {
+        GameDefinition(id: Game.wanderingDigits,
+                       title: "Wandering Digits",
+                       tagLine: "Spot the out of place number?",
                        description: textBlock(
-                        "Wondering Digits is a game of mathematical deduction.",
-                        "...",
-                        "...",
-                        "..."
+                        "Wandering Digits is a game of mathematical deduction.",
+                        "You have a perfectly crafted formula. Everything is well with the world and the formula calculates the right result. You pass your masterpiece to the type-setters who transcribe it into beautiful print for you.",
+                        "Sadly, someone makes a mistake and your formula no longer makes sense. One of the digits has been moved! You can't let it go out into the world like this, so you must identify the digit that has moved and put it back in it's rightful place.",
+                        "Locate the errant digit and drag it back into place in the shortest time."
                        ),
                        gamePlay: textBlock(
-                        "Your job is to analyse the formula and find the digit that is out of place",
-                        "...",
-                        "..."
+                        "Your job is to analyse the formula and find the digit that is out of place. Only one digit will have moved but the result of the calculation is obviously incorrect.",
+                        "Using logic and mathematics, locate the digit that is in the wrong place and drag it back to where it is supposed to be.",
+                        "There is no time limit but, if you want to be on the leader board, you need to locate and drag as quickly as possible."
                        ),
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",

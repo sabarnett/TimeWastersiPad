@@ -12,12 +12,12 @@
 import SwiftUI
 import SharedComponents
 
-public struct WonderingDigitsGameView: View {
+public struct WanderingDigitsGameView: View {
 
     @Environment(\.colorScheme) private var colorScheme
 
     @State public var gameData: Game
-    @State private var game: WonderingDigitsGame = WonderingDigitsGame()
+    @State private var game: WanderingDigitsGame = WanderingDigitsGame()
     @State private var showLeaderBoard = false
     @State private var showMasterCode = false
 
@@ -130,7 +130,7 @@ public struct WonderingDigitsGameView: View {
 }
 
 #Preview {
-    WonderingDigitsGameView(gameData: Game.snake)
+    WanderingDigitsGameView(gameData: Game.snake)
 }
 
 

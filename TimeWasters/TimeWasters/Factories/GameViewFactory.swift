@@ -49,8 +49,8 @@ struct GameViewFactory {
             AnyView(SnakeGameView(gameData: game))
         case .codeMaster:
             AnyView(CodeMasterGameView(gameData: game))
-        case .wonderingDigits:
-            AnyView(WonderingDigitsGameView(gameData: game))
+        case .wanderingDigits:
+            AnyView(WanderingDigitsGameView(gameData: game))
         @unknown default:
             fatalError("Unable to determine game view")
         }
@@ -78,8 +78,8 @@ struct GameViewFactory {
             AnyView(SnakeSettingsView())
         case .codeMaster:
             AnyView(CodeMasterSettingsView())
-        case .wonderingDigits:
-            AnyView(WonderingDigitsSettingsView())
+        case .wanderingDigits:
+            AnyView(WanderingDigitsSettingsView())
         @unknown default:
             fatalError("Unable to determine game settings view")
         }
