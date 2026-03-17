@@ -21,6 +21,7 @@ import WordCraft
 import WordSearch
 import Snake
 import CodeMasters
+import WanderingDigits
 
 /// Single place to generate the game view or the game
 /// settings view
@@ -48,6 +49,8 @@ struct GameViewFactory {
             AnyView(SnakeGameView(gameData: game))
         case .codeMaster:
             AnyView(CodeMasterGameView(gameData: game))
+        case .wonderingDigits:
+            AnyView(WonderingDigitsGameView(gameData: game))
         @unknown default:
             fatalError("Unable to determine game view")
         }
@@ -75,6 +78,8 @@ struct GameViewFactory {
             AnyView(SnakeSettingsView())
         case .codeMaster:
             AnyView(CodeMasterSettingsView())
+        case .wonderingDigits:
+            AnyView(WonderingDigitsSettingsView())
         @unknown default:
             fatalError("Unable to determine game settings view")
         }

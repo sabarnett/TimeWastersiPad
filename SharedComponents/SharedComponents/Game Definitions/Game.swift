@@ -16,7 +16,7 @@ public enum Game: String, CaseIterable, Identifiable {
     case minesweeper, wordcraft, numberCombinations, ticTacToe,
          othello,
          snake, adventure, matchedPairs, wordSearch,
-         codeMaster
+         codeMaster, wonderingDigits
 
     public var id: Game { self }
 
@@ -42,6 +42,8 @@ public enum Game: String, CaseIterable, Identifiable {
             return wordSearchGame()
         case .codeMaster:
             return codeMasterGame()
+        case .wonderingDigits:
+            return wonderingDigitsGame()
         }
     }
 }
@@ -251,7 +253,7 @@ extension Game {
         )
     }
 
-    // MARK: - Word Search
+    // MARK: - Code Master
     private func codeMasterGame() -> GameDefinition {
         GameDefinition(id: Game.codeMaster,
                        title: "Code Master",
@@ -270,6 +272,29 @@ extension Game {
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
                        gameIcon: "circle.grid.3x3.fill",
+                       hasSettings: true
+        )
+    }
+
+    // MARK: - Wondering Digits
+    private func wonderingDigitsGame() -> GameDefinition {
+        GameDefinition(id: Game.wonderingDigits,
+                       title: "Wondering Digits",
+                       tagLine: "Spots the out of place number?",
+                       description: textBlock(
+                        "Wondering Digits is a game of mathematical deduction.",
+                        "...",
+                        "...",
+                        "..."
+                       ),
+                       gamePlay: textBlock(
+                        "Your job is to analyse the formula and find the digit that is out of place",
+                        "...",
+                        "..."
+                       ),
+                       credits: "Steven Barnett",
+                       link: "http://www.sabarnett.co.uk",
+                       gameIcon: "rectangle.2.swap",
                        hasSettings: true
         )
     }

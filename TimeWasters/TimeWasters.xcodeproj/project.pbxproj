@@ -13,6 +13,8 @@
 		E81FF8D72E5F8CE90078EB22 /* Snake.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E81FF8D52E5F8CE90078EB22 /* Snake.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; };
 		E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E82346DC2E49F75600BF34CB /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E82A3B312F69A10500829AF3 /* WanderingDigits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E82A3B212F6998D800829AF3 /* WanderingDigits.framework */; };
+		E82A3B322F69A10500829AF3 /* WanderingDigits.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E82A3B212F6998D800829AF3 /* WanderingDigits.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E85413EA2E57543300CFC667 /* AdventureGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E92E57543300CFC667 /* AdventureGame.framework */; };
 		E85413EB2E57543300CFC667 /* AdventureGame.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E92E57543300CFC667 /* AdventureGame.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E87CA3B62E5CE8BD001459A0 /* MatchedPairs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E87CA3B52E5CE8BD001459A0 /* MatchedPairs.framework */; };
@@ -39,6 +41,13 @@
 			remoteGlobalIDString = E8D25ADB2E49F71800F29757;
 			remoteInfo = SharedComponents;
 		};
+		E82A3B202F6998D800829AF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E82A3B1A2F6998D800829AF3 /* WanderingDigits.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E82A3B102F6998D700829AF3;
+			remoteInfo = WanderingDigits;
+		};
 		E88C9E512F47700A004D24CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E88C9E4B2F47700A004D24CA /* CodeMasters.xcodeproj */;
@@ -59,6 +68,7 @@
 				E82346DF2E49F76B00BF34CB /* SharedComponents.framework in Embed Frameworks */,
 				E805C1512E508611005B69A4 /* MineSweeper.framework in Embed Frameworks */,
 				E8FF0DED2E50C0FA00D24375 /* WordCraft.framework in Embed Frameworks */,
+				E82A3B322F69A10500829AF3 /* WanderingDigits.framework in Embed Frameworks */,
 				E88D54152E54A26C001ECD5E /* NumberCombinations.framework in Embed Frameworks */,
 				E88D54742E54B3C1001ECD5E /* Othello.framework in Embed Frameworks */,
 				E81FF8D72E5F8CE90078EB22 /* Snake.framework in Embed Frameworks */,
@@ -77,6 +87,7 @@
 		E805C14F2E508611005B69A4 /* MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E81FF8C82E5F8B090078EB22 /* Snake.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Snake.xcodeproj; path = ../Snake/Snake.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E81FF8D52E5F8CE90078EB22 /* Snake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Snake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E82A3B1A2F6998D800829AF3 /* WanderingDigits.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WanderingDigits.xcodeproj; path = ../WanderingDigits/WanderingDigits.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E84ABEAD2F47691D00F3709B /* CodeMasters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodeMasters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E85413DC2E5753E000CFC667 /* AdventureGame.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AdventureGame.xcodeproj; path = ../AdventureGame/AdventureGame.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E85413E92E57543300CFC667 /* AdventureGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdventureGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +138,7 @@
 				E82346DE2E49F76B00BF34CB /* SharedComponents.framework in Frameworks */,
 				E805C1502E508611005B69A4 /* MineSweeper.framework in Frameworks */,
 				E8FF0DEC2E50C0FA00D24375 /* WordCraft.framework in Frameworks */,
+				E82A3B312F69A10500829AF3 /* WanderingDigits.framework in Frameworks */,
 				E88D54142E54A26C001ECD5E /* NumberCombinations.framework in Frameworks */,
 				E88D54732E54B3C1001ECD5E /* Othello.framework in Frameworks */,
 				E81FF8D62E5F8CE90078EB22 /* Snake.framework in Frameworks */,
@@ -176,6 +188,14 @@
 				E805C14F2E508611005B69A4 /* MineSweeper.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E82A3B1D2F6998D800829AF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E82A3B212F6998D800829AF3 /* WanderingDigits.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E84376F92E5C86A8009900CF /* Products */ = {
@@ -232,6 +252,7 @@
 		E8DB6CB22E49F69900A351A8 = {
 			isa = PBXGroup;
 			children = (
+				E82A3B1A2F6998D800829AF3 /* WanderingDigits.xcodeproj */,
 				E88C9E4B2F47700A004D24CA /* CodeMasters.xcodeproj */,
 				E8298B8D2E49FE5A00803FE0 /* TimeWasters */,
 				E85413DC2E5753E000CFC667 /* AdventureGame.xcodeproj */,
@@ -356,6 +377,10 @@
 					ProjectRef = E88D541A2E54AE66001ECD5E /* TicTacToe.xcodeproj */;
 				},
 				{
+					ProductGroup = E82A3B1D2F6998D800829AF3 /* Products */;
+					ProjectRef = E82A3B1A2F6998D800829AF3 /* WanderingDigits.xcodeproj */;
+				},
+				{
 					ProductGroup = E88D53782E549B78001ECD5E /* Products */;
 					ProjectRef = E8FF0DDF2E50C0BE00D24375 /* WordCraft.xcodeproj */;
 				},
@@ -377,6 +402,13 @@
 			fileType = wrapper.framework;
 			path = SharedComponents.framework;
 			remoteRef = E82346DB2E49F75600BF34CB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E82A3B212F6998D800829AF3 /* WanderingDigits.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WanderingDigits.framework;
+			remoteRef = E82A3B202F6998D800829AF3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E88C9E522F47700A004D24CA /* CodeMasters.framework */ = {
