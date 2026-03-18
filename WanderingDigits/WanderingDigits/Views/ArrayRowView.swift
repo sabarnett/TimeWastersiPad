@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct ArrayColumnView: View {
+struct ArrayRowView: View {
     let arrayIndex: Int
     @Binding var arrays: [GameRow]
 
@@ -20,22 +20,24 @@ struct ArrayColumnView: View {
     @State private var dragOver: Int? = nil  // item index being hovered over
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack {
             ForEach(arrays[arrayIndex].values.indices, id: \.self) { itemIndex in
                 Text(arrays[arrayIndex].values[itemIndex])
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
+                    .font(.numberFont)
+                    .monospacedDigit()
                     .background(dragOver == itemIndex
                                 ? Color.blue.opacity(0.35)
-                                : Color.blue.opacity(0.15))
-                    .cornerRadius(8)
-                    .frame(maxWidth: 60, alignment: .trailing)
+                                : Color.clear)
+                    .frame(alignment: .trailing)
+                    .foregroundStyle(arrayIndex == 2 ? .secondary : .primary)
+
                     // Drag source
                     .draggable(DragItem(
                         text: arrays[arrayIndex].values[itemIndex],
                         sourceArrayIndex: arrayIndex,
                         sourceItemIndex: itemIndex
                     ))
+
                     // Drop target — insert before this item
                     .dropDestination(for: DragItem.self) { items, _ in
                         handleDrop(items: items, targetIndex: itemIndex)
@@ -44,10 +46,10 @@ struct ArrayColumnView: View {
                     }
             }
 
-            // Append drop zone at the bottom of the column
+            // Append drop zone at the end of the row
             Color.clear
-                .frame(maxWidth: 60)
-                .frame(height: 44)
+                .frame(maxWidth: 40)
+                .frame(height: 30)
                 .contentShape(Rectangle())
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -63,19 +65,19 @@ struct ArrayColumnView: View {
                     dragOver = isOver ? arrays[arrayIndex].values.endIndex : nil
                 }
 
+            // put the math operator at the end of the line. This is not eligible
+            // for drag/drop activities
             Text(arrays[arrayIndex].mathOperator)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .frame(maxWidth: 60, alignment: .trailing)
-
+                .font(.operatorFont)
+                .padding(.leading, 10)
+                .frame(maxWidth: 80, alignment: .trailing)
         }
-        .padding()
+        .padding(.top, arrayIndex == 2 ? 28 : 0)
     }
 
     // MARK: - Drop Handler
 
     private func handleDrop(items: [DragItem], targetIndex: Int) -> Bool {
-        print("Handle drop")
         guard
             let dragItem = items.first,
             dragItem.sourceArrayIndex != arrayIndex  // block same-array drops
@@ -87,27 +89,24 @@ struct ArrayColumnView: View {
         let sourceIndex = dragItem.sourceItemIndex
         let text = dragItem.text
 
-        print("Dragged item text \(text)")
         let accepted = checkResult(
             text,
             sourceArray, sourceIndex,
             arrayIndex, targetIndex
         )
 
-        print("Value accepted")
         guard accepted else { return false }
 
-        print("Remove item at index \(sourceIndex)")
-        // Remove from source array
-        arrays[sourceArray].values.remove(at: sourceIndex)
+        withAnimation {
+            // Remove from source array
+            arrays[sourceArray].values.remove(at: sourceIndex)
 
-        // Recalculate insert index (target array is unaffected by source removal
-        // since they are always different arrays)
-        let insertIndex = min(targetIndex, arrays[arrayIndex].values.endIndex)
-        print("Insert at index \(insertIndex)")
-        arrays[arrayIndex].values.insert(text, at: insertIndex)
+            // Recalculate insert index (target array is unaffected by source removal
+            // since they are always different arrays)
+            let insertIndex = min(targetIndex, arrays[arrayIndex].values.endIndex)
+            arrays[arrayIndex].values.insert(text, at: insertIndex)
+        }
 
-        print(arrays)
         return true
     }
 }

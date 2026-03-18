@@ -34,14 +34,6 @@ public struct WanderingDigitsGameView: View {
                 Spacer()
 
                 GameBoardView(game: game)
-//                VStack(alignment: .trailing) {
-//                    valueDisplay(game.gameBoard[0].values, mathOperator: game.mathOperator)
-//                    valueDisplay(game.gameBoard[1].values, mathOperator: "=")
-//                        .padding(.bottom, 12)
-//
-//                    valueDisplay(game.gameBoard[2].values, mathOperator: " ")
-//                        .foregroundStyle(.secondary)
-//                }
 
                 Spacer()
             }
@@ -148,7 +140,9 @@ public struct WanderingDigitsGameView: View {
 
     fileprivate func restartGameButton() -> some View {
         return Button(action: {
-            game.restart()
+            withAnimation {
+                game.restart()
+            }
         }, label: {
             Image(systemName: "arrow.uturn.left.circle")
         })

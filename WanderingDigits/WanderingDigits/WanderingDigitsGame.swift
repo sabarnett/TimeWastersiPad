@@ -68,6 +68,15 @@ final class WanderingDigitsGame {
         isPlaying = true
     }
 
+    func checkMove(
+        item: String,
+        fromArray: Int, fromIndex: Int,
+        toArray: Int, toIndex: Int
+    ) -> Bool {
+        // Replace with your actual logic.
+        return true
+    }
+    
     // MARK: - Souond functions
 
     private var sounds: AVAudioPlayer!

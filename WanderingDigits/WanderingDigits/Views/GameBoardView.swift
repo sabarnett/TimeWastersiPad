@@ -16,25 +16,16 @@ struct GameBoardView: View {
     @Bindable var game: WanderingDigitsGame
 
     var body: some View {
-        VStack(alignment: .trailing, spacing: 16) {
+        VStack(alignment: .trailing, spacing: 0) {
             ForEach(game.gameBoard.indices, id: \.self) { arrayIndex in
-                ArrayColumnView(
+                ArrayRowView(
                     arrayIndex: arrayIndex,
                     arrays: $game.gameBoard,
-                    checkResult: checkResult
+                    checkResult: game.checkMove
                 )
             }
         }
         .padding()
     }
 
-    // MARK: - Result Check
-    func checkResult(
-        item: String,
-        fromArray: Int, fromIndex: Int,
-        toArray: Int, toIndex: Int
-    ) -> Bool {
-        // Replace with your actual logic.
-        return true
-    }
 }
