@@ -16,7 +16,7 @@ struct GameBoardView: View {
     @Bindable var game: WanderingDigitsGame
 
     var body: some View {
-        HStack(alignment: .top, spacing: 16) {
+        VStack(alignment: .trailing, spacing: 16) {
             ForEach(game.gameBoard.indices, id: \.self) { arrayIndex in
                 ArrayColumnView(
                     arrayIndex: arrayIndex,

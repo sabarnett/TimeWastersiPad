@@ -20,7 +20,7 @@ struct ArrayColumnView: View {
     @State private var dragOver: Int? = nil  // item index being hovered over
 
     var body: some View {
-        VStack(alignment: .trailing, spacing: 8) {
+        HStack(spacing: 8) {
             ForEach(arrays[arrayIndex].values.indices, id: \.self) { itemIndex in
                 Text(arrays[arrayIndex].values[itemIndex])
                     .padding(.horizontal, 12)
@@ -29,7 +29,7 @@ struct ArrayColumnView: View {
                                 ? Color.blue.opacity(0.35)
                                 : Color.blue.opacity(0.15))
                     .cornerRadius(8)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .frame(maxWidth: 60, alignment: .trailing)
                     // Drag source
                     .draggable(DragItem(
                         text: arrays[arrayIndex].values[itemIndex],
@@ -46,7 +46,7 @@ struct ArrayColumnView: View {
 
             // Append drop zone at the bottom of the column
             Color.clear
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: 60)
                 .frame(height: 44)
                 .contentShape(Rectangle())
                 .overlay(
@@ -62,11 +62,14 @@ struct ArrayColumnView: View {
                 } isTargeted: { isOver in
                     dragOver = isOver ? arrays[arrayIndex].values.endIndex : nil
                 }
+
+            Text(arrays[arrayIndex].mathOperator)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .frame(maxWidth: 60, alignment: .trailing)
+
         }
-        .frame(maxWidth: .infinity)
         .padding()
-        .background(Color.gray.opacity(0.1))
-        .cornerRadius(12)
     }
 
     // MARK: - Drop Handler

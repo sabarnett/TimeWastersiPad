@@ -15,6 +15,7 @@ import AVKit
 struct GameRow {
     var values: [String] = []
     var target: Int = 0
+    var mathOperator = " "
 
     init(values: [String]) {
         self.values = values
@@ -58,7 +59,10 @@ final class WanderingDigitsGame {
         gameBoard.append(generateNumber())
         gameBoard.append(generateNumber())
         gameBoard.append(generateNumber())
-        mathOperator = ["+", "-"].randomElement() ?? "+"
+
+        gameBoard[0].mathOperator = ["+", "-"].randomElement() ?? "+"
+        gameBoard[1].mathOperator = "="
+        gameBoard[2].mathOperator = ""
 
         isGameOver = false
         isPlaying = true
