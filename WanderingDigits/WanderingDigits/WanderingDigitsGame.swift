@@ -12,6 +12,16 @@
 import SwiftUI
 import AVKit
 
+struct GameRow {
+    var values: [String] = []
+    var target: Int = 0
+
+    init(values: [String]) {
+        self.values = values
+        self.target = Int(self.values.joined()) ?? 0
+    }
+}
+
 @Observable
 final class WanderingDigitsGame {
 
@@ -24,12 +34,34 @@ final class WanderingDigitsGame {
 
     var showGamePlay = false
     var isGameOver = false
-    var attemptsCount = 0
+    var isPlaying = false
+    var secondsElapsed = 0
 
+    var gameBoard: [GameRow] = [
+        GameRow(values: ["0"]),
+        GameRow(values: ["0"]),
+        GameRow(values: ["0"])
+    ]
+
+    var mathOperator: String = "+"
     var leaderBoard = LeaderBoard()
 
     func restart() {
+        isGameOver = true
+        isPlaying = false
+
         // TODO: setup the game
+        secondsElapsed = 0
+
+        // Generate numbers
+        gameBoard.removeAll()
+        gameBoard.append(generateNumber())
+        gameBoard.append(generateNumber())
+        gameBoard.append(generateNumber())
+        mathOperator = ["+", "-"].randomElement() ?? "+"
+
+        isGameOver = false
+        isPlaying = true
     }
 
     // MARK: - Souond functions
@@ -113,4 +145,12 @@ final class WanderingDigitsGame {
     }
 }
 
+extension WanderingDigitsGame {
+    func generateNumber() -> GameRow {
+        let count = Int.random(in: 3...5)
+        var gameNumbers = (0..<count).map { _ in String(Int.random(in: 0...9)) }
+        gameNumbers[0] = String(Int.random(in: 1...9))
 
+        return GameRow(values: gameNumbers)
+    }
+}

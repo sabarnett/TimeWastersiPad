@@ -11,6 +11,7 @@
 
 import SwiftUI
 import SharedComponents
+import Combine
 
 public struct WanderingDigitsGameView: View {
 
@@ -20,6 +21,7 @@ public struct WanderingDigitsGameView: View {
     @State private var game: WanderingDigitsGame = WanderingDigitsGame()
     @State private var showLeaderBoard = false
     @State private var showMasterCode = false
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     public init(gameData: Game) {
         self.gameData = gameData
@@ -28,7 +30,20 @@ public struct WanderingDigitsGameView: View {
     public var body: some View {
         ZStack {
             VStack {
-                Text("To Do")
+                gameStatusDisplay
+                Spacer()
+
+                GameBoardView(game: game)
+//                VStack(alignment: .trailing) {
+//                    valueDisplay(game.gameBoard[0].values, mathOperator: game.mathOperator)
+//                    valueDisplay(game.gameBoard[1].values, mathOperator: "=")
+//                        .padding(.bottom, 12)
+//
+//                    valueDisplay(game.gameBoard[2].values, mathOperator: " ")
+//                        .foregroundStyle(.secondary)
+//                }
+
+                Spacer()
             }
         }
         .padding()
@@ -37,6 +52,13 @@ public struct WanderingDigitsGameView: View {
         .onAppear { game.playBackgroundSound() }
         .onDisappear { game.stopSounds() }
         .background(colorScheme == .dark ? Color.black : Color.white)
+        
+        .onReceive(timer) { _ in
+            if game.showGamePlay || showLeaderBoard { return }
+            guard game.isPlaying else { return }
+            guard game.secondsElapsed < 999 else { return }
+            game.secondsElapsed += 1
+        }
 
         .sheet(isPresented: $game.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)
@@ -65,16 +87,31 @@ public struct WanderingDigitsGameView: View {
         }
 
         if game.isGameOver {
-            let str = AttributedString(localized: "You won in ^[\(game.attemptsCount) move](inflect: true)")
+            let str = AttributedString(localized: "You won in ^[\(game.secondsElapsed) second](inflect: true)")
             let subMessage = String(str.characters)
 
-            GameOverView(message: "You completed the puzzle!",
+            GameOverView(message: "You restored the formula!",
                          subMessage: subMessage) {
                 withAnimation {
                     game.stopSounds()
                     game.restart()
                 }
             }
+        }
+    }
+
+    fileprivate func valueDisplay(_ value: [String], mathOperator: String) -> some View {
+        HStack {
+            ForEach(value.indices, id: \.self) { index in
+                Text(value[index])
+                    .font(.system(size: 70))
+                    .monospacedDigit()
+            }
+            Text(mathOperator)
+                .font(.system(size: 70))
+                .padding(.leading, 12)
+                .monospacedDigit()
+                .frame(minWidth: 60)
         }
     }
 
@@ -126,6 +163,25 @@ public struct WanderingDigitsGameView: View {
         })
         .help("Toggle sound effects")
     }
+
+    /// Displays the current selected bomb count and the number of seconds elapsed. It also
+    /// has a button in betweenthe two scores that allows the user to restart the game. It sits
+    /// above the game play area, in the middle. Ther may be buttons to the right and
+    /// left. These are produced by the toggleButtons function.
+    private var gameStatusDisplay: some View {
+        HStack(spacing: 0) {
+            Text(game.secondsElapsed.formatted(.number.precision(.integerLength(3))))
+                .fixedSize()
+                .padding(.horizontal, 6)
+                .foregroundStyle(.red.gradient)
+        }
+        .monospacedDigit()
+        .font(.largeTitle)
+        .background(.black)
+        .clipShape(.rect(cornerRadius: 10))
+        .padding(.top)
+    }
+
 }
 
 #Preview {

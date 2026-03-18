@@ -29,7 +29,7 @@ class LeaderBoard {
     func addLeader(score: Int) {
         // based on the game level, add the score to the leader board
         // if it is better than any other score.
-        var requiresSave = addScoreToBoard(score: score)
+        let requiresSave = addScoreToBoard(score: score)
 
         // Save the leader board if we changed it.
         if requiresSave {
