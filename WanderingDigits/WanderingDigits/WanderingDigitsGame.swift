@@ -12,17 +12,6 @@
 import SwiftUI
 import AVKit
 
-struct GameRow {
-    var values: [String] = []
-    var target: Int = 0
-    var mathOperator = " "
-
-    init(values: [String]) {
-        self.values = values
-        self.target = Int(self.values.joined()) ?? 0
-    }
-}
-
 @Observable
 final class WanderingDigitsGame {
 
@@ -38,13 +27,8 @@ final class WanderingDigitsGame {
     var isPlaying = false
     var secondsElapsed = 0
 
-    var gameBoard: [GameRow] = [
-        GameRow(values: ["0"]),
-        GameRow(values: ["0"]),
-        GameRow(values: ["0"])
-    ]
+    var gameBoard: GameBoard = GameBoard()
 
-    var mathOperator: String = "+"
     var leaderBoard = LeaderBoard()
 
     func restart() {
@@ -55,14 +39,8 @@ final class WanderingDigitsGame {
         secondsElapsed = 0
 
         // Generate numbers
-        gameBoard.removeAll()
-        gameBoard.append(generateNumber())
-        gameBoard.append(generateNumber())
-        gameBoard.append(generateNumber())
-
-        gameBoard[0].mathOperator = ["+", "-"].randomElement() ?? "+"
-        gameBoard[1].mathOperator = "="
-        gameBoard[2].mathOperator = ""
+        gameBoard = GameBoard()
+        gameBoard.reset()
 
         isGameOver = false
         isPlaying = true
@@ -155,15 +133,5 @@ final class WanderingDigitsGame {
             if volume != 1 { sounds.volume = volume }
             self.sounds.play()
         }
-    }
-}
-
-extension WanderingDigitsGame {
-    func generateNumber() -> GameRow {
-        let count = Int.random(in: 3...5)
-        var gameNumbers = (0..<count).map { _ in String(Int.random(in: 0...9)) }
-        gameNumbers[0] = String(Int.random(in: 1...9))
-
-        return GameRow(values: gameNumbers)
     }
 }

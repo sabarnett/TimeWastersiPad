@@ -17,10 +17,10 @@ struct GameBoardView: View {
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
-            ForEach(game.gameBoard.indices, id: \.self) { arrayIndex in
+            ForEach(game.gameBoard.rows.indices, id: \.self) { arrayIndex in
                 ArrayRowView(
                     arrayIndex: arrayIndex,
-                    arrays: $game.gameBoard,
+                    board: $game.gameBoard,
                     checkResult: game.checkMove
                 )
             }

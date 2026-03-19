@@ -13,7 +13,7 @@ import SwiftUI
 
 struct ArrayRowView: View {
     let arrayIndex: Int
-    @Binding var arrays: [GameRow]
+    @Binding var board: GameBoard
 
     let checkResult: (String, Int, Int, Int, Int) -> Bool
 
@@ -21,29 +21,45 @@ struct ArrayRowView: View {
 
     var body: some View {
         HStack {
-            ForEach(arrays[arrayIndex].values.indices, id: \.self) { itemIndex in
-                Text(arrays[arrayIndex].values[itemIndex])
-                    .font(.numberFont)
-                    .monospacedDigit()
-                    .background(dragOver == itemIndex
-                                ? Color.blue.opacity(0.35)
-                                : Color.clear)
-                    .frame(alignment: .trailing)
-                    .foregroundStyle(arrayIndex == 2 ? .secondary : .primary)
+            let row = board.row(at: arrayIndex)
 
-                    // Drag source
-                    .draggable(DragItem(
-                        text: arrays[arrayIndex].values[itemIndex],
-                        sourceArrayIndex: arrayIndex,
-                        sourceItemIndex: itemIndex
-                    ))
+            ForEach(row.indices, id: \.self) { itemIndex in
+                let number = row.value(at: itemIndex)
+                if number == "-" {
+                    // A sign value cannot be dragged and dropped
+                    Text(row.value(at: itemIndex))
+                        .font(.numberFont)
+                        .monospacedDigit()
+                        .background(dragOver == itemIndex
+                                    ? Color.blue.opacity(0.35)
+                                    : Color.clear)
+                        .frame(alignment: .trailing)
+                        .foregroundStyle(arrayIndex == 2 ? .secondary : .primary)
+                } else {
+                    // display the number and setup for drag and drop
+                    Text(row.value(at: itemIndex))
+                        .font(.numberFont)
+                        .monospacedDigit()
+                        .background(dragOver == itemIndex
+                                    ? Color.blue.opacity(0.35)
+                                    : Color.clear)
+                        .frame(alignment: .trailing)
+                        .foregroundStyle(arrayIndex == 2 ? .secondary : .primary)
 
-                    // Drop target — insert before this item
-                    .dropDestination(for: DragItem.self) { items, _ in
-                        handleDrop(items: items, targetIndex: itemIndex)
-                    } isTargeted: { isOver in
-                        dragOver = isOver ? itemIndex : nil
-                    }
+                        // Drag source
+                        .draggable(DragItem(
+                            text: row.value(at: itemIndex),
+                            sourceArrayIndex: arrayIndex,
+                            sourceItemIndex: itemIndex
+                        ))
+
+                        // Drop target — insert before this item
+                        .dropDestination(for: DragItem.self) { items, _ in
+                            handleDrop(items: items, targetIndex: itemIndex)
+                        } isTargeted: { isOver in
+                            dragOver = isOver ? itemIndex : nil
+                        }
+                }
             }
 
             // Append drop zone at the end of the row
@@ -54,20 +70,20 @@ struct ArrayRowView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .strokeBorder(
-                            dragOver == arrays[arrayIndex].values.endIndex
+                            dragOver == row.endIndex
                                 ? Color.blue : Color.clear,
                             lineWidth: 2
                         )
                 )
                 .dropDestination(for: DragItem.self) { items, _ in
-                    handleDrop(items: items, targetIndex: arrays[arrayIndex].values.endIndex)
+                    handleDrop(items: items, targetIndex: row.endIndex)
                 } isTargeted: { isOver in
-                    dragOver = isOver ? arrays[arrayIndex].values.endIndex : nil
+                    dragOver = isOver ? row.endIndex : nil
                 }
 
             // put the math operator at the end of the line. This is not eligible
             // for drag/drop activities
-            Text(arrays[arrayIndex].mathOperator)
+            Text(board.row(at: arrayIndex).mathOperator)
                 .font(.operatorFont)
                 .padding(.leading, 10)
                 .frame(maxWidth: 80, alignment: .trailing)
@@ -99,12 +115,12 @@ struct ArrayRowView: View {
 
         withAnimation {
             // Remove from source array
-            arrays[sourceArray].values.remove(at: sourceIndex)
+            board.row(at: sourceArray).values.remove(at: sourceIndex)
 
             // Recalculate insert index (target array is unaffected by source removal
             // since they are always different arrays)
-            let insertIndex = min(targetIndex, arrays[arrayIndex].values.endIndex)
-            arrays[arrayIndex].values.insert(text, at: insertIndex)
+            let insertIndex = min(targetIndex, board.row(at: arrayIndex).endIndex)
+            board.row(at: arrayIndex).values.insert(text, at: insertIndex)
         }
 
         return true
