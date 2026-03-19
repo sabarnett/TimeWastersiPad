@@ -12,6 +12,12 @@
 import SwiftUI
 
 extension Font {
-    static var numberFont: Font { Font.system(size: 60) }
-    static var operatorFont: Font { Font.system(size: 70) }
+    static var numberFont: Font {
+        Font.system(size: 60)
+            .monospacedDigit()
+    }
+    static var operatorFont: Font {
+        Font.system(size: 70)
+            .monospacedDigit()
+    }
 }

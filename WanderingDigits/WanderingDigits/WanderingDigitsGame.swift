@@ -34,8 +34,6 @@ final class WanderingDigitsGame {
     func restart() {
         isGameOver = true
         isPlaying = false
-
-        // TODO: setup the game
         secondsElapsed = 0
 
         // Generate numbers

@@ -29,7 +29,6 @@ struct ArrayRowView: View {
                     // A sign value cannot be dragged and dropped
                     Text(row.value(at: itemIndex))
                         .font(.numberFont)
-                        .monospacedDigit()
                         .background(dragOver == itemIndex
                                     ? Color.blue.opacity(0.35)
                                     : Color.clear)
@@ -39,7 +38,6 @@ struct ArrayRowView: View {
                     // display the number and setup for drag and drop
                     Text(row.value(at: itemIndex))
                         .font(.numberFont)
-                        .monospacedDigit()
                         .background(dragOver == itemIndex
                                     ? Color.blue.opacity(0.35)
                                     : Color.clear)
@@ -59,6 +57,7 @@ struct ArrayRowView: View {
                         } isTargeted: { isOver in
                             dragOver = isOver ? itemIndex : nil
                         }
+
                 }
             }
 
