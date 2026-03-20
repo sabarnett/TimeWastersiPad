@@ -18,7 +18,10 @@ class GameRow: CustomDebugStringConvertible {
     }
 
     var values: [String] = []
-    private(set) var target: Int = 0
+    var target: Int {
+        Int(self.values.joined()) ?? 0
+    }
+
     private(set) var mathOperator: String
 
     // Helper variables to make accessing the data more intuitive
@@ -28,7 +31,6 @@ class GameRow: CustomDebugStringConvertible {
     init(values: [String], mathOperator: String = " ") {
         self.mathOperator = mathOperator
         self.values = values
-        self.target = Int(self.values.joined()) ?? 0
     }
 
     func value(at index: Int) -> String {

@@ -54,7 +54,19 @@ class GameBoard {
                    fromArray: Int, fromIndex: Int,
                    toArray: Int, toIndex: Int) -> Bool {
 
-        return true
+        // We create a working copy of the current state of the game
+        // and apply the changes to it. We can then use this to check
+        // whether the solution is correct
+        let board = duplicateBoard()
+
+        board[fromArray].values.remove(at: fromIndex)
+        board[toArray].values.insert(item, at: toIndex)
+
+        if board[0].mathOperator == "+" {
+            return board[2].target == (board[0].target + board[1].target)
+        } else {
+            return board[2].target == (board[0].target - board[1].target)
+        }
     }
 
     /// Generates a random GameRow number with 3-5 numbers in it.
