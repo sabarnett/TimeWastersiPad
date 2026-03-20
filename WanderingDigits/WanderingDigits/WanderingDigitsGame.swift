@@ -42,6 +42,8 @@ final class WanderingDigitsGame {
 
         isGameOver = false
         isPlaying = true
+
+        playBackgroundSound()
     }
 
     func checkMove(item: String,
@@ -57,6 +59,8 @@ final class WanderingDigitsGame {
         if correct {
             isGameOver = true
             isPlaying = false
+        } else {
+            playIncorrectSound()
         }
 
         return correct
@@ -67,8 +71,7 @@ final class WanderingDigitsGame {
     private var sounds: AVAudioPlayer!
     private var key: AVAudioPlayer!
     private var backgroundURL: URL { soundFile(named: "background") }
-    private var keyURL: URL { soundFile(named: "splat") }
-    private var chimeURL: URL { soundFile(named: "chime") }
+    private var incorrectURL: URL { soundFile(named: "incorrect-answer") }
     var speakerIcon: String = "speaker"
 
     /// Play the background music
@@ -85,17 +88,9 @@ final class WanderingDigitsGame {
 
     /// Play the tile drop sound while the new tiles enter into the game play area. This
     /// will play over the top of the background sound.
-    func playKeyboardSound() {
+    func playIncorrectSound() {
         guard wdPlaySounds else { return }
-        key = try? AVAudioPlayer(contentsOf: keyURL)
-        key.play()
-    }
-
-    /// Play the tile drop sound while the new tiles enter into the game play area. This
-    /// will play over the top of the background sound.
-    func playDingSound() {
-        guard wdPlaySounds else { return }
-        key = try? AVAudioPlayer(contentsOf: chimeURL)
+        key = try? AVAudioPlayer(contentsOf: incorrectURL)
         key.play()
     }
 
