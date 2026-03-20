@@ -42,18 +42,21 @@ class GameBoard {
         rows.append(generateNumber(mathOperator: "="))
         rows.append(generateResultRow())
 
-        createSolution()
+        solution = duplicateBoard()
 
         print("Debug: Correct structure state:")
-        
         print(solution)
 
         shuffleDigit()
-
-        print("Debug: Shuffled structure state:")
-        print(rows)
     }
-    
+
+    func checkMove(item: String,
+                   fromArray: Int, fromIndex: Int,
+                   toArray: Int, toIndex: Int) -> Bool {
+
+        return true
+    }
+
     /// Generates a random GameRow number with 3-5 numbers in it.
     /// - Parameter mathOperator: The math operator for the game. This will be + or - or =
     /// - Returns: The completed GameRow. Numbers will always have a leading non-zero value.
@@ -113,13 +116,16 @@ class GameBoard {
 
     /// createSolution copies the game board prior to it's numbers being jumbled up. This
     /// is a convenience for the reveal popup.
-    fileprivate func createSolution() {
-        solution.removeAll()
-        solution.append(GameRow(values: rows[0].values.map { $0 },
+    fileprivate func duplicateBoard() ->[GameRow] {
+        var boardCopy: [GameRow] = []
+
+        boardCopy.append(GameRow(values: rows[0].values.map { $0 },
                                 mathOperator: rows[0].mathOperator))
-        solution.append(GameRow(values: rows[1].values.map { $0 },
+        boardCopy.append(GameRow(values: rows[1].values.map { $0 },
                                 mathOperator: rows[1].mathOperator))
-        solution.append(GameRow(values: rows[2].values.map { $0 },
+        boardCopy.append(GameRow(values: rows[2].values.map { $0 },
                                 mathOperator: rows[2].mathOperator))
+
+        return boardCopy
     }
 }

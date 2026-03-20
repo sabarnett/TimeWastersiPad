@@ -44,14 +44,22 @@ final class WanderingDigitsGame {
         isPlaying = true
     }
 
-    func checkMove(
-        item: String,
+    func checkMove(item: String,
         fromArray: Int, fromIndex: Int,
-        toArray: Int, toIndex: Int
-    ) -> Bool {
+        toArray: Int, toIndex: Int) -> Bool {
         attempts += 1
-        // Replace with your actual logic.
-        return true
+
+        // Delegate the check to the game board
+        let correct = gameBoard.checkMove(item: item,
+                                          fromArray: fromArray, fromIndex: fromIndex,
+                                          toArray: toArray, toIndex: toIndex)
+
+        if correct {
+            isGameOver = true
+            isPlaying = false
+        }
+
+        return correct
     }
     
     // MARK: - Souond functions

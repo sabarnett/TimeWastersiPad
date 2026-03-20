@@ -38,9 +38,23 @@ public struct WanderingDigitsGameView: View {
 
                 Spacer()
             }
+            .disabled(game.isGameOver)
+
+            if game.isGameOver {
+                let str = AttributedString(localized: "You won in ^[\(game.secondsElapsed) second](inflect: true) and took ^[\(game.attempts) attempt](inflect: true)")
+                let subMessage = String(str.characters)
+
+                GameOverView(message: "You restored the formula!",
+                             subMessage: subMessage) {
+                    withAnimation {
+                        game.stopSounds()
+                        game.restart()
+                    }
+                }
+            }
+
         }
         .padding()
-        .disabled(game.isGameOver)
         .task { game.restart() }
         .onAppear { game.playBackgroundSound() }
         .onDisappear { game.stopSounds() }
@@ -78,18 +92,6 @@ public struct WanderingDigitsGameView: View {
             }
         }
 
-        if game.isGameOver {
-            let str = AttributedString(localized: "You won in ^[\(game.secondsElapsed) second](inflect: true)")
-            let subMessage = String(str.characters)
-
-            GameOverView(message: "You restored the formula!",
-                         subMessage: subMessage) {
-                withAnimation {
-                    game.stopSounds()
-                    game.restart()
-                }
-            }
-        }
     }
 
     fileprivate func valueDisplay(_ value: [String], mathOperator: String) -> some View {
