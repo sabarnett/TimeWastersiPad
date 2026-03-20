@@ -13,15 +13,16 @@ import SwiftUI
 
 struct GameBoardView: View {
 
-    @Bindable var game: WanderingDigitsGame
+    @Bindable var gameBoard: GameBoard
+    let checkResult: (String, Int, Int, Int, Int) -> Bool
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
-            ForEach(game.gameBoard.rows.indices, id: \.self) { arrayIndex in
+            ForEach(gameBoard.rows.indices, id: \.self) { arrayIndex in
                 ArrayRowView(
                     arrayIndex: arrayIndex,
-                    board: $game.gameBoard,
-                    checkResult: game.checkMove
+                    board: gameBoard,
+                    checkResult: checkResult
                 )
             }
         }

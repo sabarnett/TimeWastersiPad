@@ -13,7 +13,7 @@ import SwiftUI
 
 struct ArrayRowView: View {
     let arrayIndex: Int
-    @Binding var board: GameBoard
+    @Bindable var board: GameBoard
 
     let checkResult: (String, Int, Int, Int, Int) -> Bool
 

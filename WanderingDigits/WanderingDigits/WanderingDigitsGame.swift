@@ -26,6 +26,7 @@ final class WanderingDigitsGame {
     var isGameOver = false
     var isPlaying = false
     var secondsElapsed = 0
+    var attempts = 0
 
     var gameBoard: GameBoard = GameBoard()
 
@@ -35,9 +36,8 @@ final class WanderingDigitsGame {
         isGameOver = true
         isPlaying = false
         secondsElapsed = 0
+        attempts = 0
 
-        // Generate numbers
-        gameBoard = GameBoard()
         gameBoard.reset()
 
         isGameOver = false
@@ -49,6 +49,7 @@ final class WanderingDigitsGame {
         fromArray: Int, fromIndex: Int,
         toArray: Int, toIndex: Int
     ) -> Bool {
+        attempts += 1
         // Replace with your actual logic.
         return true
     }

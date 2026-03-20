@@ -18,7 +18,13 @@ class GameBoard {
         GameRow(values: ["0"]),
         GameRow(values: ["0"])
     ]
-    
+
+    private(set) var solution: [GameRow] = [
+        GameRow(values: ["0"]),
+        GameRow(values: ["0"]),
+        GameRow(values: ["0"])
+    ]
+
     /// Returns the GameRow at the selected index
     /// - Parameter index: The index of the row to retrieve. This will be in the range 0...2
     /// - Returns: The selected GameRow
@@ -28,7 +34,7 @@ class GameBoard {
         }
         return rows[index]
     }
-    
+
     /// Resets the game board, generating new numbers, and a new result row.
     func reset() {
         rows.removeAll()
@@ -36,8 +42,11 @@ class GameBoard {
         rows.append(generateNumber(mathOperator: "="))
         rows.append(generateResultRow())
 
+        createSolution()
+
         print("Debug: Correct structure state:")
-        print(rows)
+        
+        print(solution)
 
         shuffleDigit()
 
@@ -100,5 +109,17 @@ class GameBoard {
             randomInsert += 1
         }
         rows[indexes[1]].values.insert(movedItem, at: randomInsert)
+    }
+
+    /// createSolution copies the game board prior to it's numbers being jumbled up. This
+    /// is a convenience for the reveal popup.
+    fileprivate func createSolution() {
+        solution.removeAll()
+        solution.append(GameRow(values: rows[0].values.map { $0 },
+                                mathOperator: rows[0].mathOperator))
+        solution.append(GameRow(values: rows[1].values.map { $0 },
+                                mathOperator: rows[1].mathOperator))
+        solution.append(GameRow(values: rows[2].values.map { $0 },
+                                mathOperator: rows[2].mathOperator))
     }
 }

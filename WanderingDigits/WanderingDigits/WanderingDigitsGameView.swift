@@ -20,7 +20,7 @@ public struct WanderingDigitsGameView: View {
     @State public var gameData: Game
     @State private var game: WanderingDigitsGame = WanderingDigitsGame()
     @State private var showLeaderBoard = false
-    @State private var showMasterCode = false
+    @State private var showSolution = false
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     public init(gameData: Game) {
@@ -33,7 +33,8 @@ public struct WanderingDigitsGameView: View {
                 gameStatusDisplay
                 Spacer()
 
-                GameBoardView(game: game)
+                GameBoardView(gameBoard: game.gameBoard,
+                              checkResult: game.checkMove)
 
                 Spacer()
             }
@@ -58,11 +59,10 @@ public struct WanderingDigitsGameView: View {
         .sheet(isPresented: $showLeaderBoard) {
             LeaderBoardView(leaderBoard: game.leaderBoard)
         }
-        .sheet(isPresented: $showMasterCode, onDismiss: {
+        .sheet(isPresented: $showSolution, onDismiss: {
             withAnimation { game.restart() }
         }) {
-            //                CodeRevealView(pegs: game.masterCode.pegs, attempts: game.attempts.count)
-            //                    .padding()
+            SolutionRevealView(gameBoard: game.gameBoard, attempts: 0)
         }
 
         .toolbar {
@@ -130,7 +130,7 @@ public struct WanderingDigitsGameView: View {
         return Button(action: {
             withAnimation {
                 game.stopSounds()
-                showMasterCode = true
+                showSolution = true
             }
         }, label: {
             Image(systemName: "eye.circle")
@@ -164,13 +164,25 @@ public struct WanderingDigitsGameView: View {
     /// left. These are produced by the toggleButtons function.
     private var gameStatusDisplay: some View {
         HStack(spacing: 0) {
+            Text("Attempts:")
+                .font(.callout)
+            Text(game.attempts.formatted(.number.precision(.integerLength(3))))
+                .fixedSize()
+                .padding(.horizontal, 6)
+
+            Image(systemName: "diamond.fill")
+                .font(.title3)
+
             Text(game.secondsElapsed.formatted(.number.precision(.integerLength(3))))
                 .fixedSize()
                 .padding(.horizontal, 6)
-                .foregroundStyle(.red.gradient)
+            Text("seconds")
+                .font(.callout)
         }
+        .padding(.horizontal)
         .monospacedDigit()
         .font(.largeTitle)
+        .foregroundStyle(.white.gradient)
         .background(.black)
         .clipShape(.rect(cornerRadius: 10))
         .padding(.top)

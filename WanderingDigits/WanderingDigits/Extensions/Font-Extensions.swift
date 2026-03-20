@@ -16,6 +16,10 @@ extension Font {
         Font.system(size: 60)
             .monospacedDigit()
     }
+    static var numberFontSmall: Font {
+        Font.system(size: 30)
+            .monospacedDigit()
+    }
     static var operatorFont: Font {
         Font.system(size: 70)
             .monospacedDigit()
