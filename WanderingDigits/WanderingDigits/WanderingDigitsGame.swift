@@ -22,6 +22,7 @@ final class WanderingDigitsGame {
         }
     }
 
+    var incorrectMessageOpacity: CGFloat = 0.0
     var showGamePlay = false
     var isGameOver = false
     var isPlaying = false
@@ -29,12 +30,10 @@ final class WanderingDigitsGame {
     var attempts = 0
 
     var gameBoard: GameBoard = GameBoard()
-
     var leaderBoard = LeaderBoard()
-
+    
+    /// Restarty the game. Clear state and generate a new game board.
     func restart() {
-        isGameOver = true
-        isPlaying = false
         secondsElapsed = 0
         attempts = 0
 
@@ -45,7 +44,18 @@ final class WanderingDigitsGame {
 
         playBackgroundSound()
     }
-
+    
+    /// The player dragged and dropped a number. We need to test whether this solves
+    /// the formula.
+    ///
+    /// - Parameters:
+    ///   - item: The number that was to be moved
+    ///   - fromArray: The row it comes from
+    ///   - fromIndex: The index of the number in the row
+    ///   - toArray: The row to move the number to
+    ///   - toIndex: The position to move it to
+    ///
+    /// - Returns: True if the formula is now valid, else false.
     func checkMove(item: String,
         fromArray: Int, fromIndex: Int,
         toArray: Int, toIndex: Int) -> Bool {
@@ -62,6 +72,14 @@ final class WanderingDigitsGame {
             leaderBoard.addLeader(timeTaken: secondsElapsed, attempts: attempts)
         } else {
             playIncorrectSound()
+
+            withAnimation(.easeIn(duration: 0.5), {
+                self.incorrectMessageOpacity = 1
+            }, completion: {
+                withAnimation(.linear(duration: 3)) {
+                    self.incorrectMessageOpacity = 0
+                }
+            })
         }
 
         return correct

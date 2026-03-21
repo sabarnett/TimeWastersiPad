@@ -36,6 +36,17 @@ public struct WanderingDigitsGameView: View {
                 GameBoardView(gameBoard: game.gameBoard,
                               checkResult: game.checkMove)
 
+                Text("Incorrect Move")
+                    .font(.title).bold()
+                    .foregroundStyle(.red)
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.secondary.opacity(0.2))
+                    }
+                    .opacity(game.incorrectMessageOpacity)
+
+
                 Spacer()
             }
             .disabled(game.isGameOver)
@@ -189,7 +200,6 @@ public struct WanderingDigitsGameView: View {
         .clipShape(.rect(cornerRadius: 10))
         .padding(.top)
     }
-
 }
 
 #Preview {
