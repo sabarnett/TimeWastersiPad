@@ -12,8 +12,6 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-// MARK: - Transferable Drag Item
-
 struct DragItem: Transferable, Codable {
     let text: String
     let sourceArrayIndex: Int

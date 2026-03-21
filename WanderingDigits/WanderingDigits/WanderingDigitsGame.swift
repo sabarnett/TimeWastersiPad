@@ -59,7 +59,7 @@ final class WanderingDigitsGame {
         if correct {
             isGameOver = true
             isPlaying = false
-            leaderBoard.addLeader(score: secondsElapsed)
+            leaderBoard.addLeader(timeTaken: secondsElapsed, attempts: attempts)
         } else {
             playIncorrectSound()
         }

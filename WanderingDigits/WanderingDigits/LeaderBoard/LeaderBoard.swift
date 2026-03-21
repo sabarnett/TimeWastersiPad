@@ -25,33 +25,30 @@ class LeaderBoard {
         leaderBoard.leaderBoard = []
         saveLoaderBoard()
     }
-
-    func addLeader(score: Int) {
-        // based on the game level, add the score to the leader board
+    
+    /// Adds the time taken and attempts count to the leader board and trim the
+    /// list to the fastest 5 entries.
+    ///
+    /// - Parameters:
+    ///   - timeTaken: Time taken to guess the correct formula
+    ///   - attempts: How many attempts the player took.
+    func addLeader(timeTaken: Int, attempts: Int) {
+        // Add the new game time taken and attempts count to the
         // if it is better than any other score.
-        let requiresSave = addScoreToBoard(score: score)
-
-        // Save the leader board if we changed it.
-        if requiresSave {
-            saveLoaderBoard()
-        }
+        addScoreToBoard(timeTaken: timeTaken, attempts: attempts)
+        saveLoaderBoard()
     }
 
-    private func addScoreToBoard(score: Int) -> Bool {
-        if leaderBoard.leaderBoard.count == 5 {
-            if let maxScore = leaderBoard.leaderBoard.max(by: { $0.gameScore < $1.gameScore }) {
-                if score >= maxScore.gameScore { return false }
-            }
-        }
+    private func addScoreToBoard(timeTaken: Int, attempts: Int) {
+        leaderBoard.leaderBoard.append(
+                LeaderBoardItem(gameDate: Date.now, gameScore: timeTaken, gameAttempts: attempts)
+            )
 
-        leaderBoard.leaderBoard.append(LeaderBoardItem(gameDate: Date.now, gameScore: score))
-        let newScores = leaderBoard.leaderBoard.sorted(by: { $0.gameScore < $1.gameScore })
-
+        let newScores = leaderBoard.leaderBoard.sorted()
         leaderBoard.leaderBoard = Array(newScores.prefix(5))
-        return true
     }
 
-    /// Load tghe leader board from the saved JSON file, If the file doesn't exist
+    /// Load the leader board from the saved JSON file, If the file doesn't exist
     /// we assume that no scores have been saved, so we go with the default
     /// initialisation.
     private func loadLeaderBoard() {
@@ -91,9 +88,17 @@ struct LeaderBoardData: Codable {
     var leaderBoard: [LeaderBoardItem] = []
 }
 
-struct LeaderBoardItem: Codable, Identifiable {
+struct LeaderBoardItem: Codable, Identifiable, Comparable {
     var id: UUID = UUID()
 
     var gameDate: Date
     var gameScore: Int
+    var gameAttempts: Int
+
+    static func < (lhs: LeaderBoardItem, rhs: LeaderBoardItem) -> Bool {
+        if lhs.gameScore != rhs.gameScore {
+            return lhs.gameScore < rhs.gameScore
+        }
+        return lhs.gameAttempts < rhs.gameAttempts
+    }
 }

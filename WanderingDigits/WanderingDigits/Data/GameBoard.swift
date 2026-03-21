@@ -13,12 +13,16 @@ import Foundation
 
 @Observable
 class GameBoard {
+    /// This is the live game board that the player plays on.
     var rows: [GameRow] = [
         GameRow(values: ["0"]),
         GameRow(values: ["0"]),
         GameRow(values: ["0"])
     ]
 
+    /// This is a copy of the game board before one of the digits is moved. It allows
+    /// us to have the solution ready for anyone that needs to access it. It will be used
+    /// when the player asks to see the solution.
     private(set) var solution: [GameRow] = [
         GameRow(values: ["0"]),
         GameRow(values: ["0"]),
@@ -49,7 +53,17 @@ class GameBoard {
 
         shuffleDigit()
     }
-
+    
+    /// Check whether the game will be completed if the move is made.
+    ///
+    /// - Parameters:
+    ///   - item: The number that was moved
+    ///   - fromArray: The row that the number is coming from
+    ///   - fromIndex: The index of the number in the source array
+    ///   - toArray: The row that the number is to be inserted into
+    ///   - toIndex: The position in the row that the number should be inserted
+    ///
+    /// - Returns: Returns True if the move results in a correct solution, else False
     func checkMove(item: String,
                    fromArray: Int, fromIndex: Int,
                    toArray: Int, toIndex: Int) -> Bool {
@@ -70,6 +84,7 @@ class GameBoard {
     }
 
     /// Generates a random GameRow number with 3-5 numbers in it.
+    ///
     /// - Parameter mathOperator: The math operator for the game. This will be + or - or =
     /// - Returns: The completed GameRow. Numbers will always have a leading non-zero value.
     private func generateNumber(mathOperator: String) -> GameRow {
@@ -82,6 +97,7 @@ class GameBoard {
     
     /// Generates the result row. This will be the result of adding or subtracting the two random number
     /// rows.
+    /// 
     /// - Returns: A completed GameRow with the calculated result of adding or subtracting the numbers.
     private func generateResultRow() -> GameRow {
         let value1 = row(at: 0).target

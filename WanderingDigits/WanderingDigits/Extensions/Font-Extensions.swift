@@ -12,14 +12,19 @@
 import SwiftUI
 
 extension Font {
+    /// Game play font for the numbers.
     static var numberFont: Font {
         Font.system(size: 60)
             .monospacedDigit()
     }
+
+    /// Font to use in the 'show solution' popup
     static var numberFontSmall: Font {
         Font.system(size: 30)
             .monospacedDigit()
     }
+
+    /// Font to use to show the math operator
     static var operatorFont: Font {
         Font.system(size: 70)
             .monospacedDigit()

@@ -13,6 +13,4 @@ import Foundation
 
 struct Constants {
     public static let wdPlaySounds = "wdPlaySounds"
-    public static let wdGameLevel = "wdGameLevel"
-    public static let wdGameTheme = "wdGameTheme"
 }

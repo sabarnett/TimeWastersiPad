@@ -100,6 +100,11 @@ struct LeaderBoardItemHeader: View {
             Spacer()
             Text("Seconds")
                 .font(.headline)
+                .frame(width: 95, alignment: .trailing)
+
+            Text("Attempts")
+                .font(.headline)
+                .frame(width: 95, alignment: .trailing)
         }.foregroundStyle(.orange.opacity(0.85))
     }
 }
@@ -120,6 +125,9 @@ struct LeaderBoardItemView: View {
             Text(dateFormatter.string(from: leaderItem.gameDate))
             Spacer()
             Text("\(leaderItem.gameScore)")
+                .frame(width: 95, alignment: .trailing)
+            Text("\(leaderItem.gameAttempts)")
+                .frame(width: 95, alignment: .trailing)
         }
     }
 }

@@ -12,5 +12,6 @@
 import UniformTypeIdentifiers
 
 extension UTType {
+    /// UTType we use when dragging and dropping numbers in the game
     static let dragItem = UTType(exportedAs: "uk.co.sabarnett")
 }
