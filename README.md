@@ -21,20 +21,20 @@ At present, this Mac app contains nine games;
 * Matched Pairs
 * Word Search
 * Code Master
+* Wandering Digits
 
 These are a mixture of games I have adapted and games I have written myself. 
 
 * Minesweeper and WordCraft were created by [Paul Hudson in his Hacking with Swift+ live streams]( https://www.hackingwithswift.com/plus ). I have 'messed' with them to extend the games. 
+* Pyramid of Doom is a Stott Adams game from way back when the TRS-80 was still cool - this is my port of that game, taken from the original C code and ported to Swift. I then added a SwiftUI front end as the original game was a console line game
 
-* Snake, Number Combinations, Tic Tac Toe, Othello, Matched Pairs, Word Search and Code Master are mine. I've picked up the basic logic from web articles but have written the code myself.
-
-* Pyramid of Doom is a Stott Adams game from way back when the TRS-80 was still cool - this is my port of that game, taken from the original C code and ported to Swift. I then added a SwiftUI front end as the original game was a console line game.
+Snake, Number Combinations, Tic Tac Toe, Othello, Matched Pairs, Word Search, Code Master and Wandering Digits are mine. I've picked up the basic logic from web articles and books but have written the code myself.
 
 More will be added at some point, as and when I come across something I like the look of.
 
 ### Current State
 
-Currently, the conversion process has been completed and all games are playable. However, there are lots of tweaks that I need to go to polish the games properly for the iPad layout. Many of the games were fixed size on the Mac so cells could be of a pre-dedtermined size. Some of these didn't work well on the iPad so I'mm reviewing all games to make sure the layouts work better. When this process is complete, I'll be flagging that here.
+Currently, the conversion process has been completed and all games are playable. I've added a few games since the original set and hope to drop new games as and when I find time.
 
 ### The Games
 
@@ -174,6 +174,22 @@ Recognising that the game can be difficult at the hard and very hard levels, I r
 ![CodeMaster](./Images/twiCodeReveal.png)
 
 While not a 100% faithful recreation of the original game, this implementation can be used to play the original or to play one of the variants for more or less difficulty.
+
+## Wandering Digits
+
+Wandering Digits is a game of mathematical deduction. You have a perfectly crafted formula. Everything is well with the world and the formula calculates the right result.  You pass your masterpiece to the type-setters who transcribe it into beautiful print for you. Sadly, someone makes a mistake and your formula no longer makes  sense. One of the digits has been moved! You can't let it go out  into the world like this, so you must identify the digit that has  moved and put it back in it's rightful place.
+
+![Wandering Digits](./Images/twiDigit.png)
+
+You move a digit by dragging and dropping it into it's new position. When you drag over  another digit, the drop point is immediately before the digit. To drop at the end of a number you drop immediately after the last digit. 
+
+There is no limit to the number of moves you have to arrive at the corrected result. The game score, however, is based purely on the length of time it takes you to arrive in the right place. We record the number of moves, but it's not as good a metric as the time.
+
+When working with these puzzles, he trick is to start working from the right. Check that the formula is correct one digit at a time until you find a failure. When the partial formula does not work, you hvae found the correct place to insert the wandering digit. All you need to do now is work out what digit to move to make the formula add up.
+
+Recognising that the game can be difficult at the hard and very hard levels, I relented and added a facility where you can see the correct formula. This ends the game, but also takes away some of the frustration when you're struggling.
+
+![Wandering Digits](./Images/twiDigitReveal.png)
 
 ## Overviews
 
