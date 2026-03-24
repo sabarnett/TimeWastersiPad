@@ -38,9 +38,12 @@ struct ArrayRowView: View {
                     // display the number and setup for drag and drop
                     Text(row.value(at: itemIndex))
                         .font(.numberFont)
+                        .padding(.horizontal)
                         .background(dragOver == itemIndex
-                                    ? Color.blue.opacity(0.35)
-                                    : Color.clear)
+                                    ? Color.blue.opacity(0.35).gradient
+                                    : Color.green.opacity(0.6).gradient)
+                        .clipShape(RoundedRectangle(cornerRadius: 25))
+
                         .frame(alignment: .trailing)
                         .foregroundStyle(arrayIndex == 2 ? .secondary : .primary)
 

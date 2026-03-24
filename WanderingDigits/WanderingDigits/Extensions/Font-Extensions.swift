@@ -14,7 +14,7 @@ import SwiftUI
 extension Font {
     /// Game play font for the numbers.
     static var numberFont: Font {
-        Font.system(size: 60)
+        Font.system(size: 50)
             .monospacedDigit()
     }
 
