@@ -16,7 +16,7 @@ public enum Game: String, CaseIterable, Identifiable {
     case minesweeper, wordcraft, numberCombinations, ticTacToe,
          othello,
          snake, adventure, matchedPairs, wordSearch,
-         codeMaster, wanderingDigits
+         codeMaster, wanderingDigits, game2048
 
     public var id: Game { self }
 
@@ -44,6 +44,8 @@ public enum Game: String, CaseIterable, Identifiable {
             return codeMasterGame()
         case .wanderingDigits:
             return wanderingDigitsGame()
+        case .game2048:
+            return game2048Game()
         }
     }
 }
@@ -295,6 +297,30 @@ extension Game {
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
                        gameIcon: "rectangle.2.swap",
+                       hasSettings: true
+        )
+    }
+
+    // MARK: - 2048
+    private func game2048Game() -> GameDefinition {
+        GameDefinition(id: Game.wanderingDigits,
+                       title: "2048",
+                       tagLine: "Can you geo to the target?",
+                       description: textBlock(
+                        "2048 is a single-player sliding puzzle game created by Italian developer Gabriele Cirulli and released in March 2014. The game is played on a 4×4 grid, where numbered tiles slide around when the player swipes in one of four directions. The objective is straightforward: combine matching tiles to eventually produce a tile bearing the number 2048. Despite its simple premise, the game became a viral sensation almost overnight, attracting millions of players within days of its release and spawning countless clones and variants across every platform imaginable.",
+                        "The rules are elegantly simple. Every turn, the player chooses a direction to slide all tiles on the board simultaneously. When two tiles with the same number collide during a slide, they merge into a single tile whose value is their sum — two 2s become a 4, two 4s become an 8, and so on up the powers of two. After each move, a new tile (almost always a 2, occasionally a 4) appears in a random empty cell. The challenge lies in keeping the board from filling up while steadily working tiles toward higher values.",
+                        "Strategy in 2048 is deceptively deep. Beginners quickly discover that random swiping leads to a cluttered board and an early game over, while experienced players develop disciplined habits — anchoring the highest-value tile in a corner, building a chain of descending values along one edge, and never making a move that disrupts that structure. The game rewards patience and forward thinking, punishing impulsive moves that might feel locally beneficial but leave the board in an unrecoverable state several turns later.",
+                        "What makes 2048 enduring is the tense arithmetic satisfaction at its core. Every merge delivers a small dopamine hit, and the exponential growth of tile values gives the game a natural sense of escalating drama — the jump from 1024 to 2048 feels genuinely earned. Reaching the titular tile is not the end either; the game continues beyond 2048, letting determined players push toward 4096, 8192, or higher. That open-ended ceiling, combined with the game's pick-up-and-play accessibility, is why 2048 remains one of the most replicated game concepts of the past decade."
+                       ),
+                       gamePlay: textBlock(
+                        "Every turn, the player chooses a direction to slide all tiles on the board simultaneously. When two tiles with the same number collide during a slide, they merge into a single tile whose value is their sum — two 2s become a 4, two 4s become an 8, and so on up the powers of two.",
+                        "After each move, a new tile (almost always a 2, occasionally a 4) appears in a random empty cell. The challenge lies in keeping the board from filling up while steadily working tiles toward higher values.",
+                        "Strategy in 2048 is deceptively deep. Beginners quickly discover that random swiping leads to a cluttered board and an early game over, while experienced players develop disciplined habits — anchoring the highest-value tile in a corner, building a chain of descending values along one edge, and never making a move that disrupts that structure.",
+                        "The game rewards patience and forward thinking, punishing impulsive moves that might feel locally beneficial but leave the board in an unrecoverable state several turns later."
+                       ),
+                       credits: "Steven Barnett",
+                       link: "http://www.sabarnett.co.uk",
+                       gameIcon: "square.grid.3x3.middle.filled",
                        hasSettings: true
         )
     }

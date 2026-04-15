@@ -1,0 +1,85 @@
+//
+// -----------------------------------------
+// Original project: 2048
+// Original package: 2048
+// Created on: 13/04/2026 by: Steven Barnett
+// Web: http://www.sabarnett.co.uk
+// GitHub: https://www.github.com/sabarnett
+// -----------------------------------------
+// Copyright © 2026 Steven Barnett. All rights reserved.
+//
+
+import SwiftUI
+import SharedComponents
+
+public struct Game2048GameView: View {
+    @State private var model = GameModel()
+    @State private var showInstructions = false
+
+    // Gesture tracking
+    @GestureState private var dragTranslation: CGSize = .zero
+
+    @State public var gameData: Game
+
+    public init(gameData: Game) {
+        self.gameData = gameData
+    }
+
+    public var body: some View {
+        GeometryReader { geo in
+            let boardSize = min(geo.size.width * 0.62, geo.size.height * 0.72)
+
+            ZStack {
+                HStack(spacing: 40) {
+                    // Left panel
+                    ScorePanel(model: model, performMove: performMove)
+                        .frame(width: 240)
+                        .padding(.vertical, 48)
+
+                    // Board
+                    ZStack {
+                        BoardView(model: model, boardSize: boardSize)
+                            .gesture(swipeGesture)
+
+                        if model.gameState != .playing {
+                            GameOverlayView(gameState: model.gameState) {
+                                withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                                    model.startNewGame()
+                                }
+                            }
+                            .frame(width: boardSize, height: boardSize)
+                        }
+                    }
+                }
+                .padding(.horizontal, 48)
+                .frame(width: geo.size.width, height: geo.size.height)
+            }
+        }
+    }
+
+    // MARK: - Swipe Gesture
+
+    private var swipeGesture: some Gesture {
+        DragGesture(minimumDistance: 40)
+            .onEnded { value in
+                let h = value.translation.width
+                let v = value.translation.height
+                if abs(h) > abs(v) {
+                    performMove(h > 0 ? .right : .left)
+                } else {
+                    performMove(v > 0 ? .down : .up)
+                }
+            }
+    }
+
+    private func performMove(_ direction: MoveDirection) {
+        withAnimation(.spring(response: 0.18, dampingFraction: 0.85)) {
+            model.move(direction)
+        }
+    }
+}
+
+#Preview {
+    Game2048GameView(gameData: Game.game2048)
+}
+

@@ -22,6 +22,7 @@ import WordSearch
 import Snake
 import CodeMasters
 import WanderingDigits
+import Game2048
 
 /// Single place to generate the game view or the game
 /// settings view
@@ -51,6 +52,8 @@ struct GameViewFactory {
             AnyView(CodeMasterGameView(gameData: game))
         case .wanderingDigits:
             AnyView(WanderingDigitsGameView(gameData: game))
+        case .game2048:
+            AnyView(Game2048GameView(gameData: game))
         @unknown default:
             fatalError("Unable to determine game view")
         }
@@ -80,6 +83,8 @@ struct GameViewFactory {
             AnyView(CodeMasterSettingsView())
         case .wanderingDigits:
             AnyView(WanderingDigitsSettingsView())
+        case .game2048:
+            AnyView(Text("There are no settings for 2048"))
         @unknown default:
             fatalError("Unable to determine game settings view")
         }
