@@ -42,7 +42,7 @@ struct ScorePanel: View {
             VStack(spacing: 16) {
                 Button {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                        model.startNewGame()
+                        model.newGame()
                     }
                 } label: {
                     Label("New Game", systemImage: "arrow.counterclockwise")

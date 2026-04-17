@@ -15,7 +15,7 @@ struct BoardView: View {
     let model: GameModel
     let boardSize: CGFloat
 
-    private let gridSize = Settings.gameGridSize
+    private let gridSize = Constants.gameGridSize
     private let gap: CGFloat = 12
 
     private var tileSize: CGFloat {

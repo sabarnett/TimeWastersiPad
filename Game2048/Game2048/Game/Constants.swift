@@ -11,6 +11,9 @@
 
 import Foundation
 
-struct Settings {
+struct Constants {
     static let gameGridSize: Int = 4
+
+    static let gridSize: String = "g2048GridSize"
+    static let playSounds: String = "g2048PlaySounds"
 }

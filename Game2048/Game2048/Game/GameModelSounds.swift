@@ -1,31 +1,21 @@
 //
 // -----------------------------------------
-// Original project: Othello
-// Original package: Othello
-// Created on: 19/08/2025 by: Steven Barnett
+// Original project: Game2048
+// Original package: Game2048
+// Created on: 17/04/2026 by: Steven Barnett
 // Web: http://www.sabarnett.co.uk
 // GitHub: https://www.github.com/sabarnett
 // -----------------------------------------
-// Copyright © 2025 Steven Barnett. All rights reserved.
+// Copyright © 2026 Steven Barnett. All rights reserved.
 //
 
 import Foundation
 import AVKit
 
-extension OthelloViewModel {
+extension GameModel {
     /// Play the background music
     func playBackgroundSound() {
         playSound(backgroundURL, repeating: true)
-    }
-
-    func playChime() {
-        guard othelloPlaySounds else { return }
-
-        chimeSound = try? AVAudioPlayer(contentsOf: chimeURL)
-        if chimeSound != nil {
-            chimeSound.numberOfLoops = 0
-            self.chimeSound.play()
-        }
     }
 
     /// If the background music is playing, stop it.
@@ -39,13 +29,13 @@ extension OthelloViewModel {
     /// toggled on, then we start playing the ticking sound. It is unlikely that we were playing
     /// any other sound, so this is a safe bet.
     func toggleSounds() {
-        othelloPlaySounds.toggle()
+        gamePlaySounds.toggle()
     }
 
     func updateSounds() {
-        speakerIcon = othelloPlaySounds ? "speaker.slash" : "speaker"
+        speakerIcon = gamePlaySounds ? "speaker.slash" : "speaker"
 
-        if othelloPlaySounds {
+        if gamePlaySounds {
             playSound(backgroundURL, repeating: true)
         } else {
             sounds.stop()
@@ -55,7 +45,7 @@ extension OthelloViewModel {
     /// Creates the URL of a sound file. The file must exist within the minesweeper project
     /// bundle.
     func soundFile(named file: String) -> URL {
-        let bun = Bundle(for: OthelloViewModel.self)
+        let bun = Bundle(for: GameModel.self)
         let sound = bun.path(forResource: file, ofType: "mp3")
         return URL(fileURLWithPath: sound!)
     }
@@ -63,7 +53,7 @@ extension OthelloViewModel {
     /// Play a sound file. We will be passed the URL of the file in the current bundle. If sounds are
     /// disabled, we do nothing.
     private func playSound(_ url: URL, repeating: Bool = false) {
-        guard othelloPlaySounds else { return }
+        guard gamePlaySounds else { return }
         if sounds != nil {
             sounds.stop()
         }

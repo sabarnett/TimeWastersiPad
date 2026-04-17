@@ -9,24 +9,39 @@
 // Copyright © 2026 Steven Barnett. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+import AVKit
 
 @Observable
 final class GameModel {
+    @ObservationIgnored
+    @AppStorage(Constants.playSounds) var gamePlaySounds = false {
+        didSet {
+            updateSounds()
+        }
+    }
+
     private(set) var tiles: [Tile] = []
     private(set) var score: Int = 0
     private(set) var bestScore: Int = 0
     private(set) var gameState: GameState = .playing
     private(set) var isAnimating: Bool = false
 
-    private let gridSize = Settings.gameGridSize
+    private let gridSize = Constants.gameGridSize
+
+    var showGamePlay: Bool = false
+    var showLeaderBoard: Bool = false
+
+    var speakerIcon = ""
+    var sounds: AVAudioPlayer!
+    var backgroundURL: URL { soundFile(named: "background") }
 
     init() {
         bestScore = UserDefaults.standard.integer(forKey: "bestScore2048")
-        startNewGame()
+        speakerIcon = gamePlaySounds ? "speaker.slash" : "speaker"
     }
 
-    func startNewGame() {
+    func newGame() {
         tiles = []
         score = 0
         gameState = .playing

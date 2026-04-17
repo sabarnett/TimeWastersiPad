@@ -44,7 +44,7 @@ public struct Game2048GameView: View {
                         if model.gameState != .playing {
                             GameOverlayView(gameState: model.gameState) {
                                 withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                                    model.startNewGame()
+                                    model.newGame()
                                 }
                             }
                             .frame(width: boardSize, height: boardSize)
@@ -54,6 +54,44 @@ public struct Game2048GameView: View {
                 .padding(.horizontal, 48)
                 .frame(width: geo.size.width, height: geo.size.height)
             }
+            .task { model.newGame() }
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button(action: {
+                        model.showGamePlay.toggle()
+                    }, label: {
+                        Image(systemName: "questionmark.circle")
+                    })
+                    .help("Show game rules")
+
+                    Button(action: {
+                        model.showLeaderBoard = true
+                    }, label: {
+                        Image(systemName: "trophy.circle")
+                    })
+                    .help("Show the leader board")
+                }
+
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(action: {
+                        model.newGame()
+                    }, label: {
+                        Image(systemName: "arrow.uturn.left.circle")
+                    })
+                    .help("Start a new game")
+
+                    Button(action: {
+                        model.toggleSounds()
+                    }, label: {
+                        Image(systemName: model.speakerIcon)
+                    })
+                    .help("Toggle sound effects")
+                }
+            }
+            .sheet(isPresented: $model.showGamePlay) {
+                GamePlayView(game: gameData.gameDefinition)
+            }
+
         }
     }
 
