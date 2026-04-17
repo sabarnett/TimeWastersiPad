@@ -46,8 +46,8 @@ final class GameModel {
         tiles = []
         score = 0
         gameState = .playing
-        addRandomTile()
-        addRandomTile()
+        addRandomTile(initialSetup: true)
+        addRandomTile(initialSetup: true)
     }
 
     // MARK: - Move
@@ -101,7 +101,7 @@ final class GameModel {
         tiles = newTiles
     }
 
-    private func addRandomTile() {
+    private func addRandomTile(initialSetup: Bool = false) {
         var empty: [(Int, Int)] = []
         let grid = buildGrid()
         for row in 0..<gridSize {
@@ -110,7 +110,9 @@ final class GameModel {
             }
         }
         guard let (row, col) = empty.randomElement() else { return }
-        var tile = Tile(value: Int.random(in: 1...10) == 1 ? 4 : 2, row: row, col: col)
+        var tile = Tile(value: (initialSetup == true
+                                ? 2
+                                : Int.random(in: 1...10) == 1 ? 4 : 2), row: row, col: col)
         tile.isNew = true
         tiles.append(tile)
     }
