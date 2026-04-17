@@ -173,6 +173,7 @@ final class GameModel {
 
     private func checkGameState() {
         if tiles.contains(where: { $0.value == 2048 }) {
+            leaderBoard.addLeader(score: score, for: .four)
             gameState = .won
             return
         }
@@ -191,6 +192,7 @@ final class GameModel {
                 if row + 1 < gridSize && grid[row + 1][col] == v { return }
             }
         }
+        leaderBoard.addLeader(score: score, for: .four)
         gameState = .lost
     }
 }
