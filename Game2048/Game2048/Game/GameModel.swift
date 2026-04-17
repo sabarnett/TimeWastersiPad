@@ -26,6 +26,7 @@ final class GameModel {
     private(set) var bestScore: Int = 0
     private(set) var gameState: GameState = .playing
     private(set) var isAnimating: Bool = false
+    private(set) var leaderBoard = LeaderBoard()
 
     private let gridSize = Constants.gameGridSize
 

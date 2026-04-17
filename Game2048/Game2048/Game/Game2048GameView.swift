@@ -91,7 +91,10 @@ public struct Game2048GameView: View {
             .sheet(isPresented: $model.showGamePlay) {
                 GamePlayView(game: gameData.gameDefinition)
             }
-
+            .sheet(isPresented: $model.showLeaderBoard) {
+                LeaderBoardView(leaderBoard: model.leaderBoard,
+                                initialTab: .four)
+            }
         }
     }
 
