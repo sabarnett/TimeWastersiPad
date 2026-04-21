@@ -20,6 +20,12 @@ final class GameModel {
             updateSounds()
         }
     }
+    @ObservationIgnored
+    @AppStorage(Constants.gameLevel) var gameLevel: GameLevel = .four {
+        didSet {
+            newGame()
+        }
+    }
 
     private(set) var tiles: [Tile] = []
     private(set) var score: Int = 0
@@ -28,7 +34,9 @@ final class GameModel {
     private(set) var isAnimating: Bool = false
     private(set) var leaderBoard = LeaderBoard()
 
-    private let gridSize = Constants.gameGridSize
+    private var gridSize: Int {
+        gameLevel.gridSize
+    }
 
     var showGamePlay: Bool = false
     var showLeaderBoard: Bool = false
@@ -174,7 +182,7 @@ final class GameModel {
     // MARK: - Game State Check
 
     private func checkGameState() {
-        if tiles.contains(where: { $0.value == 2048 }) {
+        if tiles.contains(where: { $0.value == gameLevel.target }) {
             leaderBoard.addLeader(score: score, for: .four)
             gameState = .won
             return

@@ -28,6 +28,21 @@ enum GameLevel: Int, CaseIterable, Identifiable, CustomStringConvertible {
             "5x5"
         }
     }
+
+    var gridSize: Int {
+        self.rawValue
+    }
+
+    var target: Int {
+        switch self {
+        case .three:
+            1024
+        case .four:
+            2048
+        case .five:
+            4096
+        }
+    }
 }
 
 struct Constants {
