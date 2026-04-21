@@ -17,14 +17,14 @@ struct ScorePanel: View {
     var performMove: ((MoveDirection) -> Void)
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 32) {
+        VStack(alignment: .center, spacing: 32) {
             // Title
-            VStack(alignment: .leading, spacing: 4) {
-                Text("\(model.gameLevel.target)")
+            VStack(alignment: .center, spacing: 4) {
+                Text(String(model.gameLevel.target))
                     .font(.system(size: 72, weight: .black, design: .rounded))
                     .foregroundStyle(Color(red: 0.47, green: 0.43, blue: 0.40))
                 
-                Text("Join the tiles,\nget to \(model.gameLevel.target)!")
+                Text("Join the tiles, get to \(model.gameLevel.target)!")
                     .font(.system(size: 17, weight: .medium, design: .rounded))
                     .foregroundStyle(Color(red: 0.60, green: 0.56, blue: 0.52))
                     .lineSpacing(4)
