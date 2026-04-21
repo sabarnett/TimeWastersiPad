@@ -13,7 +13,7 @@ import SwiftUI
 import SharedComponents
 
 public struct Game2048GameView: View {
-    @State private var model = GameModel()
+    @State private var model = Game2048Model()
     @State private var showInstructions = false
 
     // Gesture tracking

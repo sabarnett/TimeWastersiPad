@@ -13,7 +13,7 @@ import SwiftUI
 import AVKit
 
 @Observable
-final class GameModel {
+final class Game2048Model {
     @ObservationIgnored
     @AppStorage(Constants.playSounds) var gamePlaySounds = false {
         didSet {

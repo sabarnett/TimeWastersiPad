@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct ScorePanel: View {
-    @Bindable var model: GameModel
+    @Bindable var model: Game2048Model
 
     var performMove: ((MoveDirection) -> Void)
 

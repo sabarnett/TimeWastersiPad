@@ -12,7 +12,7 @@
 import Foundation
 import AVKit
 
-extension GameModel {
+extension Game2048Model {
     /// Play the background music
     func playBackgroundSound() {
         playSound(backgroundURL, repeating: true)
@@ -45,7 +45,7 @@ extension GameModel {
     /// Creates the URL of a sound file. The file must exist within the minesweeper project
     /// bundle.
     func soundFile(named file: String) -> URL {
-        let bun = Bundle(for: GameModel.self)
+        let bun = Bundle(for: Game2048Model.self)
         let sound = bun.path(forResource: file, ofType: "mp3")
         return URL(fileURLWithPath: sound!)
     }

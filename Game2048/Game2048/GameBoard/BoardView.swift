@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct BoardView: View {
-    let model: GameModel
+    let model: Game2048Model
     let boardSize: CGFloat
 
     private var gridSize: Int {
