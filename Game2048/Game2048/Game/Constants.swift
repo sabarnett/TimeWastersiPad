@@ -35,5 +35,6 @@ struct Constants {
 
     static let gridSize: String = "g2048GridSize"
     static let playSounds: String = "g2048PlaySounds"
+    static let gameLevel: String = "g2048GameLevel"
     static let leaderBoardFileName: String = "game2048LeaderBoard"
 }

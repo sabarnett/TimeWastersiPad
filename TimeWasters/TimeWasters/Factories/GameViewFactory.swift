@@ -84,7 +84,7 @@ struct GameViewFactory {
         case .wanderingDigits:
             AnyView(WanderingDigitsSettingsView())
         case .game2048:
-            AnyView(Text("There are no settings for 2048ml"))
+            AnyView(Game2048SettingsView())
         @unknown default:
             fatalError("Unable to determine game settings view")
         }
