@@ -33,6 +33,8 @@ final class Game2048Model {
     private(set) var gameState: GameState = .playing
     private(set) var isAnimating: Bool = false
     private(set) var leaderBoard = LeaderBoard()
+    private(set) var gameOverMessage: String = ""
+    private(set) var gameOverSubMessage: String = ""
 
     private var gridSize: Int {
         gameLevel.gridSize
@@ -54,6 +56,8 @@ final class Game2048Model {
         tiles = []
         score = 0
         gameState = .playing
+        gameOverMessage = ""
+        gameOverSubMessage = ""
         addRandomTile(initialSetup: true)
         addRandomTile(initialSetup: true)
 
@@ -186,6 +190,8 @@ final class Game2048Model {
     private func checkGameState() {
         if tiles.contains(where: { $0.value == gameLevel.target }) {
             leaderBoard.addLeader(score: score, for: .four)
+            gameOverMessage = "You won!"
+            gameOverSubMessage = "You reached the target with a score of \(score)"
             gameState = .won
             return
         }
@@ -205,6 +211,8 @@ final class Game2048Model {
             }
         }
         leaderBoard.addLeader(score: score, for: .four)
+        gameOverMessage = "You didn't reach the target"
+        gameOverSubMessage = "You finished with a score of \(score)"
         gameState = .lost
     }
 }

@@ -40,19 +40,19 @@ public struct Game2048GameView: View {
                     ZStack {
                         BoardView(model: model, boardSize: boardSize)
                             .gesture(swipeGesture)
-
-                        if model.gameState != .playing {
-                            GameOverlayView(gameState: model.gameState) {
-                                withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                                    model.newGame()
-                                }
-                            }
-                            .frame(width: boardSize, height: boardSize)
-                        }
                     }
                 }
                 .padding(.horizontal, 48)
                 .frame(width: geo.size.width, height: geo.size.height)
+
+                if model.gameState != .playing {
+                    GameOverView(message: model.gameOverMessage,
+                                 subMessage: model.gameOverSubMessage) {
+                        withAnimation {
+                            model.newGame()
+                        }
+                    }
+                }
             }
             .task { model.newGame() }
             .toolbar {
