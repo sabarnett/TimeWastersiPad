@@ -21,6 +21,7 @@ public struct CodeMasterGameView: View {
     @State private var game: CodeMasterGame = CodeMasterGame()
     @State private var showLeaderBoard = false
     @State private var showMasterCode = false
+    @State private var showSettings = false
 
     public init(gameData: Game) {
         self.gameData = gameData
@@ -80,6 +81,7 @@ public struct CodeMasterGameView: View {
                 ToolbarItemGroup(placement: .topBarLeading) {
                     showGamePlayButton()
                     showLeaderBoardButton()
+                    showSettingsButton()
                 }
 
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -109,6 +111,9 @@ public struct CodeMasterGameView: View {
 
         .sheet(isPresented: $game.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)
+        }
+        .sheet(isPresented: $showSettings) {
+            CodeMasterSettingsView(showClose: true)
         }
         .sheet(isPresented: $showLeaderBoard) {
             LeaderBoardView(leaderBoard: game.leaderBoard,
@@ -161,6 +166,15 @@ public struct CodeMasterGameView: View {
             Image(systemName: "trophy.circle")
         })
         .help("Show the leader board")
+    }
+
+    fileprivate func showSettingsButton() -> some View {
+        return Button(action: {
+            showSettings = true
+        }, label: {
+            Image(systemName: "gearshape")
+        })
+        .help("Show the game settings")
     }
 
     fileprivate func revealCodeButton() -> some View {

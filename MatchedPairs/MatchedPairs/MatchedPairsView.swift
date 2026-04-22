@@ -19,6 +19,7 @@ public struct MatchedPairsView: View {
 
     @State private var showGamePlay: Bool = false
     @State private var showLeaderBoard: Bool = false
+    @State private var showSettings: Bool = false
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     func cardWidth(_ proxy: GeometryProxy) -> CGFloat {
@@ -73,6 +74,14 @@ public struct MatchedPairsView: View {
                         Image(systemName: "trophy.circle")
                     })
                     .help("Show the leader board")
+
+                    Button(action: {
+                        model.stopSounds()
+                        showSettings = true
+                    }, label: {
+                        Image(systemName: "gearshape")
+                    })
+                    .help("Show the game settings")
                 }
 
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -115,6 +124,14 @@ public struct MatchedPairsView: View {
         }, content: {
             LeaderBoardView(leaderBoard: model.leaderBoard,
                             initialTab: model.gameDifficulty)
+        })
+
+        .sheet(isPresented: $showSettings, onDismiss: {
+            if model.playSounds {
+                model.playBackgroundSound()
+            }
+        }, content: {
+            MatchedPairsSettingsView(showClose: true)
         })
 
         .onReceive(timer) { _ in

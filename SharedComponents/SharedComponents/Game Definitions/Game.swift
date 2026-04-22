@@ -297,7 +297,7 @@ extension Game {
                        credits: "Steven Barnett",
                        link: "http://www.sabarnett.co.uk",
                        gameIcon: "rectangle.2.swap",
-                       hasSettings: true
+                       hasSettings: false
         )
     }
 

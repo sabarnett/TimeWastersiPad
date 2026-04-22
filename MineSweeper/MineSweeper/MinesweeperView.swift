@@ -24,6 +24,7 @@ public struct MinesweeperView: View {
     @State private var ticking: AVAudioPlayer!
     @State private var showGamePlay: Bool = false
     @State private var showLeaderBoard: Bool = false
+    @State private var showSettings: Bool = false
 
     private var tickingURL: URL { soundFile(named: "ticking") }
     private var explosionURL: URL { soundFile(named: "explosion") }
@@ -65,6 +66,14 @@ public struct MinesweeperView: View {
                         Image(systemName: "trophy.circle")
                     })
                     .help("Show the leader board")
+
+                    Button(action: {
+                        ticking?.stop()
+                        showSettings = true
+                    }, label: {
+                        Image(systemName: "gearshape")
+                    })
+                    .help("Show the game settings")
                 }
 
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -128,7 +137,15 @@ public struct MinesweeperView: View {
             }
         }, content: {
             LeaderBoardView(leaderBoard: game.leaderBoard,
-                                 initialTab: game.mineGameDifficulty)
+                            initialTab: game.mineGameDifficulty)
+        })
+
+        .sheet(isPresented: $showSettings, onDismiss: {
+            if minePlaySounds {
+                playSound(tickingURL, repeating: true)
+            }
+        }, content: {
+            MinesweeperSettings(showClose: true)
         })
     }
 

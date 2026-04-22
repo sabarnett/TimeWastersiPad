@@ -20,6 +20,7 @@ public struct Game2048GameView: View {
     @GestureState private var dragTranslation: CGSize = .zero
 
     @State public var gameData: Game
+    @State private var showSettings = false
 
     public init(gameData: Game) {
         self.gameData = gameData
@@ -70,6 +71,13 @@ public struct Game2048GameView: View {
                         Image(systemName: "trophy.circle")
                     })
                     .help("Show the leader board")
+
+                    Button(action: {
+                        showSettings = true
+                    }, label: {
+                        Image(systemName: "gearshape")
+                    })
+                    .help("Show the game settings")
                 }
 
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -95,6 +103,7 @@ public struct Game2048GameView: View {
                 LeaderBoardView(leaderBoard: model.leaderBoard,
                                 initialTab: .four)
             }
+            .sheet(isPresented: $showSettings) { Game2048SettingsView(showClose: true) }
         }
     }
 

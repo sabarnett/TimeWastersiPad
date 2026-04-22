@@ -81,7 +81,7 @@ extension Game {
         case .codeMaster:
             CodeMasterSettingsView()
         case .wanderingDigits:
-            WanderingDigitsSettingsView()
+            Text("There are no settigs for Wandering Digits")
         case .game2048:
             Game2048SettingsView()
         @unknown default:

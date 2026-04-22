@@ -12,6 +12,7 @@
 import SwiftUI
 
 public struct MatchedPairsSettingsView: View {
+    @Environment(\.dismiss) private var dismiss
 
     // Images need to be loaded from the current bundle, not the global one
     let myBundle = Bundle(for: MatchedPairsGameModel.self)
@@ -24,43 +25,65 @@ public struct MatchedPairsSettingsView: View {
     @AppStorage(Constants.autoFlipDelay) private var autoFlipDelay: Double = 5
 
     @State private var bgID: Int? = 0
+    var showClose = false
 
     var formattedDelay: String {
         autoFlipDelay.formatted(.number.precision(.integerLength(2)))
     }
 
-    public init() { }
+    public init(showClose: Bool = false) {
+        self.showClose = showClose
+    }
 
     public var body: some View {
-        Form {
-            Toggle("Play sounds", isOn: $playSounds)
+        NavigationStack {
+            Form {
+                Toggle("Play sounds", isOn: $playSounds)
+                    .padding(.bottom, 8)
+
+                Picker("Game difficulty", selection: $gameDifficulty) {
+                    ForEach(GameDifficulty.allCases) { difficulty in
+                        Text(difficulty.description)
+                            .tag(difficulty)
+                    }
+                }
                 .padding(.bottom, 8)
 
-            Picker("Game difficulty", selection: $gameDifficulty) {
-                ForEach(GameDifficulty.allCases) { difficulty in
-                    Text(difficulty.description)
-                        .tag(difficulty)
+                Toggle("Auto-flip", isOn: $autoFlip)
+                HStack {
+                    Slider(value: $autoFlipDelay, in: 2...20, step: 1.0)
+                    Text(" (\(formattedDelay) (seconds)")
+                        .font(.caption)
+                }
+                .disabled(!autoFlip)
+                .padding(.bottom, 8)
+
+                // This is a fudge. If I apply the label to the ScrollViewCarouselView
+                // the label aligns with the bottom. So I apply the label to the
+                // instructions and put the control after it without a label.
+                LabeledContent("Card Background") {
+                    Text("Scroll to select card background")
+                }
+                ScrollViewCarouselView(scrollID: $bgID)
+                    .padding(.bottom, 8)
+            }
+            .toolbar {
+                if showClose {
+                    ToolbarItem {
+                        if #available(iOS 26.0, *) {
+                            Button(role: .close,
+                                   action: { dismiss() }
+                            )
+                            .glassEffect()
+                        } else {
+                            Button(role: .cancel,
+                                   action: { dismiss() },
+                                   label: { Image(systemName: "xmark.app").scaleEffect(1.3) }
+                            )
+                        }
+                    }
                 }
             }
-            .padding(.bottom, 8)
-
-            Toggle("Auto-flip", isOn: $autoFlip)
-            HStack {
-                Slider(value: $autoFlipDelay, in: 2...20, step: 1.0)
-                Text(" (\(formattedDelay) (seconds)")
-                    .font(.caption)
-            }
-            .disabled(!autoFlip)
-            .padding(.bottom, 8)
-
-            // This is a fudge. If I apply the label to the ScrollViewCarouselView
-            // the label aligns with the bottom. So I apply the label to the
-            // instructions and put the control after it without a label.
-            LabeledContent("Card Background") {
-                    Text("Scroll to select card background")
-            }
-            ScrollViewCarouselView(scrollID: $bgID)
-                .padding(.bottom, 8)
         }
         .onAppear {
             bgID = cardBackground.id

@@ -15,6 +15,7 @@ public struct WordCraftView: View {
     @State private var viewModel = WordCraftViewModel()
     @State private var gameData: Game
     @State var columnsVisible: NavigationSplitViewVisibility = .all
+    @State private var showSettings = false
     @FocusState private var isFocused: Bool
 
     public init(gameData: Game) {
@@ -50,6 +51,9 @@ public struct WordCraftView: View {
                 Button(action: { viewModel.showGamePlay.toggle() },
                        label: { Image(systemName: "questionmark.circle") })
                 .help("Show game rules")
+                Button(action: { showSettings.toggle() },
+                       label: { Image(systemName: "gearshape") })
+                .help("Show game settings")
             }
 
             ToolbarItemGroup(placement: .topBarTrailing) {
@@ -86,6 +90,9 @@ public struct WordCraftView: View {
         }
         .sheet(isPresented: $viewModel.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)
+        }
+        .sheet(isPresented: $showSettings) {
+            WordCraftSettingsView(showClose: true)
         }
         .alert("Reset Game?", isPresented: $viewModel.showResetConfirmation) {
             Button("Yes", role: .destructive) { viewModel.reset() }

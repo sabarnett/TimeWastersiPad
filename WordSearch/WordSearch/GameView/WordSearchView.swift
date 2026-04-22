@@ -18,6 +18,7 @@ public struct WordSearchView: View {
     @State private var game: WordSearchViewModel = .init()
     @State private var showGamePlay: Bool = false
     @State private var showLeaderBoard: Bool = false
+    @State private var showSettings: Bool = false
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     public init(gameData: Game) {
@@ -51,6 +52,9 @@ public struct WordSearchView: View {
             }
             .sheet(isPresented: $showGamePlay) {
                 GamePlayView(game: gameData.gameDefinition)
+            }
+            .sheet(isPresented: $showSettings) {
+                WordSearchSettingsView(showClose: true)
             }
             .sheet(isPresented: $showLeaderBoard) {
                 LeaderBoardView(leaderBoard: game.leaderBoard,
@@ -133,6 +137,13 @@ public struct WordSearchView: View {
                 Image(systemName: "trophy.circle")
             })
             .help("Show the leader board")
+
+            Button(action: {
+                showSettings = true
+            }, label: {
+                Image(systemName: "gearshape")
+            })
+            .help("Show the game settings")
         }
     }
 

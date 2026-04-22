@@ -19,6 +19,8 @@ public struct CombinationsView: View {
     @State public var gameData: Game
     @State var model = CombinationsViewModel()
 
+    @State private var showSettings = false
+
     public init(gameData: Game) {
         self.gameData = gameData
     }
@@ -77,6 +79,13 @@ public struct CombinationsView: View {
                         Image(systemName: "trophy.circle")
                     })
                     .help("Show the leader board")
+
+                    Button(action: {
+                        showSettings = true
+                    }, label: {
+                        Image(systemName: "gearshape")
+                    })
+                    .help("Show the game settings")
                 }
 
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -121,6 +130,9 @@ public struct CombinationsView: View {
         }
         .sheet(isPresented: $model.showLeaderBoard) {
             LeaderBoardView(leaderBoard: model.leaderBoard)
+        }
+        .sheet(isPresented: $showSettings) {
+            CombinationsSettingsView(showClose: true)
         }
         .toast(toastMessage: $model.notifyMessage)
     }

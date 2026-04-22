@@ -28,6 +28,7 @@ public struct SnakeGameView: View {
     @State private var timer: Timer?
     @State private var pause: Bool = true
     @State private var showLeaderBoard: Bool = false
+    @State private var showSettings: Bool = false
     @FocusState private var hasFocus: Bool
 
     public init(gameData: Game) {
@@ -76,6 +77,14 @@ public struct SnakeGameView: View {
                         Image(systemName: "trophy.circle")
                     })
                     .help("Show the leader board")
+
+                    Button(action: {
+                        showSettings = true
+                    }, label: {
+                        Image(systemName: "gearshape")
+                    })
+                    .help("Show the game settings")
+
                 }
 
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -138,6 +147,9 @@ public struct SnakeGameView: View {
         })
         .sheet(isPresented: $game.showGamePlay) {
             GamePlayView(game: gameData.gameDefinition)
+        }
+        .sheet(isPresented: $showSettings) {
+            SnakeSettingsView(showClose: true)
         }
         .sheet(isPresented: $showLeaderBoard) {
             LeaderBoardView(leaderBoard: game.leaderBoard,
