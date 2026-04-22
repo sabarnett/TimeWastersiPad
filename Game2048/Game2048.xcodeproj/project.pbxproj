@@ -30,9 +30,22 @@
 		E880CF922F8FD3C400E1AD5E /* SharedComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E82EDFA22F98F485000E545F /* Exceptions for "Game2048" folder in "Game2048" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				Game2048.h,
+			);
+			target = E880CF602F8FD3AE00E1AD5E /* Game2048 */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E880CF632F8FD3AE00E1AD5E /* Game2048 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E82EDFA22F98F485000E545F /* Exceptions for "Game2048" folder in "Game2048" target */,
+			);
 			path = Game2048;
 			sourceTree = "<group>";
 		};
@@ -302,7 +315,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = MH62Y8D74P;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -342,7 +355,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = MH62Y8D74P;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
