@@ -15,10 +15,23 @@ import SwiftUI
 struct TimeWastersApp: App {
     @AppStorage(Constants.displayMode) var displayMode: DisplayMode = .system
 
+    @State private var showLaunch = true
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .preferredColorScheme(displayMode.colorScheme)
+            if showLaunch {
+                LaunchScreen()
+                    .task {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            withAnimation {
+                                showLaunch = false
+                            }
+                        }
+                    }
+            } else {
+                ContentView()
+                    .preferredColorScheme(displayMode.colorScheme)
+            }
         }
     }
 }
