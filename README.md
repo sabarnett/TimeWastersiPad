@@ -22,11 +22,13 @@ At present, this Mac app contains nine games;
 * Word Search
 * Code Master
 * Wandering Digits
+* 2048
 
 These are a mixture of games I have adapted and games I have written myself. 
 
 * Minesweeper and WordCraft were created by [Paul Hudson in his Hacking with Swift+ live streams]( https://www.hackingwithswift.com/plus ). I have 'messed' with them to extend the games. 
-* Pyramid of Doom is a Stott Adams game from way back when the TRS-80 was still cool - this is my port of that game, taken from the original C code and ported to Swift. I then added a SwiftUI front end as the original game was a console line game
+* Pyramid of Doom is a Stott Adams game from way back when the TRS-80 was still cool - this is my port of that game, taken from the original C code and ported to Swift. I then added a SwiftUI front end as the original game was a console line game.
+* 2048 was an experiment withh Claude. I gave it a brief and it wrote the game. To be fair, it wrote a good game, but it needed a few tweaks alomg the way to fix a few minor problems. That said, it's still 70%+ what AI generated.
 
 Snake, Number Combinations, Tic Tac Toe, Othello, Matched Pairs, Word Search, Code Master and Wandering Digits are mine. I've picked up the basic logic from web articles and books but have written the code myself.
 
@@ -189,7 +191,26 @@ When working with these puzzles, he trick is to start working from the right. Ch
 
 Recognising that the game can be difficult at the hard and very hard levels, I relented and added a facility where you can see the correct formula. This ends the game, but also takes away some of the frustration when you're struggling.
 
-![Wandering Digits](./Images/twiDigitReveal.png)
+## 2048
+
+2048 is a single-player sliding puzzle game created by Italian developer 
+Gabriele Cirulli and released in March 2014. The game is played on a 4×4 grid, 
+where numbered tiles slide around when the player swipes in one of four 
+directions. The objective is straightforward: combine matching tiles to 
+eventually produce a tile bearing the number 2048. For our game, we have
+introduced two additional variants that use a 3x3 grid and a target value of 1024 and a 5x5 grid with a target value of 4096.
+
+![2048](./Images/twi2048.png)
+
+Every turn, the player chooses a direction to slide all tiles on the board 
+simultaneously. When two tiles with the same number collide during a 
+slide, they merge into a single tile whose value is their 
+sum — two 2s become a 4, two 4s become an 8, and so on up the 
+powers of two. 
+
+After each move, a new tile (almost always a 2, occasionally a 4) appears 
+in a random empty cell. The challenge lies in keeping the board from 
+filling up while steadily working tiles toward higher values.
 
 ## Overviews
 
