@@ -3,9 +3,13 @@ A while ago, I wrote  A Time Wasters Compendium for the Mac. It was my first att
 
 So, this project has born. I have an iPad and I have some Mac games; how difficult could it be to port them across and play them in the iPad? Easy, huh? 
 
+![timeWaasters](./Images/Gaming.png)
+
 This project is/was my attempt to port the games. And, yes, it turned out to be a lot easier than I was expecting. The Mac games had been created as xcFrameworks, so the game source code was isolated. The game front end was Mac specific, so would need a re-write but creating a simple front end on the iPad is fairly trivial.
 
-Welcome to Time Wasters for the iPad. Oh, and, for good measure, it also runs on the Mac.
+Welcome to Time Wasters for the iPad. Oh, and, for good measure, it also runs on the Mac (though not perfectly!).
+
+.
 
 ### What's included
 
@@ -219,4 +223,11 @@ When you hover over the buttons on the home screen, the clock face will change t
 ![gameInfo](./Images/twiGameInfo.png)
 
 While playing a game, you can get game play instructions by clicking the question mark icon.
+
+## Version History
+
+### version 1.3
+
+* Upgraded the opening screen to show a more graphic image and to display the program name, version number and copyright.
+* Added the 2048 game.
 
