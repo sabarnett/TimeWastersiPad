@@ -56,6 +56,8 @@ final class Game2048Model {
         gameState = .playing
         addRandomTile(initialSetup: true)
         addRandomTile(initialSetup: true)
+
+        updateSounds()
     }
 
     // MARK: - Move

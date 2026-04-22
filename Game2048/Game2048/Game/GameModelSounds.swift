@@ -38,7 +38,7 @@ extension Game2048Model {
         if gamePlaySounds {
             playSound(backgroundURL, repeating: true)
         } else {
-            sounds.stop()
+            sounds?.stop()
         }
     }
 
