@@ -24,69 +24,81 @@ import CodeMasters
 import WanderingDigits
 import Game2048
 
-/// Single place to generate the game view or the game
-/// settings view
-struct GameViewFactory {
-
-    @MainActor func gameView(for game: Game) -> some View {
-        switch game {
+extension Game {
+    @MainActor @ViewBuilder
+    var gameView: some View {
+        switch self {
         case .minesweeper:
-            AnyView(MinesweeperView(gameData: game))
+            MinesweeperView(gameData: self)
         case .wordcraft:
-            AnyView(WordCraftView(gameData: game))
+            WordCraftView(gameData: self)
         case .numberCombinations:
-            AnyView(CombinationsView(gameData: game))
+            CombinationsView(gameData: self)
         case .ticTacToe:
-            AnyView(TicTacToeView(gameData: game))
+            TicTacToeView(gameData: self)
         case .othello:
-            AnyView(OthelloView(gameData: game))
+            OthelloView(gameData: self)
         case .adventure:
-            AnyView(AdventureGameView(gameData: game, game: "adv08"))
+            AdventureGameView(gameData: self, game: "adv08")
         case .matchedPairs:
-            AnyView(MatchedPairsView(gameData: game))
+            MatchedPairsView(gameData: self)
         case .wordSearch:
-            AnyView(WordSearchView(gameData: game))
+            WordSearchView(gameData: self)
         case .snake:
-            AnyView(SnakeGameView(gameData: game))
+            SnakeGameView(gameData: self)
         case .codeMaster:
-            AnyView(CodeMasterGameView(gameData: game))
+            CodeMasterGameView(gameData: self)
         case .wanderingDigits:
-            AnyView(WanderingDigitsGameView(gameData: game))
+            WanderingDigitsGameView(gameData: self)
         case .game2048:
-            AnyView(Game2048GameView(gameData: game))
+            Game2048GameView(gameData: self)
         @unknown default:
             fatalError("Unable to determine game view")
         }
     }
 
-    @MainActor func settingsView(for game: Game) -> some View {
-        switch game {
+    @MainActor @ViewBuilder
+    var settingsView: some View {
+        switch self {
         case .minesweeper:
-            AnyView(MinesweeperSettings())
+            MinesweeperSettings()
         case .wordcraft:
-            AnyView(WordCraftSettingsView())
+            WordCraftSettingsView()
         case .numberCombinations:
-            AnyView(CombinationsSettingsView())
+            CombinationsSettingsView()
         case .ticTacToe:
-            AnyView(Text("There are no settings for Tic Tac Toe"))
+            Text("There are no settings for Tic Tac Toe")
         case .othello:
-            AnyView(Text("There are no settigs for Othello"))
+            Text("There are no settigs for Othello")
         case .adventure:
-            AnyView(Text("There are no settings for Pyramid of Doom"))
+            Text("There are no settings for Pyramid of Doom")
         case .matchedPairs:
-            AnyView(MatchedPairsSettingsView())
+            MatchedPairsSettingsView()
         case .wordSearch:
-            AnyView(WordSearchSettingsView())
+            WordSearchSettingsView()
         case .snake:
-            AnyView(SnakeSettingsView())
+            SnakeSettingsView()
         case .codeMaster:
-            AnyView(CodeMasterSettingsView())
+            CodeMasterSettingsView()
         case .wanderingDigits:
-            AnyView(WanderingDigitsSettingsView())
+            WanderingDigitsSettingsView()
         case .game2048:
-            AnyView(Game2048SettingsView())
+            Game2048SettingsView()
         @unknown default:
             fatalError("Unable to determine game settings view")
         }
+    }
+}
+
+/// Single place to generate the game view or the game
+/// settings view
+struct GameViewFactory {
+
+    @MainActor func gameView(for game: Game) -> some View {
+        game.gameView
+    }
+
+    @MainActor func settingsView(for game: Game) -> some View {
+        game.settingsView
     }
 }
