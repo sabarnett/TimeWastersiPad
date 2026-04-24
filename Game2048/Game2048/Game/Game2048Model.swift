@@ -15,7 +15,7 @@ import Combine
 @Observable
 final class Game2048Model {
     /// gamePlaySounds: determines whether the game should be playing sounds. When toggled, sounds
-    /// will either stor or start playing.
+    /// will either stop or start playing.
     @ObservationIgnored
     var gamePlaySounds: Bool {
         didSet {

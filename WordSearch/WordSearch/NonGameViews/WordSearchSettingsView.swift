@@ -36,7 +36,7 @@ public struct WordSearchSettingsView: View {
                     .padding(.bottom, 8)
                 Toggle("Allow hints", isOn: $allowShowHints)
                     .padding(.bottom, 8)
-                
+
                 Picker("Game difficulty", selection: $gameDifficulty) {
                     ForEach(Difficulty.allCases) { level in
                         Text(level.description)
