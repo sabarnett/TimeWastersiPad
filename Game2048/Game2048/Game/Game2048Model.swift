@@ -9,23 +9,32 @@
 // Copyright © 2026 Steven Barnett. All rights reserved.
 //
 
-import SwiftUI
 import AVKit
+import Combine
 
 @Observable
 final class Game2048Model {
+    /// gamePlaySounds: determines whether the game should be playing sounds. When toggled, sounds
+    /// will either stor or start playing.
     @ObservationIgnored
-    @AppStorage(Constants.playSounds) var gamePlaySounds = false {
+    var gamePlaySounds: Bool {
         didSet {
+            UserDefaults.standard.set(gamePlaySounds, forKey: Constants.playSounds)
             updateSounds()
         }
     }
+
+    /// The game level - this will determine the size of the game grid which will be 3x3, 4x4 or 5x5
     @ObservationIgnored
-    @AppStorage(Constants.gameLevel) var gameLevel: GameLevel = .four {
+    var gameLevel: GameLevel {
         didSet {
+            UserDefaults.standard.set(gameLevel.rawValue, forKey: Constants.gameLevel)
             newGame()
         }
     }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     private(set) var tiles: [Tile] = []
     private(set) var score: Int = 0
@@ -48,8 +57,13 @@ final class Game2048Model {
     var backgroundURL: URL { soundFile(named: "background") }
 
     init() {
-        bestScore = UserDefaults.standard.integer(forKey: "bestScore2048")
-        speakerIcon = gamePlaySounds ? "speaker.slash" : "speaker"
+        self.gamePlaySounds = UserDefaults.standard.bool(forKey: Constants.playSounds)
+        self.gameLevel = GameLevel(rawValue: UserDefaults.standard.integer(forKey: Constants.gameLevel)) ?? .four
+
+        self.bestScore = UserDefaults.standard.integer(forKey: "bestScore2048")
+        self.speakerIcon = gamePlaySounds ? "speaker.slash" : "speaker"
+
+        observeUserDefaults()
     }
 
     func newGame() {
@@ -189,7 +203,7 @@ final class Game2048Model {
 
     private func checkGameState() {
         if tiles.contains(where: { $0.value == gameLevel.target }) {
-            leaderBoard.addLeader(score: score, for: .four)
+            leaderBoard.addLeader(score: score, for: gameLevel)
             gameOverMessage = "You won!"
             gameOverSubMessage = "You reached the target with a score of \(score)"
             gameState = .won
@@ -210,9 +224,44 @@ final class Game2048Model {
                 if row + 1 < gridSize && grid[row + 1][col] == v { return }
             }
         }
-        leaderBoard.addLeader(score: score, for: .four)
+        leaderBoard.addLeader(score: score, for: gameLevel)
         gameOverMessage = "You didn't reach the target"
         gameOverSubMessage = "You finished with a score of \(score)"
         gameState = .lost
     }
+}
+
+extension Game2048Model {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+                checkGameLevelChange()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.playSounds)
+        if self.gamePlaySounds != newValue {
+            self.gamePlaySounds = newValue
+            updateSounds()
+        }
+    }
+
+    private func checkGameLevelChange() {
+        let newLevel = GameLevel(rawValue: UserDefaults.standard.integer(forKey: Constants.gameLevel)) ?? .four
+        if self.gameLevel != newLevel {
+            self.gameLevel = newLevel
+            newGame()
+        }
+    }
+
 }

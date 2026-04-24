@@ -57,7 +57,6 @@ extension Game2048Model {
         if sounds != nil {
             sounds.stop()
         }
-
         sounds = try? AVAudioPlayer(contentsOf: url)
         if sounds != nil {
             sounds.numberOfLoops = repeating ? -1 : 0

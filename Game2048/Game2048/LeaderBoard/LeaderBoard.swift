@@ -80,7 +80,7 @@ class LeaderBoard {
             }
         }
 
-        var scoreItem = LeaderBoardItem(gameDate: Date.now, gameScore: score)
+        let scoreItem = LeaderBoardItem(gameDate: Date.now, gameScore: score)
 
         scores.append(scoreItem)
         scores.sort(by: {$0.gameScore > $1.gameScore})

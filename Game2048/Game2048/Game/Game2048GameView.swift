@@ -101,7 +101,7 @@ public struct Game2048GameView: View {
             }
             .sheet(isPresented: $model.showLeaderBoard) {
                 LeaderBoardView(leaderBoard: model.leaderBoard,
-                                initialTab: .four)
+                                initialTab: model.gameLevel)
             }
             .sheet(isPresented: $showSettings) { Game2048SettingsView(showClose: true) }
         }

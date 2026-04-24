@@ -231,3 +231,7 @@ While playing a game, you can get game play instructions by clicking the questio
 * Upgraded the opening screen to show a more graphic image and to display the program name, version number and copyright.
 * Added the 2048 game.
 
+### Version 1.4
+
+* Allow games that have settings to display and change their settings direct from the game.
+* TBA...
