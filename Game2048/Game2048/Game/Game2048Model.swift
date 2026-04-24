@@ -25,7 +25,6 @@ final class Game2048Model {
     }
 
     /// The game level - this will determine the size of the game grid which will be 3x3, 4x4 or 5x5
-    @ObservationIgnored
     var gameLevel: GameLevel {
         didSet {
             UserDefaults.standard.set(gameLevel.rawValue, forKey: Constants.gameLevel)
