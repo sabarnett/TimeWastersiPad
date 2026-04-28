@@ -9,7 +9,7 @@
 // Copyright © 2025 Steven Barnett. All rights reserved.
 //
 
-import SwiftUI
+import Combine
 import AVKit
 import SharedComponents
 
@@ -22,17 +22,30 @@ enum GameState {
 class WordSearchViewModel {
 
     @ObservationIgnored
-    @AppStorage(Constants.wordsearchPlaySounds) private var wordsearchPlaySounds = true {
+    private var wordsearchPlaySounds = true {
         didSet {
+            UserDefaults.standard.set(wordsearchPlaySounds, forKey: Constants.wordsearchPlaySounds)
             updateSounds()
         }
     }
 
     @ObservationIgnored
-    @AppStorage(Constants.wordsearchAllowShowHints) private var allowShowHints = true
+    private var allowShowHints = true {
+        didSet {
+            UserDefaults.standard.set(allowShowHints, forKey: Constants.wordsearchAllowShowHints)
+        }
+    }
 
     @ObservationIgnored
-    @AppStorage(Constants.wordsearchDifficulty) var gameDifficulty: Difficulty = .easy
+    var gameDifficulty: Difficulty = .easy {
+        didSet {
+            UserDefaults.standard.set(gameDifficulty.rawValue, forKey: Constants.wordsearchDifficulty)
+            newGame()
+        }
+    }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     @ObservationIgnored
     private var dictionary: [String]
@@ -50,7 +63,13 @@ class WordSearchViewModel {
 
     init() {
         dictionary = Array(Dictionary(size: .medium).filtered(wordMinLength: 3, wordMaxLength: 12))
-        newGame()
+
+        wordsearchPlaySounds = UserDefaults.standard.bool(forKey: Constants.wordsearchPlaySounds)
+        allowShowHints = UserDefaults.standard.bool(forKey: Constants.wordsearchAllowShowHints)
+        gameDifficulty = Difficulty(rawValue:
+                                        UserDefaults.standard.integer(forKey: Constants.wordsearchDifficulty))!
+
+        observeUserDefaults()
     }
 
     /// Create a new game, new words, new letters and reset the timer.
@@ -369,6 +388,50 @@ class WordSearchViewModel {
         if sounds != nil {
             sounds.numberOfLoops = repeating ? -1 : 0
             self.sounds.play()
+        }
+    }
+}
+
+extension WordSearchViewModel {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+                checkHintsChange()
+                checkDifficultyChange()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.wordsearchPlaySounds)
+        if self.wordsearchPlaySounds != newValue {
+            self.wordsearchPlaySounds = newValue
+            updateSounds()
+        }
+    }
+
+    private func checkHintsChange() {
+        let newHints = UserDefaults.standard.bool(forKey: Constants.wordsearchAllowShowHints)
+        if self.allowShowHints != newHints {
+            self.allowShowHints = newHints
+            newGame()
+        }
+    }
+
+    private func checkDifficultyChange() {
+        let newValue = UserDefaults.standard.integer(forKey: Constants.wordsearchDifficulty)
+        let newDifficulty = Difficulty(rawValue: newValue) ?? .easy
+        if self.gameDifficulty != newDifficulty {
+            self.gameDifficulty = newDifficulty
+            newGame()
         }
     }
 }

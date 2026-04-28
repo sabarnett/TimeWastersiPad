@@ -234,4 +234,5 @@ While playing a game, you can get game play instructions by clicking the questio
 ### Version 1.4
 
 * Allow games that have settings to display and change their settings direct from the game.
-* TBA...
+* Remove dependency on SwiftUI in view models.
+* Ensure the game updates when a setting is changed.

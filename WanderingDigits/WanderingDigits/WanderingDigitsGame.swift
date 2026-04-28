@@ -11,16 +11,23 @@
 
 import SwiftUI
 import AVKit
+import Combine
 
 @Observable
 final class WanderingDigitsGame {
 
+    /// gamePlaySounds: determines whether the game should be playing sounds. When toggled, sounds
+    /// will either stop or start playing.
     @ObservationIgnored
-    @AppStorage(Constants.wdPlaySounds) var wdPlaySounds = false {
+    var wdPlaySounds: Bool {
         didSet {
+            UserDefaults.standard.set(wdPlaySounds, forKey: Constants.wdPlaySounds)
             updateSounds()
         }
     }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     var incorrectMessageOpacity: CGFloat = 0.0
     var showGamePlay = false
@@ -31,7 +38,12 @@ final class WanderingDigitsGame {
 
     var gameBoard: GameBoard = GameBoard()
     var leaderBoard = LeaderBoard()
-    
+
+    init() {
+        wdPlaySounds = UserDefaults.standard.bool(forKey: Constants.wdPlaySounds)
+        observeUserDefaults()
+    }
+
     /// Restarty the game. Clear state and generate a new game board.
     func restart() {
         secondsElapsed = 0
@@ -156,3 +168,29 @@ final class WanderingDigitsGame {
         }
     }
 }
+
+extension WanderingDigitsGame {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.wdPlaySounds)
+        if self.wdPlaySounds != newValue {
+            self.wdPlaySounds = newValue
+            updateSounds()
+        }
+    }
+}
+

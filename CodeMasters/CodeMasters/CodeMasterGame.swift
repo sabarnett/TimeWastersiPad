@@ -9,23 +9,36 @@
 // Copyright © 2026 Steven Barnett. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
+import Combine
 import AVKit
 
 @Observable
 class CodeMasterGame {
 
+    /// gamePlaySounds: determines whether the game should be playing sounds. When toggled, sounds
+    /// will either stop or start playing.
     @ObservationIgnored
-    @AppStorage(Constants.cmPlaySounds) var cmPlaySounds = false {
+    var cmPlaySounds: Bool {
         didSet {
+            UserDefaults.standard.set(cmPlaySounds, forKey: Constants.cmPlaySounds)
             updateSounds()
         }
     }
 
     @ObservationIgnored
-    @AppStorage(Constants.cmGameLevel) var cmGameLevel: CodeMasterGameLevel = .medium
+    var cmGameLevel: CodeMasterGameLevel {
+        didSet {
+            UserDefaults.standard.set(cmGameLevel.rawValue, forKey: Constants.cmGameLevel)
+            restart()
+        }
+    }
+
     @ObservationIgnored
-    @AppStorage(Constants.cmGameTheme) var cmGameTheme: String = Themes.Random
+    var cmGameTheme: String = Themes.Random
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     var leaderBoard: LeaderBoard = LeaderBoard()
 
@@ -55,7 +68,23 @@ class CodeMasterGame {
     // Note: This init can be called more than once, so we should not
     // start the game here. Any attempt to start the game here may
     // cause problems with the sound being initialised more than once.
-    init() { }
+    init() {
+        cmPlaySounds = UserDefaults.standard.bool(forKey: Constants.cmPlaySounds)
+
+        if let level = UserDefaults.standard.string(forKey: Constants.cmGameLevel) {
+            cmGameLevel = CodeMasterGameLevel(rawValue: level) ?? .medium
+        } else {
+            cmGameLevel = .medium
+        }
+
+        if let theme = UserDefaults.standard.string(forKey: Constants.cmGameTheme) {
+            cmGameTheme = theme
+        } else {
+            cmGameTheme = Themes.Random
+        }
+
+        observeUserDefaults()
+    }
 
     func changeGuessPeg(at index: Int, to: Peg) {
         guess.pegs[index] = to
@@ -199,4 +228,50 @@ class CodeMasterGame {
             self.sounds.play()
         }
     }
+}
+
+extension CodeMasterGame {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+                checkGameLevelChange()
+                checkGameThemeChange()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.cmPlaySounds)
+        if self.cmPlaySounds != newValue {
+            self.cmPlaySounds = newValue
+            updateSounds()
+        }
+    }
+
+    private func checkGameLevelChange() {
+        let savedLevel = UserDefaults.standard.string(forKey: Constants.cmGameLevel) ?? ""
+        let newLevel = CodeMasterGameLevel(rawValue: savedLevel) ?? .medium
+
+        if self.cmGameLevel != newLevel {
+            self.cmGameLevel = newLevel
+            restart()
+        }
+    }
+
+    private func checkGameThemeChange() {
+        let newTheme = UserDefaults.standard.string(forKey: Constants.cmGameTheme) ?? ""
+        if self.cmGameTheme != newTheme {
+            self.cmGameTheme = newTheme
+            restart()
+        }
+    }
+
 }

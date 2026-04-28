@@ -80,7 +80,9 @@ public struct WordSearchView: View {
                     game.playBackgroundSound()
                 }
             }
-
+        }
+        .task {
+            game.newGame()
         }
     }
 
