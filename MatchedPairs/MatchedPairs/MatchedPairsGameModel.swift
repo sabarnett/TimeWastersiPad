@@ -9,7 +9,7 @@
 // Copyright © 2025 Steven Barnett. All rights reserved.
 //
 
-import SwiftUI
+import Combine
 import AVFoundation
 
 enum GameState {
@@ -21,17 +21,31 @@ enum GameState {
 class MatchedPairsGameModel {
 
     @ObservationIgnored
-    @AppStorage(Constants.playSound) var playSounds = true {
+    var playSounds = true {
         didSet {
+            UserDefaults.standard.set(playSounds, forKey: Constants.playSound)
             updateSounds()
         }
     }
 
     @ObservationIgnored
-    @AppStorage(Constants.gameDifficulty) var gameDifficulty: GameDifficulty = .easy
+    var gameDifficulty: GameDifficulty {
+        didSet {
+            UserDefaults.standard.set(gameDifficulty.rawValue, forKey: Constants.gameDifficulty)
+            newGame()
+        }
+    }
 
     @ObservationIgnored
-    @AppStorage(Constants.cardBackground) private var cardBg: CardBackgrounds = .one
+    private var cardBg: CardBackgrounds {
+        didSet {
+            UserDefaults.standard.set(cardBg.rawValue, forKey: Constants.cardBackground)
+            newGame()
+        }
+    }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     var tiles: [Tile] = []
     var gameState: GameState = .playing
@@ -48,7 +62,19 @@ class MatchedPairsGameModel {
 
     // Do not do initialisation here if it affects sounds or game state. As
     // this is an @Observable class, the init could be called more than once.
-    init() { }
+    init() {
+        playSounds = UserDefaults.standard.bool(forKey: Constants.playSound)
+
+        if let difficulty = UserDefaults.standard.string(forKey: Constants.gameDifficulty) {
+            gameDifficulty = GameDifficulty(rawValue: difficulty) ?? .easy
+        } else {
+            gameDifficulty = .easy
+        }
+
+        cardBg = CardBackgrounds(rawValue: UserDefaults.standard.integer(forKey: Constants.cardBackground)) ?? .one
+
+        observeUserDefaults()
+    }
 
     /// Starts a new game, generating a new card deck and a new card background. It
     /// resets the score and the timer.
@@ -242,6 +268,51 @@ class MatchedPairsGameModel {
         if sounds != nil {
             sounds.numberOfLoops = repeating ? -1 : 0
             self.sounds.play()
+        }
+    }
+}
+
+extension MatchedPairsGameModel {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+                checkGameDifficultyChange()
+                checkCardBackgroundChange()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.playSound)
+        if self.playSounds != newValue {
+            self.playSounds = newValue
+            updateSounds()
+        }
+    }
+
+    private func checkGameDifficultyChange() {
+        let difficulty = UserDefaults.standard.string(forKey: Constants.gameDifficulty) ?? GameDifficulty.easy.rawValue
+        let newLevel = GameDifficulty(rawValue: difficulty) ?? .easy
+        if self.gameDifficulty != newLevel {
+            self.gameDifficulty = newLevel
+            newGame()
+        }
+    }
+
+    private func checkCardBackgroundChange() {
+        let newBG = UserDefaults.standard.integer(forKey: Constants.cardBackground)
+        let newBackground = CardBackgrounds(rawValue: newBG) ?? .one
+        if self.cardBg != newBackground {
+            self.cardBg = newBackground
+            newGame()
         }
     }
 }
