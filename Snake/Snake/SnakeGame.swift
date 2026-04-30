@@ -10,6 +10,7 @@
 //
 
 import SwiftUI
+import Combine
 import AVKit
 
 enum Direction {
@@ -25,14 +26,23 @@ struct Position: Equatable, Hashable {
 class SnakeGame {
 
     @ObservationIgnored
-    @AppStorage(Constants.snakePlaySounds) var snakePlaySounds = false {
+    var snakePlaySounds = false {
         didSet {
+            UserDefaults.standard.set(snakePlaySounds, forKey: Constants.snakePlaySounds)
             updateSounds()
         }
     }
 
     @ObservationIgnored
-    @AppStorage(Constants.snakeGameSize) var snakeGameSize: SnakeGameSize = .medium
+    var snakeGameSize: SnakeGameSize = .medium {
+        didSet {
+            UserDefaults.standard.set(snakeGameSize.rawValue, forKey: Constants.snakeGameSize)
+            resetGame()
+        }
+    }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     @ObservationIgnored
     var leaderBoard: LeaderBoard = LeaderBoard()
@@ -48,6 +58,13 @@ class SnakeGame {
         gridSize = snakeGameSize.rawValue
         snake = [Position(x: gridSize / 2, y: gridSize / 2)]
         food = Position(x: Int.random(in: 0..<gridSize), y: Int.random(in: 0..<gridSize))
+
+        snakePlaySounds = UserDefaults.standard.bool(forKey: Constants.snakePlaySounds)
+        snakeGameSize = SnakeGameSize(rawValue:
+                                        UserDefaults.standard.integer(forKey: Constants.snakeGameSize)
+        ) ?? .medium
+
+        observeUserDefaults()
     }
 
     func isSnakeHead(_ cell: Position) -> Bool {
@@ -194,4 +211,39 @@ class SnakeGame {
     public func image(named: String) -> Image {
         return Image(named, bundle: Bundle(for: SnakeGame.self))
     }
+}
+
+extension SnakeGame {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+                checkGameSizeChange()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.snakePlaySounds)
+        if self.snakePlaySounds != newValue {
+            self.snakePlaySounds = newValue
+            updateSounds()
+        }
+    }
+
+    private func checkGameSizeChange() {
+        let newLevel = SnakeGameSize(rawValue: UserDefaults.standard.integer(forKey: Constants.snakeGameSize)) ?? .medium
+        if self.snakeGameSize != newLevel {
+            self.snakeGameSize = newLevel
+            resetGame()
+        }
+    }
+
 }
