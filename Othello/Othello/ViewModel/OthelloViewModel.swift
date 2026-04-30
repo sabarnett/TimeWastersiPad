@@ -10,18 +10,22 @@
 //
 
 import AVKit
-import SwiftUI
+import Combine
 import SharedComponents
 
 @Observable
 class OthelloViewModel {
 
     @ObservationIgnored
-    @AppStorage(Constants.othelloPlaySounds) var othelloPlaySounds = true {
+    var othelloPlaySounds = true {
         didSet {
+            UserDefaults.standard.set(othelloPlaySounds, forKey: Constants.othelloPlaySounds)
             updateSounds()
         }
     }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     var gameBoard = GameBoard()
     var playerScore = 0
@@ -44,7 +48,10 @@ class OthelloViewModel {
 
     // Do not initialise the game here as the init can be called more than once.
     init() {
+        othelloPlaySounds = UserDefaults.standard.bool(forKey: Constants.othelloPlaySounds)
         speakerIcon = othelloPlaySounds ? "speaker.slash" : "speaker"
+
+        observeUserDefaults()
     }
 
     /// Starts a new game. This involves creating a new game board, setting
@@ -347,6 +354,31 @@ class OthelloViewModel {
 
         validMoves.forEach { location in
             gameBoard.board[location.xPos][location.yPos].state = .potentialPlayerMove
+        }
+    }
+}
+
+extension OthelloViewModel {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.othelloPlaySounds)
+        if self.othelloPlaySounds != newValue {
+            self.othelloPlaySounds = newValue
+            updateSounds()
         }
     }
 }

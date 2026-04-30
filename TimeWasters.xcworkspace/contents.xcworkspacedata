@@ -4,4 +4,7 @@
    <FileRef
       location = "group:TimeWasters/TimeWasters.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:FormulaValue.swift">
+   </FileRef>
 </Workspace>

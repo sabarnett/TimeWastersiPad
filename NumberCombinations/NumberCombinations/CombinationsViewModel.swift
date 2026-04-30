@@ -9,7 +9,7 @@
 // Copyright © 2024 Steven Barnett. All rights reserved.
 //
 
-import SwiftUI
+import Combine
 import SharedComponents
 import AVKit
 
@@ -68,10 +68,19 @@ class CombinationsViewModel {
     var notifyMessage: ToastConfig?
 
     @ObservationIgnored
-    @AppStorage(Constants.ncPlaySounds) private var playSounds = true {
+    private var playSounds = true {
         didSet {
+            UserDefaults.standard.set(playSounds, forKey: Constants.ncPlaySounds)
             updateSounds()
         }
+    }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+        playSounds = UserDefaults.standard.bool(forKey: Constants.ncPlaySounds)
+        observeUserDefaults()
     }
 
     /// Generates a new puzzle by generating four numbers between 1 and 10 and a random
@@ -264,16 +273,30 @@ class CombinationsViewModel {
     }
 }
 
-struct FormulaValue {
 
-    var value: Int
-    var isUsed: Bool = false
+extension CombinationsViewModel {
 
-    init(_ value: Int) {
-        self.value = value
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+            }
+            .store(in: &cancellables)
     }
 
-    var color: Color {
-        isUsed ? .gray : .blue
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.ncPlaySounds)
+        if self.playSounds != newValue {
+            self.playSounds = newValue
+            updateSounds()
+        }
     }
 }
+
+
