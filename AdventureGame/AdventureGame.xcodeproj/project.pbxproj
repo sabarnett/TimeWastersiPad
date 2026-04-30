@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		E85413E52E5753FB00CFC667 /* SharedComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E42E5753FB00CFC667 /* SharedComponents.framework */; };
 		E85413E62E5753FB00CFC667 /* SharedComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E85413E42E5753FB00CFC667 /* SharedComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E8B285C62FA3837800DFA0FF /* Adventure+Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B285C52FA3837800DFA0FF /* Adventure+Wizard.swift */; };
+		E8B285C82FA383C000DFA0FF /* Adventure+AutoFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B285C72FA383C000DFA0FF /* Adventure+AutoFuncs.swift */; };
+		E8B285CA2FA3841800DFA0FF /* Adventure+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B285C92FA3841800DFA0FF /* Adventure+Data.swift */; };
 		E8DE7E592CD3BDE200847B82 /* AdventureGame.h in Headers */ = {isa = PBXBuildFile; fileRef = E8DE7E572CD3BDE200847B82 /* AdventureGame.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8DE7E882CD3C25E00847B82 /* adv14a.dat in Resources */ = {isa = PBXBuildFile; fileRef = E8DE7E842CD3C25E00847B82 /* adv14a.dat */; };
 		E8DE7E892CD3C25E00847B82 /* adv14b.dat in Resources */ = {isa = PBXBuildFile; fileRef = E8DE7E852CD3C25E00847B82 /* adv14b.dat */; };
@@ -65,6 +68,9 @@
 
 /* Begin PBXFileReference section */
 		E85413E42E5753FB00CFC667 /* SharedComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8B285C52FA3837800DFA0FF /* Adventure+Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Adventure+Wizard.swift"; sourceTree = "<group>"; };
+		E8B285C72FA383C000DFA0FF /* Adventure+AutoFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Adventure+AutoFuncs.swift"; sourceTree = "<group>"; };
+		E8B285C92FA3841800DFA0FF /* Adventure+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Adventure+Data.swift"; sourceTree = "<group>"; };
 		E8DE7E3E2CD3BDD600847B82 /* AdventureGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdventureGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DE7E572CD3BDE200847B82 /* AdventureGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdventureGame.h; sourceTree = "<group>"; };
 		E8DE7E5B2CD3BE4100847B82 /* SharedComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +208,9 @@
 				E8DE7E6A2CD3C25E00847B82 /* GameObjects */,
 				E8DE7E702CD3C25E00847B82 /* Helpers */,
 				E8DE7E712CD3C25E00847B82 /* AdventureGame.swift */,
+				E8B285C52FA3837800DFA0FF /* Adventure+Wizard.swift */,
+				E8B285C72FA383C000DFA0FF /* Adventure+AutoFuncs.swift */,
+				E8B285C92FA3841800DFA0FF /* Adventure+Data.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -371,6 +380,7 @@
 				E8DE7E9C2CD3C25E00847B82 /* AdventureGameView.swift in Sources */,
 				E8DE7E9D2CD3C25E00847B82 /* GameDefinitions.swift in Sources */,
 				E8DE7E9E2CD3C25E00847B82 /* Translators.swift in Sources */,
+				E8B285CA2FA3841800DFA0FF /* Adventure+Data.swift in Sources */,
 				E8DE7E9F2CD3C25E00847B82 /* GameHeader.swift in Sources */,
 				E8DE7EA02CD3C25E00847B82 /* GameRowView.swift in Sources */,
 				E8FC3FCA2CD66C4800991B12 /* GameSave.swift in Sources */,
@@ -384,6 +394,8 @@
 				E8DE7EA82CD3C25E00847B82 /* GameRoom.swift in Sources */,
 				E8DE7EA92CD3C25E00847B82 /* ListManager.swift in Sources */,
 				E8DE7EAA2CD3C25E00847B82 /* Counters.swift in Sources */,
+				E8B285C62FA3837800DFA0FF /* Adventure+Wizard.swift in Sources */,
+				E8B285C82FA383C000DFA0FF /* Adventure+AutoFuncs.swift in Sources */,
 				E8DE7EAB2CD3C25E00847B82 /* GameAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
