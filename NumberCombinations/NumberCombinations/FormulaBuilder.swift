@@ -35,59 +35,83 @@ struct FormulaBuilder {
         }
     }
 
-    // Function to evaluate formulas using different parenthetical structures
+    private struct Operation {
+        let leftIndex: Int   // negative = result index (e.g. -1 = r1, -2 = r2)
+        let rightIndex: Int
+        let opIndex: Int
+    }
+
+    // Each pattern represents a different parenthesisation of the expression
+    // p1 op1 p2 op2 p3 op3 p4, e.g:
+    //   pattern 1: ((p1 op1 p2) op2 p3) op3 p4  — left to right
+    //   pattern 5: (p1 op1 p2) op2 (p3 op3 p4)  — split pairs
+    //
+    // Rather than a switch with one branch per pattern, each pattern is encoded
+    // as a sequence of three Operations. An Operation specifies which two operands
+    // to combine and which operator to apply. Operands are identified by index:
+    //   - Non-negative index (0-3): refers to the original values array
+    //   - Negative index (-1, -2): refers to a previous intermediate result,
+    //     where -1 is the result of step 1, -2 is the result of step 2, etc.
+    //
+    // resolve(_:) translates these indices into concrete Double values at runtime,
+    // looking up either the original value or the already-computed result.
+    // Steps are executed in order, each appending its result to the results array,
+    // with the final element being the answer.
     func evaluateFormula(_ operators: [String],
                          _ values: [Double],
                          _ pattern: Int
     ) -> Double? {
-        var result: Double?
+        let patterns: [[Operation]] = [
+            // case 1: ((p1 op1 p2) op2 p3) op3 p4
+            [Operation(leftIndex: 0, rightIndex: 1, opIndex: 0),
+             Operation(leftIndex: -1, rightIndex: 2, opIndex: 1),
+             Operation(leftIndex: -2, rightIndex: 3, opIndex: 2)],
 
-        let op1 = operators[0]
-        let op2 = operators[1]
-        let op3 = operators[2]
+            // case 2: (p1 op1 (p2 op2 p3)) op3 p4
+            [Operation(leftIndex: 1, rightIndex: 2, opIndex: 1),
+             Operation(leftIndex: 0, rightIndex: -1, opIndex: 0),
+             Operation(leftIndex: -2, rightIndex: 3, opIndex: 2)],
 
-        let p1 = values[0]
-        let p2 = values[1]
-        let p3 = values[2]
-        let p4 = values[3]
+            // case 3: p1 op1 ((p2 op2 p3) op3 p4)
+            [Operation(leftIndex: 1, rightIndex: 2, opIndex: 1),
+             Operation(leftIndex: -1, rightIndex: 3, opIndex: 2),
+             Operation(leftIndex: 0, rightIndex: -2, opIndex: 0)],
 
-        switch pattern {
-        case 1:
-            if let r1 = applyOperator(p1, p2, op1),
-               let r2 = applyOperator(r1, p3, op2),
-               let r3 = applyOperator(r2, p4, op3) {
-                result = r3
-            }
-        case 2:
-            if let r1 = applyOperator(p2, p3, op2),
-               let r2 = applyOperator(p1, r1, op1),
-               let r3 = applyOperator(r2, p4, op3) {
-                result = r3
-            }
-        case 3:
-            if let r1 = applyOperator(p2, p3, op2),
-               let r2 = applyOperator(r1, p4, op3),
-               let r3 = applyOperator(p1, r2, op1) {
-                result = r3
-            }
-        case 4:
-            if let r1 = applyOperator(p3, p4, op3),
-               let r2 = applyOperator(p2, r1, op2),
-               let r3 = applyOperator(p1, r2, op1) {
-                result = r3
-            }
-        case 5:
-            if let r1 = applyOperator(p1, p2, op1),
-               let r2 = applyOperator(p3, p4, op3),
-               let r3 = applyOperator(r1, r2, op2) {
-                result = r3
-            }
-        default:
-            break
+            // case 4: p1 op1 (p2 op2 (p3 op3 p4))
+            [Operation(leftIndex: 2, rightIndex: 3, opIndex: 2),
+             Operation(leftIndex: 1, rightIndex: -1, opIndex: 1),
+             Operation(leftIndex: 0, rightIndex: -2, opIndex: 0)],
+
+            // case 5: (p1 op1 p2) op2 (p3 op3 p4)
+            [Operation(leftIndex: 0, rightIndex: 1, opIndex: 0),
+             Operation(leftIndex: 2, rightIndex: 3, opIndex: 2),
+             Operation(leftIndex: -1, rightIndex: -2, opIndex: 1)]
+        ]
+
+        guard pattern >= 1, pattern <= patterns.count else { return nil }
+
+        let steps = patterns[pattern - 1]
+        var results: [Double] = []
+
+        func resolve(_ index: Int) -> Double? {
+            if index >= 0 { return values[index] }
+            let ri = -index - 1          // -1 → 0, -2 → 1
+            return ri < results.count ? results[ri] : nil
         }
 
-        // Ensure final result is an integer
-        return (result != nil && result!.truncatingRemainder(dividingBy: 1) == 0) ? result : nil
+        for step in steps {
+            guard let left  = resolve(step.leftIndex),
+                  let right = resolve(step.rightIndex),
+                  let result = applyOperator(left, right, operators[step.opIndex])
+            else { return nil }
+            results.append(result)
+        }
+
+        guard let final = results.last,
+              final.truncatingRemainder(dividingBy: 1) == 0
+        else { return nil }
+
+        return final
     }
 
     // Function to generate a random floating-point formula that results in an integer
