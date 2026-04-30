@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 import AVKit
 import SharedComponents
 
@@ -14,11 +15,15 @@ import SharedComponents
 class WordCraftViewModel {
 
     @ObservationIgnored
-    @AppStorage(Constants.wordcraftPlaySounds) private var wordcraftPlaySounds = true {
+    private var wordcraftPlaySounds = true {
         didSet {
+            UserDefaults.standard.set(wordcraftPlaySounds, forKey: Constants.wordcraftPlaySounds)
             updateSounds()
         }
     }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     var columns = [[Tile]]()
     var notifyMessage: ToastConfig?
@@ -42,6 +47,9 @@ class WordCraftViewModel {
     let dictionary = Dictionary(size: .large).filtered(wordMinLength: 2, wordMaxLength: 13)
 
     init() {
+        wordcraftPlaySounds = UserDefaults.standard.bool(forKey: Constants.wordcraftPlaySounds)
+        observeUserDefaults()
+
         reset()
     }
 
@@ -383,6 +391,31 @@ extension WordCraftViewModel {
         if sounds != nil {
             sounds.numberOfLoops = repeating ? -1 : 0
             self.sounds.play()
+        }
+    }
+}
+
+extension WordCraftViewModel {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkSoundToggleSetting()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkSoundToggleSetting() {
+        let newValue = UserDefaults.standard.bool(forKey: Constants.wordcraftPlaySounds)
+        if self.wordcraftPlaySounds != newValue {
+            self.wordcraftPlaySounds = newValue
+            updateSounds()
         }
     }
 }

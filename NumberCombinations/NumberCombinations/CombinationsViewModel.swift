@@ -273,7 +273,6 @@ class CombinationsViewModel {
     }
 }
 
-
 extension CombinationsViewModel {
 
     // MARK: - User settings observer
@@ -298,5 +297,3 @@ extension CombinationsViewModel {
         }
     }
 }
-
-

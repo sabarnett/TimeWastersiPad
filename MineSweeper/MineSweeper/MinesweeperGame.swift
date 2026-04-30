@@ -9,13 +9,22 @@
 // Copyright © 2024 Steven Barnett. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
+import Combine
 
 @Observable
 class MinesweeperGame {
 
     @ObservationIgnored
-    @AppStorage(Constants.mineGameDifficulty) var mineGameDifficulty: GameDifficulty = .beginner
+    var mineGameDifficulty: GameDifficulty = .beginner {
+        didSet {
+            UserDefaults.standard.set(mineGameDifficulty.rawValue, forKey: Constants.mineGameDifficulty)
+            reset()
+        }
+    }
+
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
 
     private var cellCount: Int {
         switch mineGameDifficulty {
@@ -72,6 +81,14 @@ class MinesweeperGame {
             case .lost:              "😵"
             }
         }
+    }
+
+    init() {
+        mineGameDifficulty = GameDifficulty(rawValue:
+            UserDefaults.standard.integer(forKey: Constants.mineGameDifficulty)
+        ) ?? .beginner
+
+        observeUserDefaults()
     }
 
     public func createGrid() {
@@ -189,5 +206,33 @@ class MinesweeperGame {
         secondsElapsed = 0
         gameState = .waiting
         createGrid()
+    }
+}
+
+extension MinesweeperGame {
+
+    // MARK: - User settings observer
+
+    private func observeUserDefaults() {
+        NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                checkGameDifficultySetting()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func checkGameDifficultySetting() {
+        let newValue = GameDifficulty(rawValue:
+                                        UserDefaults.standard.integer(forKey: Constants.mineGameDifficulty)
+        ) ?? .beginner
+
+        if self.mineGameDifficulty != newValue {
+            self.mineGameDifficulty = newValue
+            reset()
+        }
     }
 }
