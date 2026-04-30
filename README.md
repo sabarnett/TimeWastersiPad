@@ -233,6 +233,10 @@ While playing a game, you can get game play instructions by clicking the questio
 
 ### Version 1.4
 
+This has primarily been a maintenance release. No new games, just code improvements.
+
 * Allow games that have settings to display and change their settings direct from the game.
-* Remove dependency on SwiftUI in view models.
+* Remove dependency on SwiftUI in view models, where possible.
 * Ensure the game updates when a setting is changed.
+* Fix file length warnings.
+* Fix most cyclomatic complexity issues. 
