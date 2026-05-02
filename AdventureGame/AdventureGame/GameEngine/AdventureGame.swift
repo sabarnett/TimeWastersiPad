@@ -97,18 +97,54 @@ extension Adventure {
 
         var verb = withVerb
         let noun = andNoun
-        let wordLength = gameHeader.wordLength
 
-        if options.wizardMode && verb.count > 0 {
-            if wizardCommand(verb: verb, noun: noun) {
-                return
-            }
-        }
+        // If wizard mode is enabled and this is a wizard command
+        // and we can excute it, then we're done here.
+        if executeWizardMode(verb: verb, noun: noun) { return }
 
         verb = Translators.translateShortCommands(verb)
 
         // There are commands to print the current noun. Who knows why!
         self.noun = noun
+
+        let (vIndex, nIndex) = getVerbAndNounIndex(verb: verb, noun: noun)
+
+        // If we have been unable to work out the command, tell them so.
+        // if vIndex == 0 || nIndex == 0 {
+        if vIndex == 0 {
+            display(message: "You use cryptic words I do not understand!")
+            return
+        }
+
+        var recognisedCommand = ""
+        switch runMatchingActions(vIndex: vIndex, nIndex: nIndex) {
+        case .actSuccess:
+            return
+        case .actFailedConditions:
+            recognisedCommand = "I can't do that yet."
+        default:
+            recognisedCommand = "I don't understand your command."
+        }
+
+        if autoGoTo(withVerb: vIndex, toLocationIndex: nIndex) { return }
+        if autoGet(withVerb: vIndex, itemWithIndex: nIndex) { return }
+        if autoDrop(withVerb: vIndex, itemWithIndex: nIndex) { return }
+
+        // Nothing left, we just don't recognise the command or can't do it yet.
+        display(message: recognisedCommand)
+    }
+
+    /// Get the index of the verb and noun, allowing for thepossibility we only have one so
+    /// have to infer the other (e.g. "n" infers to "go n"
+    ///
+    /// - Parameters:
+    ///   - verb: The verb the user entered
+    ///   - noun: The noun the user entered
+    ///
+    /// - Returns: A tuple containing the verb and noun index
+    private func getVerbAndNounIndex(verb: String, noun: String) ->
+    (vIndex: Int, nIndex: Int) {
+        let wordLength = gameHeader.wordLength
 
         var vIndex = ListManager.find(word: verb, inList: verbs, wordLength: wordLength)
         var nIndex = ListManager.find(word: noun, inList: nouns, wordLength: wordLength)
@@ -125,33 +161,17 @@ extension Adventure {
             }
         }
 
-        // If we have been unable to work out the command, tell them so.
-        // if vIndex == 0 || nIndex == 0 {
-        if vIndex == 0 {
-            display(message: "You use cryptic words I do not understand!")
-            return
+        return (vIndex, nIndex)
+    }
+
+    private func executeWizardMode(verb: String, noun: String) -> Bool {
+        if options.wizardMode
+            && verb.count > 0
+            && wizardCommand(verb: verb, noun: noun) {
+            return true
         }
 
-        var recognisedCommand = false
-        switch runMatchingActions(vIndex: vIndex, nIndex: nIndex) {
-        case .actSuccess:
-            return
-        case .actFailedConditions:
-            recognisedCommand = true
-        default:
-            recognisedCommand = false
-        }
-
-        if autoGoTo(withVerb: vIndex, toLocationIndex: nIndex) { return }
-        if autoGet(withVerb: vIndex, itemWithIndex: nIndex) { return }
-        if autoDrop(withVerb: vIndex, itemWithIndex: nIndex) { return }
-
-        // Nothing left, we just don't recognise the command or can't do it yet.
-        if recognisedCommand {
-            display(message: "I can't do that yet.")
-        } else {
-            display(message: "I don't understand your command.")
-        }
+        return false
     }
 
     public func carriedCount() -> Int {
